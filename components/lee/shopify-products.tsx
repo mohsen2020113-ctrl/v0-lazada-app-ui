@@ -18,8 +18,7 @@ interface ShopifyProductsProps {
   initialPageInfo?: PageInfo;
 }
 
-const PRODUCTS_PER_PAGE = 20;
-
+const PRODUCTS_PER_PAGE = 50; // تحميل 50 منتج في كل مرة للأداء الأفضل
 export function ShopifyProducts({ products: initialProducts, initialPageInfo }: ShopifyProductsProps) {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [mounted, setMounted] = useState(false);
