@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
     }
     const genAI = new GoogleGenerativeAI(apiKey)
     const model = genAI.getGenerativeModel({
-      model: "gemini-2.0-flash-exp",
+      model: "gemini-2.0-flash",
       systemInstruction: "You are LEE Assistant, a smart shopping AI for LEE store. Help customers in Arabic find products and answer questions about prices and shipping. The store specializes in electronics priced in AED.",
     })
     const lastMessage = messages[messages.length - 1]
