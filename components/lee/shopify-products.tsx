@@ -186,11 +186,13 @@ export function ShopifyProducts({ products: initialProducts, initialPageInfo }: 
                 )}
                 
                 <button
+                            type="button"
                   onClick={(e) => {
                     e.stopPropagation();
+                                  e.preventDefault();
                     toggleFavorite(product.id);
                   }}
-                  className="absolute top-2 right-2 w-7 h-7 bg-white/90 rounded-full flex items-center justify-center shadow-sm hover:bg-white transition-colors z-10"
+                  className="absolute top-2 right-2 w-7 h-7 bg-white/90 rounded-full flex items-center justify-center shadow-sm hover:bg-white transition-colors  pointer-events-autoz-10"
                 >
                   <Heart
                     className={`w-4 h-4 ${
