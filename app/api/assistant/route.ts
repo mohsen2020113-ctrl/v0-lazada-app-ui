@@ -1,79 +1,45 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { GoogleGenerativeAI } from '@google/generative-ai';
-import { products } from '@/lib/data/products';
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '');
+import { type NextRequest, NextResponse } from "next/server"
+import { GoogleGenerativeAI } from "@google/generative-ai"
 
 interface Message {
-  role: 'user' | 'assistant';
-  content: string;
+  role: "user" | "assistant" | "system"
+  content: string
 }
 
-const SYSTEM_PROMPT = `أنت LEE، مساعد تسوق ذكي لمتجر 4leee.com. 
-تتحدث العربية والإنجليزية بطلاقة.
-تعرف منتجاتنا جيداً وتساعد العملاء في الاختيار والمقارنة والشراء.
-
-معلومات عن منتجاتنا:
-${products.slice(0, 10).map(p => `- ${p.title}: ${p.price} AED (${p.category})`).join('\n')}
-
-يمكنك:
-1. تقديم توصيات شخصية بناءً على تفضيلات المستخدم
-2. مقارنة المنتجات وشرح الفروقات
-3. الإجابة على أسئلة عن المنتجات والأسعار والشحن
-4. مساعدة المستخدم في العثور على ما يبحث عنه
-
-كن ودياً وخدماتياً وحاول فهم احتياجات العميل بشكل كامل.`;
-
-export async function POST(request: NextRequest) {
+export async function POST(req: NextRequest) {
   try {
-    const body = await request.json();
-    const { message, conversationHistory = [], userId } = body;
-
-    if (!message || typeof message !== 'string') {
-      return NextResponse.json(
-        { error: 'Message is required' },
-        { status: 400 }
-      );
+    const { messages } = await req.json()
+    if (!messages || !Array.isArray(messages) || messages.length === 0) {
+      return NextResponse.json({ error: "No messages provided" }, { status: 400 })
     }
-
-    if (!process.env.GEMINI_API_KEY) {
-      return NextResponse.json(
-        { error: 'Gemini API key not configured' },
-        { status: 500 }
-      );
+    const apiKey = process.env.GEMINI_API_KEY
+    if (!apiKey) {
+      return NextResponse.json({ error: "API key not configured" }, { status: 500 })
     }
-
-    const model = genAI.getGenerativeModel({ model: 'gemini-2.5-pro' });
-
-    // Prepare conversation history for Gemini
-    const chatHistory = (conversationHistory as Message[]).map((msg) => ({
-      role: msg.role === 'assistant' ? 'model' : 'user',
-      parts: [{ text: msg.content }],
-    }));
-
-    // Start chat session
-    const chat = model.startChat({
-      history: chatHistory,
-      generationConfig: {
-        maxOutputTokens: 1024,
-        temperature: 0.7,
-      },
-    });
-
-    // Send user message and get response
-    const result = await chat.sendMessage(SYSTEM_PROMPT + '\n\nUser: ' + message);
-    const assistantMessage = result.response.text();
-
-    return NextResponse.json({
-      message: assistantMessage,
-      conversationId: userId || 'anonymous',
-      timestamp: new Date().toISOString(),
-    });
+    const genAI = new GoogleGenerativeAI(apiKey)
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.0-flash-exp",
+      systemInstruction: "You are LEE Assistant, a smart shopping AI for LEE store. Help customers in Arabic find products and answer questions about prices and shipping. The store specializes in electronics priced in AED.",
+    })
+    const lastMessage = messages[messages.length - 1]
+    if (!lastMessage || lastMessage.role !== "user") {
+      return NextResponse.json({ error: "Last message must be from user" }, { status: 400 })
+    }
+    const history = messages
+      .slice(0, -1)
+      .filter((m: Message) => m.role === "user" || m.role === "assistant")
+      .map((m: Message) => ({
+        role: m.role === "assistant" ? "model" : "user",
+        parts: [{ text: m.content }],
+      }))
+    const cleanHistory = history[0]?.role === "model" ? history.slice(1) : history
+    const chat = model.startChat({ history: cleanHistory })
+    const result = await chat.sendMessage(lastMessage.content)
+    const response = await result.response
+    const text = response.text()
+    return NextResponse.json({ message: text })
   } catch (error) {
-    console.error('[v0] Assistant API error:', error);
-    return NextResponse.json(
-      { error: 'Failed to process message' },
-      { status: 500 }
-    );
+    console.error("[v0] Assistant API error:", error)
+    return NextResponse.json({ error: "An error occurred. Please try again." }, { status: 500 })
   }
 }
