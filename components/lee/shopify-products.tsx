@@ -168,7 +168,7 @@ export function ShopifyProducts({ products: initialProducts, initialPageInfo }: 
           return (
             <Link
               key={product.id}
-              href={`/product/${product.handle}`}
+              href={`/product/${product.id}`}
               className="bg-white rounded-lg overflow-hidden border border-gray-100 hover:shadow-lg transition-all cursor-pointer active:scale-[0.98] block"
             >
               <div className="relative aspect-square bg-gray-50">

@@ -79,7 +79,7 @@ export default function MessagesPage() {
             {productSuggestions.map((product) => (
               <button
                 key={product.id}
-                onClick={() => router.push(`/product/${product.handle}`)}
+                onClick={() => router.push(`/product/${product.id}`)}
                 className="min-w-[140px] bg-gray-50 rounded-lg overflow-hidden"
               >
                 <div className="aspect-square relative">

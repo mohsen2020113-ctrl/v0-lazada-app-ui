@@ -1,5 +1,5 @@
-const domain = process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN || 'f61e20-88.myshopify.com';
-const storefrontAccessToken = process.env.NEXT_PUBLIC_SHOPIFY_ACCESS_TOKEN || '54710e221c946a7f98e4ec4ca2df3029';
+const domain = 'f61e20-88.myshopify.com';
+const storefrontAccessToken = '54710e221c946a7f98e4ec4ca2df3029';
 
 const endpoint = `https://${domain}/api/2024-01/graphql.json`;
 

@@ -78,7 +78,7 @@ export default function AccountPage() {
       {/* Profile Header */}
       <div className="bg-gradient-to-br from-[#f85c98] via-[#ec407a] to-[#d81b60] pt-12 pb-6 px-4">
         {/* Settings Button */}
-        <button
+        <button 
           onClick={() => router.push('/account/settings')}
           className="absolute top-3 right-3 w-10 h-10 bg-white/20 rounded-full flex items-center justify-center backdrop-blur-sm"
         >
@@ -103,7 +103,7 @@ export default function AccountPage() {
               <Crown className="w-4 h-4 text-white" />
             </div>
           </div>
-
+          
           <div className="flex-1 text-white">
             <h1 className="text-xl font-bold">{user?.name || 'Guest'}</h1>
             <div className="flex items-center gap-2 mt-1">
@@ -162,7 +162,7 @@ export default function AccountPage() {
         <div className="bg-white mx-3 rounded-xl p-4 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <h2 className="font-bold text-gray-900">My Orders</h2>
-            <button
+            <button 
               onClick={() => router.push('/account/orders')}
               className="flex items-center text-sm text-[#f85c98] font-medium"
             >
@@ -229,7 +229,7 @@ export default function AccountPage() {
               {showBalance ? <Eye className="w-5 h-5 text-gray-400" /> : <EyeOff className="w-5 h-5 text-gray-400" />}
             </button>
           </div>
-
+          
           <div className="flex gap-3">
             <div className="flex-1 bg-gradient-to-br from-[#f85c98] to-[#ec407a] rounded-xl p-4 text-white">
               <p className="text-sm text-white/80">Balance</p>
@@ -273,12 +273,12 @@ export default function AccountPage() {
               View All <ChevronRight className="w-4 h-4" />
             </button>
           </div>
-
+          
           <div className="flex gap-2 overflow-x-auto hide-scrollbar">
             {recentlyViewed.map((item) => (
               <button
                 key={item.id}
-                onClick={() => router.push(`/product/${item.handle}`)}
+                onClick={() => router.push(`/product/${item.id}`)}
                 className="flex-shrink-0 w-24"
               >
                 <div className="w-24 h-24 bg-gray-100 rounded-lg overflow-hidden">

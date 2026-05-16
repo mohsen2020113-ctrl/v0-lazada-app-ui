@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { BottomNav } from '@/components/lee/bottom-nav-new';
 import { useCart } from '@/app/contexts/cart-context';
-import { useRouter } from 'next/navigation'; import { PaymentMethods } from '@/components/lee/payment-methods';
+import { useRouter } from 'next/navigation';import { PaymentMethods } from '@/components/lee/payment-methods';
 import { Trash2, Plus, Minus, ChevronRight, ChevronLeft, Heart, RotateCcw, Ticket, ShoppingBag, Truck, Tag, X, Check } from 'lucide-react';
 import Image from 'next/image';
 
@@ -95,7 +95,7 @@ const recommendations = [
 export default function CartPage() {
   const { items: cartContextItems, removeFromCart, updateQuantity: updateCartQuantity } = useCart();
   const router = useRouter();
-
+  
   const [stores, setStores] = useState(initialStores);
   const [voucherCode, setVoucherCode] = useState('');
   const [appliedVoucher, setAppliedVoucher] = useState<string | null>(null);
@@ -224,7 +224,7 @@ export default function CartPage() {
                 <span className="font-semibold">Add AED {amountForFreeShipping.toFixed(0)} more for FREE shipping!</span>
               </div>
               <div className="h-2 bg-white/30 rounded-full overflow-hidden">
-                <div
+                <div 
                   className="h-full bg-white rounded-full transition-all duration-500"
                   style={{ width: `${freeShippingProgress}%` }}
                 />
@@ -266,7 +266,7 @@ export default function CartPage() {
                     onChange={() => toggleItemSelect(store.storeId, item.id)}
                     className="w-5 h-5 rounded border-gray-300 text-[#f85c98] focus:ring-[#f85c98] mt-4 flex-shrink-0"
                   />
-
+                  
                   <div className="relative w-24 h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
                     <Image
                       src={item.image}
@@ -367,7 +367,7 @@ export default function CartPage() {
               {unavailableItems.map((item) => (
                 <div key={item.id} className="flex gap-3 px-3 py-3 opacity-60">
                   <div className="w-5 h-5 mt-4" />
-
+                  
                   <div className="relative w-24 h-24 bg-gray-100 rounded-lg overflow-hidden flex-shrink-0">
                     <Image
                       src={item.image}
@@ -399,7 +399,7 @@ export default function CartPage() {
               {recommendations.map((item) => (
                 <button
                   key={item.id}
-                  onClick={() => router.push(`/product/${item.handle}`)}
+                  onClick={() => router.push(`/product/${item.id}`)}
                   className="flex-shrink-0 w-32 text-left"
                 >
                   <div className="w-32 h-32 rounded-lg overflow-hidden bg-gray-100 mb-2 relative">
@@ -455,13 +455,13 @@ export default function CartPage() {
               />
               <span className="text-sm font-medium text-gray-700">All</span>
             </div>
-
+            
             <div className="flex-1 text-right">
               <p className="text-sm text-gray-600">Total</p>
               <p className="text-xl font-bold text-[#f85c98]">AED {total.toFixed(2)}</p>
             </div>
-
-            <button
+            
+            <button 
               disabled={selectedCount === 0}
               className="bg-[#f85c98] text-white px-6 py-3 rounded-lg font-bold hover:bg-[#ec407a] transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed"
             >

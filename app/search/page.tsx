@@ -293,7 +293,7 @@ function SearchContent() {
             {filteredProducts.map((product) => (
               <Link
                 key={product.id}
-                href={`/product/${product.handle}`}
+                href={`/product/${product.id}`}
                 className={`bg-white rounded-xl overflow-hidden border border-gray-100 hover:shadow-lg transition-all active:scale-[0.98] block ${
                   viewMode === 'list' ? 'flex gap-3' : ''
                 }`}

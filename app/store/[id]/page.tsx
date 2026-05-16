@@ -173,7 +173,7 @@ export default function StorePage() {
             {storeProducts.map((product) => (
               <div
                 key={product.id}
-                onClick={() => router.push(`/product/${product.handle}`)}
+                onClick={() => router.push(`/product/${product.id}`)}
                 className="bg-white rounded-xl overflow-hidden shadow-sm cursor-pointer"
               >
                 <div className="relative aspect-square">

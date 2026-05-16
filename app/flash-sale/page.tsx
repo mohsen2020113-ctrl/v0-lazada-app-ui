@@ -237,7 +237,7 @@ export default function FlashSalePage() {
           {currentSession.products.map((product) => (
             <button
               key={product.id}
-              onClick={() => router.push(`/product/${product.handle}`)}
+              onClick={() => router.push(`/product/${product.id}`)}
               className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all active:scale-[0.98] text-left"
             >
               {/* Product Image */}

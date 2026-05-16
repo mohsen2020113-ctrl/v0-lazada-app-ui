@@ -234,7 +234,7 @@ export default function FashionPage() {
           {newArrivals.map((product) => (
             <div
               key={product.id}
-              onClick={() => router.push(`/product/${product.handle}`)}
+              onClick={() => router.push(`/product/${product.id}`)}
               className="bg-white rounded-xl overflow-hidden border border-gray-100 shadow-sm cursor-pointer"
             >
               <div className="relative aspect-square">
