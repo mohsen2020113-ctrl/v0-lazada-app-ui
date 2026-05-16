@@ -3,8 +3,14 @@ import { GoogleGenerativeAI } from "@google/generative-ai"
 interface Message { role: "user" | "assistant" | "system"; content: string }
 export async function POST(req: NextRequest) {
   try {
-    const { messages } = await req.json()
-    if (!messages || !Array.isArray(messages) || messages.length === 0) {
+    const body = await req.json()
+    let messages: Message[]
+    if (body.messages && Array.isArray(body.messages) && body.messages.length > 0) {
+      messages = body.messages
+    } else if (body.message) {
+      const history: Message[] = body.conversationHistory || []
+      messages = [...history, { role: "user" as const, content: body.message }]
+    } else {
       return NextResponse.json({ error: "No messages provided" }, { status: 400 })
     }
     const apiKey = process.env.GEMINI_API_KEY
@@ -26,7 +32,7 @@ export async function POST(req: NextRequest) {
     const result = await chat.sendMessage(lastMessage.content)
     const response = await result.response
     const text = response.text()
-    return NextResponse.json({ message: text })
+    return NextResponse.json({ message: text, response: text })
   } catch (error) {
     console.error("[v0] Assistant API error:", error)
     return NextResponse.json({ error: "An error occurred. Please try again." }, { status: 500 })
