@@ -468,7 +468,7 @@ export default function CategoryPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 pb-20">
+    <div className="w-full min-h-screen bg-gray-100 flex flex-col pb-20">
       {/* Header */}
       <div className="sticky top-0 z-40 bg-white border-b">
         <div className="flex items-center gap-3 px-4 py-3">
