@@ -31,21 +31,21 @@ const VOUCHERS = [
 ];
 
 const CATEGORIES = [
-  {id:'mall',label:'LEEMall',icon:'ð¬',bg:'#ef4444'},
-  {id:'leeland',label:'LEELand',icon:'ð',bg:'#10b981'},
-  {id:'leemart',label:'LEEMart',icon:'ðª',bg:'#3b82f6'},
-  {id:'leelive',label:'LEELive',icon:'â¶',bg:'#8b5cf6'},
-  {id:'flash',label:'Flash Sale',icon:'â¡',bg:'#f97316'},
-  {id:'fashion',label:'Fashion',icon:'ð',bg:'#ec4899'},
-  {id:'electronics',label:'Electronics',icon:'ð»',bg:'#6366f1'},
-  {id:'mobiles',label:'Mobiles',icon:'ð±',bg:'#0ea5e9'},
-  {id:'home',label:'Home',icon:'ð ',bg:'#14b8a6'},
-  {id:'gaming',label:'Gaming',icon:'ð®',bg:'#84cc16'},
-  {id:'sports',label:'Sports',icon:'â½',bg:'#f59e0b'},
-  {id:'beauty',label:'Beauty',icon:'ð',bg:'#f43f5e'},
-  {id:'food',label:'Food',icon:'ð',bg:'#a855f7'},
-  {id:'vouchers',label:'Vouchers',icon:'ð',bg:'#f97316'},
-  {id:'more',label:'More',icon:'Â·Â·Â·',bg:'#6b7280'},
+  {id:'mall',label:'LEEMall',icon:'🏬',bg:'#ef4444'},
+  {id:'leeland',label:'LEELand',icon:'📍',bg:'#10b981'},
+  {id:'leemart',label:'LEEMart',icon:'🏪',bg:'#3b82f6'},
+  {id:'leelive',label:'LEELive',icon:'▶',bg:'#8b5cf6'},
+  {id:'flash',label:'Flash Sale',icon:'⚡',bg:'#f97316'},
+  {id:'fashion',label:'Fashion',icon:'👗',bg:'#ec4899'},
+  {id:'electronics',label:'Electronics',icon:'💻',bg:'#6366f1'},
+  {id:'mobiles',label:'Mobiles',icon:'📱',bg:'#0ea5e9'},
+  {id:'home',label:'Home',icon:'🏠',bg:'#14b8a6'},
+  {id:'gaming',label:'Gaming',icon:'🎮',bg:'#84cc16'},
+  {id:'sports',label:'Sports',icon:'⚽',bg:'#f59e0b'},
+  {id:'beauty',label:'Beauty',icon:'💄',bg:'#f43f5e'},
+  {id:'food',label:'Food',icon:'🍔',bg:'#a855f7'},
+  {id:'vouchers',label:'Vouchers',icon:'🎁',bg:'#f97316'},
+  {id:'more',label:'More',icon:'···',bg:'#6b7280'},
 ];
 
 interface HomePageProps {
@@ -381,7 +381,7 @@ export default function HomePage({ navigate }: HomePageProps) {
           className="w-full py-2.5 text-purple-600 font-bold text-sm border-t border-gray-100"
           onClick={() => navigate('daily-deals')}
         >
-          See All Daily Deals â
+          See All Daily Deals →
         </button>
       </div>
 
@@ -391,7 +391,7 @@ export default function HomePage({ navigate }: HomePageProps) {
           <div>
             <div className="flex items-center gap-2">
               <Sparkles size={16} className="text-indigo-500" />
-              <span className="font-black text-gray-900 text-sm">LEE AI Picks â¨</span>
+              <span className="font-black text-gray-900 text-sm">LEE AI Picks ✨</span>
             </div>
             <div className="text-xs text-gray-500 mt-0.5">Personalized recommendations for you</div>
           </div>
