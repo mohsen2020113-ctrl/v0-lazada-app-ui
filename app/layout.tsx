@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.4leee.com'),
   title: 'LEE - Shop Online | Best Deals & Free Shipping',
   description: 'Discover LEE - Your ultimate online shopping destination. Browse millions of products with amazing discounts and free shipping. Shop now!',
+    viewport: 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover',
   generator: 'v0.app',
   icons: {
     icon: [
