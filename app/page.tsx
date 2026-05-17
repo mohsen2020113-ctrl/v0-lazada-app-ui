@@ -4,6 +4,7 @@ import { MercuryStatusBar } from "@/components/lee/mercury-status-bar"
 import { AnimatedAds } from "@/components/lee/animated-ads"
 import { BenefitsBar } from "@/components/lee/benefits-bar"
 import { CategoryIcons } from "@/components/lee/category-icons"
+import { GroceryCategories } from "@/components/lee/grocery-categories"
 import { VoucherSection } from "@/components/lee/voucher-section"
 import { FlashSale } from "@/components/lee/flash-sale"
 import { ShopifyProducts } from "@/components/lee/shopify-products"
@@ -62,6 +63,7 @@ export default async function LEEHome() {
         </div>
         <BenefitsBar />
         <CategoryIcons />
+      <GroceryCategories />
         <VoucherSection />
         <FlashSale />
         <DailyDeals />
