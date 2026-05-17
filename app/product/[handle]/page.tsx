@@ -94,7 +94,7 @@ export default function ProductPage() {
     return (
       <div className="min-h-screen bg-gray-950 text-white flex items-center justify-center" dir="rtl">
         <div className="text-center">
-          <p className="text-xl">Ø¬Ø§Ø±Ù Ø§ÙØªØ­ÙÙÙ...</p>
+          <p className="text-xl">جاري التحميل...</p>
         </div>
       </div>
     )
@@ -132,7 +132,7 @@ export default function ProductPage() {
         <button onClick={() => router.back()} className="p-2 hover:bg-gray-800 rounded-lg">
           <ChevronLeft className="w-6 h-6" />
         </button>
-        <h1 className="text-lg font-bold flex-1 text-center">ØªÙØ§ØµÙÙ Ø§ÙÙÙØªØ¬</h1>
+        <h1 className="text-lg font-bold flex-1 text-center">تفاصيل المنتج</h1>
         <button className="p-2 hover:bg-gray-800 rounded-lg">
           <Share2 className="w-5 h-5" />
         </button>
@@ -159,7 +159,7 @@ export default function ProductPage() {
                     selectedImage === idx ? 'border-orange-500' : 'border-gray-700'
                   }`}
                 >
-                  <img src={img.url} alt={`ØµÙØ±Ø© ${idx + 1}`} className="w-full h-full object-cover" />
+                  <img src={img.url} alt={`صورة ${idx + 1}`} className="w-full h-full object-cover" />
                 </button>
               ))}
             </div>
@@ -191,15 +191,15 @@ export default function ProductPage() {
             <div className="bg-gray-800 p-3 rounded-lg flex items-start gap-2">
               <Truck className="w-5 h-5 mt-1 text-orange-500 flex-shrink-0" />
               <div className="text-sm">
-                <p className="font-semibold">Ø´Ø­Ù</p>
-                <p className="text-gray-400">ÙØµÙ ÙØ±ÙØ¨Ø§Ù</p>
+                <p className="font-semibold">شحن</p>
+                <p className="text-gray-400">يصل قريباً</p>
               </div>
             </div>
             <div className="bg-gray-800 p-3 rounded-lg flex items-start gap-2">
               <RotateCcw className="w-5 h-5 mt-1 text-green-500 flex-shrink-0" />
               <div className="text-sm">
-                <p className="font-semibold">Ø¥Ø±Ø¬Ø§Ø¹ 15 ÙÙÙ</p>
-                <p className="text-gray-400">ÙØ¶ÙÙÙ</p>
+                <p className="font-semibold">إرجاع 15 يوم</p>
+                <p className="text-gray-400">مضمون</p>
               </div>
             </div>
           </div>
@@ -208,7 +208,7 @@ export default function ProductPage() {
         {/* Variant Selection */}
         {product.variants.edges.length > 0 && (
           <div className="mb-6">
-            <label className="block text-sm font-bold mb-3">Ø§Ø®ØªØ± Ø§ÙÙÙØ¹:</label>
+            <label className="block text-sm font-bold mb-3">اختر النوع:</label>
             <div className="flex gap-3 flex-wrap">
               {product.variants.edges.map((edge) => {
                 const variant = edge.node
@@ -233,7 +233,7 @@ export default function ProductPage() {
 
         {/* Quantity */}
         <div className="mb-6">
-          <label className="block text-sm font-bold mb-3">Ø§ÙÙÙÙØ©:</label>
+          <label className="block text-sm font-bold mb-3">الكمية:</label>
           <div className="flex items-center gap-3">
             <button
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -262,7 +262,7 @@ export default function ProductPage() {
             }`}
           >
             <Heart className="w-5 h-5" fill={isFavorite ? 'currentColor' : 'none'} />
-            {isFavorite ? 'ÙØ¶Ø§Ù' : 'Ø¥Ø¶Ø§ÙØ©'}
+            {isFavorite ? 'مضاف' : 'إضافة'}
           </button>
           <button
             onClick={handleAddToCart}
@@ -270,14 +270,14 @@ export default function ProductPage() {
             className="py-3 rounded-lg bg-orange-500 hover:bg-orange-600 font-bold flex items-center justify-center gap-2 transition disabled:opacity-50"
           >
             <ShoppingCart className="w-5 h-5" />
-            {addedToCart ? 'â ØªÙØª Ø§ÙØ¥Ø¶Ø§ÙØ©' : 'Ø£Ø¶Ù ÙÙØ³ÙØ©'}
+            {addedToCart ? '✓ تمت الإضافة' : 'أضف للسلة'}
           </button>
         </div>
 
         {/* Description & Specs */}
         <div className="grid grid-cols-1 gap-6">
           <div>
-            <h2 className="text-lg font-bold mb-3">Ø§ÙÙØµÙ</h2>
+            <h2 className="text-lg font-bold mb-3">الوصف</h2>
             <p className="text-gray-400">{product.description}</p>
           </div>
         </div>
