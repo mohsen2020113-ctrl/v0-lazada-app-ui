@@ -27,7 +27,7 @@ export async function GET(request: NextRequest) {
       })
 
       const data = await response.json()
-      const shopifyProducts = data?.data?.products?.edges?.map((e: any) => e.node)?.filter((p: any) => p?.title && p.title.toLowerCase().includes(query.toLowerCase())) ?? []
+      const shopifyProducts = data?.data?.products?.edges?.map((e: any) => e.node)?.filter((p: any) => p?.title) ?? []
 
       if (shopifyProducts.length > 0) {
         const results = shopifyProducts.map((p: any) => ({
