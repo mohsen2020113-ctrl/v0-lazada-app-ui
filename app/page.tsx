@@ -16,7 +16,6 @@ import { fetchAllProducts } from "@/lib/shopify"
 
 export const revalidate = 3600 // Revalidate every hour
 
-// Loading skeleton for products
 function ProductsLoading() {
   return (
     <div className="bg-white mx-3 mt-3 rounded-xl overflow-hidden p-3">
@@ -52,50 +51,36 @@ export default async function LEEHome() {
     console.error('[v0] Error fetching products:', error)
   }
   return (
-    <div className="min-h-screen min-h-dvh bg-gray-100 flex flex-col">
-      {/* Mercury Status Bar - Admin Only */}
-      <MercuryStatusBar />
-
-      {/* Scrollable Content */}
-      <main className="flex-1 overflow-y-auto pb-20 md:pb-24 hide-scrollbar">
-        {/* Animated Ads Carousel - Extends to Top */}
-        <div className="relative">
-          <AnimatedAds />
-          {/* Search Header Overlaid on Carousel */}
-          <div className="absolute top-0 left-0 right-0 z-20">
-            <SearchHeader />
+    <div className="min-h-screen min-h-dvh bg-gray-200 flex justify-center">
+      <div className="w-full max-w-[430px] min-h-screen min-h-dvh bg-gray-100 flex flex-col shadow-none sm:shadow-2xl relative">
+        <MercuryStatusBar />
+        <main className="flex-1 overflow-y-auto pb-20 hide-scrollbar">
+          <div className="relative">
+            <AnimatedAds />
+            <div className="absolute top-0 left-0 right-0 z-20">
+              <SearchHeader />
+            </div>
           </div>
-        </div>
-        
-        <BenefitsBar />
-        <CategoryIcons />
-        <VoucherSection />
-        <FlashSale />
-        <DailyDeals />
-        
-        {/* Secondary Ad Banner - Cashback Offers - Before Just For You */}
-        <AnimatedAdsBottom />
-        
-        {/* Recently Viewed Section - Last 8 viewed products */}
-        <RecentlyViewedSection />
-        
-        {/* RecGPT V2 Section - Powered by Mercury AI Recommendations */}
-        <Suspense fallback={<ProductsLoading />}>
-          <RecGPTV2 limit={12} />
-        </Suspense>
-        
-        {/* Our Products Section - Main Product Grid - All products with client-side pagination */}
-        {allProducts.length === 0 ? (
-          <ProductsError />
-        ) : (
+          <BenefitsBar />
+          <CategoryIcons />
+          <VoucherSection />
+          <FlashSale />
+          <DailyDeals />
+          <AnimatedAdsBottom />
+          <RecentlyViewedSection />
           <Suspense fallback={<ProductsLoading />}>
-            <ShopifyProducts products={allProducts} initialPageInfo={initialPageInfo} />
+            <RecGPTV2 limit={12} />
           </Suspense>
-        )}
-      </main>
-      
-      {/* Fixed Bottom Navigation */}
-      <BottomNav />
+          {allProducts.length === 0 ? (
+            <ProductsError />
+          ) : (
+            <Suspense fallback={<ProductsLoading />}>
+              <ShopifyProducts products={allProducts} initialPageInfo={initialPageInfo} />
+            </Suspense>
+          )}
+        </main>
+        <BottomNav />
+      </div>
     </div>
   )
 }
