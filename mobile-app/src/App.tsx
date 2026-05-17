@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
-import { Home, ShoppingBag, MessageCircle, User, Search, ShoppingCart, Heart, Bell, Zap, Tag, Wallet, Package, Star } from 'lucide-react';
+import { Home, ShoppingBag, Radio, MessageCircle, ShoppingCart, User } from 'lucide-react';
 
 import HomePage from './pages/HomePage';
 import FashionPage from './pages/FashionPage';
@@ -24,7 +24,7 @@ export type PageId =
   | 'home' | 'fashion' | 'cart' | 'account' | 'messages'
   | 'search' | 'product' | 'wishlist' | 'orders' | 'checkout'
   | 'notifications' | 'wallet' | 'vouchers' | 'daily-deals'
-  | 'flash-sale' | 'login';
+  | 'flash-sale' | 'login' | 'live';
 
 export interface NavigationParams {
   productHandle?: string;
@@ -44,8 +44,9 @@ function App() {
 
   const tabs = [
     { id: 'home' as PageId, label: 'Home', icon: Home },
-    { id: 'fashion' as PageId, label: 'Shop', icon: ShoppingBag },
-    { id: 'messages' as PageId, label: 'Chat', icon: MessageCircle },
+    { id: 'fashion' as PageId, label: 'Fashion', icon: ShoppingBag },
+    { id: 'live' as PageId, label: '\u0644\u0627\u064a\u0641', icon: Radio },
+    { id: 'messages' as PageId, label: 'Messages', icon: MessageCircle },
     { id: 'cart' as PageId, label: 'Cart', icon: ShoppingCart },
     { id: 'account' as PageId, label: 'Account', icon: User },
   ];
@@ -69,6 +70,7 @@ function App() {
       case 'daily-deals': return <DailyDealsPage {...props} />;
       case 'flash-sale': return <FlashSalePage {...props} />;
       case 'login': return <LoginPage {...props} />;
+      case 'live': return <FlashSalePage {...props} />;
       default: return <HomePage {...props} />;
     }
   };
@@ -78,28 +80,48 @@ function App() {
   return (
     <AuthProvider>
       <CartProvider>
-        <div className="flex flex-col h-screen bg-gray-50 max-w-md mx-auto relative overflow-hidden">
+        <div className="flex flex-col h-screen bg-gray-100 max-w-md mx-auto relative overflow-hidden">
           <main className={`flex-1 overflow-y-auto ${showBottomNav ? 'pb-16' : ''}`}>
             {renderPage()}
           </main>
 
           {showBottomNav && (
-            <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-t border-gray-200 z-50">
-              <div className="flex">
-                {tabs.map(({ id, label, icon: Icon }) => (
-                  <button
-                    key={id}
-                    onClick={() => navigate(id)}
-                    className={`flex-1 flex flex-col items-center justify-center py-2 gap-0.5 transition-colors ${
-                      activePage === id
-                        ? 'text-orange-500'
-                        : 'text-gray-400 hover:text-gray-600'
-                    }`}
-                  >
-                    <Icon size={22} strokeWidth={activePage === id ? 2.5 : 1.8} />
-                    <span className="text-[10px] font-medium">{label}</span>
-                  </button>
-                ))}
+            <nav className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-t border-gray-100 z-50 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
+              <div className="flex justify-around items-stretch">
+                {tabs.map(({ id, label, icon: Icon }) => {
+                  const active = activePage === id;
+                  return (
+                    <button
+                      key={id}
+                      onClick={() => navigate(id)}
+                      className="flex-1 flex flex-col items-center justify-center py-2 px-1 relative transition-all"
+                    >
+                      <div className="relative">
+                        <Icon
+                          size={22}
+                          strokeWidth={active ? 2.5 : 1.8}
+                          style={{ color: active ? '#f85c98' : '#6b7280' }}
+                        />
+                        {id === 'messages' && (
+                          <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[8px] rounded-full w-4 h-4 flex items-center justify-center font-bold">
+                            99
+                          </span>
+                        )}
+                        {id === 'cart' && (
+                          <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[8px] rounded-full w-4 h-4 flex items-center justify-center font-bold">
+                            2
+                          </span>
+                        )}
+                      </div>
+                      <span
+                        className="text-[9px] mt-1 font-medium"
+                        style={{ color: active ? '#f85c98' : '#6b7280' }}
+                      >
+                        {label}
+                      </span>
+                    </button>
+                  );
+                })}
               </div>
             </nav>
           )}
