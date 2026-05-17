@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { Search, SlidersHorizontal, X } from 'lucide-react';
 import { getProducts, getCollections, formatMoney, getProductImageUrl, getDiscountPercent, type ShopifyProduct, type ShopifyCollection } from '../lib/shopify';
 import type { PageId, NavigationParams } from '../App';
@@ -16,23 +16,47 @@ export default function FashionPage({ navigate, params }: Props) {
   const [sortIndex, setSortIndex] = useState(0);
   const [showFilters, setShowFilters] = useState(false);
   const [hasMore, setHasMore] = useState(false);
-  const [cursor, setCursor] = useState<string | null>(null);
+  const cursorRef = useRef<string | null>(null);
+  const isFetchingRef = useRef(false);
+  const sentinelRef = useRef<HTMLDivElement>(null);
 
   const loadProducts = useCallback(async (reset = true) => {
-    setLoading(true);
+    if (isFetchingRef.current) return;
+    isFetchingRef.current = true;
+    if (reset) setLoading(true);
     try {
       let query = searchQuery || undefined;
       if (activeCollection) query = `collection:${activeCollection}`;
-      const { products: p, pageInfo } = await getProducts(20, reset ? undefined : cursor ?? undefined, query);
+      const { products: p, pageInfo } = await getProducts(20, reset ? undefined : cursorRef.current ?? undefined, query);
       setProducts(prev => reset ? p : [...prev, ...p]);
       setHasMore(pageInfo.hasNextPage);
-      setCursor(pageInfo.endCursor);
+      cursorRef.current = pageInfo.endCursor;
     } catch (e) { console.error(e); }
-    finally { setLoading(false); }
-  }, [activeCollection, searchQuery, cursor]);
+    finally { setLoading(false); isFetchingRef.current = false; }
+  }, [activeCollection, searchQuery]);
 
   useEffect(() => { getCollections(15).then(setCollections); }, []);
-  useEffect(() => { loadProducts(true); }, [activeCollection, searchQuery]);
+
+  useEffect(() => {
+    cursorRef.current = null;
+    loadProducts(true);
+  }, [activeCollection, searchQuery]);
+
+  // Automatic infinite scroll — no button needed
+  useEffect(() => {
+    const sentinel = sentinelRef.current;
+    if (!sentinel) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore && !isFetchingRef.current) {
+          loadProducts(false);
+        }
+      },
+      { rootMargin: '300px' }
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [hasMore, loadProducts]);
 
   const sortedProducts = [...products].sort((a, b) => {
     if (sortIndex === 1) return parseFloat(a.priceRange.minVariantPrice.amount) - parseFloat(b.priceRange.minVariantPrice.amount);
@@ -72,16 +96,25 @@ export default function FashionPage({ navigate, params }: Props) {
       <div className="px-4 pb-4">
         <div className="grid grid-cols-2 gap-3">
           {loading && products.length === 0 ? (
-            Array.from({ length: 8 }).map((_, i) => (<div key={i} className="product-card"><div className="aspect-square skeleton" /><div className="p-2 space-y-1.5"><div className="h-3 skeleton rounded w-3/4" /><div className="h-4 skeleton rounded w-1/2" /></div></div>))
+            Array.from({ length: 8 }).map((_, i) => (
+              <div key={i} className="product-card">
+                <div className="aspect-square skeleton" />
+                <div className="p-2 space-y-1.5"><div className="h-3 skeleton rounded w-3/4" /><div className="h-4 skeleton rounded w-1/2" /></div>
+              </div>
+            ))
           ) : sortedProducts.length === 0 ? (
-            <div className="col-span-2 text-center py-16 text-gray-500"><p className="text-4xl mb-3">🔍</p><p className="font-medium">No products found</p><p className="text-sm">Try adjusting your filters</p></div>
+            <div className="col-span-2 text-center py-16 text-gray-500">
+              <p className="text-4xl mb-3">🔍</p>
+              <p className="font-medium">No products found</p>
+              <p className="text-sm">Try adjusting your filters</p>
+            </div>
           ) : (
             sortedProducts.map(product => {
               const discount = getDiscountPercent(product);
               return (
                 <div key={product.id} className="product-card" onClick={() => navigate('product', { productHandle: product.handle })}>
                   <div className="aspect-square bg-gray-100 relative overflow-hidden">
-                    <img src={getProductImageUrl(product)} alt={product.title} className="w-full h-full object-cover" loading="lazy" />
+                    <img src={getProductImageUrl(product)} alt={product.title} className="w-full h-full object-cover" loading="lazy" decoding="async" />
                     {discount && <span className="absolute top-2 left-2 discount-badge">-{discount}%</span>}
                     {!product.availableForSale && (<div className="absolute inset-0 bg-black/40 flex items-center justify-center"><span className="text-white text-xs font-bold">Sold Out</span></div>)}
                   </div>
@@ -95,7 +128,20 @@ export default function FashionPage({ navigate, params }: Props) {
             })
           )}
         </div>
-        {hasMore && (<button onClick={() => loadProducts(false)} disabled={loading} className="w-full mt-4 py-3 border border-orange-500 text-orange-500 font-medium rounded-xl text-sm">{loading ? 'Loading...' : 'Load More'}</button>)}
+
+        {/* Sentinel for auto infinite scroll */}
+        <div ref={sentinelRef} className="h-4" />
+
+        {/* Loading spinner while fetching more */}
+        {loading && products.length > 0 && (
+          <div className="flex justify-center py-4">
+            <div className="w-6 h-6 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
+          </div>
+        )}
+
+        {!hasMore && products.length > 0 && (
+          <p className="text-center text-xs text-gray-400 py-4">All products loaded</p>
+        )}
       </div>
 
       {showFilters && (
