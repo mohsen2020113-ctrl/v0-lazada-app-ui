@@ -19,7 +19,7 @@ export const revalidate = 3600 // Revalidate every hour
 function ProductsLoading() {
   return (
     <div className="bg-white mx-3 mt-3 rounded-xl overflow-hidden p-3">
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-2">
         {[...Array(4)].map((_, i) => (
           <div key={i} className="animate-pulse">
             <div className="aspect-square bg-gray-200 rounded-lg" />
@@ -51,36 +51,34 @@ export default async function LEEHome() {
     console.error('[v0] Error fetching products:', error)
   }
   return (
-    <div className="min-h-screen min-h-dvh bg-gray-200 flex justify-center">
-      <div className="w-full max-w-[430px] min-h-screen min-h-dvh bg-gray-100 flex flex-col shadow-none sm:shadow-2xl relative">
-        <MercuryStatusBar />
-        <main className="flex-1 overflow-y-auto pb-20 hide-scrollbar">
-          <div className="relative">
-            <AnimatedAds />
-            <div className="absolute top-0 left-0 right-0 z-20">
-              <SearchHeader />
-            </div>
+    <div className="w-full min-h-screen min-h-dvh bg-gray-100 flex flex-col relative">
+      <MercuryStatusBar />
+      <main className="flex-1 overflow-y-auto pb-20 hide-scrollbar">
+        <div className="relative">
+          <AnimatedAds />
+          <div className="absolute top-0 left-0 right-0 z-20">
+            <SearchHeader />
           </div>
-          <BenefitsBar />
-          <CategoryIcons />
-          <VoucherSection />
-          <FlashSale />
-          <DailyDeals />
-          <AnimatedAdsBottom />
-          <RecentlyViewedSection />
+        </div>
+        <BenefitsBar />
+        <CategoryIcons />
+        <VoucherSection />
+        <FlashSale />
+        <DailyDeals />
+        <AnimatedAdsBottom />
+        <RecentlyViewedSection />
+        <Suspense fallback={<ProductsLoading />}>
+          <RecGPTV2 limit={12} />
+        </Suspense>
+        {allProducts.length === 0 ? (
+          <ProductsError />
+        ) : (
           <Suspense fallback={<ProductsLoading />}>
-            <RecGPTV2 limit={12} />
+            <ShopifyProducts products={allProducts} initialPageInfo={initialPageInfo} />
           </Suspense>
-          {allProducts.length === 0 ? (
-            <ProductsError />
-          ) : (
-            <Suspense fallback={<ProductsLoading />}>
-              <ShopifyProducts products={allProducts} initialPageInfo={initialPageInfo} />
-            </Suspense>
-          )}
-        </main>
-        <BottomNav />
-      </div>
+        )}
+      </main>
+      <BottomNav />
     </div>
   )
 }
