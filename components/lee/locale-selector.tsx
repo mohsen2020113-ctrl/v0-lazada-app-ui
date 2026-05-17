@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { Globe, X, Check, ChevronRight } from 'lucide-react';
 import { useI18n } from '@/lib/i18n-context';
 import { Language, Currency, languageConfig, currencyConfig } from '@/lib/translations';
@@ -9,6 +10,8 @@ export function LocaleSelector() {
   const [isOpen, setIsOpen] = useState(false);
   const [activeTab, setActiveTab] = useState<'language' | 'currency'>('language');
   const { currentLanguage, currentCurrency, setLanguage, setCurrency, t, isRTL } = useI18n();
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
 
   const languages: Language[] = ['en', 'ar', 'th', 'fr'];
   const currencies: Currency[] = ['AED', 'SAR', 'USD', 'EUR'];
@@ -31,17 +34,20 @@ export function LocaleSelector() {
         <Globe className="w-4 h-4 text-white" />
       </button>
 
-      {/* Backdrop */}
-      {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/50 z-50"
-          onClick={() => setIsOpen(false)}
-        />
-      )}
+      {/* Modal Portal - rendered at body to avoid fixed positioning issues */}
+      {mounted && createPortal(
+        <>
+          {/* Backdrop */}
+          {isOpen && (
+            <div
+              className="fixed inset-0 bg-black/50 z-[9998]"
+              onClick={() => setIsOpen(false)}
+            />
+          )}
 
-      {/* Bottom Sheet */}
-      <div
-        className={`fixed inset-x-0 bottom-0 z-50 bg-white rounded-t-2xl transition-transform duration-300 ease-out ${
+          {/* Bottom Sheet */}
+          <div
+        className={`fixed inset-x-0 bottom-0 z-[9999] bg-white rounded-t-2xl transition-transform duration-300 ease-out ${
           isOpen ? 'translate-y-0' : 'translate-y-full'
         }`}
         style={{ maxHeight: '70vh' }}
@@ -168,6 +174,9 @@ export function LocaleSelector() {
           </span>
         </div>
       </div>
+        </>,
+        document.body
+      )}
     </>
   );
 }
