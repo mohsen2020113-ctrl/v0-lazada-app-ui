@@ -6,9 +6,11 @@ import Image from 'next/image';
 import { Phone, Lock, Eye, EyeOff, ChevronDown, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 const countries = [
-  { code: '+66', flag: '🇹🇭', name: 'Thailand' },
+  { code: '+971', flag: '🇦🇪', name: 'UAE' },
+  { code: '+966', flag: '🇸🇦', name: 'Saudi Arabia' },
   { code: '+1', flag: '🇺🇸', name: 'USA' },
   { code: '+44', flag: '🇬🇧', name: 'UK' },
+  { code: '+66', flag: '🇹🇭', name: 'Thailand' },
   { code: '+81', flag: '🇯🇵', name: 'Japan' },
   { code: '+86', flag: '🇨🇳', name: 'China' },
   { code: '+65', flag: '🇸🇬', name: 'Singapore' },
