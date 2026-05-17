@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { Search, Bell, ShoppingCart, Heart, ChevronLeft, ChevronRight, Zap, Star, Camera, Mic, Tag, Flame, Sparkles, Clock, ChevronRight as ArrowRight } from 'lucide-react';
+import { Search, Globe, ShoppingCart, Heart, ChevronLeft, ChevronRight, Zap, Star, Camera, Mic, Tag, Flame, Sparkles, Clock, ChevronRight as ArrowRight } from 'lucide-react';
 import { getProducts, ShopifyProduct, getProductImageUrl, getProductPrice, getCompareAtPrice, getDiscountPercent } from '../lib/shopify';
 import { PageId, NavigationParams } from '../App';
 
@@ -9,6 +9,11 @@ const BANNERS = [
   { id:3, tag:'FASHION', tagColor:'#8b5cf6', title:'NEW SEASON', subtitle:'STYLE YOUR LOOK', percent:'UP TO 50%', desc:'Trending Styles & Collections', btn:'Explore', btnColor:'#8b5cf6', img:'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=800' },
   { id:4, tag:'HOME', tagColor:'#10b981', title:'HOME & LIVING', subtitle:'REFRESH YOUR SPACE', percent:'UP TO 40%', desc:'Furniture, Decor & Appliances', btn:'Shop Now', btnColor:'#10b981', img:'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800' },
   { id:5, tag:'TECH', tagColor:'#3b82f6', title:'TECH DEALS', subtitle:'GADGETS & DEVICES', percent:'UP TO 55%', desc:'Phones, Laptops & Accessories', btn:'Grab Now', btnColor:'#3b82f6', img:'https://images.unsplash.com/photo-1498049794561-7780e7231661?w=800' },
+  { id:6, tag:'BEAUTY', tagColor:'#f43f5e', title:'BEAUTY FEST', subtitle:'GLOW UP THIS SEASON', percent:'UP TO 45%', desc:'Skincare, Makeup & Perfumes', btn:'Shop Now', btnColor:'#f43f5e', img:'https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?w=800' },
+  { id:7, tag:'SPORTS', tagColor:'#f59e0b', title:'SPORT ZONE', subtitle:'GEAR UP & GO', percent:'UP TO 35%', desc:'Fitness, Outdoor & Activewear', btn:'Explore', btnColor:'#f59e0b', img:'https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800' },
+  { id:8, tag:'FOOD', tagColor:'#a855f7', title:'FOOD & GROCERY', subtitle:'FRESH EVERY DAY', percent:'UP TO 25%', desc:'Organic, Snacks & Beverages', btn:'Order Now', btnColor:'#a855f7', img:'https://images.unsplash.com/photo-1542838132-92c53300491e?w=800' },
+  { id:9, tag:'FLASH', tagColor:'#ef4444', title:'FLASH DEALS', subtitle:'LIMITED TIME ONLY', percent:'UP TO 80%', desc:"Grab Before They're Gone", btn:'Grab Now', btnColor:'#ef4444', img:'https://images.unsplash.com/photo-1607083206968-13611e3d76db?w=800' },
+  { id:10, tag:'NEW', tagColor:'#0ea5e9', title:'NEW ARRIVALS', subtitle:'JUST DROPPED', percent:'EXPLORE NEW', desc:'Latest Collections & Styles', btn:'Shop New', btnColor:'#0ea5e9', img:'https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?w=800' },
 ];
 
 const BOTTOM_ADS = [
@@ -149,26 +154,24 @@ export default function HomePage({ navigate }: HomePageProps) {
 
       {/* Search Bar */}
       <div className="sticky top-0 z-30 bg-white px-3 py-2 flex items-center gap-2 shadow-sm">
-        <Bell size={22} className="text-gray-600 flex-shrink-0" onClick={() => navigate('notifications')} />
-        <div className="flex-1 flex items-center bg-gray-100 rounded-full px-3 py-1.5 gap-2">
-          <Search size={15} className="text-gray-400" />
+        <Globe size={22} className="text-gray-500 flex-shrink-0" onClick={() => {}} />
+        <div className="flex-1 flex items-center bg-gray-100 rounded-full px-3 py-1.5 gap-2" onClick={() => navigate('search')}>
+          <Search size={15} style={{ color: '#f97316' }} />
           <input
-            className="flex-1 bg-transparent text-sm outline-none text-gray-700 placeholder-gray-400"
-            placeholder="Search products..."
-            onFocus={() => navigate('search')}
+            className="flex-1 bg-transparent text-sm outline-none text-gray-500 placeholder-gray-400"
+            placeholder="Search in LEE"
             readOnly
           />
           <Camera size={16} className="text-gray-400" />
           <Mic size={16} className="text-gray-400" />
         </div>
         <button
-          className="flex-shrink-0 text-white text-sm font-semibold px-3 py-1.5 rounded-full"
+          className="flex-shrink-0 text-white text-sm font-bold px-4 py-1.5 rounded-full"
           style={{ backgroundColor: '#f97316' }}
           onClick={() => navigate('search')}
         >
           Search
         </button>
-        <ShoppingCart size={22} className="text-gray-600 flex-shrink-0" onClick={() => navigate('cart')} />
       </div>
 
       {/* Hero Banner */}
@@ -198,12 +201,14 @@ export default function HomePage({ navigate }: HomePageProps) {
       </div>
 
       {/* Service Bar */}
-      <div className="flex items-center justify-center gap-3 py-2 px-4" style={{ backgroundColor: '#1e1b4b' }}>
-        <span className="text-white text-xs font-black px-2 py-0.5 rounded" style={{ backgroundColor: '#f97316' }}>FREE</span>
+      <div className="flex items-center justify-center gap-2 py-2 px-3" style={{ backgroundColor: '#1e1b4b' }}>
+        <span className="text-white text-xs font-black px-1.5 py-0.5 rounded" style={{ backgroundColor: '#10b981' }}>FREE</span>
         <span className="text-white text-xs font-medium">Free Shipping</span>
-        <span className="text-gray-400 text-xs">|</span>
+        <span className="text-gray-500 text-xs mx-1">|</span>
+        <span className="text-green-400 text-xs">✓</span>
         <span className="text-white text-xs font-medium">Fast Delivery</span>
-        <span className="text-gray-400 text-xs">|</span>
+        <span className="text-gray-500 text-xs mx-1">|</span>
+        <span className="text-blue-400 text-xs">↩</span>
         <span className="text-white text-xs font-medium">Free Return</span>
       </div>
 
