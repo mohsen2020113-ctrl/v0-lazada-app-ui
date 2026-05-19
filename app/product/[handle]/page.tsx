@@ -40,7 +40,7 @@ interface ShopifyProduct {
 
 export default function ProductPage() {
   const router = useRouter()
-  const cartStore = useCartStore()
+  const addItem = useCartStore((s) => s.addItem)
   const routeParams = useParams()
   const handle = decodeURIComponent((routeParams?.handle as string) || '')
   const [product, setProduct] = useState<ShopifyProduct | null>(null)
@@ -109,20 +109,24 @@ export default function ProductPage() {
   const maxPrice = parseFloat(product.priceRange.maxVariantPrice.amount)
 
   const handleAddToCart = () => {
-    if (!selectedVariant) return
+    if (!product || !selectedVariant || !selectedVariant.availableForSale) return
 
-    cartStore.addItem({
-      productId: product.id,
-      name: product.title,
-      price: parseFloat(selectedVariant.price.amount),
-      image: images[0]?.url || '',
-      quantity,
-      color: selectedVariant.selectedOptions.find((o) => o.name === 'Color')?.value || '',
-      size: selectedVariant.selectedOptions.find((o) => o.name === 'Size')?.value || '',
-      sellerName: product.vendor,
-    })
-    setAddedToCart(true)
-    setTimeout(() => setAddedToCart(false), 2000)
+    try {
+      addItem({
+        productId: product.id,
+        name: product.title,
+        price: parseFloat(selectedVariant.price.amount),
+        image: images[0]?.url || '',
+        quantity,
+        color: selectedVariant.selectedOptions.find((o) => o.name === 'Color')?.value || '',
+        size: selectedVariant.selectedOptions.find((o) => o.name === 'Size')?.value || '',
+        sellerName: product.vendor,
+      })
+      setAddedToCart(true)
+      setTimeout(() => setAddedToCart(false), 2000)
+    } catch (err) {
+      console.error('[AddToCart] failed to add item to cart:', err)
+    }
   }
 
   return (
