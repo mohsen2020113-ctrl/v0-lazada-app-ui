@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 import { Home, ShoppingBag, Radio, MessageCircle, ShoppingCart, User } from 'lucide-react';
@@ -39,8 +39,25 @@ function App() {
   const navigate = (page: PageId, params: NavigationParams = {}) => {
     setActivePage(page);
     setNavParams(params);
+    window.history.pushState({}, '', '/' + page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Sync activePage from direct URL access (enables /cart, /checkout, etc. deep links)
+  useEffect(() => {
+    const syncFromUrl = () => {
+      const path = window.location.pathname.replace(/^\//, '').split('/')[0] as PageId;
+      const valid: PageId[] = ['home','fashion','cart','account','messages','search',
+        'product','wishlist','orders','checkout','notifications','wallet','vouchers',
+        'daily-deals','flash-sale','login','live'];
+      if (path && valid.includes(path)) {
+        setActivePage(path);
+      }
+    };
+    syncFromUrl();
+    window.addEventListener('popstate', syncFromUrl);
+    return () => window.removeEventListener('popstate', syncFromUrl);
+  }, []);
 
   const tabs = [
     { id: 'home' as PageId, label: 'Home', icon: Home },
