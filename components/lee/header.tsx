@@ -8,9 +8,10 @@ interface HeaderProps {
   showBack?: boolean;
   showSearch?: boolean;
   onSearchChange?: (value: string) => void;
+    onSearch?: () => void;
 }
 
-export function Header({ title, showBack = false, showSearch = false, onSearchChange }: HeaderProps) {
+export function Header({ title, showBack = false, showSearch = false, onSearchChange, onSearch }: HeaderProps) {
   const router = useRouter();
 
   return (
@@ -32,6 +33,7 @@ export function Header({ title, showBack = false, showSearch = false, onSearchCh
               type="text"
               placeholder="Search products..."
               onChange={(e) => onSearchChange?.(e.target.value)}
+              onKeyDown={(e) => { if (e.key === 'Enter') onSearch?.() }}
               className="flex-1 bg-transparent text-gray-800 placeholder-gray-400 outline-none text-sm sm:text-base"
             />
           </div>
