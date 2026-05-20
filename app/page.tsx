@@ -15,7 +15,7 @@ import { RecentlyViewedSection } from "@/components/lee/recently-viewed-section"
 import { AnimatedAdsBottom } from "@/components/lee/animated-ads-bottom"
 import { fetchAllProducts } from "@/lib/shopify"
 
-export const revalidate = 3600 // Revalidate every hour
+export const revalidate = 30 // Homepage refreshes every 30 seconds
 
 function ProductsLoading() {
   return (
