@@ -5,6 +5,12 @@ import { ChevronLeft, Heart, Share2, Star, Truck, RotateCcw, ShoppingCart } from
 import { useRouter, useParams } from 'next/navigation'
 import { notFound } from 'next/navigation'
 import { useCartStore } from '@/lib/store/cart-store'
+export const revalidate = 60 // ISR: revalidate every 60 seconds
+
+export async function generateStaticParams() {
+    // Pre-render top products at build time
+    return []
+}
 
 interface ProductVariant {
   id: string
