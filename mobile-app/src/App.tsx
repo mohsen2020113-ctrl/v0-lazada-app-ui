@@ -19,12 +19,19 @@ import VouchersPage from './pages/VouchersPage';
 import DailyDealsPage from './pages/DailyDealsPage';
 import FlashSalePage from './pages/FlashSalePage';
 import LoginPage from './pages/LoginPage';
+import DashboardPage from './pages/DashboardPage';
+import ProfilePage from './pages/ProfilePage';
+import SettingsPage from './pages/SettingsPage';
+import TrackingPage from './pages/TrackingPage';
+import DropshipPage from './pages/DropshipPage';
+import ShippingPage from './pages/ShippingPage';
 
 export type PageId =
-  | 'home' | 'fashion' | 'cart' | 'account' | 'messages'
-  | 'search' | 'product' | 'wishlist' | 'orders' | 'checkout'
-  | 'notifications' | 'wallet' | 'vouchers' | 'daily-deals'
-  | 'flash-sale' | 'login' | 'live';
+| 'home' | 'fashion' | 'cart' | 'account' | 'messages'
+| 'search' | 'product' | 'wishlist' | 'orders' | 'checkout'
+| 'notifications' | 'wallet' | 'vouchers' | 'daily-deals'
+| 'flash-sale' | 'login' | 'live'
+| 'profile' | 'settings' | 'tracking' | 'dashboard' | 'dropship' | 'shipping';
 
 export interface NavigationParams {
   productHandle?: string;
@@ -49,7 +56,8 @@ function App() {
       const path = window.location.pathname.replace(/^\//, '').split('/')[0] as PageId;
       const valid: PageId[] = ['home','fashion','cart','account','messages','search',
         'product','wishlist','orders','checkout','notifications','wallet','vouchers',
-        'daily-deals','flash-sale','login','live'];
+        'daily-deals','flash-sale','login','live',
+        'profile','settings','tracking','dashboard','dropship','shipping'];
       if (path && valid.includes(path)) {
         setActivePage(path);
       }
@@ -62,7 +70,7 @@ function App() {
   const tabs = [
     { id: 'home' as PageId, label: 'Home', icon: Home },
     { id: 'fashion' as PageId, label: 'Fashion', icon: ShoppingBag },
-    { id: 'live' as PageId, label: '\u0644\u0627\u064a\u0641', icon: Radio },
+    { id: 'live' as PageId, label: 'لايف', icon: Radio },
     { id: 'messages' as PageId, label: 'Messages', icon: MessageCircle },
     { id: 'cart' as PageId, label: 'Cart', icon: ShoppingCart },
     { id: 'account' as PageId, label: 'Account', icon: User },
@@ -88,6 +96,12 @@ function App() {
       case 'flash-sale': return <FlashSalePage {...props} />;
       case 'login': return <LoginPage {...props} />;
       case 'live': return <FlashSalePage {...props} />;
+      case 'dashboard': return <DashboardPage {...props} />;
+      case 'profile': return <ProfilePage {...props} />;
+      case 'settings': return <SettingsPage {...props} />;
+      case 'tracking': return <TrackingPage {...props} />;
+      case 'dropship': return <DropshipPage {...props} />;
+      case 'shipping': return <ShippingPage {...props} />;
       default: return <HomePage {...props} />;
     }
   };
