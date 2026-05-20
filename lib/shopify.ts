@@ -54,3 +54,36 @@ export async function shopifyFetch<T>(
 //     products(first: 20) { edges { node { id title priceRange { minVariantPrice { amount currencyCode } } } } }
 //   }
 // `
+
+export async function fetchAllProducts(locale = 'ae'): Promise<{
+  products: any[]
+  pageInfo: { hasNextPage: boolean; endCursor: string | null }
+}> {
+  const QUERY = `
+    query AllProducts __CONTEXT__ {
+      products(first: 20) {
+        pageInfo { hasNextPage endCursor }
+        edges {
+          node {
+            id handle title
+            priceRange {
+              minVariantPrice { amount currencyCode }
+              maxVariantPrice { amount currencyCode }
+            }
+            images(first: 1) { edges { node { url altText } } }
+          }
+        }
+      }
+    }
+  `
+  const data = await shopifyFetch<{
+    products: {
+      pageInfo: { hasNextPage: boolean; endCursor: string | null }
+      edges: Array<{ node: any }>
+    }
+  }>(QUERY, {}, locale)
+  return {
+    products: data.products.edges.map((e) => e.node),
+    pageInfo: data.products.pageInfo,
+  }
+}

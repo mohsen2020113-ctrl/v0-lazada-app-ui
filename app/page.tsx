@@ -14,6 +14,7 @@ import { RecGPTV2 } from "@/components/lee/recgpt-v2"
 import { RecentlyViewedSection } from "@/components/lee/recently-viewed-section"
 import { AnimatedAdsBottom } from "@/components/lee/animated-ads-bottom"
 import { fetchAllProducts } from "@/lib/shopify"
+import { cookies } from 'next/headers'
 
 export const revalidate = 30 // Homepage refreshes every 30 seconds
 
@@ -45,7 +46,8 @@ export default async function LEEHome() {
   let allProducts: any[] = []
   let initialPageInfo = { hasNextPage: false, endCursor: null as string | null }
   try {
-    const result = await fetchAllProducts()
+    const locale = cookies().get('lee_country')?.value?.toLowerCase() ?? 'ae'
+    const result = await fetchAllProducts(locale)
     allProducts = result.products
     initialPageInfo = result.pageInfo
   } catch (error) {

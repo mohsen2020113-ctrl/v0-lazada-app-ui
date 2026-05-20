@@ -5,6 +5,7 @@ import { ChevronLeft, Heart, Share2, Star, Truck, RotateCcw, ShoppingCart } from
 import { useRouter, useParams } from 'next/navigation'
 import { notFound } from 'next/navigation'
 import { useCartStore } from '@/lib/store/cart-store'
+import { shopifyFetch } from '@/lib/shopify'
 export const revalidate = 60 // ISR: revalidate every 60 seconds
 
 export async function generateStaticParams() {
@@ -60,23 +61,13 @@ export default function ProductPage() {
   useEffect(() => {
     const fetchProduct = async () => {
       try {
-        const storeUrl = process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN || 'f61e20-88.myshopify.com'
-        const token = process.env.NEXT_PUBLIC_SHOPIFY_ACCESS_TOKEN || '54710e221c946a7f98e4ec4ca2df3029'
-
-        const response = await fetch(`https://${storeUrl}/api/2024-01/graphql.json`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'X-Shopify-Storefront-Access-Token': token,
-          },
-          body: JSON.stringify({
-            query: `{ product(handle: "${handle}") { id handle title description descriptionHtml vendor productType priceRange { minVariantPrice { amount currencyCode } maxVariantPrice { amount currencyCode } } images(first: 10) { edges { node { url altText } } } variants(first: 10) { edges { node { id title availableForSale price { amount currencyCode } selectedOptions { name value } } } } } }`,
-          }),
-        })
-
-        const data = await response.json()
-        const fetchedProduct = data?.data?.product
-
+        const locale = document.cookie.match(/lee_country=([^;]+)/)?.[1]?.toLowerCase() ?? 'ae'
+        const data = await shopifyFetch<{ product: ShopifyProduct }>(
+          `query __CONTEXT__ { product(handle: "${handle}") { id handle title description descriptionHtml vendor productType priceRange { minVariantPrice { amount currencyCode } maxVariantPrice { amount currencyCode } } images(first: 10) { edges { node { url altText } } } variants(first: 10) { edges { node { id title availableForSale price { amount currencyCode } selectedOptions { name value } } } } } }`,
+          {},
+          locale
+        )
+        const fetchedProduct = data?.product
         if (!fetchedProduct) {
           notFound()
         }

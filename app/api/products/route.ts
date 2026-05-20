@@ -1,14 +1,31 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { products } from '@/lib/data/products'
+import { shopifyFetch } from '@/lib/shopify'
 
-export async function GET(request: NextRequest) {
+const PRODUCTS_QUERY = `
+  query Products __CONTEXT__ {
+    products(first: 20) {
+      edges {
+        node {
+          id
+          title
+          handle
+          priceRange {
+            minVariantPrice { amount currencyCode }
+          }
+          images(first: 1) { edges { node { url altText } } }
+        }
+      }
+    }
+  }
+`
+
+export async function GET(req: NextRequest) {
+  const locale = req.cookies.get('lee_country')?.value?.toLowerCase() || 'ae'
   try {
-    return NextResponse.json(products)
-  } catch (error) {
-    console.error('[API] /api/products error:', error)
-    return NextResponse.json(
-      { error: 'Failed to fetch products' },
-      { status: 500 }
-    )
+    const data = await shopifyFetch<any>(PRODUCTS_QUERY, {}, locale)
+    const products = data.products.edges.map((e: any) => e.node)
+    return NextResponse.json({ products, locale })
+  } catch (e: any) {
+    return NextResponse.json({ error: e.message }, { status: 500 })
   }
 }
