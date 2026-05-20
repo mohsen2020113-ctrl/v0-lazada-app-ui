@@ -1,38 +1,43 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server'
 
-export async function middleware(request: NextRequest) {
-  const response = NextResponse.next();
+const COUNTRY_LOCALE: Record<string, string> = {
+  AE: 'ae', SA: 'sa', EG: 'eg', KW: 'kw', QA: 'qa', BH: 'bh', OM: 'om',
+  TH: 'th', MY: 'my', SG: 'sg', ID: 'id', PH: 'ph', VN: 'vn', MM: 'mm',
+  IN: 'in', PK: 'pk', BD: 'bd', LK: 'lk', NP: 'np', TR: 'tr',
+  GB: 'gb', DE: 'de', FR: 'fr', IT: 'it', ES: 'es',
+  US: 'us', CA: 'ca', AU: 'au', NZ: 'nz',
+  CN: 'cn', JP: 'jp', KR: 'kr',
+  NG: 'ng', ZA: 'za', KE: 'ke', GH: 'gh',
+}
 
-  // Add security headers to all responses
-  response.headers.set('X-Content-Type-Options', 'nosniff');
-  response.headers.set('X-Frame-Options', 'DENY');
-  response.headers.set('X-XSS-Protection', '1; mode=block');
-  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+const STATIC_PREFIXES = ['/api/', '/_next/', '/favicon.ico', '/images/', '/fonts/', '/icons/']
 
-  // For admin routes: detect and log requests from proxy/VPN indicators
-  if (request.nextUrl.pathname.startsWith('/admin')) {
-    const suspiciousHeaders = [
-      'x-forwarded-for',
-      'x-real-ip',
-      'cf-connecting-ip',
-      'true-client-ip',
-    ];
+export function middleware(req: NextRequest) {
+  const { pathname } = req.nextUrl
 
-    const proxyHeaders: Record<string, string> = {};
-    suspiciousHeaders.forEach((h) => {
-      const val = request.headers.get(h);
-      if (val) proxyHeaders[h] = val;
-    });
-
-    const proxyCount = Object.keys(proxyHeaders).length;
-    if (proxyCount >= 2) {
-      console.warn('[SECURITY] Possible VPN/proxy admin access:', JSON.stringify(proxyHeaders));
-    }
+  // Skip static assets and API routes
+  if (STATIC_PREFIXES.some(p => pathname.startsWith(p))) {
+    return NextResponse.next()
   }
 
-  return response;
+  // Skip if already has locale prefix
+  const locales = Object.values(COUNTRY_LOCALE)
+  const hasLocale = locales.some(l => pathname === `/${l}` || pathname.startsWith(`/${l}/`))
+  if (hasLocale) return NextResponse.next()
+
+  // Get country from Vercel geo headers
+  const country = req.geo?.country || req.headers.get('x-vercel-ip-country') || 'AE'
+  const locale = COUNTRY_LOCALE[country] || 'ae'
+
+  // Set cookie and rewrite
+  const url = req.nextUrl.clone()
+  url.pathname = `/${locale}${pathname === '/' ? '' : pathname}`
+
+  const response = NextResponse.redirect(url, { status: 307 })
+  response.cookies.set('lee_country', country, { maxAge: 86400, path: '/' })
+  return response
 }
 
 export const config = {
-  matcher: ['/((?!_next/static|_next/image|favicon.ico).*)'],
-};
+  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|images|fonts|icons).*)'],
+}
