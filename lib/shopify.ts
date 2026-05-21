@@ -109,3 +109,56 @@ export async function createShopifyCart(
                                                   }>(MUTATION, { lines })
                                                     return data?.cartCreate?.cart ?? null
                                                     }
+
+// Get a single product by handle
+export async function getProduct(handle: string) {
+  const QUERY = `
+    query getProduct($handle: String!) {
+      productByHandle(handle: $handle) {
+        id title handle description
+        priceRange { minVariantPrice { amount currencyCode } }
+        images(first: 10) { edges { node { url altText } } }
+        variants(first: 100) {
+          edges { node { id title price { amount currencyCode } availableForSale } }
+        }
+      }
+    }
+  `
+  const data = await shopifyFetch<{ productByHandle: any }>(QUERY, { handle })
+  return data?.productByHandle ?? null
+}
+
+// Get all collections
+export async function getCollections() {
+  const QUERY = `
+    query {
+      collections(first: 50) {
+        edges { node { id title handle description image { url } } }
+      }
+    }
+  `
+  const data = await shopifyFetch<{ collections: { edges: { node: any }[] } }>(QUERY, {})
+  return data?.collections?.edges?.map((e: any) => e.node) ?? []
+}
+
+// Get products in a collection by handle
+export async function getCollectionProducts(handle: string, first: number = 20) {
+  const QUERY = `
+    query getCollectionProducts($handle: String!, $first: Int!) {
+      collectionByHandle(handle: $handle) {
+        id title description
+        products(first: $first) {
+          edges {
+            node {
+              id title handle
+              priceRange { minVariantPrice { amount currencyCode } }
+              images(first: 1) { edges { node { url altText } } }
+            }
+          }
+        }
+      }
+    }
+  `
+  const data = await shopifyFetch<{ collectionByHandle: any }>(QUERY, { handle, first })
+  return data?.collectionByHandle ?? null
+    }
