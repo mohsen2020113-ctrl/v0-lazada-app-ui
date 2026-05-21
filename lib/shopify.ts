@@ -87,3 +87,25 @@ export async function fetchAllProducts(locale = 'ae'): Promise<{
     pageInfo: data.products.pageInfo,
   }
 }
+
+
+// Alias used by wishlist page
+export const fetchProducts = fetchAllProducts
+
+// Create a Shopify cart and return checkout URL
+export async function createShopifyCart(
+  lines: { merchandiseId: string; quantity: number }[]
+  ) {
+    const MUTATION = `
+        mutation cartCreate($lines: [CartLineInput!]!) {
+              cartCreate(input: { lines: $lines }) {
+                      cart { checkoutUrl id }
+                              userErrors { field message }
+                                    }
+                                        }
+                                          `
+                                            const data = await shopifyFetch<{
+                                                cartCreate: { cart: { checkoutUrl: string; id: string } }
+                                                  }>(MUTATION, { lines })
+                                                    return data?.cartCreate?.cart ?? null
+                                                    }

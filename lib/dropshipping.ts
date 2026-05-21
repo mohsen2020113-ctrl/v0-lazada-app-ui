@@ -451,9 +451,9 @@ export function calculateDropshipProfit(
   product: DropshipProduct,
   sellingPrice?: number,
   platformFeePercent: number = 5,
-feat: add dropshipping data layer with suppliers and products (lib/dropshipping.ts)): DropshipProfitResult {
+): DropshipProfitResult {
   const retail = sellingPrice ?? product.suggestedRetailPrice;
-  const supplier = product.supplierPrice;
+  const supplier = product.supplierPrice;  const shippingCost = 0; // not tracked in product data
   const grossProfit = retail - supplier - shippingCost;
   const grossMarginPercent = (grossProfit / retail) * 100;
   const estimatedFees = retail * (platformFeePercent / 100);

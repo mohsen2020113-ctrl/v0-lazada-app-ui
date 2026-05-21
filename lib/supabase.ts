@@ -9,3 +9,16 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey)
 
 // Server client (full access, server-side only)
 export const supabaseAdmin = createClient(supabaseUrl, supabaseServiceKey)
+
+
+// Safe wrapper — returns defaultValue when Supabase is unavailable
+export async function safeSupabaseCall<T>(
+  fn: () => Promise<T>,
+    defaultValue: T
+    ): Promise<T> {
+      try {
+          return await fn()
+            } catch {
+                return defaultValue
+                  }
+                  }

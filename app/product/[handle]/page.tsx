@@ -6,13 +6,6 @@ import { useRouter, useParams } from 'next/navigation'
 import { notFound } from 'next/navigation'
 import { useCartStore } from '@/lib/store/cart-store'
 import { shopifyFetch } from '@/lib/shopify'
-export const revalidate = 60 // ISR: revalidate every 60 seconds
-
-export async function generateStaticParams() {
-    // Pre-render top products at build time
-    return []
-}
-
 interface ProductVariant {
   id: string
   title: string
