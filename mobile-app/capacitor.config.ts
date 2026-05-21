@@ -2,39 +2,28 @@ import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
   appId: 'com.leee.app',
-  appName: 'LEE',
+  appName: '4leee',
   webDir: 'dist',
   server: {
     androidScheme: 'https',
     iosScheme: 'https',
+    hostname: 'app.4leee.com',
   },
   plugins: {
     SplashScreen: {
       launchShowDuration: 2000,
-      launchAutoHide: true,
-      backgroundColor: '#FF6B00',
-      androidSplashResourceName: 'splash',
-      androidScaleType: 'CENTER_CROP',
+      backgroundColor: '#F57C00',
       showSpinner: false,
-      iosSpinnerStyle: 'small',
-      spinnerColor: '#ffffff',
+      androidSplashResourceName: 'splash',
+      iosSplashResourceName: 'Default',
     },
     PushNotifications: {
       presentationOptions: ['badge', 'sound', 'alert'],
     },
     StatusBar: {
-      style: 'Default',
-      backgroundColor: '#FF6B00',
+      style: 'light',
+      backgroundColor: '#F57C00',
     },
-  },
-  android: {
-    allowMixedContent: true,
-    captureInput: true,
-    webContentsDebuggingEnabled: false,
-  },
-  ios: {
-    contentInset: 'automatic',
-    scrollEnabled: true,
   },
 };
 

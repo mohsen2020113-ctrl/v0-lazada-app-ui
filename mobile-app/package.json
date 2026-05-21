@@ -1,7 +1,8 @@
 {
-  "name": "lee-mobile-app",
+  "name": "4leee-mobile",
   "private": true,
   "version": "1.0.0",
+  "description": "4leee - Global Shopping App",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -16,6 +17,7 @@
   "dependencies": {
     "@capacitor/android": "^6.0.0",
     "@capacitor/app": "^6.0.0",
+    "@capacitor/cli": "^6.0.0",
     "@capacitor/core": "^6.0.0",
     "@capacitor/haptics": "^6.0.0",
     "@capacitor/ios": "^6.0.0",
