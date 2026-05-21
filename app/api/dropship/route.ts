@@ -72,8 +72,8 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
         p.name.toLowerCase().includes(q) ||
         p.nameAr.includes(search) ||
         p.sku.toLowerCase().includes(q)
-feat: add dropship catalog API route with supplier and product filtering (app/api/dropship/route.ts)  }
-
+);
+  }
   return NextResponse.json(
     {
       success: true,
