@@ -29,15 +29,9 @@ const menuItems = [
 ];
 
 const recentOrders = [
-  { id: 'ORD001', status: 'Shipped', date: '2 days ago', items: 2, total: 1259, image: 'https://images.unsplash.com/photo-1542272604-787c62d465d1?w=100&h=100&fit=crop' },
-  { id: 'ORD002', status: 'Delivered', date: '1 week ago', items: 1, total: 890, image: 'https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=100&h=100&fit=crop' },
 ];
 
 const recentlyViewed = [
-  { id: '1', price: 1344.82, image: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=150&h=150&fit=crop' },
-  { id: '2', price: 94.31, image: 'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=150&h=150&fit=crop' },
-  { id: '3', price: 2290.00, image: 'https://images.unsplash.com/photo-1509423350716-97f9360b4e09?w=150&h=150&fit=crop' },
-  { id: '4', price: 459.00, image: 'https://images.unsplash.com/photo-1507473885765-e6ed057f782c?w=150&h=150&fit=crop' },
 ];
 
 export default function AccountPage() {

@@ -169,7 +169,7 @@ const ads = [
   },
   {
     id: 19,
-    title: "LAZMALL DAY",
+    title: "LEE MALL DAY",
     subtitle: "AUTHENTIC",
     highlight: "EXTRA 15%",
     description: "Official Brand Stores Only",
@@ -181,7 +181,7 @@ const ads = [
     title: "WEEKEND",
     subtitle: "SAT-SUN ONLY",
     highlight: "AED 100 OFF",
-    description: "Use Code: LAZWEEKEND",
+    description: "Use Code: LEEWEEKEND",
     badge: "CODE",
     image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1200&h=600&fit=crop",
   },

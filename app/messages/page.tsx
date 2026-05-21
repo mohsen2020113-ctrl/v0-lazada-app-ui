@@ -19,11 +19,8 @@ export default function MessagesPage() {
   ];
 
   const productSuggestions = [
-    { id: 1, title: '(1ลังมี 30ห่อ) ...', price: 'AED 85.00', image: 'https://images.unsplash.com/photo-1586473219010-2ffc57b0d282?w=150&h=150&fit=crop' },
-    { id: 2, title: 'แปรงขัดห้องน้ำ ...', price: 'AED 32.00', image: 'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=150&h=150&fit=crop' },
-    { id: 3, title: 'ใหม่ ไม้กวาดยาง...', price: 'AED 37.00', image: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=150&h=150&fit=crop' },
-  ];
-
+      // No product suggestions
+      ];
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
       {/* Header */}

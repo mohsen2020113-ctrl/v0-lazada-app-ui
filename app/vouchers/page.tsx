@@ -10,7 +10,6 @@ const vouchers = {
     { id: 1, type: 'discount', amount: 'AED 100', minSpend: 'AED 500', code: 'LEE100', expiry: 'May 31, 2026', category: 'All Products' },
     { id: 2, type: 'percent', amount: '15%', minSpend: 'AED 300', code: 'SAVE15', expiry: 'Jun 15, 2026', category: 'Fashion', maxDiscount: 'AED 200' },
     { id: 3, type: 'shipping', amount: 'FREE', minSpend: 'AED 199', code: 'FREESHIP', expiry: 'Jun 30, 2026', category: 'All Products' },
-    { id: 4, type: 'discount', amount: 'AED 50', minSpend: 'AED 250', code: 'LEE50', expiry: 'May 20, 2026', category: 'Electronics' },
     { id: 5, type: 'percent', amount: '20%', minSpend: 'AED 1,000', code: 'MEGA20', expiry: 'Jun 5, 2026', category: 'All Products', maxDiscount: 'AED 500' },
   ],
   used: [
