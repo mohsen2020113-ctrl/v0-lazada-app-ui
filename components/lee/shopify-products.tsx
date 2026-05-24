@@ -151,10 +151,10 @@ export function ShopifyProducts({ products: initialProducts, initialPageInfo }: 
                       <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
                                 <div className="w-6 h-6 bg-gradient-to-r from-[#f85c98] to-[#e91e8c] rounded-md flex items-center justify-center">
                                             <ShoppingCart className="w-3.5 h-3.5 text-white" />
-                                </div>div>
+                                </div></div>
                                 <h2 className="text-lg font-bold text-gray-900">{t('promo.ourProducts')}</h2>h2>
-                      </div>div>
-              </div>div>
+                      </div></div>
+              </div></div>
         
               <div className="p-3 grid grid-cols-2 gap-2">
                 {products.map((product) => {
@@ -175,9 +175,9 @@ export function ShopifyProducts({ products: initialProducts, initialPageInfo }: 
                                                   {/* Placeholder always behind */}
                                                                 <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
                                                                                   <ShoppingCart className="w-8 h-8 text-gray-300" />
-                                                                </div>div>
+                                                                </div></div>
                                                 
-                                                  {/* Image on top — hidden on error */}
+                                                  {/* Image on top -- hidden on error */}
                                                   {imageUrl && !imageFailed && (
                                                                     <Image
                                                                                           src={imageUrl}
@@ -203,57 +203,57 @@ export function ShopifyProducts({ products: initialProducts, initialPageInfo }: 
                                                                                                                                 isFav ? 'fill-[#f85c98] text-[#f85c98]' : 'text-gray-400'
                                                                                                           }`}
                                                                                                       />
-                                                                </button>button>
+                                                                </button></button>
                                                 
                                                   {discount > 0 && (
                                                                     <span className="absolute bottom-2 left-2 bg-[#f85c98] text-white text-[9px] px-1.5 py-0.5 rounded font-bold z-10">
                                                                                         -{discount}%
-                                                                    </span>span>
+                                                                    </span></span>
                                                                 )}
-                                                </div>div>
+                                                </div></div>
                                   
                                                 <div className="p-2">
                                                                 <p className="text-[10px] text-gray-700 line-clamp-2 mb-1 leading-tight font-medium h-7">
                                                                   {product.title}
-                                                                </p>p>
+                                                                </p></p>
                                                 
                                                                 <div className="flex items-baseline gap-1 mb-1">
                                                                                   <span className="text-[#f85c98] font-bold text-sm">
                                                                                     {formatPrice(price)}
-                                                                                    </span>span>
+                                                                                    </span></span>
                                                                   {discount > 0 && (
                                                                       <span className="text-gray-400 text-[9px] line-through">
                                                                         {formatPrice(compareAt)}
-                                                                      </span>span>
+                                                                      </span></span>
                                                                                   )}
-                                                                </div>div>
+                                                                </div></div>
                                                 
                                                                 <div className="flex items-center justify-between">
                                                                                   <div className="flex items-center gap-1 text-[8px]">
                                                                                                       <Star className="w-2.5 h-2.5 fill-yellow-400 text-yellow-400" />
-                                                                                                      <span className="text-gray-600">4.8</span>span>
-                                                                                                      <span className="text-gray-400">| 1.2k sold</span>span>
-                                                                                    </div>div>
+                                                                                                      <span className="text-gray-600">4.8</span></span>
+                                                                                                      <span className="text-gray-400">| 1.2k sold</span></span>
+                                                                                    </div></div>
                                                                                   <button
                                                                                                         onClick={(e) => handleAddToCart(product, e)}
                                                                                                         className="w-6 h-6 bg-[#f85c98] rounded-full flex items-center justify-center hover:bg-[#e91e8c] transition-colors"
                                                                                                       >
                                                                                                       <ShoppingCart className="w-3 h-3 text-white" />
-                                                                                    </button>button>
-                                                                </div>div>
-                                                </div>div>
-                                  </Link>Link>
+                                                                                    </button></button>
+                                                                </div></div>
+                                                </div></div>
+                                  </Link></Link>
                                 );
         })}
-              </div>div>
+              </div></div>
         
               <div ref={sentinelRef} className="h-4" />
         
           {loading && (
                   <div className="flex justify-center items-center py-6">
                             <div className="w-8 h-8 border-4 border-[#f85c98] border-t-transparent rounded-full animate-spin" />
-                  </div>div>
+                  </div></div>
               )}
-        </section>section>
+        </section></section>
       );
 }</section>
