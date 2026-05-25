@@ -23,6 +23,19 @@ const COUNTRY_LANGUAGE: Record<string, { country: string; language: string }> = 
   fr: { country: 'FR', language: 'FR' },
 }
 
+
+export interface ShopifyProduct {
+  id: string
+  handle: string
+  title: string
+  vendor?: string
+  priceRange: { minVariantPrice: { amount: string; currencyCode: string }; maxVariantPrice?: { amount: string; currencyCode: string } }
+  compareAtPriceRange?: { minVariantPrice: { amount: string; currencyCode: string } }
+  featuredImage?: { url: string; altText?: string | null }
+  images: { edges: { node: { url: string; altText?: string | null } }[] }
+  variants: { edges: { node: { id: string; title: string; price: { amount: string; currencyCode: string }; availableForSale: boolean } }[] }
+}
+
 export async function shopifyFetch<T>(
   query: string,
   variables: Record<string, unknown> = {},
@@ -66,6 +79,7 @@ export async function fetchAllProducts(_locale = 'ae'): Promise<{
           compareAtPriceRange {
             minVariantPrice { amount currencyCode }
           }
+          featuredImage { url altText }
           images(first: 1) { edges { node { url altText } } }
           variants(first: 1) { edges { node { id title price { amount currencyCode } availableForSale } } }
         }
