@@ -26,10 +26,7 @@ export function middleware(req: NextRequest) {
   const country = req.geo?.country || req.headers.get('x-vercel-ip-country') || 'AE'
   const locale = COUNTRY_LOCALE[country] || 'ae'
 
-  const url = req.nextUrl.clone()
-  url.pathname = `/${locale}${pathname === '/' ? '' : pathname}`
-
-  const response = NextResponse.redirect(url, { status: 307 })
+  const response = NextResponse.next()
   response.cookies.set('lee_country', country, { maxAge: 86400, path: '/' })
   return response
 }
