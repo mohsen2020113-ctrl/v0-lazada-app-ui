@@ -48,46 +48,50 @@ export async function shopifyFetch<T>(
   return json.data as T
 }
 
-// Example query using __CONTEXT__ placeholder:
-// const PRODUCTS_QUERY = `
-//   query Products __CONTEXT__ {
-//     products(first: 20) { edges { node { id title priceRange { minVariantPrice { amount currencyCode } } } } }
-//   }
-// `
-
-export async function fetchAllProducts(locale = 'ae'): Promise<{
+export async function fetchAllProducts(_locale = 'ae'): Promise<{
   products: any[]
   pageInfo: { hasNextPage: boolean; endCursor: string | null }
 }> {
-  const QUERY = `
-    query AllProducts __CONTEXT__ {
-      products(first: 20) {
-        pageInfo { hasNextPage endCursor }
-        edges {
-          node {
-            id handle title
-            priceRange {
-              minVariantPrice { amount currencyCode }
-              maxVariantPrice { amount currencyCode }
-            }
-            images(first: 1) { edges { node { url altText } } }
+  // Simple query without @inContext to ensure compatibility across all store configurations
+  const QUERY = `{
+    products(first: 20) {
+      pageInfo { hasNextPage endCursor }
+      edges {
+        node {
+          id handle title
+          priceRange {
+            minVariantPrice { amount currencyCode }
+            maxVariantPrice { amount currencyCode }
           }
+          compareAtPriceRange {
+            minVariantPrice { amount currencyCode }
+          }
+          images(first: 1) { edges { node { url altText } } }
+          variants(first: 1) { edges { node { id title price { amount currencyCode } availableForSale } } }
         }
       }
     }
-  `
-  const data = await shopifyFetch<{
-    products: {
-      pageInfo: { hasNextPage: boolean; endCursor: string | null }
-      edges: Array<{ node: any }>
-    }
-  }>(QUERY, {}, locale)
+  }`
+
+  const res = await fetch(SHOPIFY_API_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Shopify-Storefront-Access-Token': SHOPIFY_TOKEN,
+    },
+    body: JSON.stringify({ query: QUERY }),
+    cache: 'no-store',
+  })
+
+  if (!res.ok) throw new Error(`Shopify products fetch failed: ${res.status}`)
+  const json = await res.json()
+  if (json.errors) throw new Error(json.errors[0].message)
+
   return {
-    products: data.products.edges.map((e) => e.node),
-    pageInfo: data.products.pageInfo,
+    products: json.data.products.edges.map((e: any) => e.node),
+    pageInfo: json.data.products.pageInfo,
   }
 }
-
 
 // Alias used by wishlist page
 export const fetchProducts = fetchAllProducts
@@ -95,20 +99,20 @@ export const fetchProducts = fetchAllProducts
 // Create a Shopify cart and return checkout URL
 export async function createShopifyCart(
   lines: { merchandiseId: string; quantity: number }[]
-  ) {
-    const MUTATION = `
-        mutation cartCreate($lines: [CartLineInput!]!) {
-              cartCreate(input: { lines: $lines }) {
-                      cart { checkoutUrl id }
-                              userErrors { field message }
-                                    }
-                                        }
-                                          `
-                                            const data = await shopifyFetch<{
-                                                cartCreate: { cart: { checkoutUrl: string; id: string } }
-                                                  }>(MUTATION, { lines })
-                                                    return data?.cartCreate?.cart ?? null
-                                                    }
+) {
+  const MUTATION = `
+    mutation cartCreate($lines: [CartLineInput!]!) {
+      cartCreate(input: { lines: $lines }) {
+        cart { checkoutUrl id }
+        userErrors { field message }
+      }
+    }
+  `
+  const data = await shopifyFetch<{
+    cartCreate: { cart: { checkoutUrl: string; id: string } }
+  }>(MUTATION, { lines })
+  return data?.cartCreate?.cart ?? null
+}
 
 // Get a single product by handle
 export async function getProduct(handle: string) {
@@ -161,4 +165,4 @@ export async function getCollectionProducts(handle: string, first: number = 20) 
   `
   const data = await shopifyFetch<{ collectionByHandle: any }>(QUERY, { handle, first })
   return data?.collectionByHandle ?? null
-    }
+}
