@@ -151,10 +151,10 @@ export function ShopifyProducts({ products: initialProducts, initialPageInfo }: 
                       <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
                                 <div className="w-6 h-6 bg-gradient-to-r from-[#f85c98] to-[#e91e8c] rounded-md flex items-center justify-center">
                                             <ShoppingCart className="w-3.5 h-3.5 text-white" />
-                                </div></div>
+                                </div>
                                 <h2 className="text-lg font-bold text-gray-900">{t('promo.ourProducts')}</h2>
-                      </div></div>
-              </div></div>
+                      </div>
+              </div>
         
               <div className="p-3 grid grid-cols-2 gap-2">
                 {products.map((product) => {
