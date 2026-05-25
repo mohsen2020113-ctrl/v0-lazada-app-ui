@@ -203,12 +203,12 @@ export function ShopifyProducts({ products: initialProducts, initialPageInfo }: 
                                                                                                                                 isFav ? 'fill-[#f85c98] text-[#f85c98]' : 'text-gray-400'
                                                                                                           }`}
                                                                                                       />
-                                                                </button></button>
+                                                                </button>
                                                 
                                                   {discount > 0 && (
                                                                     <span className="absolute bottom-2 left-2 bg-[#f85c98] text-white text-[9px] px-1.5 py-0.5 rounded font-bold z-10">
                                                                                         -{discount}%
-                                                                    </span></span>
+                                                                    </span>
                                                                 )}
                                                 </div></div>
                                   
