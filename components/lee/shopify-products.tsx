@@ -256,4 +256,4 @@ export function ShopifyProducts({ products: initialProducts, initialPageInfo }: 
               )}
         </section>
       );
-}</section>
+}
