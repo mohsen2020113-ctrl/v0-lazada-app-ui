@@ -46,7 +46,8 @@ export default async function LEEHome() {
   let allProducts: any[] = []
   let initialPageInfo = { hasNextPage: false, endCursor: null as string | null }
   try {
-    const locale = cookies().get('lee_country')?.value?.toLowerCase() ?? 'ae'
+    const cookieStore = await cookies()
+    const locale = cookieStore.get('lee_country')?.value?.toLowerCase() ?? 'ae'
     const result = await fetchAllProducts(locale)
     allProducts = result.products
     initialPageInfo = result.pageInfo
