@@ -143,6 +143,20 @@ export default function ProductPage() {
                 className="w-full h-full object-cover"
               />
             </div>
+            {/* Gallery Dots */}
+            {images.length > 1 && (
+              <div className="flex justify-center gap-1.5 mt-2 mb-2">
+                {images.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setSelectedImage(idx)}
+                    className={`rounded-full transition-all ${
+                      selectedImage === idx ? 'w-6 h-2 bg-orange-500' : 'w-2 h-2 bg-gray-600'
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
             {/* Thumbnails */}
             <div className="flex gap-2">
               {images.map((img, idx) => (
@@ -211,7 +225,7 @@ export default function ProductPage() {
                     key={variant.id}
                     onClick={() => setSelectedVariant(variant)}
                     disabled={!variant.availableForSale}
-                    className={`px-4 py-2 rounded-lg border-2 transition ${
+                    className={`px-4 py-2 rounded-full border-2 transition ${
                       selectedVariant?.id === variant.id
                         ? 'border-orange-500 bg-gray-800'
                         : 'border-gray-700 bg-gray-900'
