@@ -1,95 +1,148 @@
-"use client"
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { supabase } from "@/lib/supabase"
+'use client'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { ChevronLeft, Store, User, Phone, Mail, MapPin, FileText, CheckCircle } from 'lucide-react'
 
 export default function VendorRegisterPage() {
   const router = useRouter()
-  const [form, setForm] = useState({ businessName: "", email: "", phone: "", category: "", description: "", password: "" })
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState("")
-  const [success, setSuccess] = useState(false)
+  const [step, setStep] = useState(1)
+  const [form, setForm] = useState({
+    storeName: '', ownerName: '', phone: '', email: '',
+    city: '', category: '', description: '',
+  })
+  const [submitted, setSubmitted] = useState(false)
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
-    setForm({ ...form, [e.target.name]: e.target.value })
+  const update = (k: string, v: string) => setForm(prev => ({ ...prev, [k]: v }))
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-    setError("")
-    try {
-      const { data, error: authError } = await supabase.auth.signUp({ email: form.email, password: form.password })
-      if (authError) throw authError
-      if (data.user) {
-        const { error: dbError } = await supabase.from("vendors").insert([{ user_id: data.user.id, business_name: form.businessName, phone: form.phone, category: form.category, description: form.description, status: "pending" }])
-        if (dbError) throw dbError
-      }
-      setSuccess(true)
-    } catch (err: any) {
-      setError(err.message || "Registration failed. Please try again.")
-    } finally {
-      setLoading(false)
-    }
+  const inputClass = "w-full bg-[#0F0F0F] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 outline-none focus:border-[#F57224] transition-colors"
+
+  if (submitted) {
+    return (
+      <div className="min-h-screen bg-[#0F0F0F] text-white flex flex-col items-center justify-center p-6 text-center" dir="rtl">
+        <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mb-6">
+          <CheckCircle className="w-10 h-10 text-green-400" />
+        </div>
+        <h2 className="text-2xl font-bold mb-3">تم التسجيل بنجاح!</h2>
+        <p className="text-gray-400 text-sm mb-8 max-w-xs">
+          شكراً لتسجيلك كبائع. سيتم مراجعة طلبك والتواصل معك خلال 24-48 ساعة.
+        </p>
+        <button
+          onClick={() => router.back()}
+          className="px-8 py-3 bg-[#F57224] rounded-2xl font-semibold"
+        >
+          العودة للرئيسية
+        </button>
+      </div>
+    )
   }
 
-  if (success) return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
-      <div className="bg-white rounded-2xl shadow p-8 max-w-md w-full text-center">
-        <div className="text-5xl mb-4">✅</div>
-        <h2 className="text-2xl font-bold text-gray-800 mb-2">Application Submitted!</h2>
-        <p className="text-gray-500 mb-6">Check your email to verify your account. We will review your application within 2-3 business days.</p>
-        <button onClick={() => router.push("/")} className="w-full bg-orange-500 text-white py-3 rounded-xl font-semibold hover:bg-orange-600">Back to Home</button>
-      </div>
-    </div>
-  )
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="bg-gradient-to-r from-orange-500 to-red-500 p-6 text-white text-center">
-        <h1 className="text-2xl font-bold">Become a LEE Vendor</h1>
-        <p className="text-orange-100 mt-1">Reach millions of customers across the UAE</p>
+    <div className="min-h-screen bg-[#0F0F0F] text-white" dir="rtl">
+      {/* Header */}
+      <div className="bg-[#1A1A1A] px-4 py-4 flex items-center gap-3 border-b border-white/10">
+        <button onClick={() => router.back()} className="text-white">
+          <ChevronLeft className="w-6 h-6 rotate-180" />
+        </button>
+        <h1 className="text-lg font-bold">تسجيل متجر جديد</h1>
       </div>
-      <div className="max-w-lg mx-auto p-4">
-        <form onSubmit={handleSubmit} className="bg-white rounded-2xl shadow p-6 mt-4 space-y-4">
-          {error && <div className="bg-red-50 text-red-600 p-3 rounded-lg text-sm">{error}</div>}
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Business Name *</label>
-            <input name="businessName" value={form.businessName} onChange={handleChange} required placeholder="Your Store Name" className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400" />
+
+      {/* Steps */}
+      <div className="flex items-center gap-2 px-4 py-4">
+        {[1, 2].map(s => (
+          <div key={s} className="flex items-center flex-1">
+            <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+              step >= s ? 'bg-[#F57224] text-white' : 'bg-[#1A1A1A] text-gray-500'
+            }`}>
+              {s}
+            </div>
+            {s < 2 && <div className={`h-0.5 flex-1 mx-2 ${step > s ? 'bg-[#F57224]' : 'bg-white/10'}`} />}
           </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Email Address *</label>
-            <input name="email" type="email" value={form.email} onChange={handleChange} required placeholder="business@example.com" className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Password *</label>
-            <input name="password" type="password" value={form.password} onChange={handleChange} required placeholder="Min 8 characters" minLength={8} className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
-            <input name="phone" value={form.phone} onChange={handleChange} required placeholder="+971 50 000 0000" className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400" />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Business Category *</label>
-            <select name="category" value={form.category} onChange={handleChange} required className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400">
-              <option value="">Select a category</option>
-              <option value="electronics">Electronics</option>
-              <option value="fashion">Fashion &amp; Apparel</option>
-              <option value="home">Home &amp; Living</option>
-              <option value="beauty">Beauty &amp; Health</option>
-              <option value="sports">Sports &amp; Outdoors</option>
-              <option value="food">Food &amp; Grocery</option>
-              <option value="other">Other</option>
-            </select>
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-1">Business Description</label>
-            <textarea name="description" value={form.description} onChange={handleChange} rows={3} placeholder="Tell us about your business..." className="w-full border border-gray-300 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-orange-400" />
-          </div>
-          <button type="submit" disabled={loading} className="w-full bg-orange-500 text-white py-3 rounded-xl font-bold text-lg hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors">
-            {loading ? "Submitting..." : "Apply to Sell on LEE"}
-          </button>
-          <p className="text-center text-sm text-gray-500">Already a vendor? <a href="/vendor/login" className="text-orange-500 font-medium">Sign In</a></p>
-        </form>
+        ))}
+        <div className="flex gap-2 text-xs text-gray-400 absolute right-16">
+        </div>
+      </div>
+
+      <div className="p-4 space-y-4">
+        {step === 1 ? (
+          <>
+            <div>
+              <label className="text-xs text-gray-400 mb-1.5 block">اسم المتجر</label>
+              <div className="relative">
+                <Store className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                <input value={form.storeName} onChange={e => update('storeName', e.target.value)}
+                  placeholder="اسم متجرك التجاري" className={inputClass + " pr-10"} />
+              </div>
+            </div>
+            <div>
+              <label className="text-xs text-gray-400 mb-1.5 block">اسم المالك</label>
+              <div className="relative">
+                <User className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                <input value={form.ownerName} onChange={e => update('ownerName', e.target.value)}
+                  placeholder="الاسم الكامل" className={inputClass + " pr-10"} />
+              </div>
+            </div>
+            <div>
+              <label className="text-xs text-gray-400 mb-1.5 block">رقم الهاتف</label>
+              <div className="relative">
+                <Phone className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                <input value={form.phone} onChange={e => update('phone', e.target.value)}
+                  placeholder="+971 50 000 0000" type="tel" className={inputClass + " pr-10"} />
+              </div>
+            </div>
+            <div>
+              <label className="text-xs text-gray-400 mb-1.5 block">البريد الإلكتروني</label>
+              <div className="relative">
+                <Mail className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                <input value={form.email} onChange={e => update('email', e.target.value)}
+                  placeholder="store@example.com" type="email" className={inputClass + " pr-10"} />
+              </div>
+            </div>
+            <button onClick={() => setStep(2)} className="w-full py-3 bg-[#F57224] rounded-2xl font-semibold mt-4">
+              التالي
+            </button>
+          </>
+        ) : (
+          <>
+            <div>
+              <label className="text-xs text-gray-400 mb-1.5 block">المدينة</label>
+              <div className="relative">
+                <MapPin className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
+                <input value={form.city} onChange={e => update('city', e.target.value)}
+                  placeholder="مثال: دبي" className={inputClass + " pr-10"} />
+              </div>
+            </div>
+            <div>
+              <label className="text-xs text-gray-400 mb-1.5 block">فئة المتجر</label>
+              <select value={form.category} onChange={e => update('category', e.target.value)}
+                className={inputClass}>
+                <option value="">اختر الفئة</option>
+                <option value="electronics">إلكترونيات</option>
+                <option value="fashion">أزياء</option>
+                <option value="home">منزل ومطبخ</option>
+                <option value="beauty">جمال وعناية</option>
+                <option value="sports">رياضة</option>
+                <option value="food">طعام وشراب</option>
+              </select>
+            </div>
+            <div>
+              <label className="text-xs text-gray-400 mb-1.5 block">وصف المتجر</label>
+              <div className="relative">
+                <FileText className="absolute right-3 top-3 w-4 h-4 text-gray-500" />
+                <textarea value={form.description} onChange={e => update('description', e.target.value)}
+                  placeholder="اكتب وصفاً مختصراً عن متجرك..."
+                  rows={4} className={inputClass + " pr-10 resize-none"} />
+              </div>
+            </div>
+            <div className="flex gap-3 mt-4">
+              <button onClick={() => setStep(1)} className="flex-1 py-3 bg-[#1A1A1A] rounded-2xl font-semibold border border-white/10">
+                رجوع
+              </button>
+              <button onClick={() => setSubmitted(true)} className="flex-1 py-3 bg-[#F57224] rounded-2xl font-semibold">
+                إرسال الطلب
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   )
