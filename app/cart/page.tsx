@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { ShoppingCart, Trash2, Plus, Minus, Lock, ChevronRight } from 'lucide-react'
-import { useCart } from '../contexts/CartContext'
+import { useCart } from '../contexts/cart-context'
 
 export default function CartPage() {
   const { items, removeItem, updateQuantity, total, clearCart } = useCart()
@@ -118,14 +118,17 @@ export default function CartPage() {
         <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50 px-6">
           <div className="bg-[#1A1A1A] rounded-2xl p-6 w-full max-w-sm">
             <h3 className="text-white font-bold text-base mb-2">مسح السلة</h3>
-            <p className="text-white/60 text-sm mb-5">هل تريد إزالة جميع المنتجات من سلتك؟</p>
-            <div className="flex gap-3 justify-end">
-              <button onClick={() => setShowConfirm(false)} className="text-white/40 font-medium text-sm px-4 py-2">
+            <p className="text-white/50 text-sm mb-5">هل أنت متأكد من مسح جميع المنتجات؟</p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowConfirm(false)}
+                className="flex-1 border border-white/20 text-white py-3 rounded-xl font-semibold text-sm"
+              >
                 إلغاء
               </button>
               <button
-                onClick={() => { clearCart?.(); setShowConfirm(false) }}
-                className="text-red-400 font-bold text-sm px-4 py-2"
+                onClick={() => { clearCart(); setShowConfirm(false); }}
+                className="flex-1 bg-red-500 text-white py-3 rounded-xl font-semibold text-sm"
               >
                 مسح
               </button>
@@ -135,4 +138,4 @@ export default function CartPage() {
       )}
     </div>
   )
-}
+                }
