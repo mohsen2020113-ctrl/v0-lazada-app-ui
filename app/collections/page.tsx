@@ -1,175 +1,54 @@
-'use client';
+'use client'
+import { useRouter } from 'next/navigation'
+import { ChevronLeft, Grid3X3, ChevronRight } from 'lucide-react'
+import Link from 'next/link'
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import Link from 'next/link';
-import { ChevronLeft, FolderOpen, Package } from 'lucide-react';
-import { BottomNav } from '@/components/lee/bottom-nav-new';
-
-type Collection = {
-  node: {
-    id: string;
-    title: string;
-    handle: string;
-    description: string;
-    image: {
-      url: string;
-      altText: string | null;
-    } | null;
-  };
-};
+const COLLECTIONS = [
+  { handle: 'electronics', name: 'الإلكترونيات', emoji: '📱', count: 240, color: '#3B82F6' },
+  { handle: 'fashion', name: 'الأزياء والموضة', emoji: '👗', count: 180, color: '#EC4899' },
+  { handle: 'home', name: 'المنزل والمطبخ', emoji: '🏠', count: 150, color: '#10B981' },
+  { handle: 'beauty', name: 'الجمال والعناية', emoji: '💄', count: 120, color: '#8B5CF6' },
+  { handle: 'sports', name: 'الرياضة واللياقة', emoji: '⚽', count: 90, color: '#F59E0B' },
+  { handle: 'gaming', name: 'الألعاب والترفيه', emoji: '🎮', count: 75, color: '#EF4444' },
+  { handle: 'food', name: 'الغذاء والمشروبات', emoji: '🍔', count: 60, color: '#F97316' },
+  { handle: 'kids', name: 'الأطفال والألعاب', emoji: '🧸', count: 110, color: '#06B6D4' },
+  { handle: 'books', name: 'الكتب والقرطاسية', emoji: '📚', count: 85, color: '#84CC16' },
+  { handle: 'automotive', name: 'السيارات والقطع', emoji: '🚗', count: 45, color: '#6366F1' },
+  { handle: 'travel', name: 'السفر والحقائب', emoji: '✈️', count: 55, color: '#14B8A6' },
+  { handle: 'watches', name: 'الساعات والمجوهرات', emoji: '⌚', count: 70, color: '#F59E0B' },
+]
 
 export default function CollectionsPage() {
-  const router = useRouter();
-  const [collections, setCollections] = useState<Collection[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    async function fetchCollections() {
-      try {
-        const res = await fetch('/api/collections');
-        if (!res.ok) throw new Error('Failed to fetch');
-        const data = await res.json();
-        setCollections(data);
-      } catch (err) {
-        setError('Failed to load collections');
-      } finally {
-        setLoading(false);
-      }
-    }
-    
-    fetchCollections();
-  }, []);
-
-  // Loading skeleton
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-100">
-        <div className="sticky top-0 z-40 bg-gradient-to-r from-[#f85c98] to-[#e91e8c] text-white">
-          <div className="flex items-center gap-3 px-4 py-3">
-            <div className="w-8 h-8 bg-white/20 rounded-full animate-pulse" />
-            <div className="h-6 w-32 bg-white/20 rounded animate-pulse" />
-          </div>
-        </div>
-        
-        <div className="p-4 grid grid-cols-2 gap-4">
-          {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} className="bg-white rounded-xl overflow-hidden shadow-sm">
-              <div className="aspect-video bg-gray-200 animate-pulse" />
-              <div className="p-3 space-y-2">
-                <div className="h-4 bg-gray-200 rounded animate-pulse" />
-                <div className="h-3 w-1/2 bg-gray-200 rounded animate-pulse" />
-              </div>
-            </div>
-          ))}
-        </div>
-        
-        <BottomNav />
-      </div>
-    );
-  }
-
-  // Error state
-  if (error) {
-    return (
-      <div className="min-h-screen bg-gray-100 flex flex-col">
-        <div className="sticky top-0 z-40 bg-gradient-to-r from-[#f85c98] to-[#e91e8c] text-white">
-          <div className="flex items-center gap-3 px-4 py-3">
-            <button onClick={() => router.back()} className="p-1">
-              <ChevronLeft className="w-6 h-6" />
-            </button>
-            <h1 className="text-lg font-bold">All Categories</h1>
-          </div>
-        </div>
-        
-        <div className="flex-1 flex flex-col items-center justify-center p-8">
-          <div className="w-24 h-24 bg-gray-200 rounded-full flex items-center justify-center mb-4">
-            <FolderOpen className="w-12 h-12 text-gray-400" />
-          </div>
-          <h2 className="text-lg font-semibold text-gray-900 mb-2">{error}</h2>
-          <button
-            onClick={() => window.location.reload()}
-            className="px-6 py-2 bg-[#f85c98] text-white rounded-full font-medium"
-          >
-            Try Again
-          </button>
-        </div>
-        
-        <BottomNav />
-      </div>
-    );
-  }
+  const router = useRouter()
 
   return (
-    <div className="min-h-screen bg-gray-100 pb-20">
-      {/* Header */}
-      <div className="sticky top-0 z-40 bg-gradient-to-r from-[#f85c98] to-[#e91e8c] text-white">
-        <div className="flex items-center gap-3 px-4 py-3">
-          <button onClick={() => router.back()} className="p-1">
-            <ChevronLeft className="w-6 h-6" />
-          </button>
-          <div>
-            <h1 className="text-lg font-bold">All Categories</h1>
-            <p className="text-xs text-white/80">{collections.length} collections</p>
-          </div>
-        </div>
+    <div className="min-h-screen bg-[#0F0F0F]" dir="rtl">
+      <div className="flex items-center px-4 pt-12 pb-4 gap-3">
+        <button onClick={() => router.back()} className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center">
+          <ChevronLeft size={18} className="text-white" />
+        </button>
+        <Grid3X3 size={20} className="text-[#F57224]" />
+        <h1 className="text-white font-bold text-lg">جميع الأقسام</h1>
       </div>
 
-      {/* Collections Grid */}
-      {collections.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-16 px-8">
-          <div className="w-20 h-20 bg-gray-200 rounded-full flex items-center justify-center mb-4">
-            <FolderOpen className="w-10 h-10 text-gray-400" />
-          </div>
-          <h3 className="text-gray-900 font-semibold mb-1">No collections found</h3>
-          <p className="text-gray-500 text-sm text-center">
-            Check back later for new categories.
-          </p>
-        </div>
-      ) : (
-        <div className="p-4 grid grid-cols-2 gap-4">
-          {collections.map(({ node: collection }) => (
-            <Link
-              key={collection.id}
-              href={`/category/${collection.handle}`}
-              className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow"
-            >
-              <div className="relative aspect-video bg-gradient-to-br from-[#f85c98]/20 to-[#e91e8c]/20">
-                {collection.image ? (
-                  <Image
-                    src={collection.image.url}
-                    alt={collection.image.altText || collection.title}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 768px) 50vw, 200px"
-                  />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center">
-                    <Package className="w-12 h-12 text-[#f85c98]/40" />
-                  </div>
-                )}
-                
-
+      <div className="px-4 pb-24">
+        <div className="grid grid-cols-2 gap-3">
+          {COLLECTIONS.map(col => (
+            <Link key={col.handle} href={`/category/${col.handle}`}
+              className="bg-[#1A1A1A] rounded-2xl p-4 flex items-center gap-3 hover:bg-[#222]">
+              <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 text-2xl"
+                style={{ background: col.color + '20' }}>
+                {col.emoji}
               </div>
-              
-              <div className="p-3">
-                <h3 className="font-semibold text-gray-900 text-sm line-clamp-1">
-                  {collection.title}
-                </h3>
-                {collection.description && (
-                  <p className="text-gray-500 text-xs line-clamp-1 mt-0.5">
-                    {collection.description}
-                  </p>
-                )}
+              <div className="flex-1 min-w-0">
+                <p className="text-white text-sm font-semibold line-clamp-1">{col.name}</p>
+                <p className="text-white/30 text-xs">{col.count} منتج</p>
               </div>
+              <ChevronLeft size={16} className="text-white/20 shrink-0" />
             </Link>
           ))}
         </div>
-      )}
-
-      <BottomNav />
+      </div>
     </div>
-  );
+  )
 }
