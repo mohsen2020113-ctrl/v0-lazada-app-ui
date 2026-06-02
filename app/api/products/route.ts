@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const SHOPIFY_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || 'f61e20-88.myshopify.com'
+const SHOPIFY_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || 'smcicw-19.myshopify.com'
 const SHOPIFY_TOKEN = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN || '54710e221c946a7f98e4ec4ca2df3029'
 const SHOPIFY_API_URL = `https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`
 
@@ -10,21 +10,15 @@ const PRODUCTS_QUERY = `
       pageInfo { hasNextPage endCursor }
       edges {
         node {
-          id
-          title
-          handle
+          id title handle availableForSale
           priceRange {
             minVariantPrice { amount currencyCode }
             maxVariantPrice { amount currencyCode }
           }
-          compareAtPriceRange {
-            minVariantPrice { amount currencyCode }
-          }
+          compareAtPriceRange { minVariantPrice { amount currencyCode } }
           featuredImage { url altText }
           images(first: 1) { edges { node { url altText } } }
-          variants(first: 1) {
-            edges { node { id title price { amount currencyCode } availableForSale } }
-          }
+          variants(first: 1) { edges { node { id title price { amount currencyCode } availableForSale } } }
         }
       }
     }
@@ -46,14 +40,11 @@ export async function GET(req: NextRequest) {
       body: JSON.stringify({ query: PRODUCTS_QUERY, variables: { first, after } }),
       cache: 'no-store',
     })
-
     if (!res.ok) throw new Error(`Shopify: ${res.status}`)
     const json = await res.json()
     if (json.errors) throw new Error(json.errors[0].message)
-
     const products = json.data.products.edges.map((e: any) => e.node)
     const pageInfo = json.data.products.pageInfo
-
     return NextResponse.json({ products, pageInfo })
   } catch (e: any) {
     return NextResponse.json({ error: e.message }, { status: 500 })
