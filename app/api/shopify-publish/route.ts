@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+export const maxDuration = 60
+
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json()
@@ -44,17 +46,26 @@ export async function POST(request: NextRequest) {
     }
     if (options) productPayload.options = options
 
-    const shopifyRes = await fetch(
-      `https://${domain}/admin/api/2024-01/products.json`,
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'X-Shopify-Access-Token': token,
-        },
-        body: JSON.stringify({ product: productPayload }),
-      }
-    )
+    let shopifyRes: Response
+    try {
+      shopifyRes = await fetch(
+        `https://${domain}/admin/api/2024-01/products.json`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Shopify-Access-Token': token,
+          },
+          body: JSON.stringify({ product: productPayload }),
+        }
+      )
+    } catch (fetchErr: unknown) {
+      const msg = fetchErr instanceof Error ? fetchErr.message : String(fetchErr)
+      return NextResponse.json(
+        { error: `Shopify fetch failed: ${msg}` },
+        { status: 502 }
+      )
+    }
 
     if (!shopifyRes.ok) {
       const errText = await shopifyRes.text()
