@@ -1,295 +1,219 @@
 'use client'
+import { useState } from 'react'
+import { useRouter } from 'next/navigation'
+import { ArrowRight, Heart, Share2, ShoppingCart, Shield, RotateCcw, Truck, ChevronLeft, ChevronRight } from 'lucide-react'
+import { useCart } from '@/contexts/CartContext'
 
-import { useState, useEffect } from 'react'
-import { ChevronLeft, Heart, Share2, Star, Truck, RotateCcw, ShoppingCart } from 'lucide-react'
-import { useRouter, useParams } from 'next/navigation'
-import { notFound } from 'next/navigation'
-import { useCartStore } from '@/lib/store/cart-store'
-import { shopifyFetch } from '@/lib/shopify'
-interface ProductVariant {
+interface Variant {
   id: string
   title: string
-  availableForSale: boolean
-  price: {
-    amount: string
-    currencyCode: string
-  }
-  selectedOptions: Array<{ name: string; value: string }>
+  price: string
+  available: boolean
+  compareAtPrice?: string
 }
 
-interface ProductImage {
-  url: string
-  altText: string
-}
-
-interface ShopifyProduct {
+interface Product {
   id: string
+  title: string
   handle: string
-  title: string
   description: string
-  descriptionHtml: string
-  vendor: string
-  productType: string
-  priceRange: {
-    minVariantPrice: { amount: string; currencyCode: string }
-    maxVariantPrice: { amount: string; currencyCode: string }
-  }
-  images: { edges: Array<{ node: ProductImage }> }
-  variants: { edges: Array<{ node: ProductVariant }> }
+  images: string[]
+  variants: Variant[]
+  price: string
 }
 
-export default function ProductPage() {
+async function getProduct(handle: string): Promise<Product | null> {
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || ''}/api/products/${handle}`, { cache: 'no-store' })
+    if (!res.ok) return null
+    return res.json()
+  } catch { return null }
+}
+
+export default function ProductPage({ params }: { params: { handle: string } }) {
+  return <ProductClientPage handle={params.handle} />
+}
+
+function ProductClientPage({ handle }: { handle: string }) {
   const router = useRouter()
-  const addItem = useCartStore((s) => s.addItem)
-  const routeParams = useParams()
-  const handle = decodeURIComponent((routeParams?.handle as string) || '')
-  const [product, setProduct] = useState<ShopifyProduct | null>(null)
+  const { addToCart } = useCart()
+  const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
-  const [selectedImage, setSelectedImage] = useState(0)
-  const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null)
+  const [selectedVariant, setSelectedVariant] = useState(0)
   const [quantity, setQuantity] = useState(1)
-  const [isFavorite, setIsFavorite] = useState(false)
-  const [addedToCart, setAddedToCart] = useState(false)
+  const [currentImage, setCurrentImage] = useState(0)
+  const [added, setAdded] = useState(false)
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const locale = document.cookie.match(/lee_country=([^;]+)/)?.[1]?.toLowerCase() ?? 'ae'
-        const data = await shopifyFetch<{ product: ShopifyProduct }>(
-          `query __CONTEXT__ { product(handle: "${handle}") { id handle title description descriptionHtml vendor productType priceRange { minVariantPrice { amount currencyCode } maxVariantPrice { amount currencyCode } } images(first: 10) { edges { node { url altText } } } variants(first: 10) { edges { node { id title availableForSale price { amount currencyCode } selectedOptions { name value } } } } } }`,
-          {},
-          locale
-        )
-        const fetchedProduct = data?.product
-        if (!fetchedProduct) {
-          notFound()
-        }
+  // Fetch product on mount
+  useState(() => {
+    fetch(`/api/products/${handle}`)
+      .then(r => r.json())
+      .then(d => { setProduct(d); setLoading(false) })
+      .catch(() => setLoading(false))
+  })
 
-        setProduct(fetchedProduct)
-        if (fetchedProduct.variants.edges.length > 0) {
-          setSelectedVariant(fetchedProduct.variants.edges[0].node)
-        }
-      } catch (error) {
-        console.error('[v0] Product fetch error:', error)
-        setProduct(null)
-      } finally {
-        setLoading(false)
-      }
-    }
+  if (loading) return (
+    <div className="min-h-screen bg-[#0F0F0F] flex items-center justify-center">
+      <div className="w-10 h-10 border-2 border-[#F57224] border-t-transparent rounded-full animate-spin" />
+    </div>
+  )
 
-    fetchProduct()
-  }, [handle])
+  if (!product) return (
+    <div className="min-h-screen bg-[#0F0F0F] flex flex-col items-center justify-center gap-4" dir="rtl">
+      <p className="text-white/60">المنتج غير موجود</p>
+      <button onClick={() => router.back()} className="text-[#F57224] text-sm">العودة</button>
+    </div>
+  )
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-950 text-white flex items-center justify-center" dir="rtl">
-        <div className="text-center">
-          <p className="text-xl">جاري التحميل...</p>
-        </div>
-      </div>
-    )
-  }
-
-  if (!loading && !product) {
-    notFound()
-  }
-
-  const images = product.images.edges.map((e) => e.node)
-  const minPrice = parseFloat(product.priceRange.minVariantPrice.amount)
-  const maxPrice = parseFloat(product.priceRange.maxVariantPrice.amount)
+  const variant = product.variants?.[selectedVariant] || { price: product.price, available: true, title: '' }
+  const images = product.images?.length ? product.images : ['/placeholder.png']
+  const hasVariants = product.variants?.length > 1
 
   const handleAddToCart = () => {
-    if (!product || !selectedVariant || !selectedVariant.availableForSale) return
-
-    try {
-      addItem({
-        productId: product.id,
-        name: product.title,
-        price: parseFloat(selectedVariant.price.amount),
-        image: images[0]?.url || '',
-        quantity,
-        color: selectedVariant.selectedOptions.find((o) => o.name === 'Color')?.value || '',
-        size: selectedVariant.selectedOptions.find((o) => o.name === 'Size')?.value || '',
-        sellerName: product.vendor,
-      })
-      setAddedToCart(true)
-      setTimeout(() => setAddedToCart(false), 2000)
-    } catch (err) {
-      console.error('[AddToCart] failed to add item to cart:', err)
-    }
+    addToCart({ id: variant.id || product.id, title: product.title, variantTitle: variant.title, price: variant.price, image: images[0], handle: product.handle }, quantity)
+    setAdded(true)
+    setTimeout(() => setAdded(false), 2000)
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white" dir="rtl">
-      {/* Header */}
-      <div className="sticky top-0 z-40 bg-gray-900 border-b border-gray-800 px-4 py-3 flex items-center justify-between">
-        <button onClick={() => router.back()} className="p-2 hover:bg-gray-800 rounded-lg">
-          <ChevronLeft className="w-6 h-6" />
+    <div className="min-h-screen bg-[#0F0F0F]" dir="rtl">
+      {/* AppBar */}
+      <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-4 pt-12 pb-4">
+        <button onClick={() => router.back()} className="w-9 h-9 rounded-full bg-black/50 flex items-center justify-center">
+          <ArrowRight size={18} className="text-white" />
         </button>
-        <h1 className="text-lg font-bold flex-1 text-center">تفاصيل المنتج</h1>
-        <button className="p-2 hover:bg-gray-800 rounded-lg">
-          <Share2 className="w-5 h-5" />
-        </button>
+        <div className="flex gap-2">
+          <button className="w-9 h-9 rounded-full bg-black/50 flex items-center justify-center">
+            <Heart size={18} className="text-white" />
+          </button>
+          <button className="w-9 h-9 rounded-full bg-black/50 flex items-center justify-center">
+            <Share2 size={18} className="text-white" />
+          </button>
+        </div>
       </div>
 
-      <div className="max-w-2xl mx-auto px-4 py-6">
-        {/* Image Gallery */}
-        {images.length > 0 && (
-          <div className="mb-6">
-            <div className="bg-gray-800 aspect-square rounded-lg overflow-hidden mb-4 flex items-center justify-center">
-              <img
-                src={images[selectedImage]?.url}
-                alt={images[selectedImage]?.altText || product.title}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            {/* Gallery Dots */}
-            {images.length > 1 && (
-              <div className="flex justify-center gap-1.5 mt-2 mb-2">
-                {images.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setSelectedImage(idx)}
-                    className={`rounded-full transition-all ${
-                      selectedImage === idx ? 'w-6 h-2 bg-orange-500' : 'w-2 h-2 bg-gray-600'
-                    }`}
-                  />
-                ))}
-              </div>
-            )}
-            {/* Thumbnails */}
-            <div className="flex gap-2">
-              {images.map((img, idx) => (
+      {/* Image Gallery */}
+      <div className="relative h-[360px] bg-[#1A1A1A] overflow-hidden">
+        <img
+          src={images[currentImage]}
+          alt={product.title}
+          className="w-full h-full object-cover"
+          onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder.png' }}
+        />
+        {images.length > 1 && (
+          <>
+            <button
+              onClick={() => setCurrentImage(p => Math.max(0, p - 1))}
+              className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 flex items-center justify-center"
+            >
+              <ChevronLeft size={16} className="text-white" />
+            </button>
+            <button
+              onClick={() => setCurrentImage(p => Math.min(images.length - 1, p + 1))}
+              className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 flex items-center justify-center"
+            >
+              <ChevronRight size={16} className="text-white" />
+            </button>
+            <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5">
+              {images.map((_, i) => (
                 <button
-                  key={idx}
-                  onClick={() => setSelectedImage(idx)}
-                  className={`w-16 h-16 rounded-lg overflow-hidden border-2 ${
-                    selectedImage === idx ? 'border-orange-500' : 'border-gray-700'
+                  key={i}
+                  onClick={() => setCurrentImage(i)}
+                  className={`h-1.5 rounded-full transition-all ${i === currentImage ? 'w-5 bg-[#F57224]' : 'w-1.5 bg-white/40'}`}
+                />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+
+      {/* Content */}
+      <div className="rounded-t-3xl bg-[#0F0F0F] -mt-6 relative z-10 px-5 pt-5 pb-32">
+        {/* Title & Price */}
+        <div className="flex items-start justify-between gap-3 mb-4">
+          <h1 className="text-white font-bold text-lg leading-snug flex-1">{product.title}</h1>
+          <div className="text-right shrink-0">
+            <div className="text-[#F57224] font-extrabold text-2xl">{variant.price} AED</div>
+            {variant.compareAtPrice && (
+              <div className="text-white/30 text-sm line-through">{variant.compareAtPrice} AED</div>
+            )}
+          </div>
+        </div>
+
+        {/* Variants */}
+        {hasVariants && (
+          <div className="mb-4">
+            <p className="text-white/50 text-xs font-bold tracking-wide mb-2.5">الخيارات</p>
+            <div className="flex flex-wrap gap-2">
+              {product.variants.map((v, i) => (
+                <button
+                  key={v.id}
+                  onClick={() => setSelectedVariant(i)}
+                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
+                    i === selectedVariant
+                      ? 'bg-[#F57224] text-white'
+                      : 'bg-[#1A1A1A] text-white/70 border border-white/10'
                   }`}
                 >
-                  <img src={img.url} alt={`صورة ${idx + 1}`} className="w-full h-full object-cover" />
+                  {v.title}
                 </button>
               ))}
             </div>
           </div>
         )}
 
-        {/* Product Info */}
-        <div className="mb-6">
-          <h1 className="text-2xl font-bold mb-2">{product.title}</h1>
-
-          {/* Price */}
-          <div className="flex items-baseline gap-3 mb-4">
-            <span className="text-3xl font-bold text-orange-500">
-              {minPrice === maxPrice ? `${minPrice.toFixed(2)}` : `${minPrice.toFixed(2)} - ${maxPrice.toFixed(2)}`}{' '}
-              {product.priceRange.minVariantPrice.currencyCode}
-            </span>
-          </div>
-
-          {/* Vendor Info */}
-          <div className="bg-gray-800 p-4 rounded-lg mb-4">
-            <div className="flex items-center justify-between mb-2">
-              <span className="font-bold">{product.vendor}</span>
-            </div>
-            <p className="text-sm text-gray-400">{product.productType}</p>
-          </div>
-
-          {/* Shipping */}
-          <div className="grid grid-cols-2 gap-3 mb-6">
-            <div className="bg-gray-800 p-3 rounded-lg flex items-start gap-2">
-              <Truck className="w-5 h-5 mt-1 text-orange-500 flex-shrink-0" />
-              <div className="text-sm">
-                <p className="font-semibold">شحن</p>
-                <p className="text-gray-400">يصل قريباً</p>
-              </div>
-            </div>
-            <div className="bg-gray-800 p-3 rounded-lg flex items-start gap-2">
-              <RotateCcw className="w-5 h-5 mt-1 text-green-500 flex-shrink-0" />
-              <div className="text-sm">
-                <p className="font-semibold">إرجاع 15 يوم</p>
-                <p className="text-gray-400">مضمون</p>
-              </div>
-            </div>
+        {/* Quantity */}
+        <div className="flex items-center justify-between mb-5">
+          <p className="text-white/50 text-xs font-bold tracking-wide">الكمية</p>
+          <div className="flex items-center bg-[#1A1A1A] rounded-xl overflow-hidden">
+            <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="w-9 h-9 flex items-center justify-center text-white/70">−</button>
+            <span className="w-9 text-center text-white font-bold text-sm">{quantity}</span>
+            <button onClick={() => setQuantity(q => q + 1)} className="w-9 h-9 flex items-center justify-center text-white/70">+</button>
           </div>
         </div>
 
-        {/* Variant Selection */}
-        {product.variants.edges.length > 0 && (
-          <div className="mb-6">
-            <label className="block text-sm font-bold mb-3">اختر النوع:</label>
-            <div className="flex gap-3 flex-wrap">
-              {product.variants.edges.map((edge) => {
-                const variant = edge.node
-                return (
-                  <button
-                    key={variant.id}
-                    onClick={() => setSelectedVariant(variant)}
-                    disabled={!variant.availableForSale}
-                    className={`px-4 py-2 rounded-full border-2 transition ${
-                      selectedVariant?.id === variant.id
-                        ? 'border-orange-500 bg-gray-800'
-                        : 'border-gray-700 bg-gray-900'
-                    } ${!variant.availableForSale ? 'opacity-50 cursor-not-allowed' : ''}`}
-                  >
-                    {variant.title}
-                  </button>
-                )
-              })}
-            </div>
+        <div className="border-t border-white/5 mb-5" />
+
+        {/* Description */}
+        {product.description && (
+          <div className="mb-5">
+            <p className="text-white font-bold text-sm mb-2">تفاصيل المنتج</p>
+            <p className="text-white/50 text-sm leading-relaxed">{product.description}</p>
           </div>
         )}
 
-        {/* Quantity */}
-        <div className="mb-6">
-          <label className="block text-sm font-bold mb-3">الكمية:</label>
-          <div className="flex items-center gap-3">
-            <button
-              onClick={() => setQuantity(Math.max(1, quantity - 1))}
-              className="bg-gray-800 px-4 py-2 rounded-lg hover:bg-gray-700"
-            >
-              -
-            </button>
-            <span className="text-lg font-bold min-w-8 text-center">{quantity}</span>
-            <button
-              onClick={() => setQuantity(quantity + 1)}
-              className="bg-gray-800 px-4 py-2 rounded-lg hover:bg-gray-700"
-            >
-              +
-            </button>
+        {/* Info rows */}
+        <div className="space-y-2.5">
+          <div className="flex items-center gap-2 text-white/50 text-xs">
+            <Truck size={14} className="text-[#F57224] shrink-0" />
+            <span>شحن مجاني للطلبات فوق 200 AED</span>
           </div>
-        </div>
-
-        {/* Action Buttons */}
-        <div className="grid grid-cols-2 gap-3 mb-6 sticky bottom-0 bg-gray-950 py-4">
-          <button
-            onClick={() => setIsFavorite(!isFavorite)}
-            className={`py-3 rounded-lg border-2 flex items-center justify-center gap-2 transition ${
-              isFavorite
-                ? 'border-red-500 bg-red-500 text-white'
-                : 'border-gray-700 bg-gray-800 text-gray-400 hover:border-red-500'
-            }`}
-          >
-            <Heart className="w-5 h-5" fill={isFavorite ? 'currentColor' : 'none'} />
-            {isFavorite ? 'مضاف' : 'إضافة'}
-          </button>
-          <button
-            onClick={handleAddToCart}
-            disabled={!selectedVariant?.availableForSale}
-            className="py-3 rounded-lg bg-orange-500 hover:bg-orange-600 font-bold flex items-center justify-center gap-2 transition disabled:opacity-50"
-          >
-            <ShoppingCart className="w-5 h-5" />
-            {addedToCart ? '✓ تمت الإضافة' : 'أضف للسلة'}
-          </button>
-        </div>
-
-        {/* Description & Specs */}
-        <div className="grid grid-cols-1 gap-6">
-          <div>
-            <h2 className="text-lg font-bold mb-3">الوصف</h2>
-            <p className="text-gray-400">{product.description}</p>
+          <div className="flex items-center gap-2 text-white/50 text-xs">
+            <RotateCcw size={14} className="text-[#F57224] shrink-0" />
+            <span>إرجاع مجاني خلال 14 يوماً</span>
+          </div>
+          <div className="flex items-center gap-2 text-white/50 text-xs">
+            <Shield size={14} className="text-[#F57224] shrink-0" />
+            <span>منتج أصلي 100%</span>
           </div>
         </div>
       </div>
+
+      {/* Bottom CTA */}
+      <div className="fixed bottom-0 left-0 right-0 bg-[#1A1A1A] px-5 pt-3 pb-8">
+        <button
+          onClick={handleAddToCart}
+          disabled={!variant.available}
+          className={`w-full h-14 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-colors ${
+            variant.available
+              ? added ? 'bg-green-500 text-white' : 'bg-[#F57224] text-white'
+              : 'bg-white/10 text-white/40'
+          }`}
+        >
+          <ShoppingCart size={20} />
+          {!variant.available ? 'نفد المخزون' : added ? 'تمت الإضافة ✓' : 'أضف إلى السلة'}
+        </button>
+      </div>
     </div>
   )
-}
+               }
