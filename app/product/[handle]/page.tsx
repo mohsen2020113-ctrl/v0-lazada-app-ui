@@ -1,8 +1,7 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { ArrowRight, Heart, Share2, ShoppingCart, Shield, RotateCcw, Truck, ChevronLeft, ChevronRight } from 'lucide-react'
-import { useCart } from '@/contexts/CartContext'
 
 interface Variant {
   id: string
@@ -22,21 +21,8 @@ interface Product {
   price: string
 }
 
-async function getProduct(handle: string): Promise<Product | null> {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL || ''}/api/products/${handle}`, { cache: 'no-store' })
-    if (!res.ok) return null
-    return res.json()
-  } catch { return null }
-}
-
 export default function ProductPage({ params }: { params: { handle: string } }) {
-  return <ProductClientPage handle={params.handle} />
-}
-
-function ProductClientPage({ handle }: { handle: string }) {
   const router = useRouter()
-  const { addToCart } = useCart()
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
   const [selectedVariant, setSelectedVariant] = useState(0)
@@ -44,13 +30,12 @@ function ProductClientPage({ handle }: { handle: string }) {
   const [currentImage, setCurrentImage] = useState(0)
   const [added, setAdded] = useState(false)
 
-  // Fetch product on mount
-  useState(() => {
-    fetch(`/api/products/${handle}`)
+  useEffect(() => {
+    fetch(`/api/products/${params.handle}`)
       .then(r => r.json())
       .then(d => { setProduct(d); setLoading(false) })
       .catch(() => setLoading(false))
-  })
+  }, [params.handle])
 
   if (loading) return (
     <div className="min-h-screen bg-[#0F0F0F] flex items-center justify-center">
@@ -65,12 +50,11 @@ function ProductClientPage({ handle }: { handle: string }) {
     </div>
   )
 
-  const variant = product.variants?.[selectedVariant] || { price: product.price, available: true, title: '' }
+  const variant = product.variants?.[selectedVariant] || { price: product.price, available: true, title: '', id: product.id }
   const images = product.images?.length ? product.images : ['/placeholder.png']
-  const hasVariants = product.variants?.length > 1
+  const hasVariants = (product.variants?.length ?? 0) > 1
 
   const handleAddToCart = () => {
-    addToCart({ id: variant.id || product.id, title: product.title, variantTitle: variant.title, price: variant.price, image: images[0], handle: product.handle }, quantity)
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)
   }
@@ -129,7 +113,6 @@ function ProductClientPage({ handle }: { handle: string }) {
 
       {/* Content */}
       <div className="rounded-t-3xl bg-[#0F0F0F] -mt-6 relative z-10 px-5 pt-5 pb-32">
-        {/* Title & Price */}
         <div className="flex items-start justify-between gap-3 mb-4">
           <h1 className="text-white font-bold text-lg leading-snug flex-1">{product.title}</h1>
           <div className="text-right shrink-0">
@@ -140,7 +123,6 @@ function ProductClientPage({ handle }: { handle: string }) {
           </div>
         </div>
 
-        {/* Variants */}
         {hasVariants && (
           <div className="mb-4">
             <p className="text-white/50 text-xs font-bold tracking-wide mb-2.5">الخيارات</p>
@@ -150,9 +132,7 @@ function ProductClientPage({ handle }: { handle: string }) {
                   key={v.id}
                   onClick={() => setSelectedVariant(i)}
                   className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
-                    i === selectedVariant
-                      ? 'bg-[#F57224] text-white'
-                      : 'bg-[#1A1A1A] text-white/70 border border-white/10'
+                    i === selectedVariant ? 'bg-[#F57224] text-white' : 'bg-[#1A1A1A] text-white/70 border border-white/10'
                   }`}
                 >
                   {v.title}
@@ -162,7 +142,6 @@ function ProductClientPage({ handle }: { handle: string }) {
           </div>
         )}
 
-        {/* Quantity */}
         <div className="flex items-center justify-between mb-5">
           <p className="text-white/50 text-xs font-bold tracking-wide">الكمية</p>
           <div className="flex items-center bg-[#1A1A1A] rounded-xl overflow-hidden">
@@ -174,7 +153,6 @@ function ProductClientPage({ handle }: { handle: string }) {
 
         <div className="border-t border-white/5 mb-5" />
 
-        {/* Description */}
         {product.description && (
           <div className="mb-5">
             <p className="text-white font-bold text-sm mb-2">تفاصيل المنتج</p>
@@ -182,7 +160,6 @@ function ProductClientPage({ handle }: { handle: string }) {
           </div>
         )}
 
-        {/* Info rows */}
         <div className="space-y-2.5">
           <div className="flex items-center gap-2 text-white/50 text-xs">
             <Truck size={14} className="text-[#F57224] shrink-0" />
@@ -205,9 +182,7 @@ function ProductClientPage({ handle }: { handle: string }) {
           onClick={handleAddToCart}
           disabled={!variant.available}
           className={`w-full h-14 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-colors ${
-            variant.available
-              ? added ? 'bg-green-500 text-white' : 'bg-[#F57224] text-white'
-              : 'bg-white/10 text-white/40'
+            !variant.available ? 'bg-white/10 text-white/40' : added ? 'bg-green-500 text-white' : 'bg-[#F57224] text-white'
           }`}
         >
           <ShoppingCart size={20} />
@@ -216,4 +191,4 @@ function ProductClientPage({ handle }: { handle: string }) {
       </div>
     </div>
   )
-               }
+      }
