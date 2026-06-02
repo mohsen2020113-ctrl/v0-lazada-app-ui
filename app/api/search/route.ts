@@ -12,9 +12,9 @@ export async function GET(request: NextRequest) {
 
     // Try to fetch from Shopify first
     try {
-      const storeUrl = process.env.NEXT_PUBLIC_SHOPIFY_DOMAIN || 'f61e20-88.myshopify.com'
-      const token = process.env.NEXT_PUBLIC_SHOPIFY_ACCESS_TOKEN || '54710e221c946a7f98e4ec4ca2df3029'
-      
+      const storeUrl = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || 'smcicw-19.myshopify.com'
+      const token = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN || '54710e221c946a7f98e4ec4ca2df3029'
+
       const response = await fetch(`https://${storeUrl}/api/2024-01/graphql.json`, {
         method: 'POST',
         headers: {
@@ -22,7 +22,7 @@ export async function GET(request: NextRequest) {
           'X-Shopify-Storefront-Access-Token': token,
         },
         body: JSON.stringify({
-          query: `{ products(first: 20, query: "${query}") { edges { node { id handle title description priceRange { minVariantPrice { amount } } images(first: 1) { edges { node { url } } } } } } }`,
+          query: `{ products(first: 50, query: "${query}") { edges { node { id handle title description productType priceRange { minVariantPrice { amount currencyCode } } compareAtPriceRange { minVariantPrice { amount } } images(first: 1) { edges { node { url } } } } } } }`,
         }),
       })
 
@@ -30,13 +30,20 @@ export async function GET(request: NextRequest) {
       const shopifyProducts = data?.data?.products?.edges?.map((e: any) => e.node)?.filter((p: any) => p?.title) ?? []
 
       if (shopifyProducts.length > 0) {
-        const results = shopifyProducts.map((p: any) => ({
-          id: p.handle,
-          title: p.title,
-          description: p.description,
-          price: parseFloat(p.priceRange?.minVariantPrice?.amount) || 0,
-          image: p.images?.edges?.[0]?.node?.url,
-        }))
+        const results = shopifyProducts.map((p: any) => {
+          const price = parseFloat(p.priceRange?.minVariantPrice?.amount) || 0
+          const comparePrice = parseFloat(p.compareAtPriceRange?.minVariantPrice?.amount) || 0
+          return {
+            id: p.handle,
+            handle: p.handle,
+            title: p.title,
+            description: p.description,
+            price,
+            originalPrice: comparePrice > price ? comparePrice : undefined,
+            image: p.images?.edges?.[0]?.node?.url,
+            category: p.productType || 'General',
+          }
+        })
         return NextResponse.json({ results }, {
           headers: {
             'Cache-Control': 'public, s-maxage=60, stale-while-revalidate=120',
