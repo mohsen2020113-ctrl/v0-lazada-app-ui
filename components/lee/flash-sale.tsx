@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { ChevronRight } from "lucide-react"
+import Link from "next/link"
 import Image from "next/image"
 
 const flashProducts = [
@@ -108,8 +109,9 @@ export function FlashSale() {
 
         <div className="flex gap-2 sm:gap-3 px-3 sm:px-4 md:px-6 overflow-x-auto hide-scrollbar pb-1">
           {flashProducts.map((product, index) => (
-            <button
+            <Link
               key={product.id}
+              href="/search"
               className="flex-shrink-0 w-[130px] sm:w-[150px] md:w-[170px] bg-white rounded-lg overflow-hidden border border-gray-100 hover:shadow-md transition-shadow active:scale-[0.98] text-left"
             >
               <div className="relative aspect-square bg-gray-50">
@@ -188,7 +190,7 @@ export function FlashSale() {
                   </span>
                 </div>
               </div>
-            </button>
+            </Link>
           ))}
         </div>
       </div>
