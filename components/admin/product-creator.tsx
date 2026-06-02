@@ -15,6 +15,7 @@ interface ProductResult {
 }
 
 type ProcessStatus = 'idle' | 'analyzing' | 'colors' | 'description' | 'translating' | 'done' | 'error'
+type ShopifyStatus = 'idle' | 'loading' | 'success' | 'error'
 
 export default function ProductCreator() {
   const [imageFile, setImageFile] = useState<File | null>(null)
@@ -25,6 +26,9 @@ export default function ProductCreator() {
   const [progress, setProgress] = useState(0)
   const [result, setResult] = useState<ProductResult | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [shopifyStatus, setShopifyStatus] = useState<ShopifyStatus>('idle')
+  const [shopifyUrl, setShopifyUrl] = useState<string | null>(null)
+  const [shopifyError, setShopifyError] = useState<string | null>(null)
   const fileRef = useRef<HTMLInputElement>(null)
 
   const handleImage = useCallback((file: File) => {
@@ -86,6 +90,37 @@ export default function ProductCreator() {
     }
   }
 
+  const publishToShopify = async () => {
+    if (!result) return
+    setShopifyStatus('loading')
+    setShopifyError(null)
+    setShopifyUrl(null)
+
+    try {
+      const res = await fetch('/api/shopify-publish', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: result.descriptions.ar.title || result.name,
+          description_ar: result.descriptions.ar.mainDescription,
+          description_en: result.descriptions.en.mainDescription,
+          colors: result.colors,
+          sizes: result.sizes,
+          category: result.category,
+        }),
+      })
+
+      const data = await res.json()
+      if (!res.ok) throw new Error(data.error || 'Shopify publish failed')
+
+      setShopifyStatus('success')
+      setShopifyUrl(data.adminUrl)
+    } catch (err) {
+      setShopifyStatus('error')
+      setShopifyError(err instanceof Error ? err.message : 'Unknown error')
+    }
+  }
+
   const reset = () => {
     setImageFile(null)
     setImagePreview(null)
@@ -95,6 +130,9 @@ export default function ProductCreator() {
     setProgress(0)
     setResult(null)
     setError(null)
+    setShopifyStatus('idle')
+    setShopifyUrl(null)
+    setShopifyError(null)
   }
 
   const statusLabels: Record<ProcessStatus, string> = {
@@ -266,9 +304,39 @@ export default function ProductCreator() {
                 </div>
               </div>
 
+              {/* Shopify success message */}
+              {shopifyStatus === 'success' && shopifyUrl && (
+                <div className="bg-green-900/30 border border-green-700 rounded-xl p-4 mb-4 flex items-center justify-between">
+                  <span className="text-green-400 font-semibold">✅ تم النشر على Shopify بنجاح!</span>
+                  <a
+                    href={shopifyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="bg-green-700 hover:bg-green-600 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors"
+                  >
+                    عرض المنتج في Shopify ↗
+                  </a>
+                </div>
+              )}
+
+              {/* Shopify error message */}
+              {shopifyStatus === 'error' && shopifyError && (
+                <div className="bg-red-900/30 border border-red-700 rounded-xl p-4 mb-4 text-red-400">
+                  ❌ فشل النشر: {shopifyError}
+                </div>
+              )}
+
               {/* Add to Shopify Button */}
-              <button className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-xl transition-colors">
-                ✅ إضافة إلى Shopify
+              <button
+                onClick={publishToShopify}
+                disabled={shopifyStatus === 'loading' || shopifyStatus === 'success'}
+                className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-bold py-3 rounded-xl transition-colors"
+              >
+                {shopifyStatus === 'loading'
+                  ? '⏳ جاري النشر على Shopify...'
+                  : shopifyStatus === 'success'
+                  ? '✅ تم النشر على Shopify'
+                  : '🛍️ إضافة إلى Shopify'}
               </button>
             </div>
           </div>
