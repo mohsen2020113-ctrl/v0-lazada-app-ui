@@ -7,6 +7,7 @@ import { useI18n } from '@/lib/i18n-context'
 
 interface RecommendedProduct {
   id: string
+  handle?: string
   title: string
   price: string
   image?: string
@@ -109,7 +110,7 @@ export function RecGPTV2({ userId, limit = 12 }: RecGPTV2Props) {
             {displayProducts.map((product) => (
               <Link
                 key={product.id}
-                href={`/product/${product.handle}`}
+                href={`/product/${product.handle || product.id}`}
                 className="flex-shrink-0 w-[130px] bg-gray-50 rounded-lg overflow-hidden border border-gray-100 hover:shadow-lg transition-all cursor-pointer active:scale-[0.98] block"
               >
                 {/* Product Image */}
