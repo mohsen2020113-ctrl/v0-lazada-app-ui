@@ -1,6 +1,7 @@
 "use client"
 
 import { ChevronRight } from "lucide-react"
+import Link from "next/link"
 import Image from "next/image"
 import { useState, useEffect } from "react"
 
@@ -79,8 +80,9 @@ export function DailyDeals() {
 
         <div className="flex gap-2 sm:gap-3 px-3 sm:px-4 md:px-6 overflow-x-auto hide-scrollbar pb-1">
           {dailyProducts.map((product) => (
-            <button
+            <Link
               key={product.id}
+              href="/search"
               className="flex-shrink-0 w-[130px] sm:w-[150px] md:w-[170px] bg-white rounded-lg overflow-hidden border border-gray-100 hover:shadow-md transition-shadow active:scale-[0.98]"
             >
               <div className="relative aspect-square bg-gray-50">
@@ -106,7 +108,7 @@ export function DailyDeals() {
                 {/* Product info overlay */}
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/30 to-transparent h-8 sm:h-10" />
               </div>
-            </button>
+            </Link>
           ))}
         </div>
       </div>
