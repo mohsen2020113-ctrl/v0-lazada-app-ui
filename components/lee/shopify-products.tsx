@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Heart } from 'lucide-react'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { SkeletonGrid } from '@/components/skeleton-card'
 
 interface Product {
@@ -83,18 +83,50 @@ function ProductCard({ product }: { product: Product }) {
   )
 }
 
-export function ShopifyProducts({ products, loading = false, title }: ShopifyProductsProps) {
-  if (loading) return <SkeletonGrid count={6} />
-  if (!products?.length) return null
+export function ShopifyProducts({ products: initialProducts, loading = false, title = 'All Products' }: ShopifyProductsProps) {
+  const [displayCount, setDisplayCount] = useState(20)
+  const sentinelRef = useRef<HTMLDivElement>(null)
+
+  const displayedProducts = initialProducts.slice(0, displayCount)
+  const hasMore = displayCount < initialProducts.length
+
+  useEffect(() => {
+    const sentinel = sentinelRef.current
+    if (!sentinel) return
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setDisplayCount((prev) => Math.min(prev + 20, initialProducts.length))
+        }
+      },
+      { rootMargin: '300px' }
+    )
+
+    observer.observe(sentinel)
+    return () => observer.disconnect()
+  }, [hasMore, initialProducts.length])
+
+  if (loading) return <SkeletonGrid />
 
   return (
-    <section className="px-2 py-3">
-      {title && <h2 className="text-sm font-bold text-gray-800 mb-2 px-1">{title}</h2>}
-      <div className="grid grid-cols-2 gap-2">
-        {products.map((product) => (
+    <section className="py-3 sm:py-4">
+      <div className="px-3 sm:px-4 md:px-6 mb-3 sm:mb-4 flex items-center justify-between">
+        <h2 className="text-base sm:text-lg font-bold text-gray-800">{title}</h2>
+        <span className="text-xs sm:text-sm text-gray-500">{initialProducts.length} products</span>
+      </div>
+      <div className="px-3 sm:px-4 md:px-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
+        {displayedProducts.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
       </div>
+      {/* Sentinel for IntersectionObserver */}
+      <div ref={sentinelRef} className="h-4 mt-2" />
+      {hasMore && (
+        <div className="flex justify-center py-4">
+          <span className="text-gray-400 text-sm">Loading more...</span>
+        </div>
+      )}
     </section>
   )
 }
