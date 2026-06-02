@@ -1,4 +1,4 @@
-const SHOPIFY_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || 'f61e20-88.myshopify.com'
+const SHOPIFY_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || 'smcicw-19.myshopify.com'
 const SHOPIFY_TOKEN = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN || '54710e221c946a7f98e4ec4ca2df3029'
 const SHOPIFY_API_URL = `https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`
 
@@ -22,7 +22,6 @@ const COUNTRY_LANGUAGE: Record<string, { country: string; language: string }> = 
   de: { country: 'DE', language: 'DE' },
   fr: { country: 'FR', language: 'FR' },
 }
-
 
 export interface ShopifyProduct {
   id: string
@@ -65,13 +64,13 @@ export async function fetchAllProducts(_locale = 'ae'): Promise<{
   products: any[]
   pageInfo: { hasNextPage: boolean; endCursor: string | null }
 }> {
-  // Simple query without @inContext to ensure compatibility across all store configurations
   const QUERY = `{
-    products(first: 20) {
+    products(first: 250) {
       pageInfo { hasNextPage endCursor }
       edges {
         node {
           id handle title
+          availableForSale
           priceRange {
             minVariantPrice { amount currencyCode }
             maxVariantPrice { amount currencyCode }
@@ -169,6 +168,7 @@ export async function getCollectionProducts(handle: string, first: number = 20) 
           edges {
             node {
               id title handle
+              availableForSale
               priceRange { minVariantPrice { amount currencyCode } }
               images(first: 1) { edges { node { url altText } } }
             }
