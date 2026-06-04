@@ -1,11 +1,13 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
-import Image from 'next/image';
+import { ChevronLeft, ChevronRight, Toggle2 } from 'lucide-react';
+import { useState } from 'react';
 
 export default function SettingsPage() {
   const router = useRouter();
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [darkModeEnabled, setDarkModeEnabled] = useState(false);
 
   const menuItems = [
     { label: 'Account Information', href: '/account/settings/info' },
@@ -14,6 +16,8 @@ export default function SettingsPage() {
     { 
       label: 'Messages', 
       subtitle: 'Receive exclusive offers and personal updates',
+      hasToggle: true,
+      toggleKey: 'notifications',
       href: '/messages' 
     },
     { 
@@ -27,7 +31,12 @@ export default function SettingsPage() {
       subtitle: 'English',
       href: '/account/settings/language' 
     },
-    { label: 'Dark Mode', href: '/account/settings/darkmode' },
+    { 
+      label: 'Dark Mode', 
+      hasToggle: true,
+      toggleKey: 'darkMode',
+      href: '/account/settings/darkmode' 
+    },
     { label: 'Account Security', href: '/account/settings/security' },
     { label: 'Policies', href: '/account/settings/policies' },
     { label: 'Help', href: '/account/settings/help' },
@@ -35,8 +44,17 @@ export default function SettingsPage() {
   ];
 
   const handleLogout = () => {
-    // Handle logout logic
     router.push('/');
+  };
+
+  const toggleNotifications = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setNotificationsEnabled(!notificationsEnabled);
+  };
+
+  const toggleDarkMode = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setDarkModeEnabled(!darkModeEnabled);
   };
 
   return (
@@ -61,7 +79,7 @@ export default function SettingsPage() {
           {menuItems.map((item, index) => (
             <button
               key={index}
-              onClick={() => router.push(item.href)}
+              onClick={() => !item.hasToggle && router.push(item.href)}
               className="w-full flex items-center px-4 py-4 border-b border-gray-100 hover:bg-gray-50 transition-colors"
             >
               {/* Thailand Flag for Country item */}
@@ -84,8 +102,27 @@ export default function SettingsPage() {
                   <p className="text-sm text-gray-500 mt-0.5">{item.subtitle}</p>
                 )}
               </div>
-              
-              <ChevronRight className="w-5 h-5 text-gray-400" />
+
+              {item.hasToggle ? (
+                <button
+                  onClick={item.toggleKey === 'notifications' ? toggleNotifications : toggleDarkMode}
+                  className={`ml-3 w-12 h-6 rounded-full transition-colors flex items-center ${
+                    item.toggleKey === 'notifications' 
+                      ? (notificationsEnabled ? 'bg-pink-500' : 'bg-gray-300')
+                      : (darkModeEnabled ? 'bg-pink-500' : 'bg-gray-300')
+                  }`}
+                >
+                  <div
+                    className={`w-5 h-5 rounded-full bg-white transition-transform ${
+                      item.toggleKey === 'notifications'
+                        ? (notificationsEnabled ? 'translate-x-6' : 'translate-x-0.5')
+                        : (darkModeEnabled ? 'translate-x-6' : 'translate-x-0.5')
+                    }`}
+                  />
+                </button>
+              ) : (
+                <ChevronRight className="w-5 h-5 text-gray-400" />
+              )}
             </button>
           ))}
         </div>
