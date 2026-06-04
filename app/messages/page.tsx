@@ -1,103 +1,225 @@
 'use client'
-import { ExternalLink, MessageCircle, Mail, Globe, ChevronDown, ChevronUp } from 'lucide-react'
-import { useState } from 'react'
 
-const WHATSAPP = '+971500000000'
-const STORE_URL = 'https://www.4leee.com'
+import { useState, useCallback } from 'react'
+import { useRouter } from 'next/navigation'
+import { Trash2, MoreVertical, MessageCircle, Package, Bell, Tag, Search, Heart, MessageSquare } from 'lucide-react'
 
-const FAQS = [
-  { q: 'كيف أتتبع طلبي؟', a: 'يمكنك تتبع طلبك من خلال صفحة حسابي > تتبع الطلبات' },
-  { q: 'ما هي سياسة الإرجاع؟', a: 'نقبل الإرجاع خلال 14 يوماً من تاريخ الاستلام' },
-  { q: 'كم تستغرق الشحنة؟', a: 'يتم التوصيل خلال 3-5 أيام عمل داخل الإمارات' },
-  { q: 'هل الدفع آمن؟', a: 'نعم، جميع عمليات الدفع مؤمّنة ومشفّرة بالكامل' },
-]
+interface ChatMessage {
+  id: string
+  type: 'product' | 'text'
+  title?: string
+  price?: string
+  image?: string
+  text?: string
+  timestamp: string
+}
+
+interface Tab {
+  id: string
+  label: string
+  icon: React.ReactNode
+  badge?: number
+}
 
 export default function MessagesPage() {
-  const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const router = useRouter()
+  const [activeTab, setActiveTab] = useState('chats')
+  const [showNotificationModal, setShowNotificationModal] = useState(false)
+  const [messages, setMessages] = useState<ChatMessage[]>([
+    {
+      id: '1',
+      type: 'product',
+      title: '(1ลิ้ง 30ห้อ) ...',
+      price: '₹85.00',
+      image: '📦',
+      timestamp: '2:30 PM',
+    },
+    {
+      id: '2',
+      type: 'product',
+      title: 'แปรงขัดห้องน้ำ ...',
+      price: '₹32.00',
+      image: '🧹',
+      timestamp: '2:25 PM',
+    },
+    {
+      id: '3',
+      type: 'product',
+      title: 'ใหม่ไม้กวาดยาง...',
+      price: '₹37.00',
+      image: '🧼',
+      timestamp: '2:20 PM',
+    },
+  ])
+
+  const handleNavigate = useCallback((path: string) => {
+    router.push(path)
+  }, [router])
+
+  const tabs: Tab[] = [
+    {
+      id: 'chats',
+      label: 'Chats',
+      icon: <MessageSquare className="w-5 h-5" />,
+      badge: 99,
+    },
+    {
+      id: 'orders',
+      label: 'Orders',
+      icon: <Package className="w-5 h-5" />,
+      badge: 4,
+    },
+    {
+      id: 'alerts',
+      label: 'Alerts',
+      icon: <Bell className="w-5 h-5" />,
+    },
+    {
+      id: 'promos',
+      label: 'Promos',
+      icon: <Tag className="w-5 h-5" />,
+    },
+  ]
 
   return (
-    <div className="min-h-screen bg-[#0F0F0F] pb-24" dir="rtl">
-      <div className="bg-[#0F0F0F] px-4 py-4 border-b border-white/5">
-        <h1 className="text-white font-bold text-lg">الرسائل</h1>
-      </div>
-
-      <div className="px-4 py-5 space-y-5">
-        {/* Hero */}
-        <div className="bg-gradient-to-bl from-[#F57224] to-[#E04E0F] rounded-2xl p-6 text-center">
-          <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-3">
-            <MessageCircle size={32} className="text-white" />
-          </div>
-          <h2 className="text-white font-bold text-lg mb-1">تواصل مع فريق الدعم</h2>
-          <p className="text-white/70 text-sm">نحن هنا للمساعدة على مدار الساعة</p>
-        </div>
-
-        {/* Contact channels */}
-        <div>
-          <p className="text-white/50 text-xs font-bold tracking-wide mb-3">قنوات التواصل</p>
-          <div className="space-y-2.5">
-            <a href={`https://wa.me/${WHATSAPP.replace('+','')}`} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-3 bg-[#1A1A1A] rounded-2xl p-4">
-              <div className="w-11 h-11 rounded-xl bg-[#25D366]/15 flex items-center justify-center shrink-0">
-                <MessageCircle size={20} className="text-[#25D366]" />
-              </div>
-              <div className="flex-1">
-                <p className="text-white font-semibold text-sm">واتساب</p>
-                <p className="text-white/40 text-xs">تحدث معنا مباشرة</p>
-              </div>
-              <ExternalLink size={16} className="text-white/30" />
-            </a>
-
-            <a href="mailto:support@4leee.com"
-              className="flex items-center gap-3 bg-[#1A1A1A] rounded-2xl p-4">
-              <div className="w-11 h-11 rounded-xl bg-[#F57224]/15 flex items-center justify-center shrink-0">
-                <Mail size={20} className="text-[#F57224]" />
-              </div>
-              <div className="flex-1">
-                <p className="text-white font-semibold text-sm">البريد الإلكتروني</p>
-                <p className="text-white/40 text-xs">support@4leee.com</p>
-              </div>
-              <ExternalLink size={16} className="text-white/30" />
-            </a>
-
-            <a href={`${STORE_URL}/pages/contact`} target="_blank" rel="noopener noreferrer"
-              className="flex items-center gap-3 bg-[#1A1A1A] rounded-2xl p-4">
-              <div className="w-11 h-11 rounded-xl bg-[#1DA1F2]/15 flex items-center justify-center shrink-0">
-                <Globe size={20} className="text-[#1DA1F2]" />
-              </div>
-              <div className="flex-1">
-                <p className="text-white font-semibold text-sm">نموذج التواصل</p>
-                <p className="text-white/40 text-xs">أرسل رسالة عبر الموقع</p>
-              </div>
-              <ExternalLink size={16} className="text-white/30" />
-            </a>
+    <div className="min-h-screen bg-gradient-to-b from-gray-800 to-gray-700 pb-24">
+      {/* Header */}
+      <header className="sticky top-0 z-40 bg-gray-800/95 backdrop-blur border-b border-gray-700">
+        <div className="px-4 py-3 flex items-center justify-between">
+          <h1 className="text-lg font-bold text-white">Message+</h1>
+          <div className="flex items-center gap-2">
+            <button onClick={() => handleNavigate('/trash')} className="p-1.5 hover:bg-gray-700 rounded-lg transition-colors">
+              <Trash2 className="w-5 h-5 text-gray-400" />
+            </button>
+            <button className="p-1.5 hover:bg-gray-700 rounded-lg transition-colors">
+              <MoreVertical className="w-5 h-5 text-gray-400" />
+            </button>
           </div>
         </div>
 
-        {/* FAQ */}
-        <div>
-          <p className="text-white/50 text-xs font-bold tracking-wide mb-3">الأسئلة الشائعة</p>
-          <div className="space-y-2">
-            {FAQS.map((faq, i) => (
-              <div key={i} className="bg-[#1A1A1A] rounded-2xl overflow-hidden">
+        {/* Tab Navigation */}
+        <div className="flex overflow-x-auto scrollbar-hide border-b border-gray-700">
+          {tabs.map(tab => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`flex-1 min-w-fit px-4 py-3 flex items-center justify-center gap-2 transition-colors relative ${
+                activeTab === tab.id
+                  ? 'text-white border-b-2 border-pink-500'
+                  : 'text-gray-400 hover:text-gray-300'
+              }`}
+            >
+              {tab.icon}
+              <span className="text-sm font-medium">{tab.label}</span>
+              {tab.badge && (
+                <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                  tab.id === 'chats' || tab.id === 'orders'
+                    ? 'bg-red-600 text-white'
+                    : ''
+                }`}>
+                  {tab.badge > 99 ? '99+' : tab.badge}
+                </span>
+              )}
+            </button>
+          ))}
+        </div>
+      </header>
+
+      {/* Main Content */}
+      <main className="px-4 py-4 space-y-4">
+        {/* Chat Products Grid */}
+        <div className="grid grid-cols-3 gap-3">
+          {messages.map(msg => (
+            <div
+              key={msg.id}
+              onClick={() => msg.type === 'product' && handleNavigate('/product/detail')}
+              className="bg-teal-700 rounded-lg p-2 cursor-pointer hover:opacity-90 transition-opacity overflow-hidden"
+            >
+              <div className="w-full aspect-square bg-gray-700 rounded flex items-center justify-center text-3xl mb-1">
+                {msg.image}
+              </div>
+              <p className="text-xs text-white font-medium truncate">{msg.title}</p>
+              <div className="flex items-center justify-between mt-1">
+                <span className="text-sm font-bold text-pink-300">{msg.price}</span>
                 <button
-                  onClick={() => setOpenFaq(openFaq === i ? null : i)}
-                  className="w-full flex items-center justify-between px-4 py-4 text-right"
+                  onClick={(e) => {
+                    e.stopPropagation()
+                    handleNavigate('/cart')
+                  }}
+                  className="bg-pink-600 hover:bg-pink-700 text-white p-1 rounded transition-colors"
                 >
-                  <span className="text-white text-sm font-medium">{faq.q}</span>
-                  {openFaq === i
-                    ? <ChevronUp size={16} className="text-[#F57224] shrink-0" />
-                    : <ChevronDown size={16} className="text-white/30 shrink-0" />}
+                  <MessageSquare className="w-3 h-3" />
                 </button>
-                {openFaq === i && (
-                  <div className="px-4 pb-4">
-                    <p className="text-white/50 text-sm">{faq.a}</p>
-                  </div>
-                )}
               </div>
-            ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Message History Section */}
+        <div className="text-center py-6">
+          <p className="text-gray-400 text-sm">Message history above</p>
+        </div>
+
+        {/* Lazzie Bot Section */}
+        <div className="bg-gray-700 rounded-lg p-4">
+          <div className="flex items-start gap-2">
+            <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center flex-shrink-0">
+              <span className="text-white text-sm font-bold">L</span>
+            </div>
+            <div className="flex-1">
+              <p className="font-semibold text-gray-200 text-sm">Lazzie</p>
+              <p className="text-gray-300 text-sm mt-1">
+                Saw ไม้กวาดหยายไซย์ยิฮะได้ 280 cm? —here&apos;s what else you might like...
+              </p>
+            </div>
           </div>
         </div>
-      </div>
+      </main>
+
+      {/* Notification Modal */}
+      {showNotificationModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-end z-50">
+          <div className="w-full bg-white rounded-t-3xl p-6 space-y-4">
+            <div className="text-center">
+              <h2 className="text-2xl font-bold text-gray-900 mb-2">Checking on your order?</h2>
+            </div>
+
+            {/* Phone Illustration */}
+            <div className="flex justify-center py-4">
+              <div className="w-32 h-56 bg-gray-800 rounded-3xl border-4 border-gray-600 flex flex-col items-center justify-center p-4 relative">
+                <div className="w-20 h-4 bg-gray-600 rounded-full mb-2" />
+                <div className="text-xs text-white text-center">
+                  <p className="font-semibold">App notifications</p>
+                  <p className="text-gray-400 mt-1">Lazada</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="text-center">
+              <p className="text-gray-700 font-semibold mb-1">Stay updated on order progress by turning on</p>
+              <p className="text-gray-600 text-sm">Order Notifications</p>
+            </div>
+
+            <div className="space-y-3">
+              <button
+                onClick={() => setShowNotificationModal(false)}
+                className="w-full py-3 text-center text-blue-600 font-semibold hover:bg-blue-50 rounded-lg transition-colors"
+              >
+                Not now
+              </button>
+              <button
+                onClick={() => {
+                  setShowNotificationModal(false)
+                  handleNavigate('/settings')
+                }}
+                className="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-lg transition-colors"
+              >
+                Enable Order Notifications
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
