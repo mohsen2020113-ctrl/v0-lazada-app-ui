@@ -27,25 +27,41 @@ const PRODUCTS_QUERY = `
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url)
-  const first = parseInt(searchParams.get('first') || '20', 10)
   const after = searchParams.get('cursor') || undefined
 
   try {
-    const res = await fetch(SHOPIFY_API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Shopify-Storefront-Access-Token': SHOPIFY_TOKEN,
-      },
-      body: JSON.stringify({ query: PRODUCTS_QUERY, variables: { first, after } }),
-      cache: 'no-store',
-    })
-    if (!res.ok) throw new Error(`Shopify: ${res.status}`)
-    const json = await res.json()
-    if (json.errors) throw new Error(json.errors[0].message)
-    const products = json.data.products.edges.map((e: any) => e.node)
-    const pageInfo = json.data.products.pageInfo
-    return NextResponse.json({ products, pageInfo })
+    let allProducts: any[] = []
+    let hasNextPage = true
+    let cursor: string | null = after || null
+
+    // Loop through all pages until we get all products
+    while (hasNextPage) {
+      const res = await fetch(SHOPIFY_API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Shopify-Storefront-Access-Token': SHOPIFY_TOKEN,
+        },
+        body: JSON.stringify({ query: PRODUCTS_QUERY, variables: { first: 250, after: cursor } }),
+        cache: 'no-store',
+      })
+      if (!res.ok) throw new Error(`Shopify: ${res.status}`)
+      const json = await res.json()
+      if (json.errors) throw new Error(json.errors[0].message)
+
+      const products = json.data.products.edges.map((e: any) => e.node)
+      allProducts = allProducts.concat(products)
+
+      hasNextPage = json.data.products.pageInfo.hasNextPage
+      cursor = json.data.products.pageInfo.endCursor
+    }
+
+    const pageInfo = {
+      hasNextPage: false,
+      endCursor: null
+    }
+
+    return NextResponse.json({ products: allProducts, pageInfo })
   } catch (e: any) {
     return NextResponse.json({ error: e.message }, { status: 500 })
   }
