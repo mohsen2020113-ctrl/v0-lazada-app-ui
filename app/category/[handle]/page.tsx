@@ -20,7 +20,7 @@ export default function CategoryPage({ params }: { params: { handle: string } })
 
   useEffect(() => {
     setLoading(true)
-    fetch(`/api/products?collection=${params.handle}&limit=24`)
+    fetch(`/api/products?collection=${params.handle}`)
       .then(r => r.json())
       .then(data => {
         setProducts(data.products || [])

@@ -28,7 +28,7 @@ export default function FashionPage() {
 
   useEffect(() => {
     setLoading(true)
-    fetch('/api/products?limit=20')
+    fetch('/api/products')
       .then(r => r.json())
       .then(data => { setProducts(data.products || []); setLoading(false) })
       .catch(() => setLoading(false))

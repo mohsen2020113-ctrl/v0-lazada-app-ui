@@ -64,45 +64,59 @@ export async function fetchAllProducts(_locale = 'ae'): Promise<{
   products: any[]
   pageInfo: { hasNextPage: boolean; endCursor: string | null }
 }> {
-  const QUERY = `{
-    products(first: 250) {
-      pageInfo { hasNextPage endCursor }
-      edges {
-        node {
-          id handle title
-          availableForSale
-          priceRange {
-            minVariantPrice { amount currencyCode }
-            maxVariantPrice { amount currencyCode }
+  const QUERY = `
+    query Products($first: Int!, $after: String) {
+      products(first: $first, after: $after) {
+        pageInfo { hasNextPage endCursor }
+        edges {
+          node {
+            id handle title
+            availableForSale
+            priceRange {
+              minVariantPrice { amount currencyCode }
+              maxVariantPrice { amount currencyCode }
+            }
+            compareAtPriceRange {
+              minVariantPrice { amount currencyCode }
+            }
+            featuredImage { url altText }
+            images(first: 1) { edges { node { url altText } } }
+            variants(first: 1) { edges { node { id title price { amount currencyCode } availableForSale } } }
           }
-          compareAtPriceRange {
-            minVariantPrice { amount currencyCode }
-          }
-          featuredImage { url altText }
-          images(first: 1) { edges { node { url altText } } }
-          variants(first: 1) { edges { node { id title price { amount currencyCode } availableForSale } } }
         }
       }
     }
-  }`
+  `
 
-  const res = await fetch(SHOPIFY_API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'X-Shopify-Storefront-Access-Token': SHOPIFY_TOKEN,
-    },
-    body: JSON.stringify({ query: QUERY }),
-    cache: 'no-store',
-  })
+  let allProducts: any[] = []
+  let hasNextPage = true
+  let cursor: string | null = null
 
-  if (!res.ok) throw new Error(`Shopify products fetch failed: ${res.status}`)
-  const json = await res.json()
-  if (json.errors) throw new Error(json.errors[0].message)
+  while (hasNextPage) {
+    const res = await fetch(SHOPIFY_API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-Shopify-Storefront-Access-Token': SHOPIFY_TOKEN,
+      },
+      body: JSON.stringify({ query: QUERY, variables: { first: 250, after: cursor } }),
+      cache: 'no-store',
+    })
+
+    if (!res.ok) throw new Error(`Shopify products fetch failed: ${res.status}`)
+    const json = await res.json()
+    if (json.errors) throw new Error(json.errors[0].message)
+
+    const products = json.data.products.edges.map((e: any) => e.node)
+    allProducts = allProducts.concat(products)
+
+    hasNextPage = json.data.products.pageInfo.hasNextPage
+    cursor = json.data.products.pageInfo.endCursor
+  }
 
   return {
-    products: json.data.products.edges.map((e: any) => e.node),
-    pageInfo: json.data.products.pageInfo,
+    products: allProducts,
+    pageInfo: { hasNextPage: false, endCursor: null },
   }
 }
 
