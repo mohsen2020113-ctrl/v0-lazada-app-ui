@@ -1,5 +1,3 @@
-'use client'
-
 import Link from 'next/link'
 import { ChevronRight, Heart, MessageSquare, Gift, Zap, Settings } from 'lucide-react'
 
