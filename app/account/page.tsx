@@ -1,7 +1,11 @@
+'use client'
+
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 import { ChevronRight, Heart, MessageSquare, Gift, Zap, Settings } from 'lucide-react'
 
 export default function AccountPage() {
+  const router = useRouter()
   return (
     <div className="min-h-screen bg-pink-50 pb-24">
       {/* Header with Profile */}
@@ -16,14 +20,14 @@ export default function AccountPage() {
             </div>
           </div>
           <Link href="/account/settings">
-            <button className="p-2 rounded-full border-2 border-gray-300 hover:bg-white/50">
+            <button className="p-2 rounded-full border-2 border-gray-300 hover:bg-white/50 transition-colors">
               <Settings className="w-5 h-5 text-gray-700" />
             </button>
           </Link>
         </div>
 
         {/* Vouchers Banner */}
-        <div className="bg-white rounded-lg p-4 flex items-center gap-3 shadow-sm border border-pink-100">
+        <div onClick={() => router.push('/vouchers')} className="bg-white rounded-lg p-4 flex items-center gap-3 shadow-sm border border-pink-100 cursor-pointer hover:bg-pink-50 transition-colors">
           <div className="bg-pink-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">✓</div>
           <div className="flex-1 min-w-0">
             <p className="text-sm font-bold text-pink-600">52 vouchers | claim ₹1,000 vouc...</p>
@@ -46,21 +50,21 @@ export default function AccountPage() {
           {/* Featured Games - 2 Column */}
           <div className="grid grid-cols-2 gap-3 mb-4">
             {/* Coins Card */}
-            <div className="bg-gradient-to-br from-yellow-200 to-yellow-100 rounded-2xl p-4">
+            <div onClick={() => router.push('/games/coins')} className="bg-gradient-to-br from-yellow-200 to-yellow-100 rounded-2xl p-4 cursor-pointer hover:shadow-lg transition-shadow">
               <div className="text-4xl mb-3">🪙</div>
               <h3 className="text-sm font-bold text-gray-900">Coins</h3>
               <p className="text-xs text-gray-700 mb-3">250 Free Coins</p>
-              <button className="bg-pink-500 hover:bg-pink-600 text-white text-xs font-bold px-4 py-2 rounded transition-colors">
+              <button onClick={(e) => { e.stopPropagation(); router.push('/games/coins'); }} className="bg-pink-500 hover:bg-pink-600 text-white text-xs font-bold px-4 py-2 rounded transition-colors">
                 Collect
               </button>
             </div>
 
             {/* Lazland Card */}
-            <div className="bg-gradient-to-br from-green-200 to-green-100 rounded-2xl p-4">
+            <div onClick={() => router.push('/games/lazland')} className="bg-gradient-to-br from-green-200 to-green-100 rounded-2xl p-4 cursor-pointer hover:shadow-lg transition-shadow">
               <div className="text-4xl mb-3">🎁</div>
               <h3 className="text-sm font-bold text-gray-900">Lazland</h3>
               <p className="text-xs text-gray-700 mb-3">Get Free Prize!</p>
-              <button className="bg-pink-500 hover:bg-pink-600 text-white text-xs font-bold px-4 py-2 rounded transition-colors">
+              <button onClick={(e) => { e.stopPropagation(); router.push('/games/lazland'); }} className="bg-pink-500 hover:bg-pink-600 text-white text-xs font-bold px-4 py-2 rounded transition-colors">
                 GO
               </button>
             </div>
@@ -69,23 +73,30 @@ export default function AccountPage() {
           {/* Game Icons Carousel */}
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4">
             {[
-              { icon: '🎯', name: 'Biggest Sa...' },
-              { icon: '🔀', name: 'MergeBoss' },
-              { icon: '🎮', name: 'GoGoMatch' },
-              { icon: '🎲', name: 'LazFun' },
-              { icon: '💎', name: 'Crack' },
+              { icon: '🎯', name: 'Biggest Sa...', path: '/games/biggest-sale' },
+              { icon: '🔀', name: 'MergeBoss', path: '/games/mergeboss' },
+              { icon: '🎮', name: 'GoGoMatch', path: '/games/gogomatch' },
+              { icon: '🎲', name: 'LazFun', path: '/games/lazfun' },
+              { icon: '💎', name: 'Crack', path: '/games/crack' },
             ].map((game, i) => (
-              <div key={i} className="flex-shrink-0 text-center">
+              <button 
+                key={i}
+                onClick={() => router.push(game.path)}
+                className="flex-shrink-0 text-center hover:opacity-80 transition-opacity"
+              >
                 <div className="text-4xl mb-1">{game.icon}</div>
                 <p className="text-xs text-gray-700 whitespace-nowrap">{game.name}</p>
-              </div>
+              </button>
             ))}
           </div>
 
           {/* Rewards Banner */}
-          <div className="bg-gradient-to-r from-purple-200 to-pink-200 rounded-lg p-4 mt-4 flex items-center justify-between">
+          <div className="bg-gradient-to-r from-purple-200 to-pink-200 rounded-lg p-4 mt-4 flex items-center justify-between hover:shadow-lg transition-shadow cursor-pointer">
             <p className="text-sm font-bold text-gray-900">Play to get ₹20 LazRewards!</p>
-            <button className="border-2 border-pink-500 text-pink-500 text-xs font-bold px-4 py-1.5 rounded hover:bg-pink-50 transition-colors">
+            <button 
+              onClick={() => router.push('/rewards')}
+              className="border-2 border-pink-500 text-pink-500 text-xs font-bold px-4 py-1.5 rounded hover:bg-pink-50 transition-colors"
+            >
               Go
             </button>
           </div>
@@ -103,18 +114,22 @@ export default function AccountPage() {
 
           <div className="grid grid-cols-5 gap-2">
             {[
-              { icon: '💳', label: 'To Pay' },
-              { icon: '📦', label: 'To Ship' },
-              { icon: '📥', label: 'To Receive' },
-              { icon: '⭐', label: 'To Review' },
-              { icon: '🔄', label: 'Returns &\nCancellations' },
+              { icon: '💳', label: 'To Pay', path: '/orders/to-pay' },
+              { icon: '📦', label: 'To Ship', path: '/orders/to-ship' },
+              { icon: '📥', label: 'To Receive', path: '/orders/to-receive' },
+              { icon: '⭐', label: 'To Review', path: '/orders/to-review' },
+              { icon: '🔄', label: 'Returns &\nCancellations', path: '/orders/returns' },
             ].map((item, i) => (
-              <div key={i} className="flex flex-col items-center gap-2">
-                <div className="bg-pink-100 p-3 rounded-lg text-center">
+              <button
+                key={i}
+                onClick={() => router.push(item.path)}
+                className="flex flex-col items-center gap-2 hover:opacity-80 transition-opacity"
+              >
+                <div className="bg-pink-100 p-3 rounded-lg text-center hover:bg-pink-200 transition-colors w-full">
                   <span className="text-xl">{item.icon}</span>
                 </div>
                 <p className="text-xs text-gray-700 text-center font-medium leading-tight">{item.label}</p>
-              </div>
+              </button>
             ))}
           </div>
         </div>
@@ -135,7 +150,10 @@ export default function AccountPage() {
           {/* Channel Cards */}
           <div className="space-y-3">
             {/* PAYDAY Card */}
-            <div className="bg-gradient-to-br from-pink-300 to-pink-200 rounded-lg p-4">
+            <button 
+              onClick={() => router.push('/channels/payday')}
+              className="w-full bg-gradient-to-br from-pink-300 to-pink-200 rounded-lg p-4 hover:shadow-lg transition-shadow text-left"
+            >
               <p className="text-xs font-bold text-pink-700 mb-3 bg-pink-500 text-white w-fit px-3 py-1 rounded">PAYDAY</p>
               <div className="flex items-center justify-between">
                 <div>
@@ -143,21 +161,27 @@ export default function AccountPage() {
                 </div>
                 <p className="text-xs text-gray-700">Deals & Promotions</p>
               </div>
-            </div>
+            </button>
 
             {/* Deals Grid */}
             <div className="grid grid-cols-2 gap-3">
-              <div className="bg-white rounded-lg p-4 border border-gray-200">
+              <button
+                onClick={() => router.push('/channels/biggest-sale')}
+                className="bg-white rounded-lg p-4 border border-gray-200 hover:shadow-lg transition-shadow text-left"
+              >
                 <p className="text-xs font-bold text-gray-900 mb-2">Biggest Sa...</p>
                 <p className="text-2xl font-bold text-pink-500">15%</p>
                 <p className="text-xs text-pink-500 font-bold">OFF</p>
                 <p className="text-xs text-gray-600 mt-2">Min. spend ₹1,299</p>
-              </div>
-              <div className="bg-gradient-to-br from-purple-300 to-purple-200 rounded-lg p-4">
+              </button>
+              <button
+                onClick={() => router.push('/channels/lazflash')}
+                className="bg-gradient-to-br from-purple-300 to-purple-200 rounded-lg p-4 hover:shadow-lg transition-shadow text-left"
+              >
                 <p className="text-xs font-bold text-gray-900 mb-2">LazFlash</p>
                 <p className="text-sm font-bold text-gray-800">17:24:19</p>
                 <p className="text-xs text-gray-700 mt-2">Flash Sale</p>
-              </div>
+              </button>
             </div>
           </div>
         </div>
@@ -174,14 +198,24 @@ export default function AccountPage() {
                 <p className="text-xs text-gray-600 mb-1">Lazada Wallet (₹)</p>
                 <p className="text-2xl font-bold text-gray-900">0.00</p>
               </div>
-              <button className="text-pink-500 text-xs font-bold hover:text-pink-600">Activate</button>
+              <button 
+                onClick={() => router.push('/wallet/activate')}
+                className="text-pink-500 text-xs font-bold hover:text-pink-600 transition-colors"
+              >
+                Activate
+              </button>
             </div>
             <div className="border-t pt-4 flex justify-between items-start">
               <div>
                 <p className="text-xs text-gray-600 mb-1">Payment Options</p>
                 <p className="text-2xl font-bold text-gray-900">2</p>
               </div>
-              <button className="text-pink-500 text-xs font-bold hover:text-pink-600">View</button>
+              <button 
+                onClick={() => router.push('/wallet/options')}
+                className="text-pink-500 text-xs font-bold hover:text-pink-600 transition-colors"
+              >
+                View
+              </button>
             </div>
           </div>
         </div>
@@ -198,14 +232,18 @@ export default function AccountPage() {
 
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4">
             {[
-              { emoji: '🌿', price: '₹1,344.82' },
-              { emoji: '🌴', price: '₹94.31' },
-              { emoji: '🎋', price: '₹2,290.00' },
+              { emoji: '🌿', price: '₹1,344.82', id: '1' },
+              { emoji: '🌴', price: '₹94.31', id: '2' },
+              { emoji: '🎋', price: '₹2,290.00', id: '3' },
             ].map((item, i) => (
-              <div key={i} className="flex-shrink-0 w-28">
-                <div className="bg-gray-300 rounded-lg aspect-square flex items-center justify-center text-4xl mb-2">{item.emoji}</div>
+              <button
+                key={i}
+                onClick={() => router.push(`/product/${item.id}`)}
+                className="flex-shrink-0 w-28 hover:opacity-80 transition-opacity"
+              >
+                <div className="bg-gray-300 rounded-lg aspect-square flex items-center justify-center text-4xl mb-2 hover:shadow-lg transition-shadow">{item.emoji}</div>
                 <p className="text-pink-600 font-bold text-sm">{item.price}</p>
-              </div>
+              </button>
             ))}
           </div>
         </div>
@@ -213,19 +251,23 @@ export default function AccountPage() {
         {/* Bottom Menu Grid */}
         <div className="grid grid-cols-4 gap-4 mt-8">
           {[
-            { icon: Heart, label: 'WishList' },
-            { icon: MessageSquare, label: 'My Reviews' },
-            { icon: Gift, label: 'Chat with\nCustomer Care' },
-            { icon: Zap, label: 'Bill Payment\n& Top Up' },
-            { icon: Gift, label: 'Followed\nStores' },
-            { icon: Gift, label: 'Memberships' },
-            { icon: Gift, label: 'Open shop\non Lazada' },
-            { icon: Gift, label: 'Try & Buy' },
+            { icon: Heart, label: 'WishList', path: '/wishlist' },
+            { icon: MessageSquare, label: 'My Reviews', path: '/reviews' },
+            { icon: Gift, label: 'Chat with\nCustomer Care', path: '/chat' },
+            { icon: Zap, label: 'Bill Payment\n& Top Up', path: '/payment' },
+            { icon: Gift, label: 'Followed\nStores', path: '/stores' },
+            { icon: Gift, label: 'Memberships', path: '/memberships' },
+            { icon: Gift, label: 'Open shop\non Lazada', path: '/shop' },
+            { icon: Gift, label: 'Try & Buy', path: '/try-and-buy' },
           ].map((item, i) => {
             const Icon = item.icon
             return (
-              <button key={i} className="flex flex-col items-center gap-2 p-2 hover:bg-pink-100 rounded-lg transition-colors">
-                <div className="w-10 h-10 rounded-lg border-2 border-gray-300 flex items-center justify-center hover:border-pink-500 transition-colors">
+              <button 
+                key={i}
+                onClick={() => router.push(item.path)}
+                className="flex flex-col items-center gap-2 p-2 hover:bg-pink-100 rounded-lg transition-colors"
+              >
+                <div className="w-10 h-10 rounded-lg border-2 border-gray-300 flex items-center justify-center hover:border-pink-500 transition-colors hover:bg-pink-50">
                   <Icon className="w-5 h-5 text-gray-700" />
                 </div>
                 <p className="text-xs text-gray-700 text-center leading-tight font-medium">{item.label}</p>
