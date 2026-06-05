@@ -6,6 +6,7 @@ import { ImageGallery } from '@/components/image-gallery'
 import { VariantChips } from '@/components/variant-chips'
 import { QuantitySelector } from '@/components/quantity-selector'
 import { Reviews } from '@/components/reviews'
+import { RelatedProducts } from '@/components/related-products'
 
 interface Variant {
   id: string
@@ -141,6 +142,11 @@ export default function ProductPage({ params }: { params: { handle: string } }) 
             <Shield size={14} className="text-[#F57224] shrink-0" />
             <span>منتج أصلي 100%</span>
           </div>
+        </div>
+
+        {/* Related Products */}
+        <div className="mt-8 -mx-5">
+          <RelatedProducts productHandle={product.handle} />
         </div>
 
         {/* Reviews Section */}
