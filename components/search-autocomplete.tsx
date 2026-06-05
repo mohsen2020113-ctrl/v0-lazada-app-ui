@@ -28,7 +28,7 @@ export function SearchAutocomplete({
     return (
       <div className="absolute top-full left-0 right-0 bg-[#1A1A1A] border-b border-white/8 rounded-b-lg z-50">
         <div className="px-4 py-8 text-center">
-          <p className="text-white/40 text-sm">لا توجد اقتراحات</p>
+          <p className="text-white/40 text-sm">No suggestions</p>
         </div>
       </div>
     )
@@ -72,7 +72,7 @@ export function SearchAutocomplete({
             onClick={onClearHistory}
             className="w-full px-4 py-3 text-center text-white/40 hover:text-white/60 transition-colors text-sm font-medium"
           >
-            مسح السجل
+            Clear History
           </button>
         )}
       </div>

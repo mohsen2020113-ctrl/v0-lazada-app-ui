@@ -7,13 +7,13 @@ import { BottomSheetFilter } from '@/components/bottom-sheet-filter'
 import { useInfiniteScroll } from '@/hooks/use-infinite-scroll'
 import { InfiniteScrollLoader } from '@/components/infinite-scroll-loader'
 
-const TABS = ['الكل', 'نساء', 'رجال', 'أطفال', 'اكسسوارات']
+const TABS = ['All', 'Women', 'Men', 'Kids', 'Accessories']
 const FILTER_OPTIONS = [
-  { label: 'الأكثر مبيعاً', value: 'trending' },
-  { label: 'الأحدث', value: 'newest' },
-  { label: 'السعر: الأقل إلى الأعلى', value: 'price-low' },
-  { label: 'السعر: الأعلى إلى الأقل', value: 'price-high' },
-  { label: 'التقييم: الأفضل أولاً', value: 'rating' },
+  { label: 'Most Popular', value: 'trending' },
+  { label: 'Newest', value: 'newest' },
+  { label: 'Price: Low to High', value: 'price-low' },
+  { label: 'Price: High to Low', value: 'price-high' },
+  { label: 'Highest Rated', value: 'rating' },
 ]
 
 interface Product {
@@ -128,14 +128,14 @@ export default function FashionPage() {
   })
 
   return (
-    <div className="min-h-screen bg-white" dir="rtl">
+    <div className="min-h-screen bg-white" dir="ltr">
       {/* Header */}
       <header className="sticky top-0 z-40 bg-white border-b border-gray-100">
         <div className="flex items-center justify-between px-4 py-4 gap-3">
           <button className="p-2 -ml-2 hover:bg-gray-100 rounded-lg transition-colors">
             <ChevronLeft className="w-5 h-5" />
           </button>
-          <h1 className="text-xl font-bold flex-1 text-center">الأزياء</h1>
+          <h1 className="text-xl font-bold flex-1 text-center">Fashion</h1>
           <button
             onClick={() => setShowFilterSheet(true)}
             className="p-2 -mr-2 hover:bg-gray-100 rounded-lg transition-colors"
@@ -172,7 +172,7 @@ export default function FashionPage() {
             onClick={() => setActiveFilter('trending')}
             className="text-xs text-pink-600 hover:text-pink-700 font-medium"
           >
-            إعادة تعيين
+            Clear
           </button>
         </div>
       )}
@@ -272,7 +272,7 @@ export default function FashionPage() {
         options={FILTER_OPTIONS}
         activeFilter={activeFilter}
         onFilterChange={setActiveFilter}
-        title="ترتيب حسب"
+        title="Sort By"
       />
     </div>
   )

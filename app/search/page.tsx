@@ -7,7 +7,7 @@ import Link from 'next/link'
 import { SearchAutocomplete } from '@/components/search-autocomplete'
 import { useSearchHistory } from '@/hooks/use-search-history'
 
-const POPULAR = ['فستان', 'حذاء', 'حقيبة', 'ساعة', 'عطر', 'نظارة']
+const POPULAR = ['Dress', 'Shoes', 'Bag', 'Watch', 'Perfume', 'Glasses']
 
 type Product = {
   id: string
@@ -89,7 +89,7 @@ export default function SearchPage() {
               onKeyDown={e => e.key === 'Enter' && handleSearch(query)}
               onFocus={handleInputFocus}
               onBlur={handleInputBlur}
-              placeholder="ابحث عن منتجات..."
+              placeholder="Search products..."
               autoFocus
               className="flex-1 bg-transparent text-white text-sm outline-none placeholder:text-white/30"
               dir="rtl"

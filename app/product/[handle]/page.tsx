@@ -117,7 +117,7 @@ export default function ProductPage({ params }: { params: { handle: string } }) 
           onQuantityChange={setQuantity}
           min={1}
           max={999}
-          label="الكمية"
+          label="Quantity"
         />
 
         <div className="border-t border-white/5 mb-5" />

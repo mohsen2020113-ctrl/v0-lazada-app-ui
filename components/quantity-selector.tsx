@@ -14,7 +14,7 @@ export function QuantitySelector({
   onQuantityChange,
   min = 1,
   max = 999,
-  label = 'الكمية',
+  label = 'Quantity',
 }: QuantitySelectorProps) {
   const handleDecrement = () => {
     if (quantity > min) {

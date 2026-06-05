@@ -56,10 +56,10 @@ export function Reviews({
   }))
 
   return (
-    <div className="bg-[#0F0F0F] px-5 py-8" dir="rtl">
+    <div className="bg-[#0F0F0F] px-5 py-8" dir="ltr">
       {/* Rating Summary */}
       <div className="mb-8">
-        <h2 className="text-white font-bold text-lg mb-6">التقييمات والمراجعات</h2>
+        <h2 className="text-white font-bold text-lg mb-6">الreviewsات والمراجعات</h2>
         
         <div className="bg-[#1A1A1A] rounded-2xl p-5 mb-6">
           <div className="flex items-start justify-between mb-5">
@@ -76,13 +76,13 @@ export function Reviews({
                   ))}
                 </div>
               </div>
-              <p className="text-white/50 text-xs">{totalReviews} تقييم</p>
+              <p className="text-white/50 text-xs">{totalReviews} reviews</p>
             </div>
             <button
               onClick={() => setShowReviewForm(!showReviewForm)}
               className="bg-[#F57224] text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-[#F57224]/80 transition-colors"
             >
-              اكتب مراجعة
+              Write Review
             </button>
           </div>
 
@@ -114,7 +114,7 @@ export function Reviews({
         {showReviewForm && (
           <div className="bg-[#1A1A1A] rounded-2xl p-5 mb-6">
             <div className="flex items-center justify-between mb-4">
-              <p className="text-white font-bold">أضف مراجعتك</p>
+              <p className="text-white font-bold">Add Your Review</p>
               <button onClick={() => setShowReviewForm(false)} className="text-white/50">
                 <X size={16} />
               </button>
@@ -122,7 +122,7 @@ export function Reviews({
 
             {/* Star Rating Selector */}
             <div className="mb-4">
-              <p className="text-white/50 text-xs mb-2">التقييم</p>
+              <p className="text-white/50 text-xs mb-2">الreviews</p>
               <div className="flex gap-2">
                 {[1, 2, 3, 4, 5].map(star => (
                   <button
@@ -139,23 +139,23 @@ export function Reviews({
             {/* Title Input */}
             <input
               type="text"
-              placeholder="عنوان المراجعة..."
+              placeholder="Review title..."
               value={formData.title}
               onChange={e => setFormData(p => ({ ...p, title: e.target.value }))}
               maxLength={100}
               className="w-full bg-[#0F0F0F] border border-white/10 rounded-xl px-3 py-2.5 text-white text-sm placeholder:text-white/30 outline-none mb-3"
-              dir="rtl"
+              dir="ltr"
             />
 
             {/* Review Text */}
             <textarea
-              placeholder="شارك رأيك عن هذا المنتج..."
+              placeholder="Share your thoughts about this product..."
               value={formData.text}
               onChange={e => setFormData(p => ({ ...p, text: e.target.value }))}
               maxLength={500}
               rows={4}
               className="w-full bg-[#0F0F0F] border border-white/10 rounded-xl px-3 py-2.5 text-white text-sm placeholder:text-white/30 outline-none resize-none mb-3"
-              dir="rtl"
+              dir="ltr"
             />
 
             {/* Submit Button */}
@@ -164,7 +164,7 @@ export function Reviews({
               disabled={!formData.title.trim() || !formData.text.trim()}
               className="w-full bg-[#F57224] text-white py-2.5 rounded-xl text-sm font-bold disabled:bg-white/10 disabled:text-white/40 hover:bg-[#F57224]/80 transition-colors"
             >
-              إرسال المراجعة
+              Submit Review
             </button>
           </div>
         )}
@@ -173,7 +173,7 @@ export function Reviews({
       {/* Reviews List */}
       <div className="space-y-4">
         {filteredReviews.length === 0 ? (
-          <p className="text-white/50 text-sm text-center py-8">لا توجد مراجعات حتى الآن</p>
+          <p className="text-white/50 text-sm text-center py-8">No reviews yet</p>
         ) : (
           filteredReviews.map(review => (
             <div key={review.id} className="bg-[#1A1A1A] rounded-2xl p-4 border border-white/5">
@@ -184,7 +184,7 @@ export function Reviews({
                     <p className="text-white text-sm font-bold">{review.author}</p>
                     {review.verified && (
                       <span className="text-[#F57224] text-[10px] bg-[#F57224]/15 px-1.5 py-0.5 rounded-full">
-                        تم التحقق
+                        Verified
                       </span>
                     )}
                   </div>
@@ -210,7 +210,7 @@ export function Reviews({
               {/* Helpful Button */}
               <button className="flex items-center gap-1.5 text-white/50 hover:text-white/70 text-xs transition-colors">
                 <ThumbsUp size={12} />
-                <span>مفيد ({review.helpful})</span>
+                <span>Helpful ({review.helpful})</span>
               </button>
             </div>
           ))
@@ -220,7 +220,7 @@ export function Reviews({
       {/* Load More */}
       {filteredReviews.length > 0 && filteredReviews.length < reviews.length && (
         <button className="w-full mt-6 py-3 text-[#F57224] font-bold text-sm hover:text-[#F57224]/80 transition-colors">
-          عرض المزيد من المراجعات
+          Load More Reviews
         </button>
       )}
     </div>

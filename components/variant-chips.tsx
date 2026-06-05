@@ -12,7 +12,7 @@ interface VariantChipsProps {
   label?: string
 }
 
-export function VariantChips({ variants, selectedIndex, onSelect, label = 'اختر الخيار' }: VariantChipsProps) {
+export function VariantChips({ variants, selectedIndex, onSelect, label = 'Choose Option' }: VariantChipsProps) {
   if (!variants.length) return null
 
   return (

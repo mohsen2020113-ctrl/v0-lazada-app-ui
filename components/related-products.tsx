@@ -97,7 +97,7 @@ export function RelatedProducts({ productHandle }: RelatedProductsProps) {
   return (
     <div className="py-6 -mx-5 px-5">
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-white font-bold text-base">منتجات ذات صلة</h2>
+        <h2 className="text-white font-bold text-base">Related Products</h2>
         <div className="flex gap-2">
           <button
             onClick={() => scroll('right')}
