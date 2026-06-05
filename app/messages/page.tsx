@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState, useCallback, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Trash2, MoreVertical, MessageSquare, Package, Bell, Tag, Heart } from 'lucide-react'
 
@@ -16,7 +16,13 @@ interface ChatMessage {
 export default function MessagesPage() {
   const router = useRouter()
   const [activeTab, setActiveTab] = useState('chats')
-  const [showNotificationModal, setShowNotificationModal] = useState(true)
+  const [showNotificationModal, setShowNotificationModal] = useState(false)
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+    setShowNotificationModal(true)
+  }, [])
   const [messages] = useState<ChatMessage[]>([
     {
       id: '1',
@@ -177,7 +183,7 @@ export default function MessagesPage() {
       </main>
 
       {/* Notification Modal */}
-      {showNotificationModal && (
+      {isClient && showNotificationModal && (
         <div className="fixed inset-0 bg-black/60 flex items-end z-50">
           <div className="w-full bg-white rounded-t-3xl p-6 space-y-4 animate-in slide-in-from-bottom">
             {/* Close area */}
