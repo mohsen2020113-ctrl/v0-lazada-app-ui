@@ -1,7 +1,10 @@
 'use client'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowRight, Heart, Share2, ShoppingCart, Shield, RotateCcw, Truck, ChevronLeft, ChevronRight } from 'lucide-react'
+import { ArrowRight, Heart, Share2, ShoppingCart, Shield, RotateCcw, Truck } from 'lucide-react'
+import { ImageGallery } from '@/components/image-gallery'
+import { VariantChips } from '@/components/variant-chips'
+import { QuantitySelector } from '@/components/quantity-selector'
 
 interface Variant {
   id: string
@@ -77,39 +80,11 @@ export default function ProductPage({ params }: { params: { handle: string } }) 
       </div>
 
       {/* Image Gallery */}
-      <div className="relative h-[360px] bg-[#1A1A1A] overflow-hidden">
-        <img
-          src={images[currentImage]}
-          alt={product.title}
-          className="w-full h-full object-cover"
-          onError={(e) => { (e.target as HTMLImageElement).src = '/placeholder.png' }}
-        />
-        {images.length > 1 && (
-          <>
-            <button
-              onClick={() => setCurrentImage(p => Math.max(0, p - 1))}
-              className="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 flex items-center justify-center"
-            >
-              <ChevronLeft size={16} className="text-white" />
-            </button>
-            <button
-              onClick={() => setCurrentImage(p => Math.min(images.length - 1, p + 1))}
-              className="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/50 flex items-center justify-center"
-            >
-              <ChevronRight size={16} className="text-white" />
-            </button>
-            <div className="absolute bottom-3 left-0 right-0 flex justify-center gap-1.5">
-              {images.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setCurrentImage(i)}
-                  className={`h-1.5 rounded-full transition-all ${i === currentImage ? 'w-5 bg-[#F57224]' : 'w-1.5 bg-white/40'}`}
-                />
-              ))}
-            </div>
-          </>
-        )}
-      </div>
+      <ImageGallery
+        images={images}
+        alt={product.title}
+        onImageChange={setCurrentImage}
+      />
 
       {/* Content */}
       <div className="rounded-t-3xl bg-[#0F0F0F] -mt-6 relative z-10 px-5 pt-5 pb-32">
@@ -124,32 +99,24 @@ export default function ProductPage({ params }: { params: { handle: string } }) 
         </div>
 
         {hasVariants && (
-          <div className="mb-4">
-            <p className="text-white/50 text-xs font-bold tracking-wide mb-2.5">الخيارات</p>
-            <div className="flex flex-wrap gap-2">
-              {product.variants.map((v, i) => (
-                <button
-                  key={v.id}
-                  onClick={() => setSelectedVariant(i)}
-                  className={`px-4 py-2 rounded-xl text-sm font-medium transition-colors ${
-                    i === selectedVariant ? 'bg-[#F57224] text-white' : 'bg-[#1A1A1A] text-white/70 border border-white/10'
-                  }`}
-                >
-                  {v.title}
-                </button>
-              ))}
-            </div>
-          </div>
+          <VariantChips
+            variants={product.variants.map((v, i) => ({
+              ...v,
+              available: v.available !== false,
+            }))}
+            selectedIndex={selectedVariant}
+            onSelect={setSelectedVariant}
+            label="الخيارات"
+          />
         )}
 
-        <div className="flex items-center justify-between mb-5">
-          <p className="text-white/50 text-xs font-bold tracking-wide">الكمية</p>
-          <div className="flex items-center bg-[#1A1A1A] rounded-xl overflow-hidden">
-            <button onClick={() => setQuantity(q => Math.max(1, q - 1))} className="w-9 h-9 flex items-center justify-center text-white/70">−</button>
-            <span className="w-9 text-center text-white font-bold text-sm">{quantity}</span>
-            <button onClick={() => setQuantity(q => q + 1)} className="w-9 h-9 flex items-center justify-center text-white/70">+</button>
-          </div>
-        </div>
+        <QuantitySelector
+          quantity={quantity}
+          onQuantityChange={setQuantity}
+          min={1}
+          max={999}
+          label="الكمية"
+        />
 
         <div className="border-t border-white/5 mb-5" />
 
