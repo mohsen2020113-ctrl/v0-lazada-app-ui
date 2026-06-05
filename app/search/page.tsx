@@ -1,9 +1,11 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { Search, X, TrendingUp, SearchX } from 'lucide-react'
 import Link from 'next/link'
+import { SearchAutocomplete } from '@/components/search-autocomplete'
+import { useSearchHistory } from '@/hooks/use-search-history'
 
 const POPULAR = ['فستان', 'حذاء', 'حقيبة', 'ساعة', 'عطر', 'نظارة']
 
@@ -26,54 +28,93 @@ async function searchProducts(q: string): Promise<Product[]> {
   }
 }
 
+function getSuggestions(query: string): string[] {
+  if (!query.trim()) return []
+  const lower = query.toLowerCase()
+  return POPULAR.filter(item => item.toLowerCase().includes(lower)).slice(0, 5)
+}
+
 export default function SearchPage() {
   const [query, setQuery] = useState('')
   const [results, setResults] = useState<Product[]>([])
   const [loading, setLoading] = useState(false)
   const [searched, setSearched] = useState(false)
+  const [showAutocomplete, setShowAutocomplete] = useState(false)
   const inputRef = useRef<HTMLInputElement>(null)
+  const { history, addToHistory, clearHistory, removeFromHistory, isReady } = useSearchHistory()
+
+  const suggestions = getSuggestions(query)
 
   const handleSearch = async (q: string) => {
     if (!q.trim()) return
     setQuery(q)
     setLoading(true)
     setSearched(true)
+    setShowAutocomplete(false)
     const products = await searchProducts(q)
     setResults(products)
     setLoading(false)
+    addToHistory(q)
   }
 
   const clearSearch = () => {
     setQuery('')
     setResults([])
     setSearched(false)
+    setShowAutocomplete(false)
     inputRef.current?.focus()
+  }
+
+  const handleInputFocus = () => {
+    setShowAutocomplete(true)
+  }
+
+  const handleInputBlur = () => {
+    // Delay to allow click on autocomplete items
+    setTimeout(() => setShowAutocomplete(false), 200)
   }
 
   return (
     <div className="min-h-screen bg-[#0F0F0F]" dir="rtl">
       {/* Search bar */}
-      <div className="bg-[#0F0F0F] px-4 py-3 flex items-center gap-2">
-        <div className="flex-1 bg-[#1A1A1A] rounded-xl flex items-center px-3 h-11 gap-2">
-          <Search size={18} className="text-white/30 flex-shrink-0" />
-          <input
-            ref={inputRef}
-            type="text"
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-            onKeyDown={e => e.key === 'Enter' && handleSearch(query)}
-            placeholder="ابحث عن منتجات..."
-            autoFocus
-            className="flex-1 bg-transparent text-white text-sm outline-none placeholder:text-white/30"
-            dir="rtl"
-          />
-          {query && (
-            <button onClick={clearSearch} className="text-white/30">
-              <X size={16} />
-            </button>
+      <div className="bg-[#0F0F0F] px-4 py-3 flex items-center gap-2 relative z-40">
+        <div className="flex-1 relative">
+          <div className="bg-[#1A1A1A] rounded-xl flex items-center px-3 h-11 gap-2">
+            <Search size={18} className="text-white/30 flex-shrink-0" />
+            <input
+              ref={inputRef}
+              type="text"
+              value={query}
+              onChange={e => setQuery(e.target.value)}
+              onKeyDown={e => e.key === 'Enter' && handleSearch(query)}
+              onFocus={handleInputFocus}
+              onBlur={handleInputBlur}
+              placeholder="ابحث عن منتجات..."
+              autoFocus
+              className="flex-1 bg-transparent text-white text-sm outline-none placeholder:text-white/30"
+              dir="rtl"
+            />
+            {query && (
+              <button onClick={clearSearch} className="text-white/30 hover:text-white/60 transition-colors">
+                <X size={16} />
+              </button>
+            )}
+          </div>
+          
+          {/* Autocomplete dropdown */}
+          {isReady && showAutocomplete && (
+            <SearchAutocomplete
+              query={query}
+              suggestions={suggestions}
+              history={history}
+              isOpen={showAutocomplete}
+              onSuggestionClick={handleSearch}
+              onHistoryRemove={removeFromHistory}
+              onClearHistory={clearHistory}
+            />
           )}
         </div>
-        <Link href="/" className="text-white/50 text-sm font-medium whitespace-nowrap">إلغاء</Link>
+        <Link href="/" className="text-white/50 text-sm font-medium whitespace-nowrap hover:text-white/70 transition-colors">إلغاء</Link>
       </div>
 
       {loading ? (
