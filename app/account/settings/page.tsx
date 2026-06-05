@@ -10,7 +10,7 @@ export default function SettingsPage() {
   const [isLoggingOut, setIsLoggingOut] = useState(false);
 
   const handleNavigateBack = useCallback(() => {
-    router.back();
+    router.push('/account');
   }, [router]);
 
   const handleLogout = async () => {
