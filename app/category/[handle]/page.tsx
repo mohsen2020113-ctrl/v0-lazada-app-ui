@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { ArrowRight, SlidersHorizontal, Heart } from 'lucide-react'
+import { ProductGridSkeletonDark } from '@/components/skeleton-loader'
 
 interface Product {
   id: string
@@ -48,9 +49,7 @@ export default function CategoryPage({ params }: { params: { handle: string } })
       {/* Products */}
       <div className="px-3 py-4 pb-24">
         {loading ? (
-          <div className="flex justify-center py-20">
-            <div className="w-8 h-8 border-2 border-[#F57224] border-t-transparent rounded-full animate-spin" />
-          </div>
+          <ProductGridSkeletonDark columns={2} />
         ) : products.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 gap-3">
             <div className="text-5xl text-white/10">📦</div>

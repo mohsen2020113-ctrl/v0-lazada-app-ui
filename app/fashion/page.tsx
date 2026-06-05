@@ -2,6 +2,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { SlidersHorizontal, TrendingUp, Sparkles, ArrowUp, ArrowDown, Heart, ChevronLeft, Search } from 'lucide-react'
+import { ProductGridSkeleton } from '@/components/skeleton-loader'
 
 const TABS = ['الكل', 'نساء', 'رجال', 'أطفال', 'اكسسوارات']
 const FILTERS = [
@@ -41,9 +42,16 @@ export default function FashionPage() {
   const [products, setProducts] = useState<Product[]>(MOCK_PRODUCTS)
   const [favorites, setFavorites] = useState<Set<string>>(new Set())
   const [isClient, setIsClient] = useState(false)
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
     setIsClient(true)
+    // Simulate loading products
+    const timer = setTimeout(() => {
+      setProducts(MOCK_PRODUCTS)
+      setIsLoading(false)
+    }, 800)
+    return () => clearTimeout(timer)
   }, [])
 
   const toggleFavorite = useCallback((productId: string, e: React.MouseEvent) => {
@@ -125,78 +133,82 @@ export default function FashionPage() {
 
       {/* Products Grid */}
       <div className="px-2 py-4 pb-24">
-        <div className="grid grid-cols-2 gap-3">
-          {filteredProducts.map(product => (
-            <Link key={product.id} href={`/product/${product.handle}`}>
-              <div className="bg-white rounded-lg overflow-hidden hover:shadow-md transition-shadow active:shadow-lg">
-                {/* Product Image */}
-                <div className="relative aspect-[3/4] bg-gray-100 overflow-hidden">
-                  <div className="w-full h-full flex items-center justify-center text-5xl font-bold">
-                    {product.image}
-                  </div>
-
-                  {/* Discount Badge */}
-                  {product.discount && (
-                    <div className="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded">
-                      -{product.discount}%
+        {isLoading ? (
+          <ProductGridSkeleton columns={2} />
+        ) : (
+          <div className="grid grid-cols-2 gap-3">
+            {filteredProducts.map(product => (
+              <Link key={product.id} href={`/product/${product.handle}`}>
+                <div className="bg-white rounded-lg overflow-hidden hover:shadow-md transition-shadow active:shadow-lg">
+                  {/* Product Image */}
+                  <div className="relative aspect-[3/4] bg-gray-100 overflow-hidden">
+                    <div className="w-full h-full flex items-center justify-center text-5xl font-bold">
+                      {product.image}
                     </div>
-                  )}
 
-                  {/* New Badge */}
-                  {product.isNew && (
-                    <div className="absolute top-2 left-2 bg-pink-600 text-white text-[10px] font-bold px-2 py-1 rounded">
-                      جديد
-                    </div>
-                  )}
+                    {/* Discount Badge */}
+                    {product.discount && (
+                      <div className="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded">
+                        -{product.discount}%
+                      </div>
+                    )}
 
-                  {/* Favorite Button */}
-                  {isClient && (
-                    <button
-                      onClick={(e) => toggleFavorite(product.id, e)}
-                      className="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors"
-                    >
-                      <Heart
-                        size={16}
-                        className={`transition-colors ${
-                          favorites.has(product.id)
-                            ? 'fill-pink-600 text-pink-600'
-                            : 'text-gray-400'
-                        }`}
-                      />
-                    </button>
-                  )}
+                    {/* New Badge */}
+                    {product.isNew && (
+                      <div className="absolute top-2 left-2 bg-pink-600 text-white text-[10px] font-bold px-2 py-1 rounded">
+                        جديد
+                      </div>
+                    )}
 
-                  {/* Rating */}
-                  {product.rating && (
-                    <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-semibold text-gray-900 flex items-center gap-0.5">
-                      ⭐ {product.rating}
-                    </div>
-                  )}
-                </div>
+                    {/* Favorite Button */}
+                    {isClient && (
+                      <button
+                        onClick={(e) => toggleFavorite(product.id, e)}
+                        className="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors"
+                      >
+                        <Heart
+                          size={16}
+                          className={`transition-colors ${
+                            favorites.has(product.id)
+                              ? 'fill-pink-600 text-pink-600'
+                              : 'text-gray-400'
+                          }`}
+                        />
+                      </button>
+                    )}
 
-                {/* Product Info */}
-                <div className="p-2.5">
-                  {/* Title */}
-                  <p className="text-gray-900 text-xs font-semibold line-clamp-2 mb-1.5 h-8">
-                    {product.title}
-                  </p>
-
-                  {/* Price */}
-                  <div className="flex items-center gap-1.5">
-                    <span className="text-pink-600 font-bold text-sm">
-                      {product.price.toLocaleString()} ر.س
-                    </span>
-                    {product.originalPrice && (
-                      <span className="text-gray-400 text-xs line-through">
-                        {product.originalPrice.toLocaleString()}
-                      </span>
+                    {/* Rating */}
+                    {product.rating && (
+                      <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-semibold text-gray-900 flex items-center gap-0.5">
+                        ⭐ {product.rating}
+                      </div>
                     )}
                   </div>
+
+                  {/* Product Info */}
+                  <div className="p-2.5">
+                    {/* Title */}
+                    <p className="text-gray-900 text-xs font-semibold line-clamp-2 mb-1.5 h-8">
+                      {product.title}
+                    </p>
+
+                    {/* Price */}
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-pink-600 font-bold text-sm">
+                        {product.price.toLocaleString()} ر.س
+                      </span>
+                      {product.originalPrice && (
+                        <span className="text-gray-400 text-xs line-through">
+                          {product.originalPrice.toLocaleString()}
+                        </span>
+                      )}
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   )
