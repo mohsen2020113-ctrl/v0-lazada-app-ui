@@ -91,8 +91,10 @@ export async function fetchAllProducts(_locale = 'ae'): Promise<{
   let allProducts: any[] = []
   let hasNextPage = true
   let cursor: string | null = null
+  let pageCount = 0
 
   while (hasNextPage) {
+    pageCount++
     const res = await fetch(SHOPIFY_API_URL, {
       method: 'POST',
       headers: {
@@ -109,10 +111,13 @@ export async function fetchAllProducts(_locale = 'ae'): Promise<{
 
     const products = json.data.products.edges.map((e: any) => e.node)
     allProducts = allProducts.concat(products)
+    console.log(`[v0] Fetched page ${pageCount}: ${products.length} products (total: ${allProducts.length})`)
 
     hasNextPage = json.data.products.pageInfo.hasNextPage
     cursor = json.data.products.pageInfo.endCursor
   }
+
+  console.log(`[v0] Completed fetching all products: ${allProducts.length} products across ${pageCount} pages`)
 
   return {
     products: allProducts,
