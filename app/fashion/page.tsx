@@ -1,118 +1,204 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
-import { SlidersHorizontal, TrendingUp, Sparkles, ArrowUp, ArrowDown, Heart } from 'lucide-react'
+import { SlidersHorizontal, TrendingUp, Sparkles, ArrowUp, ArrowDown, Heart, ChevronLeft, Search } from 'lucide-react'
 
 const TABS = ['الكل', 'نساء', 'رجال', 'أطفال', 'اكسسوارات']
 const FILTERS = [
-  { label: 'الأكثر مبيعاً', icon: TrendingUp },
-  { label: 'الأحدث', icon: Sparkles },
-  { label: 'السعر: الأقل', icon: ArrowUp },
-  { label: 'السعر: الأعلى', icon: ArrowDown },
+  { label: 'الأكثر مبيعاً', value: 'trending' },
+  { label: 'الأحدث', value: 'newest' },
+  { label: 'السعر: الأقل', value: 'price-low' },
+  { label: 'السعر: الأعلى', value: 'price-high' },
 ]
 
 interface Product {
   id: string
   title: string
   handle: string
-  price: string
+  price: number
+  originalPrice?: number
   image: string
+  discount?: number
+  isNew?: boolean
+  rating?: number
 }
+
+// Mock products data
+const MOCK_PRODUCTS: Product[] = [
+  { id: '1', title: 'فستان كاجوال مريح', handle: 'casual-dress', price: 89, originalPrice: 150, image: '👗', discount: 40, isNew: true, rating: 4.5 },
+  { id: '2', title: 'قميص قطن فاخر', handle: 'cotton-shirt', price: 65, originalPrice: 120, image: '👔', discount: 45, rating: 4.8 },
+  { id: '3', title: 'بنطلون جينز أصلي', handle: 'jeans', price: 120, originalPrice: 200, image: '👖', discount: 40, isNew: true, rating: 4.6 },
+  { id: '4', title: 'معطف فخم شتوي', handle: 'winter-coat', price: 150, originalPrice: 280, image: '🧥', discount: 46, rating: 4.7 },
+  { id: '5', title: 'تيشيرت رياضي', handle: 'sports-tee', price: 35, originalPrice: 60, image: '👕', discount: 42, isNew: true, rating: 4.4 },
+  { id: '6', title: 'تنورة ماكسي أنيقة', handle: 'maxi-skirt', price: 95, originalPrice: 160, image: '👗', discount: 40, rating: 4.9 },
+  { id: '7', title: 'حزام جلدي أسود', handle: 'leather-belt', price: 45, originalPrice: 75, image: '⌚', discount: 40, isNew: true, rating: 4.5 },
+  { id: '8', title: 'حقيبة يد فاخرة', handle: 'handbag', price: 180, originalPrice: 300, image: '👜', discount: 40, rating: 5 },
+]
 
 export default function FashionPage() {
   const [activeTab, setActiveTab] = useState(0)
   const [activeFilter, setActiveFilter] = useState(0)
-  const [products, setProducts] = useState<Product[]>([])
-  const [loading, setLoading] = useState(true)
-  const [showFilter, setShowFilter] = useState(false)
+  const [products, setProducts] = useState<Product[]>(MOCK_PRODUCTS)
+  const [favorites, setFavorites] = useState<Set<string>>(new Set())
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
-    setLoading(true)
-    fetch('/api/products')
-      .then(r => r.json())
-      .then(data => { setProducts(data.products || []); setLoading(false) })
-      .catch(() => setLoading(false))
-  }, [activeTab])
+    setIsClient(true)
+  }, [])
+
+  const toggleFavorite = useCallback((productId: string, e: React.MouseEvent) => {
+    e.preventDefault()
+    setFavorites(prev => {
+      const newFavorites = new Set(prev)
+      if (newFavorites.has(productId)) {
+        newFavorites.delete(productId)
+      } else {
+        newFavorites.add(productId)
+      }
+      return newFavorites
+    })
+  }, [])
+
+  const filteredProducts = [...products].sort((a, b) => {
+    switch (activeFilter) {
+      case 1: // الأحدث
+        return b.id.localeCompare(a.id)
+      case 2: // السعر: الأقل
+        return a.price - b.price
+      case 3: // السعر: الأعلى
+        return b.price - a.price
+      default: // الأكثر مبيعاً
+        return 0
+    }
+  })
 
   return (
-    <div className="min-h-screen bg-[#0F0F0F]" dir="rtl">
-      <div className="bg-[#0F0F0F] sticky top-0 z-10 border-b border-white/5">
-        <div className="flex items-center justify-between px-4 py-4">
-          <h1 className="text-white font-bold text-lg">الأزياء</h1>
-          <button onClick={() => setShowFilter(true)} className="p-2 rounded-full bg-[#1A1A1A] text-white">
-            <SlidersHorizontal size={18} />
+    <div className="min-h-screen bg-white" dir="rtl">
+      {/* Header */}
+      <header className="sticky top-0 z-40 bg-white border-b border-gray-100">
+        <div className="flex items-center justify-between px-4 py-4 gap-3">
+          <button className="p-2 -ml-2 hover:bg-gray-100 rounded-lg transition-colors">
+            <ChevronLeft className="w-5 h-5" />
+          </button>
+          <h1 className="text-xl font-bold flex-1 text-center">الأزياء</h1>
+          <button className="p-2 -mr-2 hover:bg-gray-100 rounded-lg transition-colors">
+            <Search className="w-5 h-5" />
           </button>
         </div>
-        <div className="flex overflow-x-auto scrollbar-hide px-4 gap-6 pb-0">
+
+        {/* Tabs */}
+        <div className="flex overflow-x-auto scrollbar-hide border-b border-gray-100">
           {TABS.map((tab, i) => (
-            <button key={i} onClick={() => setActiveTab(i)}
-              className={`pb-3 text-sm font-medium whitespace-nowrap border-b-2 transition-colors ${activeTab === i ? 'border-[#F57224] text-[#F57224]' : 'border-transparent text-white/50'}`}>
+            <button
+              key={i}
+              onClick={() => setActiveTab(i)}
+              className={`px-4 py-3 text-sm font-medium whitespace-nowrap transition-colors border-b-2 ${
+                activeTab === i 
+                  ? 'border-pink-600 text-pink-600' 
+                  : 'border-transparent text-gray-600 hover:text-gray-900'
+              }`}
+            >
               {tab}
             </button>
           ))}
         </div>
-      </div>
-      <div className="flex gap-2 px-4 py-3 overflow-x-auto scrollbar-hide">
-        {FILTERS.map((f, i) => {
-          const Icon = f.icon
-          return (
-            <button key={i} onClick={() => setActiveFilter(i)}
-              className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium whitespace-nowrap transition-colors ${activeFilter === i ? 'bg-[#F57224] text-white' : 'bg-[#1A1A1A] text-white/50'}`}>
-              <Icon size={12} />{f.label}
+      </header>
+
+      {/* Filters */}
+      <div className="sticky top-[120px] z-30 bg-white border-b border-gray-100 px-3 py-3">
+        <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
+          {FILTERS.map((f, i) => (
+            <button
+              key={i}
+              onClick={() => setActiveFilter(i)}
+              className={`px-3 py-1.5 text-xs font-medium whitespace-nowrap rounded-full transition-all ${
+                activeFilter === i
+                  ? 'bg-pink-600 text-white'
+                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+              }`}
+            >
+              {f.label}
             </button>
-          )
-        })}
+          ))}
+        </div>
       </div>
-      <div className="px-3 pb-24">
-        {loading ? (
-          <div className="flex justify-center py-20">
-            <div className="w-8 h-8 border-2 border-[#F57224] border-t-transparent rounded-full animate-spin" />
-          </div>
-        ) : products.length === 0 ? (
-          <div className="text-center py-20 text-white/40">لا توجد منتجات</div>
-        ) : (
-          <div className="grid grid-cols-2 gap-3">
-            {products.map(product => (
-              <Link key={product.id} href={`/product/${product.handle}`}>
-                <div className="bg-[#1A1A1A] rounded-2xl overflow-hidden">
-                  <div className="relative aspect-[3/4] bg-[#2A2A2A]">
-                    {product.image ? (
-                      <img src={product.image} alt={product.title} className="w-full h-full object-cover" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center text-white/20 text-4xl">👗</div>
-                    )}
-                    <div className="absolute top-2 right-2 bg-[#F57224] text-white text-[10px] font-bold px-2 py-0.5 rounded-lg">جديد</div>
+
+      {/* Products Grid */}
+      <div className="px-2 py-4 pb-24">
+        <div className="grid grid-cols-2 gap-3">
+          {filteredProducts.map(product => (
+            <Link key={product.id} href={`/product/${product.handle}`}>
+              <div className="bg-white rounded-lg overflow-hidden hover:shadow-md transition-shadow active:shadow-lg">
+                {/* Product Image */}
+                <div className="relative aspect-[3/4] bg-gray-100 overflow-hidden">
+                  <div className="w-full h-full flex items-center justify-center text-5xl font-bold">
+                    {product.image}
                   </div>
-                  <div className="p-2.5">
-                    <p className="text-white text-xs font-semibold line-clamp-2 mb-1.5">{product.title}</p>
-                    <div className="flex items-center justify-between">
-                      <span className="text-[#F57224] text-sm font-bold">{product.price} AED</span>
-                      <button className="w-7 h-7 rounded-lg bg-[#F57224]/15 flex items-center justify-center">
-                        <Heart size={13} className="text-[#F57224]" />
-                      </button>
+
+                  {/* Discount Badge */}
+                  {product.discount && (
+                    <div className="absolute top-2 right-2 bg-red-600 text-white text-[10px] font-bold px-2 py-1 rounded">
+                      -{product.discount}%
                     </div>
+                  )}
+
+                  {/* New Badge */}
+                  {product.isNew && (
+                    <div className="absolute top-2 left-2 bg-pink-600 text-white text-[10px] font-bold px-2 py-1 rounded">
+                      جديد
+                    </div>
+                  )}
+
+                  {/* Favorite Button */}
+                  {isClient && (
+                    <button
+                      onClick={(e) => toggleFavorite(product.id, e)}
+                      className="absolute bottom-2 right-2 w-8 h-8 rounded-full bg-white/90 backdrop-blur-sm flex items-center justify-center hover:bg-white transition-colors"
+                    >
+                      <Heart
+                        size={16}
+                        className={`transition-colors ${
+                          favorites.has(product.id)
+                            ? 'fill-pink-600 text-pink-600'
+                            : 'text-gray-400'
+                        }`}
+                      />
+                    </button>
+                  )}
+
+                  {/* Rating */}
+                  {product.rating && (
+                    <div className="absolute bottom-2 left-2 bg-white/90 backdrop-blur-sm px-2 py-0.5 rounded text-[10px] font-semibold text-gray-900 flex items-center gap-0.5">
+                      ⭐ {product.rating}
+                    </div>
+                  )}
+                </div>
+
+                {/* Product Info */}
+                <div className="p-2.5">
+                  {/* Title */}
+                  <p className="text-gray-900 text-xs font-semibold line-clamp-2 mb-1.5 h-8">
+                    {product.title}
+                  </p>
+
+                  {/* Price */}
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-pink-600 font-bold text-sm">
+                      {product.price.toLocaleString()} ر.س
+                    </span>
+                    {product.originalPrice && (
+                      <span className="text-gray-400 text-xs line-through">
+                        {product.originalPrice.toLocaleString()}
+                      </span>
+                    )}
                   </div>
                 </div>
-              </Link>
-            ))}
-          </div>
-        )}
-      </div>
-      {showFilter && (
-        <div className="fixed inset-0 z-50 flex items-end" dir="rtl">
-          <div className="absolute inset-0 bg-black/60" onClick={() => setShowFilter(false)} />
-          <div className="relative w-full bg-[#1A1A1A] rounded-t-3xl p-6">
-            <h2 className="text-white font-bold text-base mb-5">تصفية النتائج</h2>
-            <p className="text-white/50 text-sm mb-3">السعر</p>
-            <div className="flex items-center gap-3 mb-6">
-              <div className="flex-1 bg-[#0F0F0F] rounded-xl px-4 py-3 text-white text-sm">0 AED</div>
-              <span className="text-white/40">—</span>
-              <div className="flex-1 bg-[#0F0F0F] rounded-xl px-4 py-3 text-white text-sm">1000 AED</div>
-            </div>
-            <button onClick={() => setShowFilter(false)} className="w-full bg-[#F57224] text-white font-bold py-3 rounded-xl">تطبيق</button>
-          </div>
+              </div>
+            </Link>
+          ))}
         </div>
-      )}
+      </div>
     </div>
   )
-      }
+}
+
