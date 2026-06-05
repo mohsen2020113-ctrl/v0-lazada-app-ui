@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { ArrowRight, SlidersHorizontal, Heart } from 'lucide-react'
 import { ProductGridSkeletonDark } from '@/components/skeleton-loader'
+import { BottomSheetFilter } from '@/components/bottom-sheet-filter'
 
 interface Product {
   id: string
@@ -11,13 +12,24 @@ interface Product {
   handle: string
   price: string
   image: string
+  rating?: number
 }
+
+const FILTER_OPTIONS = [
+  { label: 'Most Popular', value: 'trending' },
+  { label: 'Newest', value: 'newest' },
+  { label: 'Price: Low to High', value: 'price-low' },
+  { label: 'Price: High to Low', value: 'price-high' },
+  { label: 'Best Rating', value: 'rating' },
+]
 
 export default function CategoryPage({ params }: { params: { handle: string } }) {
   const router = useRouter()
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [title, setTitle] = useState(decodeURIComponent(params.handle).replace(/-/g, ' '))
+  const [activeFilter, setActiveFilter] = useState('trending')
+  const [showFilterSheet, setShowFilterSheet] = useState(false)
 
   useEffect(() => {
     setLoading(true)
@@ -41,7 +53,10 @@ export default function CategoryPage({ params }: { params: { handle: string } })
           </button>
           <h1 className="text-white font-bold text-lg capitalize">{title}</h1>
         </div>
-        <button className="w-9 h-9 rounded-full bg-[#1A1A1A] flex items-center justify-center">
+        <button
+          onClick={() => setShowFilterSheet(true)}
+          className="w-9 h-9 rounded-full bg-[#1A1A1A] flex items-center justify-center hover:bg-[#2A2A2A] transition-colors"
+        >
           <SlidersHorizontal size={16} className="text-white" />
         </button>
       </div>
@@ -57,7 +72,20 @@ export default function CategoryPage({ params }: { params: { handle: string } })
           </div>
         ) : (
           <div className="grid grid-cols-2 gap-3">
-            {products.map(product => (
+            {[...products].sort((a, b) => {
+              switch (activeFilter) {
+                case 'newest':
+                  return b.id.localeCompare(a.id)
+                case 'price-low':
+                  return parseFloat(a.price) - parseFloat(b.price)
+                case 'price-high':
+                  return parseFloat(b.price) - parseFloat(a.price)
+                case 'rating':
+                  return (b.rating || 0) - (a.rating || 0)
+                default: // trending
+                  return 0
+              }
+            }).map(product => (
               <Link key={product.id} href={`/product/${product.handle}`}>
                 <div className="bg-[#1A1A1A] rounded-2xl overflow-hidden">
                   <div className="relative aspect-[4/5] bg-[#2A2A2A]">
@@ -82,6 +110,16 @@ export default function CategoryPage({ params }: { params: { handle: string } })
           </div>
         )}
       </div>
+
+      {/* Bottom Sheet Filter */}
+      <BottomSheetFilter
+        isOpen={showFilterSheet}
+        onClose={() => setShowFilterSheet(false)}
+        options={FILTER_OPTIONS}
+        activeFilter={activeFilter}
+        onFilterChange={setActiveFilter}
+        title="Sort By"
+      />
     </div>
   )
 }

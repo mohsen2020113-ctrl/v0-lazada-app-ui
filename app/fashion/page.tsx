@@ -1,15 +1,17 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
-import { SlidersHorizontal, TrendingUp, Sparkles, ArrowUp, ArrowDown, Heart, ChevronLeft, Search } from 'lucide-react'
+import { Heart, ChevronLeft, Search, SlidersHorizontal } from 'lucide-react'
 import { ProductGridSkeleton } from '@/components/skeleton-loader'
+import { BottomSheetFilter } from '@/components/bottom-sheet-filter'
 
 const TABS = ['الكل', 'نساء', 'رجال', 'أطفال', 'اكسسوارات']
-const FILTERS = [
+const FILTER_OPTIONS = [
   { label: 'الأكثر مبيعاً', value: 'trending' },
   { label: 'الأحدث', value: 'newest' },
-  { label: 'السعر: الأقل', value: 'price-low' },
-  { label: 'السعر: الأعلى', value: 'price-high' },
+  { label: 'السعر: الأقل إلى الأعلى', value: 'price-low' },
+  { label: 'السعر: الأعلى إلى الأقل', value: 'price-high' },
+  { label: 'التقييم: الأفضل أولاً', value: 'rating' },
 ]
 
 interface Product {
@@ -38,11 +40,12 @@ const MOCK_PRODUCTS: Product[] = [
 
 export default function FashionPage() {
   const [activeTab, setActiveTab] = useState(0)
-  const [activeFilter, setActiveFilter] = useState(0)
+  const [activeFilter, setActiveFilter] = useState('trending')
   const [products, setProducts] = useState<Product[]>(MOCK_PRODUCTS)
   const [favorites, setFavorites] = useState<Set<string>>(new Set())
   const [isClient, setIsClient] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+  const [showFilterSheet, setShowFilterSheet] = useState(false)
 
   useEffect(() => {
     setIsClient(true)
@@ -69,13 +72,15 @@ export default function FashionPage() {
 
   const filteredProducts = [...products].sort((a, b) => {
     switch (activeFilter) {
-      case 1: // الأحدث
+      case 'newest':
         return b.id.localeCompare(a.id)
-      case 2: // السعر: الأقل
+      case 'price-low':
         return a.price - b.price
-      case 3: // السعر: الأعلى
+      case 'price-high':
         return b.price - a.price
-      default: // الأكثر مبيعاً
+      case 'rating':
+        return (b.rating || 0) - (a.rating || 0)
+      default: // trending
         return 0
     }
   })
@@ -89,8 +94,11 @@ export default function FashionPage() {
             <ChevronLeft className="w-5 h-5" />
           </button>
           <h1 className="text-xl font-bold flex-1 text-center">الأزياء</h1>
-          <button className="p-2 -mr-2 hover:bg-gray-100 rounded-lg transition-colors">
-            <Search className="w-5 h-5" />
+          <button
+            onClick={() => setShowFilterSheet(true)}
+            className="p-2 -mr-2 hover:bg-gray-100 rounded-lg transition-colors"
+          >
+            <SlidersHorizontal className="w-5 h-5" />
           </button>
         </div>
 
@@ -112,24 +120,20 @@ export default function FashionPage() {
         </div>
       </header>
 
-      {/* Filters */}
-      <div className="sticky top-[120px] z-30 bg-white border-b border-gray-100 px-3 py-3">
-        <div className="flex items-center gap-2 overflow-x-auto scrollbar-hide">
-          {FILTERS.map((f, i) => (
-            <button
-              key={i}
-              onClick={() => setActiveFilter(i)}
-              className={`px-3 py-1.5 text-xs font-medium whitespace-nowrap rounded-full transition-all ${
-                activeFilter === i
-                  ? 'bg-pink-600 text-white'
-                  : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-              }`}
-            >
-              {f.label}
-            </button>
-          ))}
+      {/* Active Filter Display */}
+      {activeFilter !== 'trending' && (
+        <div className="px-4 py-2 bg-pink-50 border-b border-pink-100 flex items-center justify-between">
+          <span className="text-xs font-medium text-pink-600">
+            {FILTER_OPTIONS.find(f => f.value === activeFilter)?.label}
+          </span>
+          <button
+            onClick={() => setActiveFilter('trending')}
+            className="text-xs text-pink-600 hover:text-pink-700 font-medium"
+          >
+            إعادة تعيين
+          </button>
         </div>
-      </div>
+      )}
 
       {/* Products Grid */}
       <div className="px-2 py-4 pb-24">
@@ -210,6 +214,16 @@ export default function FashionPage() {
           </div>
         )}
       </div>
+
+      {/* Bottom Sheet Filter */}
+      <BottomSheetFilter
+        isOpen={showFilterSheet}
+        onClose={() => setShowFilterSheet(false)}
+        options={FILTER_OPTIONS}
+        activeFilter={activeFilter}
+        onFilterChange={setActiveFilter}
+        title="ترتيب حسب"
+      />
     </div>
   )
 }
