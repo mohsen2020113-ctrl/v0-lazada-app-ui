@@ -106,3 +106,83 @@ ALTER TABLE cart_items ENABLE ROW LEVEL SECURITY;
 ALTER TABLE orders ENABLE ROW LEVEL SECURITY;
 ALTER TABLE wishlists ENABLE ROW LEVEL SECURITY;
 ALTER TABLE addresses ENABLE ROW LEVEL SECURITY;
+
+-- Categories table
+CREATE TABLE IF NOT EXISTS categories (
+  id BIGSERIAL PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  slug VARCHAR(255) NOT NULL UNIQUE,
+  parent_id BIGINT REFERENCES categories(id) ON DELETE CASCADE,
+  image TEXT,
+  level INT DEFAULT 0,
+  sort_order INT DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX idx_categories_slug ON categories(slug);
+CREATE INDEX idx_categories_parent_id ON categories(parent_id);
+
+-- Products table
+CREATE TABLE IF NOT EXISTS products (
+  id BIGSERIAL PRIMARY KEY,
+  shopify_id VARCHAR(255) UNIQUE,
+  name VARCHAR(500) NOT NULL,
+  slug VARCHAR(500) NOT NULL UNIQUE,
+  description TEXT,
+  price DECIMAL(12,2),
+  original_price DECIMAL(12,2),
+  stock_quantity INT DEFAULT 0,
+  category_id BIGINT REFERENCES categories(id) ON DELETE SET NULL,
+  brand VARCHAR(255),
+  images JSONB,
+  attributes JSONB,
+  rating_avg DECIMAL(2,1) DEFAULT 0,
+  review_count INT DEFAULT 0,
+  available_for_sale BOOLEAN DEFAULT true,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX idx_products_slug ON products(slug);
+CREATE INDEX idx_products_category_id ON products(category_id);
+CREATE INDEX idx_products_shopify_id ON products(shopify_id);
+
+-- Reviews table
+CREATE TABLE IF NOT EXISTS reviews (
+  id BIGSERIAL PRIMARY KEY,
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  product_id BIGINT REFERENCES products(id) ON DELETE CASCADE,
+  rating INT NOT NULL CHECK (rating >= 1 AND rating <= 5),
+  comment TEXT,
+  images JSONB,
+  verified_purchase BOOLEAN DEFAULT false,
+  helpful_count INT DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX idx_reviews_product_id ON reviews(product_id);
+CREATE INDEX idx_reviews_user_id ON reviews(user_id);
+CREATE INDEX idx_reviews_created_at ON reviews(created_at DESC);
+
+-- Order items table
+CREATE TABLE IF NOT EXISTS order_items (
+  id BIGSERIAL PRIMARY KEY,
+  order_id UUID REFERENCES orders(id) ON DELETE CASCADE,
+  product_id BIGINT REFERENCES products(id) ON DELETE RESTRICT,
+  product_name_snapshot VARCHAR(500) NOT NULL,
+  price_snapshot DECIMAL(12,2) NOT NULL,
+  quantity INT NOT NULL DEFAULT 1,
+  variant_info JSONB,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE INDEX idx_order_items_order_id ON order_items(order_id);
+CREATE INDEX idx_order_items_product_id ON order_items(product_id);
+
+-- Enable RLS for new tables
+ALTER TABLE categories ENABLE ROW LEVEL SECURITY;
+ALTER TABLE products ENABLE ROW LEVEL SECURITY;
+ALTER TABLE reviews ENABLE ROW LEVEL SECURITY;
+ALTER TABLE order_items ENABLE ROW LEVEL SECURITY;
