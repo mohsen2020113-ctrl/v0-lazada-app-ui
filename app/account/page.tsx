@@ -16,14 +16,14 @@ export default function AccountPage() {
       {/* Header with Profile */}
       <div className="bg-gradient-to-b from-pink-200 to-pink-100 px-4 pt-4 pb-6">
         <div className="flex items-center justify-between mb-6">
-          <div className="flex items-center gap-4">
+          <Link href="/account/profile" className="flex items-center gap-4 flex-1 hover:opacity-80 transition-opacity">
             <div className="w-16 h-16 rounded-full border-4 border-yellow-400 bg-gradient-to-br from-yellow-200 to-yellow-400 flex items-center justify-center flex-shrink-0">
               <span className="text-2xl">👤</span>
             </div>
             <div>
               <h1 className="text-2xl font-bold text-gray-900">Mohsen Alattas</h1>
             </div>
-          </div>
+          </Link>
           <Link href="/account/settings">
             <button className="p-2 rounded-full border-2 border-gray-300 hover:bg-white/50 transition-colors">
               <Settings className="w-5 h-5 text-gray-700" />
