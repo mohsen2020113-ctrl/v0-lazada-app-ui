@@ -147,4 +147,4 @@ export default function CartPage() {
       <BottomNav />
     </div>
   )
-} "
+}
