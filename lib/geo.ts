@@ -25,7 +25,7 @@ export const EXCHANGE_RATES: Record<string, number> = {
   LBP: 88000,   // Lebanese Pound
   
   // Southeast Asia
-  THB: 33.5,    // Thai Baht (Legacy - deprecated)
+  AED: 33.5,    // AED (Legacy - deprecated)
   MYR: 4.35,    // Malaysian Ringgit
   SGD: 1.34,    // Singapore Dollar
   IDR: 15500,   // Indonesian Rupiah
@@ -90,7 +90,7 @@ export const CURRENCY_METADATA: Record<string, CurrencyMetadata> = {
   USD: { symbol: '$', name: 'US Dollar', nameAr: 'الدولار الأمريكي', position: 'before', decimals: 2, locale: 'en-US' },
   EUR: { symbol: '€', name: 'Euro', nameAr: 'اليورو', position: 'before', decimals: 2, locale: 'de-DE' },
   GBP: { symbol: '£', name: 'British Pound', nameAr: 'الجنيه الإسترليني', position: 'before', decimals: 2, locale: 'en-GB' },
-  THB: { symbol: '฿', name: 'Thai Baht (Legacy)', nameAr: 'بات تايلاندي (قديم)', position: 'after', decimals: 2, locale: 'th-TH' },
+  AED: { symbol: '฿', name: 'AED (Legacy)', nameAr: 'بات تايلاندي (قديم)', position: 'after', decimals: 2, locale: 'th-TH' },
   INR: { symbol: '₹', name: 'Indian Rupee', nameAr: 'الروبية الهندية', position: 'before', decimals: 2, locale: 'en-IN' },
   JPY: { symbol: '¥', name: 'Japanese Yen', nameAr: 'الين الياباني', position: 'before', decimals: 0, locale: 'ja-JP' },
   CNY: { symbol: '¥', name: 'Chinese Yuan', nameAr: 'اليوان الصيني', position: 'before', decimals: 2, locale: 'zh-CN' },

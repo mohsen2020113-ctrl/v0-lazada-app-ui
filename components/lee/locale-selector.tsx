@@ -13,7 +13,7 @@ export function LocaleSelector() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setMounted(true); }, []);
 
-  const languages: Language[] = ['en', 'ar', 'th', 'fr'];
+  const languages: Language[] = ['en', 'ar', 'ae', 'fr'];
   const currencies: Currency[] = ['AED', 'SAR', 'USD', 'EUR'];
 
   const currencyLabels: Record<Currency, string> = {
@@ -206,7 +206,7 @@ function LocaleSelectorModal({ onClose }: { onClose: () => void }) {
   const [activeTab, setActiveTab] = useState<'language' | 'currency'>('language');
   const { currentLanguage, currentCurrency, setLanguage, setCurrency, t, isRTL } = useI18n();
 
-  const languages: Language[] = ['en', 'ar', 'th', 'fr'];
+  const languages: Language[] = ['en', 'ar', 'ae', 'fr'];
   const currencies: Currency[] = ['AED', 'SAR', 'USD', 'EUR'];
 
   const currencyLabels: Record<Currency, string> = {

@@ -24,7 +24,7 @@ export function useGeo() {
     isArabic: geo.language === 'ar',
     isRTL: isRTL(geo.language),
     isMEA: ['ae', 'sa', 'eg', 'kw', 'qa', 'bh', 'om', 'jo', 'lb'].includes(geo.locale),
-    isSEA: ['th', 'my', 'sg', 'id', 'ph', 'vn', 'mm', 'la', 'kh'].includes(geo.locale),
+    isSEA: ['ae', 'my', 'sg', 'id', 'ph', 'vn', 'mm', 'la', 'kh'].includes(geo.locale),
     
     // Utility functions
     isCountry: (country: string | string[]) => isCountry(country),

@@ -179,7 +179,7 @@ export const getCurrencyOptions = (): CurrencyOption[] => [
  * Format a number according to locale
  */
 export const formatNumber = (number: number, language: Language): string => {
-  const formatter = new Intl.NumberFormat(language === 'ar' ? 'ar-SA' : language === 'th' ? 'th-TH' : language === 'fr' ? 'fr-FR' : 'en-US');
+  const formatter = new Intl.NumberFormat(language === 'ar' ? 'ar-SA' : language === 'ae' ? 'th-TH' : language === 'fr' ? 'fr-FR' : 'en-US');
   return formatter.format(number);
 };
 
@@ -187,7 +187,7 @@ export const formatNumber = (number: number, language: Language): string => {
  * Format a date according to locale
  */
 export const formatDate = (date: Date, language: Language): string => {
-  const formatter = new Intl.DateTimeFormat(language === 'ar' ? 'ar-SA' : language === 'th' ? 'th-TH' : language === 'fr' ? 'fr-FR' : 'en-US');
+  const formatter = new Intl.DateTimeFormat(language === 'ar' ? 'ar-SA' : language === 'ae' ? 'th-TH' : language === 'fr' ? 'fr-FR' : 'en-US');
   return formatter.format(date);
 };
 

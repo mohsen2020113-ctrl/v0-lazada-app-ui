@@ -5,7 +5,7 @@ const COUNTRY_LOCALE: Record<string, string> = {
   // Middle East & GCC
   AE: 'ae', SA: 'sa', EG: 'eg', KW: 'kw', QA: 'qa', BH: 'bh', OM: 'om', JO: 'jo', LB: 'lb', PS: 'ps',
   // Southeast Asia
-  TH: 'th', MY: 'my', SG: 'sg', ID: 'id', PH: 'ph', VN: 'vn', MM: 'mm', LA: 'la', KH: 'kh',
+  TH: 'ae', MY: 'my', SG: 'sg', ID: 'id', PH: 'ph', VN: 'vn', MM: 'mm', LA: 'la', KH: 'kh',
   // South Asia
   IN: 'in', PK: 'pk', BD: 'bd', LK: 'lk', NP: 'np',
   // Europe
@@ -25,7 +25,7 @@ const COUNTRY_CURRENCY: Record<string, string> = {
   // Middle East
   AE: 'AED', SA: 'SAR', EG: 'EGP', KW: 'KWD', QA: 'QAR', BH: 'BHD', OM: 'OMR', JO: 'JOD', LB: 'LBP',
   // Southeast Asia
-  TH: 'THB', MY: 'MYR', SG: 'SGD', ID: 'IDR', PH: 'PHP', VN: 'VND', MM: 'MMK', LA: 'LAK', KH: 'KHR',
+  TH: 'AED', MY: 'MYR', SG: 'SGD', ID: 'IDR', PH: 'PHP', VN: 'VND', MM: 'MMK', LA: 'LAK', KH: 'KHR',
   // South Asia
   IN: 'INR', PK: 'PKR', BD: 'BDT', LK: 'LKR', NP: 'NPR',
   // Europe
@@ -47,7 +47,7 @@ const COUNTRY_LANGUAGE: Record<string, string> = {
   // English-speaking
   GB: 'en', US: 'en', CA: 'en', AU: 'en', NZ: 'en', IN: 'en', SG: 'en', MY: 'en',
   // UAE
-  TH: 'th',
+  TH: 'ae',
   // French
   FR: 'fr', BE: 'fr', CH: 'fr',
   // German

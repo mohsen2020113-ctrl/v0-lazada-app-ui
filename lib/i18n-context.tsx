@@ -27,7 +27,7 @@ export function I18nProvider({ children }: { children: ReactNode }) {
       const savedLang = localStorage.getItem('lee_language') as Language;
       const savedCurrency = localStorage.getItem('lee_currency') as Currency;
       
-      if (savedLang && ['en', 'ar', 'th', 'fr'].includes(savedLang)) {
+      if (savedLang && ['en', 'ar', 'ae', 'fr'].includes(savedLang)) {
         setCurrentLanguage(savedLang);
       }
       if (savedCurrency && ['AED', 'SAR', 'USD', 'EUR'].includes(savedCurrency)) {

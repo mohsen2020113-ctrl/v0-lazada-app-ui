@@ -59,7 +59,7 @@ export function convertCurrencyDetailed(
  * Useful for displaying prices in different regions
  */
 export function convertFromAEDMultiple(aedAmount: number, currencies?: string[]): PricingResult {
-  const targetCurrencies = currencies || ['AED', 'USD', 'EUR', 'GBP', 'THB', 'INR']
+  const targetCurrencies = currencies || ['AED', 'USD', 'EUR', 'GBP', 'AED', 'INR']
   const decimals = 2
 
   const result: PricingResult = {
@@ -90,7 +90,7 @@ export function convertFromAEDMultiple(aedAmount: number, currencies?: string[])
     if (currency === 'USD') result.usd = rounded
     if (currency === 'EUR') result.eur = rounded
     if (currency === 'GBP') result.gbp = rounded
-    if (currency === 'THB') result.aeb = rounded
+    if (currency === 'AED') result.aeb = rounded
     if (currency === 'INR') result.inr = rounded
   }
 
