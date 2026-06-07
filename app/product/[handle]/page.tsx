@@ -177,9 +177,9 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
         {/* Price block */}
         <div className="bg-white px-4 pb-3">
           <div className="flex items-end gap-2">
-            <span className="text-3xl font-extrabold text-primary">฿{product.price.toFixed(2)}</span>
+            <span className="text-3xl font-extrabold text-primary">AED {product.price.toFixed(2)}</span>
             <span className="mb-1 text-base text-muted-foreground line-through">
-              ฿{product.originalPrice.toFixed(2)}
+              AED {product.originalPrice.toFixed(2)}
             </span>
             <span className="mb-1 rounded bg-[#FFE9F2] px-1.5 py-0.5 text-sm font-bold text-primary">
               -{product.discount}%
@@ -189,10 +189,10 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
           {/* Promo chips */}
           <div className="mt-2 flex flex-wrap gap-2">
             <span className="rounded bg-[#FFF0F5] px-2 py-1 text-xs font-semibold text-primary">
-              Buy ฿1.5K, extra 5% OFF
+              Buy AED 1500, extra 5% OFF
             </span>
             <span className="rounded bg-[#FFF0F5] px-2 py-1 text-xs font-semibold text-primary">
-              TrueMoney | Extra ฿10 Off
+              TrueMoney | Extra AED 10 Off
             </span>
           </div>
         </div>
@@ -204,7 +204,7 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
               <Heart className="h-6 w-6 fill-primary text-primary" />
               <div>
                 <p className="text-lg font-bold text-primary">14% OFF</p>
-                <p className="text-xs text-muted-foreground">Min. spend ฿599, Cap ฿300</p>
+                <p className="text-xs text-muted-foreground">Min. spend AED 599, Cap AED 300</p>
               </div>
             </div>
             <button className="rounded-md bg-primary px-4 py-2 text-sm font-bold text-primary-foreground">
@@ -276,7 +276,7 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
                   Guaranteed by {product.shipping.days} days
                 </span>
                 <span className="font-bold text-foreground">
-                  {product.shipping.free ? 'FREE' : `฿${(product.shipping.days * 10).toFixed(2)}`}
+                  {product.shipping.free ? 'FREE' : `AED ${(product.shipping.days * 10).toFixed(2)}`}
                 </span>
               </div>
               <div className="mt-0.5 flex items-center justify-between text-sm text-muted-foreground">
@@ -320,8 +320,8 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
           <div className="mt-3 grid grid-cols-2 gap-3">
             {[49, 99].map((min) => (
               <div key={min} className="rounded-xl border border-[#06A589]/30 p-3 text-center">
-                <p className="text-2xl font-extrabold text-[#06A589]">฿30</p>
-                <p className="text-xs text-muted-foreground">Min. Spend ฿{min}</p>
+                <p className="text-2xl font-extrabold text-[#06A589]">AED 30</p>
+                <p className="text-xs text-muted-foreground">Min. Spend AED {min}</p>
                 <button className="mt-2 w-full rounded-md bg-[#06A589] py-1.5 text-sm font-bold text-white">
                   Collect
                 </button>

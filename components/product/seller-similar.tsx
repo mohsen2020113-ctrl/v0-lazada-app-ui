@@ -105,7 +105,7 @@ export function SellerSimilar({ productHandle, seller }: SellerSimilarProps) {
             </div>
             <div className="p-2">
               <p className="line-clamp-1 text-sm text-foreground">{p.title}</p>
-              <p className="mt-1 text-lg font-bold text-primary">฿{p.price.toFixed(2)}</p>
+              <p className="mt-1 text-lg font-bold text-primary">AED {p.price.toFixed(2)}</p>
               <div className="mt-1 flex items-center justify-between">
                 <span className="flex items-center gap-1 text-xs text-muted-foreground">
                   <Star className="h-3 w-3 fill-[#FFB400] text-[#FFB400]" />
