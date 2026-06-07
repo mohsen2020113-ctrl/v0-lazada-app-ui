@@ -206,7 +206,7 @@ function LocaleSelectorModal({ onClose }: { onClose: () => void }) {
   const [activeTab, setActiveTab] = useState<'language' | 'currency'>('language');
   const { currentLanguage, currentCurrency, setLanguage, setCurrency, t, isRTL } = useI18n();
 
-  const languages: Language[] = ['en', 'ar', 'ae', 'fr'];
+  const languages: Language[] = ['ar', 'en', 'ae', 'fr'];
   const currencies: Currency[] = ['AED', 'SAR', 'USD', 'EUR'];
 
   const currencyLabels: Record<Currency, string> = {
