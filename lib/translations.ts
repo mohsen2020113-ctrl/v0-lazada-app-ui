@@ -85,7 +85,7 @@ const translations: Record<string, Record<Language, string>> = {
   'status.allLoaded': { en: 'All products loaded', ar: 'تم تحميل كل المنتجات', th: 'โหลดสินค้าทั้งหมดแล้ว', fr: 'Tous les produits chargés' },
   
   // Search
-  'search.placeholder': { en: 'Search in LEE', ar: 'ابحث في LEE', th: 'ค้นหาใน LEE', fr: 'Rechercher dans LEE' },
+  'search.placeholder': { en: 'Search in 4LEEE', ar: 'ابحث في 4LEEE', th: 'ค้นหาใน 4LEEE', fr: 'Rechercher dans 4LEEE' },
   'search.results': { en: 'Search Results', ar: 'نتائج البحث', th: 'ผลการค้นหา', fr: 'Résultats de recherche' },
   'search.searchingFor': { en: 'Searching for', ar: 'البحث عن', th: 'กำลังค้นหา', fr: 'Recherche de' },
   
@@ -101,6 +101,33 @@ const translations: Record<string, Record<Language, string>> = {
   'settings.currency': { en: 'Currency', ar: 'العملة', th: 'สกุลเงิน', fr: 'Devise' },
   'settings.selectLanguage': { en: 'Select Language', ar: 'اختر اللغة', th: 'เลือกภาษา', fr: 'Choisir la langue' },
   'settings.selectCurrency': { en: 'Select Currency', ar: 'اختر العملة', th: 'เลือกสกุลเงิน', fr: 'Choisir la devise' },
+  
+  // 4LEEE Brand
+  '4leee.brand': { en: '4LEEE', ar: '4LEEE', th: '4LEEE', fr: '4LEEE' },
+  '4leee.tagline': { en: 'Your Ultimate Shopping Destination', ar: 'وجهتك النهائية للتسوق', th: 'ปลายทางการช้อปของคุณ', fr: 'Votre destination shopping ultime' },
+  '4leee.wallet': { en: '4LEEE Wallet', ar: 'محفظة 4LEEE', th: 'กระเป๋า 4LEEE', fr: 'Portefeuille 4LEEE' },
+  '4leee.assistant': { en: '4LEEE Assistant', ar: 'مساعد 4LEEE', th: 'ผู้ช่วย 4LEEE', fr: 'Assistant 4LEEE' },
+  '4leee.store': { en: 'Open shop on 4LEEE', ar: 'افتح متجرك على 4LEEE', th: 'เปิดร้านค้าบน 4LEEE', fr: 'Ouvrir un magasin sur 4LEEE' },
+  '4leee.rewards': { en: '4LEEE Rewards', ar: 'مكافآت 4LEEE', th: 'รางวัล 4LEEE', fr: 'Récompenses 4LEEE' },
+  '4leee.flash': { en: '4Flash', ar: '4Flash', th: '4Flash', fr: '4Flash' },
+  '4leee.land': { en: '4Land', ar: '4Land', th: '4Land', fr: '4Land' },
+  
+  // Account
+  'account.myOrders': { en: 'My Orders', ar: 'طلباتي', th: 'คำสั่งซื้อของฉัน', fr: 'Mes commandes' },
+  'account.myWallet': { en: 'My Wallet', ar: 'محفظتي', th: 'กระเป๋าของฉัน', fr: 'Mon portefeuille' },
+  'account.myGames': { en: 'My Games', ar: 'ألعابي', th: 'เกมของฉัน', fr: 'Mes jeux' },
+  'account.wishlist': { en: 'Wishlist', ar: 'قائمة الرغبات', th: 'รายการที่ชอบ', fr: 'Liste de souhaits' },
+  'account.reviews': { en: 'My Reviews', ar: 'تقييماتي', th: 'รีวิวของฉัน', fr: 'Mes avis' },
+  'account.chat': { en: 'Chat with Customer Care', ar: 'الدردشة مع خدمة العملاء', th: 'แชทกับบริการลูกค้า', fr: 'Discuter avec le service client' },
+  'account.billing': { en: 'Bill Payment & Top Up', ar: 'دفع الفواتير والشحن', th: 'ชำระบิลและเติมเงิน', fr: 'Paiement de factures et rechargement' },
+  'account.followed': { en: 'Followed Stores', ar: 'المتاجر المتابعة', th: 'ร้านค้าที่ติดตาม', fr: 'Magasins suivis' },
+  'account.memberships': { en: 'Memberships', ar: 'الاشتراكات', th: 'สมาชิก', fr: 'Adhésions' },
+  'account.tryBuy': { en: 'Try & Buy', ar: 'جرب واشتري', th: 'ลองและซื้อ', fr: 'Essayer et acheter' },
+  'account.security': { en: 'Account Security', ar: 'أمان الحساب', th: 'ความปลอดภัยของบัญชี', fr: 'Sécurité du compte' },
+  'account.policies': { en: 'Policies', ar: 'السياسات', th: 'นโยบาย', fr: 'Politiques' },
+  'account.help': { en: 'Help', ar: 'مساعدة', th: 'ช่วยเหลือ', fr: 'Aide' },
+  'account.feedback': { en: 'Feedback', ar: 'ملاحظاتك', th: 'ความเห็น', fr: 'Avis' },
+  'account.logout': { en: 'Logout', ar: 'تسجيل الخروج', th: 'ออกจากระบบ', fr: 'Déconnexion' },
 };
 
 // Main translation function
