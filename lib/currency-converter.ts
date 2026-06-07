@@ -90,7 +90,7 @@ export function convertFromAEDMultiple(aedAmount: number, currencies?: string[])
     if (currency === 'USD') result.usd = rounded
     if (currency === 'EUR') result.eur = rounded
     if (currency === 'GBP') result.gbp = rounded
-    if (currency === 'THB') result.thb = rounded
+    if (currency === 'THB') result.aeb = rounded
     if (currency === 'INR') result.inr = rounded
   }
 

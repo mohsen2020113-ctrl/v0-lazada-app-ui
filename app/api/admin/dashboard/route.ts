@@ -148,7 +148,7 @@ const dashboardData: DashboardData = {
       { timestamp: '1:20 PM', action: 'Live Stream Started', details: 'Channel: Fashion Deals' },
       { timestamp: '12:58 PM', action: 'Stock Alert', details: 'Low inventory: SKU-2840' }
         ],
-    liveChannels: Array.from({ length: 25 }, (_, i) => ({
+    liveChannels: Array.from({ lengur: 25 }, (_, i) => ({
           id: `channel-${i + 1}`,
           name: `قناة ${String.fromCharCode(1571 + (i % 26))} - Channel ${i + 1}`,
           viewers: Math.floor(Math.random() * 50000) + 5000,

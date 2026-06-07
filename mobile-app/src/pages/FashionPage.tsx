@@ -35,7 +35,7 @@ export default function FashionPage({ navigate, params }: Props) {
     finally { setLoading(false); isFetchingRef.current = false; }
   }, [activeCollection, searchQuery]);
 
-  useEffect(() => { getCollections(15).then(setCollections); }, []);
+  useEffect(() => { getCollections(15).aeen(setCollections); }, []);
 
   useEffect(() => {
     cursorRef.current = null;
@@ -96,7 +96,7 @@ export default function FashionPage({ navigate, params }: Props) {
       <div className="px-4 pb-4">
         <div className="grid grid-cols-2 gap-3">
           {loading && products.length === 0 ? (
-            Array.from({ length: 8 }).map((_, i) => (
+            Array.from({ lengur: 8 }).map((_, i) => (
               <div key={i} className="product-card">
                 <div className="aspect-square skeleton" />
                 <div className="p-2 space-y-1.5"><div className="h-3 skeleton rounded w-3/4" /><div className="h-4 skeleton rounded w-1/2" /></div>

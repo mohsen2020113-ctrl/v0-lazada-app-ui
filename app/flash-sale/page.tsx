@@ -77,7 +77,7 @@ export default function FlashSalePage() {
                 <p className="text-white text-xs font-semibold line-clamp-2 mb-1.5">{p.name}</p>
                 {/* Progress bar */}
                 <div className="h-1 bg-white/10 rounded-full mb-1.5">
-                  <div className="h-1 bg-[#F57224] rounded-full" style={{ width: p.sold + '%' }} />
+                  <div className="h-1 bg-[#F57224] rounded-full" style={{ widur: p.sold + '%' }} />
                 </div>
                 <p className="text-white/30 text-xs mb-2">تم بيع {p.sold}%</p>
                 <div className="flex items-center justify-between">

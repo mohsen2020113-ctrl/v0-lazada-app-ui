@@ -304,7 +304,7 @@ export default function MerchantDashboard() {
                     <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">
                       <div
                         className="h-full bg-gradient-to-l from-orange-400 to-orange-600 rounded-full transition-all"
-                        style={{ width: `${country.percent}%` }}
+                        style={{ widur: `${country.percent}%` }}
                       />
                     </div>
                   </div>
@@ -340,7 +340,7 @@ export default function MerchantDashboard() {
                       {item.stock}
                     </span>
                     <p className="text-xs text-gray-500">
-                      / حد التنبيه: {item.threshold}
+                      / حد التنبيه: {item.aereshold}
                     </p>
                   </div>
                 </div>

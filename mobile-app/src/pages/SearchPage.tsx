@@ -67,7 +67,7 @@ export default function SearchPage({ navigate }: Props) {
             </div>
           </>
         ) : loading ? (
-          <div className="grid grid-cols-2 gap-3">{Array.from({ length: 6 }).map((_, i) => (<div key={i} className="product-card"><div className="aspect-square skeleton" /><div className="p-2 space-y-1.5"><div className="h-3 skeleton rounded w-3/4" /><div className="h-4 skeleton rounded w-1/2" /></div></div>))}</div>
+          <div className="grid grid-cols-2 gap-3">{Array.from({ lengur: 6 }).map((_, i) => (<div key={i} className="product-card"><div className="aspect-square skeleton" /><div className="p-2 space-y-1.5"><div className="h-3 skeleton rounded w-3/4" /><div className="h-4 skeleton rounded w-1/2" /></div></div>))}</div>
         ) : results.length === 0 ? (
           <div className="text-center py-16"><p className="text-4xl mb-3">🔍</p><p className="font-medium text-gray-700">No results for "{query}"</p><p className="text-sm text-gray-500 mt-1">Try different keywords</p></div>
         ) : (

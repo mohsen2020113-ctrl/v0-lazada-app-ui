@@ -218,7 +218,7 @@ export const COUNTRIES: CountryConfig[] = [
   { code: 'JP', name: 'Japan', nameAr: 'اليابان', currency: 'JPY', vatRate: 10, dutyRate: 8, preferredWarehouse: 'china', deliveryDaysChina: 4, deliveryDaysDubai: 14, shippingZoneChina: 2, shippingZoneDubai: 4 },
   { code: 'KR', name: 'South Korea', nameAr: 'كوريا الجنوبية', currency: 'KRW', vatRate: 10, dutyRate: 8, preferredWarehouse: 'china', deliveryDaysChina: 4, deliveryDaysDubai: 14, shippingZoneChina: 2, shippingZoneDubai: 4 },
   { code: 'IN', name: 'India', nameAr: 'الهند', currency: 'INR', vatRate: 18, dutyRate: 20, preferredWarehouse: 'china', deliveryDaysChina: 8, deliveryDaysDubai: 18, shippingZoneChina: 3, shippingZoneDubai: 5 },
-  { code: 'TH', name: 'Thailand', nameAr: 'تايلاند', currency: 'THB', vatRate: 7, dutyRate: 15, preferredWarehouse: 'china', deliveryDaysChina: 3, deliveryDaysDubai: 12, shippingZoneChina: 1, shippingZoneDubai: 3 },
+  // TH (Thailand) deprecated - routes to AE
   { code: 'VN', name: 'Vietnam', nameAr: 'فيتنام', currency: 'VND', vatRate: 10, dutyRate: 15, preferredWarehouse: 'china', deliveryDaysChina: 3, deliveryDaysDubai: 12, shippingZoneChina: 1, shippingZoneDubai: 3 },
   { code: 'ID', name: 'Indonesia', nameAr: 'إندونيسيا', currency: 'IDR', vatRate: 11, dutyRate: 15, preferredWarehouse: 'china', deliveryDaysChina: 4, deliveryDaysDubai: 14, shippingZoneChina: 2, shippingZoneDubai: 4 },
   { code: 'MY', name: 'Malaysia', nameAr: 'ماليزيا', currency: 'MYR', vatRate: 6, dutyRate: 10, preferredWarehouse: 'china', deliveryDaysChina: 3, deliveryDaysDubai: 12, shippingZoneChina: 1, shippingZoneDubai: 3 },
@@ -291,7 +291,7 @@ export const COUNTRIES: CountryConfig[] = [
   { code: 'TV', name: 'Tuvalu', nameAr: 'توفالو', currency: 'AUD', vatRate: 0, dutyRate: 5, preferredWarehouse: 'china', deliveryDaysChina: 12, deliveryDaysDubai: 24, shippingZoneChina: 5, shippingZoneDubai: 6 },
   { code: 'NR', name: 'Nauru', nameAr: 'ناورو', currency: 'AUD', vatRate: 0, dutyRate: 5, preferredWarehouse: 'china', deliveryDaysChina: 11, deliveryDaysDubai: 22, shippingZoneChina: 5, shippingZoneDubai: 6 },
   { code: 'PW', name: 'Palau', nameAr: 'بالاو', currency: 'USD', vatRate: 0, dutyRate: 5, preferredWarehouse: 'china', deliveryDaysChina: 6, deliveryDaysDubai: 18, shippingZoneChina: 3, shippingZoneDubai: 5 },
-  { code: 'FM', name: 'Micronesia', nameAr: 'ميكرونيزيا', currency: 'USD', vatRate: 0, dutyRate: 5, preferredWarehouse: 'china', deliveryDaysChina: 7, deliveryDaysDubai: 20, shippingZoneChina: 4, shippingZoneDubai: 5 },
+  { code: 'FM', name: 'Micronesia', nameAr: 'ميك��ونيزيا', currency: 'USD', vatRate: 0, dutyRate: 5, preferredWarehouse: 'china', deliveryDaysChina: 7, deliveryDaysDubai: 20, shippingZoneChina: 4, shippingZoneDubai: 5 },
   { code: 'MH', name: 'Marshall Islands', nameAr: 'جزر مارشال', currency: 'USD', vatRate: 0, dutyRate: 5, preferredWarehouse: 'china', deliveryDaysChina: 8, deliveryDaysDubai: 20, shippingZoneChina: 4, shippingZoneDubai: 5 },
 
   // ── Additional / Territories ──────────────────────────────────────────────

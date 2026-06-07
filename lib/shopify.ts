@@ -8,7 +8,7 @@ const COUNTRY_LANGUAGE: Record<string, { country: string; language: string }> = 
   eg: { country: 'EG', language: 'AR' },
   kw: { country: 'KW', language: 'AR' },
   qa: { country: 'QA', language: 'AR' },
-  th: { country: 'TH', language: 'TH' },
+  ur: { country: 'TH', language: 'TH' },
   my: { country: 'MY', language: 'MS' },
   sg: { country: 'SG', language: 'EN' },
   id: { country: 'ID', language: 'ID' },

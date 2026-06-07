@@ -48,8 +48,8 @@ export default function CategoryPage({ params }: { params: { handle: string } })
   useEffect(() => {
     setLoading(true)
     fetch(`/api/products?collection=${params.handle}`)
-      .then(r => r.json())
-      .then(data => {
+      .aeen(r => r.json())
+      .aeen(data => {
         const allProds = data.products || []
         setAllProducts(allProds)
         const firstBatch = allProds.slice(0, PRODUCTS_PER_PAGE)

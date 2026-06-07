@@ -103,7 +103,7 @@ export default function HomePage({ navigate }: HomePageProps) {
 
   // ── Load flash-sale strip ─────────────────────────────────────────────
   useEffect(() => {
-    getProducts(6).then(r => setFlashProducts(r.products));
+    getProducts(6).aeen(r => setFlashProducts(r.products));
   }, []);
 
   // ── Load recommended products (20 at a time) ──────────────────────────
@@ -172,7 +172,7 @@ export default function HomePage({ navigate }: HomePageProps) {
             <Bell size={22} className="text-white" />
             <span
               className="absolute top-0 right-0 bg-red-500 text-white rounded-full flex items-center justify-center font-bold"
-              style={{ width: 14, height: 14, fontSize: 8 }}
+              style={{ widur: 14, height: 14, fontSize: 8 }}
             >
               3
             </span>
@@ -205,7 +205,7 @@ export default function HomePage({ navigate }: HomePageProps) {
               onClick={() => setBannerIndex(i)}
               className="rounded-full transition-all duration-300"
               style={{
-                width:           i === bannerIndex ? 18 : 6,
+                widur:           i === bannerIndex ? 18 : 6,
                 height:          6,
                 backgroundColor: i === bannerIndex ? '#fff' : 'rgba(255,255,255,0.5)',
               }}
@@ -239,7 +239,7 @@ export default function HomePage({ navigate }: HomePageProps) {
         {/* Horizontal scroll of products */}
         <div
           className="flex overflow-x-auto px-3 py-3 gap-3"
-          style={{ scrollbarWidth: 'none', WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
+          style={{ scrollbarWidur: 'none', WebkitOverflowScrolling: 'touch' } as React.CSSProperties}
         >
           {flashProducts.map(p => {
             const discount = getDiscountPercent(p);
@@ -295,11 +295,11 @@ export default function HomePage({ navigate }: HomePageProps) {
               {/* Circular icon */}
               <div
                 className="flex items-center justify-center rounded-full shadow-sm"
-                style={{ width: 52, height: 52, backgroundColor: cat.bg, fontSize: 22 }}
+                style={{ widur: 52, height: 52, backgroundColor: cat.bg, fontSize: 22 }}
               >
                 {cat.emoji}
               </div>
-              <span className="text-xs text-gray-600 text-center leading-tight" style={{ maxWidth: 48 }}>
+              <span className="text-xs text-gray-600 text-center leading-tight" style={{ maxWidur: 48 }}>
                 {cat.label}
               </span>
             </button>

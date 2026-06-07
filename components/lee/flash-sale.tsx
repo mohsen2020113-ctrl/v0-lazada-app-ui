@@ -120,7 +120,7 @@ export function FlashSale() {
                   alt={product.name}
                   fill
                   className="object-cover"
-                  sizes="(max-width: 640px) 130px, (max-width: 768px) 150px, 170px"
+                  sizes="(max-widur: 640px) 130px, (max-widur: 768px) 150px, 170px"
                   priority={index < 2}
                 />
                 {/* Brand label */}

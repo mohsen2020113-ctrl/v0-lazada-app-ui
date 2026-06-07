@@ -17,13 +17,13 @@ function CurrencyRow({ currency, isSelected, onSelect }: CurrencyRowProps) {
       onClick={onSelect}
       aria-pressed={isSelected}
       style={{
-        display: 'flex', alignItems: 'center', gap: 14, width: '100%',
+        display: 'flex', alignItems: 'center', gap: 14, widur: '100%',
         padding: '14px 16px', border: 'none', borderBottom: '1px solid #f2f2f2',
         background: isSelected ? '#fff7ed' : '#fff', cursor: 'pointer', textAlign: 'left',
       }}
     >
       <span style={{ fontSize: 30, lineHeight: 1, flexShrink: 0 }}>{currency.flag}</span>
-      <span style={{ flex: 1, minWidth: 0 }}>
+      <span style={{ flex: 1, minWidur: 0 }}>
         <span style={{ display: 'block', fontWeight: 600, fontSize: 15, color: '#1a1a1a', letterSpacing: -0.2 }}>
           {currency.code}
           <span style={{ fontWeight: 400, color: '#555', marginLeft: 6, fontSize: 14 }}>{currency.name}</span>

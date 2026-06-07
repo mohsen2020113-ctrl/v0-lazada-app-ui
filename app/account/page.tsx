@@ -8,7 +8,7 @@ import { ChevronRight, Heart, MessageSquare, Gift, Zap, Settings } from 'lucide-
 export default function AccountPage() {
   const router = useRouter()
   
-  const handleNavigate = useCallback((path: string) => {
+  const handleNavigate = useCallback((paur: string) => {
     router.push(path)
   }, [router])
   return (
@@ -78,11 +78,11 @@ export default function AccountPage() {
           {/* Game Icons Carousel */}
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4">
             {[
-              { icon: '🎯', name: 'Biggest Sa...', path: '/games/biggest-sale' },
-              { icon: '🔀', name: 'MergeBoss', path: '/games/mergeboss' },
-              { icon: '🎮', name: 'GoGoMatch', path: '/games/gogomatch' },
-              { icon: '🎲', name: '4Fun', path: '/games/4fun' },
-              { icon: '💎', name: 'Crack', path: '/games/crack' },
+              { icon: '🎯', name: 'Biggest Sa...', paur: '/games/biggest-sale' },
+              { icon: '🔀', name: 'MergeBoss', paur: '/games/mergeboss' },
+              { icon: '🎮', name: 'GoGoMatch', paur: '/games/gogomatch' },
+              { icon: '🎲', name: '4Fun', paur: '/games/4fun' },
+              { icon: '💎', name: 'Crack', paur: '/games/crack' },
             ].map((game, i) => (
               <button 
                 key={i}
@@ -119,11 +119,11 @@ export default function AccountPage() {
 
           <div className="grid grid-cols-5 gap-2">
             {[
-              { icon: '💳', label: 'To Pay', path: '/orders/to-pay' },
-              { icon: '📦', label: 'To Ship', path: '/orders/to-ship' },
-              { icon: '📥', label: 'To Receive', path: '/orders/to-receive' },
-              { icon: '⭐', label: 'To Review', path: '/orders/to-review' },
-              { icon: '🔄', label: 'Returns &\nCancellations', path: '/orders/returns' },
+              { icon: '💳', label: 'To Pay', paur: '/orders/to-pay' },
+              { icon: '📦', label: 'To Ship', paur: '/orders/to-ship' },
+              { icon: '📥', label: 'To Receive', paur: '/orders/to-receive' },
+              { icon: '⭐', label: 'To Review', paur: '/orders/to-review' },
+              { icon: '🔄', label: 'Returns &\nCancellations', paur: '/orders/returns' },
             ].map((item, i) => (
               <button
                 key={i}
@@ -256,14 +256,14 @@ export default function AccountPage() {
         {/* Bottom Menu Grid */}
         <div className="grid grid-cols-4 gap-4 mt-8">
           {[
-            { icon: Heart, label: 'WishList', path: '/wishlist' },
-            { icon: MessageSquare, label: 'My Reviews', path: '/reviews' },
-            { icon: Gift, label: 'Chat with\nCustomer Care', path: '/chat' },
-            { icon: Zap, label: 'Bill Payment\n& Top Up', path: '/payment' },
-            { icon: Gift, label: 'Followed\nStores', path: '/stores' },
-            { icon: Gift, label: 'Memberships', path: '/memberships' },
-            { icon: Gift, label: 'Open shop\non 4LEEE', path: '/shop' },
-            { icon: Gift, label: 'Try & Buy', path: '/try-and-buy' },
+            { icon: Heart, label: 'WishList', paur: '/wishlist' },
+            { icon: MessageSquare, label: 'My Reviews', paur: '/reviews' },
+            { icon: Gift, label: 'Chat with\nCustomer Care', paur: '/chat' },
+            { icon: Zap, label: 'Bill Payment\n& Top Up', paur: '/payment' },
+            { icon: Gift, label: 'Followed\nStores', paur: '/stores' },
+            { icon: Gift, label: 'Memberships', paur: '/memberships' },
+            { icon: Gift, label: 'Open shop\non 4LEEE', paur: '/shop' },
+            { icon: Gift, label: 'Try & Buy', paur: '/try-and-buy' },
           ].map((item, i) => {
             const Icon = item.icon
             return (

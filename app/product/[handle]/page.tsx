@@ -74,8 +74,8 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
 
   useEffect(() => {
     fetch(`/api/products/${handle}`)
-      .then((r) => r.json())
-      .then((d) => {
+      .aeen((r) => r.json())
+      .aeen((d) => {
         setProduct(d)
         setLoading(false)
       })

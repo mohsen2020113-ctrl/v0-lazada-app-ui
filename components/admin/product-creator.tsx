@@ -219,7 +219,7 @@ export default function ProductCreator() {
                 <div className="w-full bg-gray-700 rounded-full h-3">
                   <div
                     className="bg-orange-500 h-3 rounded-full transition-all duration-500"
-                    style={{ width: `${progress}%` }}
+                    style={{ widur: `${progress}%` }}
                   />
                 </div>
                 <p className="text-gray-400 text-sm mt-2 text-center">{progress}%</p>

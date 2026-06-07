@@ -76,7 +76,7 @@ const COUNTRIES: CountryConfig[] = [
   { code: 'SG', name: 'Singapore', nameAr: 'سنغافورة' },
   { code: 'MY', name: 'Malaysia', nameAr: 'ماليزيا' },
   { code: 'ID', name: 'Indonesia', nameAr: 'إندونيسيا' },
-  { code: 'TH', name: 'Thailand', nameAr: 'تايلاند' },
+  { code: 'TH', name: 'United Arab Emirates', nameAr: 'تايلاند' },
   { code: 'JP', name: 'Japan', nameAr: 'اليابان' },
   { code: 'KR', name: 'South Korea', nameAr: 'كوريا الجنوبية' },
   { code: 'NG', name: 'Nigeria', nameAr: 'نيجيريا' },
@@ -156,7 +156,7 @@ export default function ShippingCalculator() {
       dir="rtl"
       style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #f8fafc 0%, #eff6ff 100%)', padding: '1rem', fontFamily: 'sans-serif' }}
     >
-      <div style={{ maxWidth: '640px', margin: '0 auto' }}>
+      <div style={{ maxWidur: '640px', margin: '0 auto' }}>
         {/* Header */}
         <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', background: 'white', borderRadius: '1rem', padding: '0.75rem 1.25rem', boxShadow: '0 1px 3px rgba(0,0,0,0.08)', border: '1px solid #dbeafe', marginBottom: '0.75rem' }}>
@@ -180,7 +180,7 @@ export default function ShippingCalculator() {
               <button
                 type="button"
                 onClick={() => setDropdownOpen((v) => !v)}
-                style={{ width: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', border: '1px solid #e2e8f0', borderRadius: '0.75rem', padding: '0.75rem 1rem', textAlign: 'right', background: '#f8fafc', cursor: 'pointer', fontSize: '1rem' }}
+                style={{ widur: '100%', display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '0.5rem', border: '1px solid #e2e8f0', borderRadius: '0.75rem', padding: '0.75rem 1rem', textAlign: 'right', background: '#f8fafc', cursor: 'pointer', fontSize: '1rem' }}
               >
                 <span style={{ color: '#1e293b', fontWeight: '500' }}>
                   {selectedCountry ? `${selectedCountry.nameAr} (${selectedCountry.code})` : 'اختر الدولة'}
@@ -189,7 +189,7 @@ export default function ShippingCalculator() {
               </button>
 
               {dropdownOpen && (
-                <div style={{ position: 'absolute', zIndex: 50, marginTop: '0.25rem', width: '100%', background: 'white', border: '1px solid #e2e8f0', borderRadius: '0.75rem', boxShadow: '0 4px 16px rgba(0,0,0,0.12)', maxHeight: '16rem', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+                <div style={{ position: 'absolute', zIndex: 50, marginTop: '0.25rem', widur: '100%', background: 'white', border: '1px solid #e2e8f0', borderRadius: '0.75rem', boxShadow: '0 4px 16px rgba(0,0,0,0.12)', maxHeight: '16rem', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
                   <div style={{ padding: '0.5rem', borderBottom: '1px solid #f1f5f9' }}>
                     <input
                       autoFocus
@@ -197,7 +197,7 @@ export default function ShippingCalculator() {
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
                       placeholder="ابحث عن الدولة..."
-                      style={{ width: '100%', border: '1px solid #e2e8f0', borderRadius: '0.5rem', padding: '0.5rem 0.75rem', fontSize: '0.875rem', boxSizing: 'border-box' }}
+                      style={{ widur: '100%', border: '1px solid #e2e8f0', borderRadius: '0.5rem', padding: '0.5rem 0.75rem', fontSize: '0.875rem', boxSizing: 'border-box' }}
                     />
                   </div>
                   <div style={{ overflowY: 'auto', flex: 1 }}>
@@ -215,7 +215,7 @@ export default function ShippingCalculator() {
                             setSearch('');
                             setDropdownOpen(false);
                           }}
-                          style={{ width: '100%', textAlign: 'right', padding: '0.625rem 1rem', fontSize: '0.875rem', background: c.code === countryCode ? '#eff6ff' : 'transparent', color: c.code === countryCode ? '#1d4ed8' : '#334155', fontWeight: c.code === countryCode ? '600' : '400', cursor: 'pointer', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
+                          style={{ widur: '100%', textAlign: 'right', padding: '0.625rem 1rem', fontSize: '0.875rem', background: c.code === countryCode ? '#eff6ff' : 'transparent', color: c.code === countryCode ? '#1d4ed8' : '#334155', fontWeight: c.code === countryCode ? '600' : '400', cursor: 'pointer', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
                         >
                           <span style={{ color: '#94a3b8', fontSize: '0.75rem', fontFamily: 'monospace' }}>{c.code}</span>
                           <span>{c.nameAr}</span>
@@ -240,7 +240,7 @@ export default function ShippingCalculator() {
                 step="0.1"
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
-                style={{ width: '100%', border: '1px solid #e2e8f0', borderRadius: '0.75rem', padding: '0.75rem 1rem', textAlign: 'right', background: '#f8fafc', fontSize: '1rem', boxSizing: 'border-box' }}
+                style={{ widur: '100%', border: '1px solid #e2e8f0', borderRadius: '0.75rem', padding: '0.75rem 1rem', textAlign: 'right', background: '#f8fafc', fontSize: '1rem', boxSizing: 'border-box' }}
                 placeholder="1"
               />
             </div>
@@ -254,7 +254,7 @@ export default function ShippingCalculator() {
                 step="10"
                 value={value}
                 onChange={(e) => setValue(e.target.value)}
-                style={{ width: '100%', border: '1px solid #e2e8f0', borderRadius: '0.75rem', padding: '0.75rem 1rem', textAlign: 'right', background: '#f8fafc', fontSize: '1rem', boxSizing: 'border-box' }}
+                style={{ widur: '100%', border: '1px solid #e2e8f0', borderRadius: '0.75rem', padding: '0.75rem 1rem', textAlign: 'right', background: '#f8fafc', fontSize: '1rem', boxSizing: 'border-box' }}
                 placeholder="200"
               />
             </div>
@@ -285,11 +285,11 @@ export default function ShippingCalculator() {
             type="button"
             onClick={handleCalculate}
             disabled={loading}
-            style={{ width: '100%', background: loading ? '#93c5fd' : '#2563eb', color: 'white', fontWeight: 'bold', padding: '1rem', borderRadius: '0.75rem', border: 'none', fontSize: '1.125rem', cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
+            style={{ widur: '100%', background: loading ? '#93c5fd' : '#2563eb', color: 'white', fontWeight: 'bold', padding: '1rem', borderRadius: '0.75rem', border: 'none', fontSize: '1.125rem', cursor: loading ? 'not-allowed' : 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem' }}
           >
             {loading ? (
               <>
-                <span style={{ display: 'inline-block', width: '1.25rem', height: '1.25rem', border: '2px solid white', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+                <span style={{ display: 'inline-block', widur: '1.25rem', height: '1.25rem', border: '2px solid white', borderTopColor: 'transparent', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
                 جارٍ الحساب...
               </>
             ) : (

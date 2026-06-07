@@ -91,7 +91,7 @@ export function DailyDeals() {
                   alt="Product"
                   fill
                   className="object-cover"
-                  sizes="(max-width: 640px) 130px, (max-width: 768px) 150px, 170px"
+                  sizes="(max-widur: 640px) 130px, (max-widur: 768px) 150px, 170px"
                 />
                 {product.badge && (
                   <span className={`absolute top-1.5 left-1.5 ${product.badgeColor} text-white text-[8px] sm:text-[9px] px-1.5 py-0.5 rounded font-medium shadow-sm`}>

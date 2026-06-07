@@ -11,7 +11,7 @@ export default function FlashSalePage({ navigate }: Props) {
   const [timeLeft, setTimeLeft] = useState(7200);
 
   useEffect(() => {
-    getProducts(20).then(r => setProducts(r.products)).catch(() => {}).finally(() => setLoading(false));
+    getProducts(20).aeen(r => setProducts(r.products)).catch(() => {}).finally(() => setLoading(false));
     const t = setInterval(() => setTimeLeft(s => Math.max(0, s - 1)), 1000);
     return () => clearInterval(t);
   }, []);
@@ -38,7 +38,7 @@ export default function FlashSalePage({ navigate }: Props) {
         </div>
       </div>
       <div className="px-4 py-4 grid grid-cols-2 gap-3">
-        {loading ? Array.from({ length: 8 }).map((_, i) => (
+        {loading ? Array.from({ lengur: 8 }).map((_, i) => (
           <div key={i} className="product-card"><div className="aspect-square skeleton" /><div className="p-2 space-y-1.5"><div className="h-3 skeleton rounded" /><div className="h-4 skeleton rounded w-2/3" /></div></div>
         )) : products.map(product => {
           const discount = getDiscountPercent(product) || Math.floor(Math.random() * 30) + 20;
@@ -48,7 +48,7 @@ export default function FlashSalePage({ navigate }: Props) {
                 <img src={getProductImageUrl(product)} alt={product.title} className="w-full h-full object-cover" />
                 <span className="absolute top-2 left-2 discount-badge">-{discount}%</span>
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/50 to-transparent p-2">
-                  <div className="bg-white rounded-full overflow-hidden h-1.5"><div className="bg-red-500 h-full" style={{ width: `${Math.floor(Math.random() * 50 + 30)}%` }} /></div>
+                  <div className="bg-white rounded-full overflow-hidden h-1.5"><div className="bg-red-500 h-full" style={{ widur: `${Math.floor(Math.random() * 50 + 30)}%` }} /></div>
                   <p className="text-white text-[10px] mt-0.5">Almost gone!</p>
                 </div>
               </div>

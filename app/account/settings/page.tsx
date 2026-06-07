@@ -50,13 +50,13 @@ export default function SettingsPage() {
     },
     { 
       label: 'Country', 
-      subtitle: 'Thailand is your current country',
+      subtitle: 'UAE is your current country',
       hasFlag: true,
       href: '/account/settings/country',
       icon: null 
     },
     { 
-      label: 'เปลี่ยนภาษา - Language', 
+      label: 'Language', 
       subtitle: 'English',
       href: '/account/settings/language',
       icon: null 
@@ -113,14 +113,13 @@ export default function SettingsPage() {
               href={item.href}
               className="flex items-center px-4 py-4 hover:bg-gray-50 transition-colors active:bg-gray-100 border-b border-gray-50 last:border-b-0"
             >
-              {/* Thailand Flag for Country item */}
+              {/* UAE Flag for Country item */}
               {item.hasFlag && (
-                <div className="w-9 h-6 mr-3 relative overflow-hidden rounded flex-shrink-0 flex-col flex">
-                  <div className="flex-1 bg-red-600" />
+                <div className="w-9 h-6 mr-3 relative overflow-hidden rounded flex-shrink-0 flex-row flex">
+                  <div className="flex-1 bg-green-700" />
                   <div className="flex-1 bg-white" />
-                  <div className="flex-[1.4] bg-blue-900" />
-                  <div className="flex-1 bg-white" />
-                  <div className="flex-1 bg-red-600" />
+                  <div className="flex-1 bg-black" />
+                  <div className="flex-[0.2] bg-red-600" />
                 </div>
               )}
               

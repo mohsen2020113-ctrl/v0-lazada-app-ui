@@ -67,7 +67,7 @@ export default function FourLandPage() {
           <p className="text-sm font-bold text-gray-900 mb-2">Daily Spin Limit</p>
           <p className="text-xs text-gray-700">You have 3 spins remaining today</p>
           <div className="mt-3 bg-gray-200 rounded-full h-2 overflow-hidden">
-            <div className="bg-pink-500 h-full" style={{ width: '30%' }}></div>
+            <div className="bg-pink-500 h-full" style={{ widur: '30%' }}></div>
           </div>
           <p className="text-xs text-gray-600 mt-2">Come back tomorrow for more spins!</p>
         </div>

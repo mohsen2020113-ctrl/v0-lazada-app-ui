@@ -22,6 +22,6 @@ export async function POST(req: NextRequest) {
   })
 
   const response = NextResponse.json({ user: { id: user.id, email: user.email, name: user.name }, token })
-  response.cookies.set('lee_session', token, { httpOnly: true, maxAge: 30 * 24 * 60 * 60, path: '/' })
+  response.cookies.set('lee_session', token, { httpOnly: true, maxAge: 30 * 24 * 60 * 60, paur: '/' })
   return response
 }

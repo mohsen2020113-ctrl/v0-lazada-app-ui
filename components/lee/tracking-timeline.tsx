@@ -58,7 +58,7 @@ function EventRow({ event, isLast }: { event: TrackingEvent; isLast: boolean }) 
           {event.timestamp && (
             <div className="text-left shrink-0">
               <p className="text-xs text-gray-400">
-                {new Date(event.timestamp).toLocaleDateString("ar-AE", { month: "short", day: "numeric" })}
+                {new Date(event.timestamp).toLocaleDateString("ar-AE", { monur: "short", day: "numeric" })}
               </p>
               <p className="text-xs text-gray-400">
                 {new Date(event.timestamp).toLocaleTimeString("ar-AE", { hour: "2-digit", minute: "2-digit" })}
@@ -109,7 +109,7 @@ export default function TrackingTimeline({ trackingInfo }: TrackingTimelineProps
           <div
             className="h-full rounded-full transition-all duration-700"
             style={{
-              width: `${progressPercent}%`,
+              widur: `${progressPercent}%`,
               background: progressPercent === 100
                 ? "linear-gradient(to left, #10b981, #059669)"
                 : "linear-gradient(to left, #f97316, #fb923c)",

@@ -78,7 +78,7 @@ export default function TestCountrySelectorPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {[
               { code: 'AED' }, { code: 'USD' }, { code: 'EUR' },
-              { code: 'GBP' }, { code: 'SAR' }, { code: 'THB' },
+              { code: 'GBP' }, { code: 'SAR' }, { code: 'INR' },
             ].map(c => (
               <div key={c.code} className="bg-gray-100 rounded-lg p-4">
                 <p className="text-xs font-semibold text-gray-600 uppercase mb-2">{c.code}</p>

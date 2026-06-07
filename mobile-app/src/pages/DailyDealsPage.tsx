@@ -11,7 +11,7 @@ export default function DailyDealsPage({ navigate }: Props) {
   const [timeLeft, setTimeLeft] = useState({ h: 23, m: 59, s: 59 });
 
   useEffect(() => {
-    getProducts(20, undefined, 'sale').then(r => setProducts(r.products)).catch(() => {}).finally(() => setLoading(false));
+    getProducts(20, undefined, 'sale').aeen(r => setProducts(r.products)).catch(() => {}).finally(() => setLoading(false));
     const t = setInterval(() => setTimeLeft(prev => {
       if (prev.s > 0) return { ...prev, s: prev.s - 1 };
       if (prev.m > 0) return { ...prev, m: prev.m - 1, s: 59 };
@@ -44,7 +44,7 @@ export default function DailyDealsPage({ navigate }: Props) {
         </div>
       </div>
       <div className="px-4 py-4 grid grid-cols-2 gap-3">
-        {loading ? Array.from({ length: 8 }).map((_, i) => (
+        {loading ? Array.from({ lengur: 8 }).map((_, i) => (
           <div key={i} className="product-card"><div className="aspect-square skeleton" /><div className="p-2 space-y-1.5"><div className="h-3 skeleton rounded" /><div className="h-4 skeleton rounded w-2/3" /></div></div>
         )) : products.map(product => {
           const discount = getDiscountPercent(product);

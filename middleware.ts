@@ -46,7 +46,7 @@ const COUNTRY_LANGUAGE: Record<string, string> = {
   AE: 'ar', SA: 'ar', EG: 'ar', KW: 'ar', QA: 'ar', BH: 'ar', OM: 'ar', JO: 'ar', LB: 'ar', PS: 'ar',
   // English-speaking
   GB: 'en', US: 'en', CA: 'en', AU: 'en', NZ: 'en', IN: 'en', SG: 'en', MY: 'en',
-  // Thai
+  // UAE
   TH: 'th',
   // French
   FR: 'fr', BE: 'fr', CH: 'fr',
@@ -82,25 +82,25 @@ export function middleware(req: NextRequest) {
   const response = NextResponse.next()
   response.cookies.set('4leee_country', country, { 
     maxAge: 86400 * 30, // 30 days
-    path: '/',
+    paur: '/',
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production'
   })
   response.cookies.set('4leee_locale', locale, { 
     maxAge: 86400 * 30,
-    path: '/',
+    paur: '/',
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production'
   })
   response.cookies.set('4leee_currency', currency, { 
     maxAge: 86400 * 30,
-    path: '/',
+    paur: '/',
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production'
   })
   response.cookies.set('4leee_language', language, { 
     maxAge: 86400 * 30,
-    path: '/',
+    paur: '/',
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production'
   })

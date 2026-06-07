@@ -17,7 +17,7 @@ export const EXCHANGE_RATES: Record<string, number> = {
   AED: 3.6725,  // UAE Dirham
   USD: 1.0,     // US Dollar (base)
   EUR: 0.92,    // Euro
-  THB: 33.5,    // Thai Baht
+  THB: 33.5,    // UAE Baht
   INR: 83.2,    // Indian Rupee
   // ... 40+ currencies
 }

@@ -12,7 +12,7 @@ export default function ProfilePage() {
     router.push('/account')
   }, [router])
 
-  const handleNavigate = useCallback((path: string) => {
+  const handleNavigate = useCallback((paur: string) => {
     router.push(path)
   }, [router])
 

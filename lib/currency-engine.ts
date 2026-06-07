@@ -37,7 +37,7 @@ export const CURRENCIES: Record<string, CurrencyConfig> = {
   KRW: { code: 'KRW', name: 'Korean Won',             nameAr: 'وون كوري',            symbol: '₩',    rateToAED: 0.0027,   flag: '🇰🇷', decimals: 0 },
   MYR: { code: 'MYR', name: 'Malaysian Ringgit',      nameAr: 'رينغيت ماليزي',       symbol: 'RM',   rateToAED: 0.78,     flag: '🇲🇾' },
   IDR: { code: 'IDR', name: 'Indonesian Rupiah',      nameAr: 'روبية إندونيسية',     symbol: 'Rp',   rateToAED: 0.00023,  flag: '🇮🇩', decimals: 0 },
-  THB: { code: 'THB', name: 'Thai Baht',              nameAr: 'بات تايلاندي',        symbol: '฿',    rateToAED: 0.10,     flag: '🇹🇭' },
+  THB: { code: 'THB', name: 'UAE Baht',              nameAr: 'بات تايلاندي',        symbol: '฿',    rateToAED: 0.10,     flag: '🇹🇭' }, // Legacy support only
   VND: { code: 'VND', name: 'Vietnamese Dong',        nameAr: 'دونغ فيتنامي',        symbol: '₫',    rateToAED: 0.00015,  flag: '🇻🇳', decimals: 0 },
   PHP: { code: 'PHP', name: 'Philippine Peso',        nameAr: 'بيسو فلبيني',         symbol: '₱',    rateToAED: 0.064,    flag: '🇵🇭' },
   SGD: { code: 'SGD', name: 'Singapore Dollar',       nameAr: 'دولار سنغافوري',      symbol: 'S$',   rateToAED: 2.72,     flag: '🇸🇬' },

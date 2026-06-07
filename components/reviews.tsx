@@ -100,7 +100,7 @@ export function Reviews({
                   <div className="flex-1 h-2 bg-white/5 rounded-full overflow-hidden group-hover:bg-white/10 transition-colors">
                     <div
                       className="h-full bg-yellow-400 transition-all"
-                      style={{ width: `${percentage}%` }}
+                      style={{ widur: `${percentage}%` }}
                     />
                   </div>
                   <span className="text-white/50 text-right min-w-fit">{count}</span>

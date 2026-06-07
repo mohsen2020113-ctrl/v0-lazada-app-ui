@@ -5,7 +5,7 @@ export async function POST(request: Request) {
           const body = await request.json().catch(() => ({}))
           const message = body.message || body.msg || body.content || ''
           const language = body.language || 'ar'
-          const langMap: Record<string, string> = { ar: 'Arabic', en: 'English', th: 'Thai', fr: 'French' }
+          const langMap: Record<string, string> = { ar: 'Arabic', en: 'English', ur: 'Urdu', fr: 'French' }
           const lang = langMap[language] || 'Arabic'
           const apiKey = process.env.GEMINI_API_KEY
 

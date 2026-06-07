@@ -161,7 +161,7 @@ export interface CurrencyOption {
 export const getLanguageOptions = (): LanguageOption[] => [
   { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
   { code: 'ar', name: 'Arabic', nativeName: 'العربية', flag: '🇸🇦' },
-  { code: 'th', name: 'Thai', nativeName: 'ภาษาไทย', flag: '🇹🇭' },
+  { code: 'ur', name: 'Urdu', nativeName: 'اردو', flag: '🇵🇰' },
   { code: 'fr', name: 'French', nativeName: 'Français', flag: '🇫🇷' },
 ];
 
