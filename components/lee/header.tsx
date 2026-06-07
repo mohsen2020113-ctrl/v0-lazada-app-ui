@@ -2,21 +2,29 @@
 
 import { useRouter } from 'next/navigation';
 import { ChevronLeft, Search } from 'lucide-react';
+import { CountrySelector } from '@/components/CountrySelector';
 
 interface HeaderProps {
   title?: string;
   showBack?: boolean;
   showSearch?: boolean;
+  showCountrySelector?: boolean;
   onSearchChange?: (value: string) => void;
-    onSearch?: () => void;
+  onSearch?: () => void;
 }
 
-export function Header({ title, showBack = false, showSearch = false, onSearchChange, onSearch }: HeaderProps) {
+export function Header({ title, showBack = false, showSearch = false, showCountrySelector = false, onSearchChange, onSearch }: HeaderProps) {
   const router = useRouter();
 
   return (
     <div className="bg-gradient-to-r from-[#f85c98] to-[#ec407a] text-white sticky top-0 z-40 safe-area-top">
       <div className="flex items-center gap-3 px-3 py-3 sm:px-4 sm:py-4">
+        {showCountrySelector && (
+          <div className="shrink-0">
+            <CountrySelector compact={true} />
+          </div>
+        )}
+
         {showBack && (
           <button
             onClick={() => router.back()}
