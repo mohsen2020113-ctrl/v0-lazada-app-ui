@@ -5,7 +5,6 @@ import Link from "next/link"
 import { Trash2, Plus, Minus, ShoppingBag, ArrowLeft, Shield, RotateCcw, Truck } from "lucide-react"
 import { useCart } from "@/contexts/CartContext"
 import { useLanguage } from "@/contexts/LanguageContext"
-import Header from "@/components/Header"
 
 export default function CartPage() {
   const { items, removeItem, updateQuantity, total, clearCart } = useCart()
@@ -20,7 +19,6 @@ export default function CartPage() {
   if (items.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50 flex flex-col">
-        <Header />
         <div className="flex-1 flex flex-col items-center justify-center p-8 text-center">
           <div className="w-24 h-24 bg-pink-100 rounded-full flex items-center justify-center mb-6">
             <ShoppingBag className="w-12 h-12 text-pink-400" />
@@ -46,7 +44,6 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col" dir={isAr ? "rtl" : "ltr"}>
-      <Header />
 
       {/* Page Title */}
       <div className="bg-white border-b px-4 py-3 flex items-center justify-between">
