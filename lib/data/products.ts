@@ -33,10 +33,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'fashion',
     images: [
-      'https://images.unsplash.com/photo-1595777712802-a674bb8d1dfc?w=800',
-      'https://images.unsplash.com/photo-1612336307429-8a88e8d08dbb?w=800',
-      'https://images.unsplash.com/photo-1595916243836-b57a36f06d38?w=800',
-      'https://images.unsplash.com/photo-1595959375944-d28b9bbcd5d2?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.8,
     reviews: 342,
@@ -61,10 +61,10 @@ export const products: Product[] = [
     discount: 46,
     category: 'fashion',
     images: [
-      'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800',
-      'https://images.unsplash.com/photo-1542328805-c5be64b34f66?w=800',
-      'https://images.unsplash.com/photo-1517458239649-6002a92f0217?w=800',
-      'https://images.unsplash.com/photo-1515562141207-6811341204ad?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.7,
     reviews: 521,
@@ -89,10 +89,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'fashion',
     images: [
-      'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800',
-      'https://images.unsplash.com/photo-1555505172-baf2609e12e5?w=800',
-      'https://images.unsplash.com/photo-1548036328-e9db76794519?w=800',
-      'https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.9,
     reviews: 612,
@@ -117,10 +117,10 @@ export const products: Product[] = [
     discount: 48,
     category: 'fashion',
     images: [
-      'https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=800',
-      'https://images.unsplash.com/photo-1591047990052-ea33065dfa6e?w=800',
-      'https://images.unsplash.com/photo-1551028719-00167b16ebc5?w=800',
-      'https://images.unsplash.com/photo-1542272604-787c62d465d1?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.6,
     reviews: 289,
@@ -145,10 +145,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'fashion',
     images: [
-      'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=800',
-      'https://images.unsplash.com/photo-1556821552-5ce6e8c0f4b3?w=800',
-      'https://images.unsplash.com/photo-1505337458911-0a88b6461ac1?w=800',
-      'https://images.unsplash.com/photo-1527689377991-8f47fcf8abda?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.5,
     reviews: 178,
@@ -173,10 +173,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'fashion',
     images: [
-      'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800',
-      'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=800',
-      'https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=800',
-      'https://images.unsplash.com/photo-1591047990052-ea33065dfa6e?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.7,
     reviews: 234,
@@ -201,10 +201,10 @@ export const products: Product[] = [
     discount: 57,
     category: 'fashion',
     images: [
-      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800',
-      'https://images.unsplash.com/photo-1509631179647-0177331693ae?w=800',
-      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800',
-      'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.9,
     reviews: 456,
@@ -229,10 +229,10 @@ export const products: Product[] = [
     discount: 54,
     category: 'fashion',
     images: [
-      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800',
-      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800',
-      'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=800',
-      'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.6,
     reviews: 342,
@@ -258,10 +258,10 @@ export const products: Product[] = [
     discount: 33,
     category: 'electronics',
     images: [
-      'https://images.unsplash.com/photo-1511707267537-b85faf00021e?w=800',
-      'https://images.unsplash.com/photo-1512941691920-25bda36dc643?w=800',
-      'https://images.unsplash.com/photo-1511689915169-34eae2038cdc?w=800',
-      'https://images.unsplash.com/photo-1591290621437-36911b1e2e32?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.8,
     reviews: 1203,
@@ -286,10 +286,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'electronics',
     images: [
-      'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800',
-      'https://images.unsplash.com/photo-1487215078519-e21cc028cb29?w=800',
-      'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800',
-      'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.7,
     reviews: 892,
@@ -314,10 +314,10 @@ export const products: Product[] = [
     discount: 40,
     category: 'electronics',
     images: [
-      'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=800',
-      'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=800',
-      'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?w=800',
-      'https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.8,
     reviews: 567,
@@ -342,10 +342,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'electronics',
     images: [
-      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800',
-      'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800',
-      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800',
-      'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.9,
     reviews: 723,
@@ -370,10 +370,10 @@ export const products: Product[] = [
     discount: 42,
     category: 'electronics',
     images: [
-      'https://images.unsplash.com/photo-1502920917128-1aa500764cbd?w=800',
-      'https://images.unsplash.com/photo-1609034227505-5876f6aa4e90?w=800',
-      'https://images.unsplash.com/photo-1620712763512-a1d9f0a0c4b7?w=800',
-      'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.7,
     reviews: 289,
@@ -398,10 +398,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'electronics',
     images: [
-      'https://images.unsplash.com/photo-1527814050087-3793815479db?w=800',
-      'https://images.unsplash.com/photo-1627873649417-af542667a5c5?w=800',
-      'https://images.unsplash.com/photo-1593642632505-daf6ba1b7c2e?w=800',
-      'https://images.unsplash.com/photo-1616763355603-9755a6ceb0f0?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.6,
     reviews: 412,
@@ -426,10 +426,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'electronics',
     images: [
-      'https://images.unsplash.com/photo-1609042227505-dc56bca9ee10?w=800',
-      'https://images.unsplash.com/photo-1609042227505-dc56bca9ee10?w=800',
-      'https://images.unsplash.com/photo-1609042227505-dc56bca9ee10?w=800',
-      'https://images.unsplash.com/photo-1609042227505-dc56bca9ee10?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.5,
     reviews: 654,
@@ -454,10 +454,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'electronics',
     images: [
-      'https://images.unsplash.com/photo-1518330732037-5cbf832b5b85?w=800',
-      'https://images.unsplash.com/photo-1608043152269-423dbba4e7e1?w=800',
-      'https://images.unsplash.com/photo-1602392158001-5e8f33c64a35?w=800',
-      'https://images.unsplash.com/photo-1593642632505-daf6ba1b7c2e?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.4,
     reviews: 523,
@@ -483,10 +483,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'home',
     images: [
-      'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800',
-      'https://images.unsplash.com/photo-1489749798305-4fea3ba63d60?w=800',
-      'https://images.unsplash.com/photo-1592078615290-033ee584e267?w=800',
-      'https://images.unsplash.com/photo-1506439773649-6e0eb8cfb237?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.8,
     reviews: 234,
@@ -511,10 +511,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'home',
     images: [
-      'https://images.unsplash.com/photo-1540932239986-310128078ceb?w=800',
-      'https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=800',
-      'https://images.unsplash.com/photo-1592078615290-033ee584e267?w=800',
-      'https://images.unsplash.com/photo-1536376072261-38c75010e6c9?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.7,
     reviews: 412,
@@ -539,10 +539,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'home',
     images: [
-      'https://images.unsplash.com/photo-1552321554-5fefe8c9ef14?w=800',
-      'https://images.unsplash.com/photo-1577180643035-e07e09c9e83e?w=800',
-      'https://images.unsplash.com/photo-1567521464027-f127ff144326?w=800',
-      'https://images.unsplash.com/photo-1565182999472-f2ef81ac88ab?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.6,
     reviews: 289,
@@ -567,10 +567,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'home',
     images: [
-      'https://images.unsplash.com/photo-1557909556-ac5fefb6108c?w=800',
-      'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800',
-      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800',
-      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.5,
     reviews: 567,
@@ -595,10 +595,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'home',
     images: [
-      'https://images.unsplash.com/photo-1563240527-3004a588515f?w=800',
-      'https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=800',
-      'https://images.unsplash.com/photo-1565512119872-a9f5c07a2527?w=800',
-      'https://images.unsplash.com/photo-1528298935289-6e6d6e1f2919?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.9,
     reviews: 345,
@@ -623,10 +623,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'home',
     images: [
-      'https://images.unsplash.com/photo-1565763409734-bb4cfe1b6f4b?w=800',
-      'https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=800',
-      'https://images.unsplash.com/photo-1535632066927-ab7c9ab60908?w=800',
-      'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.8,
     reviews: 289,
@@ -651,10 +651,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'home',
     images: [
-      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800',
-      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800',
-      'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800',
-      'https://images.unsplash.com/photo-1584622614875-2953067d63d8?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.7,
     reviews: 123,
@@ -680,10 +680,10 @@ export const products: Product[] = [
     discount: 57,
     category: 'beauty',
     images: [
-      'https://images.unsplash.com/photo-1610312989714-f8c0534e570b?w=800',
-      'https://images.unsplash.com/photo-1594938298603-c8148c4dae35?w=800',
-      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800',
-      'https://images.unsplash.com/photo-1596099268398-b0b4ef50eb9d?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.9,
     reviews: 789,
@@ -708,10 +708,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'beauty',
     images: [
-      'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800',
-      'https://images.unsplash.com/photo-1596099268398-b0b4ef50eb9d?w=800',
-      'https://images.unsplash.com/photo-1609303537181-e8129f192a33?w=800',
-      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.6,
     reviews: 534,
@@ -736,10 +736,10 @@ export const products: Product[] = [
     discount: 50,
     category: 'beauty',
     images: [
-      'https://images.unsplash.com/photo-1599599810694-b3a3f1a6eb6f?w=800',
-      'https://images.unsplash.com/photo-1596099268398-b0b4ef50eb9d?w=800',
-      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800',
-      'https://images.unsplash.com/photo-1612036782180-69c773e69e8f?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.7,
     reviews: 612,
@@ -764,10 +764,10 @@ export const products: Product[] = [
     discount: 56,
     category: 'beauty',
     images: [
-      'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=800',
-      'https://images.unsplash.com/photo-1609303537181-e8129f192a33?w=800',
-      'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=800',
-      'https://images.unsplash.com/photo-1556238245-6d5f7ca34d47?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.5,
     reviews: 423,
@@ -792,10 +792,10 @@ export const products: Product[] = [
     discount: 56,
     category: 'beauty',
     images: [
-      'https://images.unsplash.com/photo-1570554886111-e80fcca6a029?w=800',
-      'https://images.unsplash.com/photo-1599943723291-f2265e52b1a5?w=800',
-      'https://images.unsplash.com/photo-1609125228684-38c6290dbf1d?w=800',
-      'https://images.unsplash.com/photo-1599943723291-f2265e52b1a5?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.7,
     reviews: 567,
@@ -820,10 +820,10 @@ export const products: Product[] = [
     discount: 57,
     category: 'beauty',
     images: [
-      'https://images.unsplash.com/photo-1599599810694-b3a3f1a6eb6f?w=800',
-      'https://images.unsplash.com/photo-1612036782180-69c773e69e8f?w=800',
-      'https://images.unsplash.com/photo-1596099268398-b0b4ef50eb9d?w=800',
-      'https://images.unsplash.com/photo-1596099268398-b0b4ef50eb9d?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.6,
     reviews: 478,
@@ -848,10 +848,10 @@ export const products: Product[] = [
     discount: 54,
     category: 'beauty',
     images: [
-      'https://images.unsplash.com/photo-1599599810694-b3a3f1a6eb6f?w=800',
-      'https://images.unsplash.com/photo-1612036782180-69c773e69e8f?w=800',
-      'https://images.unsplash.com/photo-1596099268398-b0b4ef50eb9d?w=800',
-      'https://images.unsplash.com/photo-1612128033182-592418191512?w=800'
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image',
+      'https://via.placeholder.com/800x800?text=Product+Image'
     ],
     rating: 4.8,
     reviews: 534,
