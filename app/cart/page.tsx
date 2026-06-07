@@ -5,7 +5,6 @@ import Link from "next/link"
 import { Trash2, Plus, Minus, ShoppingBag, ArrowLeft, Shield, RotateCcw, Truck } from "lucide-react"
 import { useCart } from "@/contexts/CartContext"
 import { useLanguage } from "@/contexts/LanguageContext"
-import BottomNav from "@/components/BottomNav"
 import Header from "@/components/Header"
 
 export default function CartPage() {
@@ -143,8 +142,6 @@ export default function CartPage() {
           {t("Proceed to Checkout", "متابعة للدفع")}
         </Link>
       </div>
-
-      <BottomNav />
     </div>
   )
 }
