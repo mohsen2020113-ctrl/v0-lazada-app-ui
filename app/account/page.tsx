@@ -64,12 +64,12 @@ export default function AccountPage() {
               </button>
             </div>
 
-            {/* Lazland Card */}
-            <div onClick={() => handleNavigate('/games/lazland')} className="bg-gradient-to-br from-green-200 to-green-100 rounded-2xl p-4 cursor-pointer hover:shadow-lg transition-shadow">
+            {/* 4Land Card */}
+            <div onClick={() => handleNavigate('/games/4land')} className="bg-gradient-to-br from-green-200 to-green-100 rounded-2xl p-4 cursor-pointer hover:shadow-lg transition-shadow">
               <div className="text-4xl mb-3">🎁</div>
-              <h3 className="text-sm font-bold text-gray-900">Lazland</h3>
+              <h3 className="text-sm font-bold text-gray-900">4Land</h3>
               <p className="text-xs text-gray-700 mb-3">Get Free Prize!</p>
-              <button onClick={(e) => { e.stopPropagation(); handleNavigate('/games/lazland'); }} className="bg-pink-500 hover:bg-pink-600 text-white text-xs font-bold px-4 py-2 rounded transition-colors">
+              <button onClick={(e) => { e.stopPropagation(); handleNavigate('/games/4land'); }} className="bg-pink-500 hover:bg-pink-600 text-white text-xs font-bold px-4 py-2 rounded transition-colors">
                 GO
               </button>
             </div>
@@ -81,7 +81,7 @@ export default function AccountPage() {
               { icon: '🎯', name: 'Biggest Sa...', path: '/games/biggest-sale' },
               { icon: '🔀', name: 'MergeBoss', path: '/games/mergeboss' },
               { icon: '🎮', name: 'GoGoMatch', path: '/games/gogomatch' },
-              { icon: '🎲', name: 'LazFun', path: '/games/lazfun' },
+              { icon: '🎲', name: '4Fun', path: '/games/4fun' },
               { icon: '💎', name: 'Crack', path: '/games/crack' },
             ].map((game, i) => (
               <button 
@@ -97,7 +97,7 @@ export default function AccountPage() {
 
           {/* Rewards Banner */}
           <div className="bg-gradient-to-r from-purple-200 to-pink-200 rounded-lg p-4 mt-4 flex items-center justify-between hover:shadow-lg transition-shadow cursor-pointer">
-            <p className="text-sm font-bold text-gray-900">Play to get ₹20 LazRewards!</p>
+            <p className="text-sm font-bold text-gray-900">Play to get ₹20 4Rewards!</p>
             <button 
               onClick={() => handleNavigate('/rewards')}
               className="border-2 border-pink-500 text-pink-500 text-xs font-bold px-4 py-1.5 rounded hover:bg-pink-50 transition-colors"
@@ -180,10 +180,10 @@ export default function AccountPage() {
                 <p className="text-xs text-gray-600 mt-2">Min. spend ₹1,299</p>
               </button>
               <button
-                onClick={() => handleNavigate('/channels/lazflash')}
+                onClick={() => handleNavigate('/channels/4flash')}
                 className="bg-gradient-to-br from-purple-300 to-purple-200 rounded-lg p-4 hover:shadow-lg transition-shadow text-left"
               >
-                <p className="text-xs font-bold text-gray-900 mb-2">LazFlash</p>
+                <p className="text-xs font-bold text-gray-900 mb-2">4Flash</p>
                 <p className="text-sm font-bold text-gray-800">17:24:19</p>
                 <p className="text-xs text-gray-700 mt-2">Flash Sale</p>
               </button>
