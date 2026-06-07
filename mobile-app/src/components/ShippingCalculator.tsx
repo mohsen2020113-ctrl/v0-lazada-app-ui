@@ -76,7 +76,6 @@ const COUNTRIES: CountryConfig[] = [
   { code: 'SG', name: 'Singapore', nameAr: 'سنغافورة' },
   { code: 'MY', name: 'Malaysia', nameAr: 'ماليزيا' },
   { code: 'ID', name: 'Indonesia', nameAr: 'إندونيسيا' },
-  { code: 'TH', name: 'United Arab Emirates', nameAr: 'تايلاند' },
   { code: 'JP', name: 'Japan', nameAr: 'اليابان' },
   { code: 'KR', name: 'South Korea', nameAr: 'كوريا الجنوبية' },
   { code: 'NG', name: 'Nigeria', nameAr: 'نيجيريا' },
@@ -263,7 +262,7 @@ export default function ShippingCalculator() {
           {/* Preference Toggle */}
           <div>
             <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', color: '#334155', marginBottom: '0.5rem' }}>
-              🎯 تفضيل الشحن
+              ��� تفضيل الشحن
             </label>
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '0.5rem', background: '#f1f5f9', padding: '0.25rem', borderRadius: '0.75rem' }}>
               {(Object.keys(PREFERENCE_LABELS) as Preference[]).map((pref) => (
