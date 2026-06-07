@@ -127,10 +127,10 @@ export default function MessagesPage() {
         {/* Chat Products Grid */}
         <div className="grid grid-cols-3 gap-2.5">
           {messages.map(msg => (
-            <button
+            <div
               key={msg.id}
               onClick={() => msg.type === 'product' && handleNavigate(`/product/${msg.id}`)}
-              className="bg-transparent group text-left transition-all"
+              className="bg-transparent group text-left transition-all cursor-pointer"
             >
               {/* Product Image Container */}
               <div className="w-full aspect-square bg-gradient-to-br from-teal-500 via-teal-600 to-teal-700 rounded-lg flex items-center justify-center text-4xl font-bold group-hover:shadow-lg transition-all">
@@ -144,18 +144,18 @@ export default function MessagesPage() {
                 </p>
                 <div className="flex items-center justify-between mt-1.5">
                   <span className="text-sm font-bold text-pink-500">{msg.price}</span>
-                  <button
+                  <div
                     onClick={(e) => {
                       e.stopPropagation()
                       handleNavigate('/cart')
                     }}
-                    className="bg-pink-600 hover:bg-pink-700 text-white p-1.5 rounded transition-all group-hover:scale-110"
+                    className="bg-pink-600 hover:bg-pink-700 text-white p-1.5 rounded transition-all group-hover:scale-110 cursor-pointer"
                   >
                     <Heart className="w-3.5 h-3.5 fill-current" />
-                  </button>
+                  </div>
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
 
