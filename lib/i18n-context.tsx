@@ -17,7 +17,7 @@ interface I18nContextType {
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [currentLanguage, setCurrentLanguage] = useState<Language>('en');
+  const [currentLanguage, setCurrentLanguage] = useState<Language>('ar');
   const [currentCurrency, setCurrentCurrency] = useState<Currency>('AED');
   const [isHydrated, setIsHydrated] = useState(false);
 

@@ -13,7 +13,7 @@ export function LocaleSelector() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => { setMounted(true); }, []);
 
-  const languages: Language[] = ['en', 'ar', 'ae', 'fr'];
+  const languages: Language[] = ['ar', 'en', 'ae', 'fr'];
   const currencies: Currency[] = ['AED', 'SAR', 'USD', 'EUR'];
 
   const currencyLabels: Record<Currency, string> = {
