@@ -32,9 +32,14 @@ export default function CartPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <div className="bg-gradient-to-r from-pink-500 to-pink-600 text-white p-4">
-        <h1 className="text-2xl font-bold">My Cart</h1>
-        <p className="text-sm opacity-90">سلة التسوق</p>
+      <div className="bg-gradient-to-r from-teal-500 to-teal-600 text-white p-4">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-bold">4LEEE Shopping Cart</h1>
+            <p className="text-sm opacity-90">سلة التسوق - 4LEEE</p>
+          </div>
+          <div className="text-3xl font-bold opacity-50">4</div>
+        </div>
       </div>
 
       <div className="max-w-6xl mx-auto p-6">
@@ -61,7 +66,7 @@ export default function CartPage() {
                           </div>
                           <div className="text-right">
                             <p className="text-gray-500 line-through text-sm">AED {(item.price * 1.2).toFixed(2)}</p>
-                            <p className="text-2xl font-bold text-pink-600">AED {item.price.toFixed(2)}</p>
+                            <p className="text-2xl font-bold text-teal-600">AED {item.price.toFixed(2)}</p>
                           </div>
                         </div>
                       </div>
@@ -73,8 +78,8 @@ export default function CartPage() {
             ) : (
               <div className="text-center py-12">
                 <p className="text-gray-500 mb-4">Your cart is empty</p>
-                <Link href="/products" className="text-pink-600 font-semibold hover:underline">
-                  Start Shopping
+                <Link href="/" className="text-teal-600 font-semibold hover:underline">
+                  Start Shopping on 4LEEE
                 </Link>
               </div>
             )}
@@ -99,20 +104,20 @@ export default function CartPage() {
                 </div>
                 <div className="border-t pt-2 flex justify-between font-bold text-lg">
                   <span>Total</span>
-                  <span className="text-pink-600">AED 752.47</span>
+                  <span className="text-teal-600">AED 752.47</span>
                 </div>
               </div>
-              <button className="w-full bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 rounded-lg mb-3 transition">
-                Checkout
+              <button className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 rounded-lg mb-3 transition">
+                Proceed to Checkout
               </button>
-              <button className="w-full border border-pink-600 text-pink-600 hover:bg-pink-50 font-semibold py-3 rounded-lg transition">
-                Continue Shopping
+              <button onClick={() => router.push('/')} className="w-full border border-teal-600 text-teal-600 hover:bg-teal-50 font-semibold py-3 rounded-lg transition">
+                Continue Shopping on 4LEEE
               </button>
               {/* Trust Badges */}
               <div className="mt-6 pt-4 border-t space-y-2 text-xs text-gray-600">
-                <p>✓ Free Returns 30 Days</p>
-                <p>✓ Secure Payment</p>
-                <p>✓ Fast Delivery</p>
+                <p>✓ Free Returns within 30 Days</p>
+                <p>✓ Secure 4LEEE Payment</p>
+                <p>✓ Fast 4LEEE Delivery</p>
               </div>
             </div>
           </div>
