@@ -37,7 +37,7 @@ export const CURRENCIES: Record<string, CurrencyConfig> = {
   KRW: { code: 'KRW', name: 'Korean Won',             nameAr: 'وون كوري',            symbol: '₩',    rateToAED: 0.0027,   flag: '🇰🇷', decimals: 0 },
   MYR: { code: 'MYR', name: 'Malaysian Ringgit',      nameAr: 'رينغيت ماليزي',       symbol: 'RM',   rateToAED: 0.78,     flag: '🇲🇾' },
   IDR: { code: 'IDR', name: 'Indonesian Rupiah',      nameAr: 'روبية إندونيسية',     symbol: 'Rp',   rateToAED: 0.00023,  flag: '🇮🇩', decimals: 0 },
-  AED: { code: 'AED', name: 'AED (Legacy)',      nameAr: 'بات تايلاندي (قديم)',        symbol: '฿',    rateToAED: 0.10,     flag: '🇹🇭' }, // Legacy support only - deprecated
+  THB: { code: 'THB', name: 'Thai Baht (Legacy)',      nameAr: 'بات تايلاندي (قديم)',        symbol: '฿',    rateToAED: 0.10,     flag: '🇹🇭' }, // Legacy support only - deprecated
   VND: { code: 'VND', name: 'Vietnamese Dong',        nameAr: 'دونغ فيتنامي',        symbol: '₫',    rateToAED: 0.00015,  flag: '🇻🇳', decimals: 0 },
   PHP: { code: 'PHP', name: 'Philippine Peso',        nameAr: 'بيسو فلبيني',         symbol: '₱',    rateToAED: 0.064,    flag: '🇵🇭' },
   SGD: { code: 'SGD', name: 'Singapore Dollar',       nameAr: 'دولار سنغافوري',      symbol: 'S$',   rateToAED: 2.72,     flag: '🇸🇬' },
@@ -58,7 +58,7 @@ export const CURRENCIES: Record<string, CurrencyConfig> = {
   LYD: { code: 'LYD', name: 'Libyan Dinar',           nameAr: 'دينار ليبي',          symbol: 'ل.د',  rateToAED: 0.75,     flag: '🇱🇾', decimals: 3, symbolAfter: true },
   MAD: { code: 'MAD', name: 'Moroccan Dirham',        nameAr: 'درهم مغربي',          symbol: 'د.م.', rateToAED: 0.37,     flag: '🇲🇦', symbolAfter: true },
   TND: { code: 'TND', name: 'Tunisian Dinar',         nameAr: 'دينار تونسي',         symbol: 'د.ت',  rateToAED: 1.22,     flag: '🇹🇳', decimals: 3, symbolAfter: true },
-  DZD: { code: 'DZD', name: 'Algerian Dinar',         nameAr: 'دينار جزائري',        symbol: 'د.ج',  rateToAED: 0.028,    flag: '🇩🇿', symbolAfter: true },
+  DZD: { code: 'DZD', name: 'Algerian Dinar',         nameAr: 'دينار جزائر��',        symbol: 'د.ج',  rateToAED: 0.028,    flag: '🇩🇿', symbolAfter: true },
   SDG: { code: 'SDG', name: 'Sudanese Pound',         nameAr: 'جنيه سوداني',         symbol: 'ج.س',  rateToAED: 0.0059,   flag: '🇸🇩', symbolAfter: true },
   IQD: { code: 'IQD', name: 'Iraqi Dinar',            nameAr: 'دينار عراقي',         symbol: 'ع.د',  rateToAED: 0.0028,   flag: '🇮🇶', decimals: 0, symbolAfter: true },
   SYP: { code: 'SYP', name: 'Syrian Pound',           nameAr: 'ليرة سورية',          symbol: 'ل.س',  rateToAED: 0.00029,  flag: '🇸🇾', decimals: 0, symbolAfter: true },
