@@ -107,7 +107,7 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
           </button>
           <div className="flex flex-1 items-center gap-2 rounded-full border-2 border-primary px-4 py-2">
             <Search className="h-4 w-4 text-muted-foreground" />
-            <span className="text-sm text-muted-foreground">Search in Lazada</span>
+            <span className="text-sm text-muted-foreground">Search in 4LEEE</span>
           </div>
           <button aria-label="Share" className="p-1">
             <Share2 className="h-6 w-6 text-foreground" />

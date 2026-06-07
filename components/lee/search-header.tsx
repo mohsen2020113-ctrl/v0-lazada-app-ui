@@ -45,7 +45,7 @@ export function SearchHeader({ placeholder = 'Search products...' }: SearchHeade
 
   return (
     <form onSubmit={handleSearch} className="flex items-center gap-2 px-3 py-2 bg-white">
-      {/* Search bar — fully rounded per Lazada spec */}
+      {/* Search bar — fully rounded per 4LEEE spec */}
       <div className="flex-1 flex items-center bg-gray-100 rounded-full px-4 gap-2"
            style={{ height: '48px' }}>
         <Search className="w-4 h-4 text-gray-400 shrink-0" />

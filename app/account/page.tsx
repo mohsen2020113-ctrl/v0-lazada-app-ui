@@ -191,16 +191,16 @@ export default function AccountPage() {
           </div>
         </div>
 
-        {/* Lazada Wallet Section */}
+        {/* 4LEEE Wallet Section */}
         <div>
           <div className="flex items-center gap-2 mb-4">
-            <h2 className="text-xl font-bold text-gray-900">Lazada Wallet</h2>
+            <h2 className="text-xl font-bold text-gray-900">4LEEE Wallet</h2>
             <span className="text-lg">👁️</span>
           </div>
           <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 space-y-4">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-xs text-gray-600 mb-1">Lazada Wallet (₹)</p>
+                <p className="text-xs text-gray-600 mb-1">4LEEE Wallet (₹)</p>
                 <p className="text-2xl font-bold text-gray-900">0.00</p>
               </div>
               <button 
@@ -262,7 +262,7 @@ export default function AccountPage() {
             { icon: Zap, label: 'Bill Payment\n& Top Up', path: '/payment' },
             { icon: Gift, label: 'Followed\nStores', path: '/stores' },
             { icon: Gift, label: 'Memberships', path: '/memberships' },
-            { icon: Gift, label: 'Open shop\non Lazada', path: '/shop' },
+            { icon: Gift, label: 'Open shop\non 4LEEE', path: '/shop' },
             { icon: Gift, label: 'Try & Buy', path: '/try-and-buy' },
           ].map((item, i) => {
             const Icon = item.icon

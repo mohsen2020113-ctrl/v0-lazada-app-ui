@@ -166,14 +166,14 @@ export default function MessagesPage() {
           <div className="flex-1 h-px bg-gray-700" />
         </div>
 
-        {/* Lazzie Bot Section */}
+        {/* 4LEEE Bot Section */}
         <div className="bg-gray-700 rounded-lg p-4 mb-4">
           <div className="flex items-start gap-3">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center flex-shrink-0 text-white text-lg font-bold">
-              L
+              4
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-semibold text-gray-200 text-sm">Lazzie</p>
+              <p className="font-semibold text-gray-200 text-sm">4LEEE Assistant</p>
               <p className="text-gray-400 text-xs mt-1.5 leading-relaxed break-words">
                 Saw ไม้กวาดหยายไซย์ยิฮะได้ 280 cm? —here&apos;s what else you might like...
               </p>
@@ -208,7 +208,7 @@ export default function MessagesPage() {
                     <div className="w-10 h-10 bg-pink-500 rounded-lg mx-auto mb-2 flex items-center justify-center">
                       <span className="text-white text-lg font-bold">L</span>
                     </div>
-                    <p className="text-white text-xs font-semibold">Lazada</p>
+                    <p className="text-white text-xs font-semibold">4LEEE</p>
                     <p className="text-gray-500 text-xs mt-1">App notifications</p>
                   </div>
                 </div>
