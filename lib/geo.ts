@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { cookies } from 'next/headers'
 
 // Geo-location data structure
 export interface GeoLocation {
