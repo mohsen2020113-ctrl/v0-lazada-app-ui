@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState, use } from 'react'
+import { useEffect, useRef, useState, use, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import {
   ArrowLeft,
@@ -48,6 +48,7 @@ type Tab = (typeof TABS)[number]
 export default function ProductPage({ params }: { params: Promise<{ handle: string }> }) {
   const { handle } = use(params)
   const router = useRouter()
+  const [isPending, startTransition] = useTransition()
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
   const [activeTab, setActiveTab] = useState<Tab>('Overview')
@@ -88,7 +89,7 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white">
         <p className="text-muted-foreground">Product not found</p>
-        <button onClick={() => router.back()} className="text-primary">
+        <button onClick={() => startTransition(() => router.back())} className="text-primary">
           Go back
         </button>
       </div>
@@ -102,7 +103,7 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
       {/* Sticky header */}
       <header className="sticky top-0 z-40 bg-white">
         <div className="flex items-center gap-2 px-3 py-2.5">
-          <button onClick={() => router.back()} aria-label="Back" className="p-1">
+          <button onClick={() => startTransition(() => router.back())} aria-label="Back" className="p-1">
             <ArrowLeft className="h-6 w-6 text-foreground" />
           </button>
           <div className="flex flex-1 items-center gap-2 rounded-full border-2 border-primary px-4 py-2">
