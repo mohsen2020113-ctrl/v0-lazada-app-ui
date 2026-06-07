@@ -9,12 +9,12 @@ interface Message {
   timestamp: string;
 }
 
-export function LEEAssistant() {
+export function FourLEEEAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: 'مرحباً! أنا LEE، مساعدك الذكي في التسوق. كيف يمكنني مساعدتك اليوم؟',
+      content: 'مرحباً! أنا 4LEEE، مساعدك الذكي في التسوق. كيف يمكنني مساعدتك اليوم؟',
       timestamp: new Date().toISOString(),
     },
   ]);

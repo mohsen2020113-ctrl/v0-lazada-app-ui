@@ -3,7 +3,7 @@ import { Geist, Geist_Mono, Noto_Sans_Arabic } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { Providers } from './providers'
 import { ServiceWorkerRegistration } from '@/components/service-worker-registration'
-import { LEEAssistant } from '@/components/lee/LEEAssistant'
+import { FourLEEEAssistant } from '@/components/lee/LEEAssistant'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
@@ -12,8 +12,8 @@ const _notoSansArabic = Noto_Sans_Arabic({ subsets: ["arabic"], weight: ["400", 
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.4leee.com'),
-  title: 'LEE - Shop Online | Best Deals & Free Shipping',
-  description: 'Discover LEE - Your ultimate online shopping destination. Browse millions of products with amazing discounts and free shipping. Shop now!',
+  title: '4LEEE - Shop Online | Best Deals & Free Shipping',
+  description: 'Discover 4LEEE - Your ultimate online shopping destination. Browse millions of products with amazing discounts and free shipping. Shop now!',
     viewport: 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover',
   icons: {
     icon: [
@@ -36,13 +36,13 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_US',
     url: 'https://www.4leee.com',
-    siteName: 'LEE',
-    title: 'LEE - Shop Online',
+    siteName: '4LEEE',
+    title: '4LEEE - Shop Online',
     description: 'Your ultimate online shopping destination with amazing deals and free shipping',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'LEE - Shop Online',
+    title: '4LEEE - Shop Online',
     description: 'Your ultimate online shopping destination',
   },
   robots: 'index, follow',
@@ -72,7 +72,7 @@ export default function RootLayout({
           {children}
         </Providers>
         <ServiceWorkerRegistration />
-        <LEEAssistant />
+        <FourLEEEAssistant />
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>
