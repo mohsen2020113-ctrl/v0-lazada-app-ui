@@ -27,7 +27,10 @@ export function FourLEEEAssistant() {
   };
 
   useEffect(() => {
-    scrollToBottom();
+    // Add hydration check to prevent errors during SSR
+    if (typeof window !== 'undefined') {
+      scrollToBottom();
+    }
   }, [messages]);
 
   const handleSendMessage = async () => {
@@ -108,7 +111,7 @@ export function FourLEEEAssistant() {
           {/* Header */}
           <div className="bg-gradient-to-r from-[#f85c98] to-[#e91e8c] p-4 text-white flex items-center justify-between">
             <div>
-              <h3 className="font-bold">LEE Assistant</h3>
+              <h3 className="font-bold">4LEEE Assistant</h3>
               <p className="text-xs opacity-90">مساعدك الذكي في التسوق</p>
             </div>
           </div>
