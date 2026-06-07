@@ -12,9 +12,9 @@ export default function AccountPage() {
     router.push(path)
   }, [router])
   return (
-    <div className="min-h-screen bg-pink-50 pb-24">
+    <div className="min-h-screen bg-teal-50 pb-24">
       {/* Header with Profile */}
-      <div className="bg-gradient-to-b from-pink-200 to-pink-100 px-4 pt-4 pb-6">
+      <div className="bg-gradient-to-b from-teal-200 to-teal-100 px-4 pt-4 pb-6">
         <div className="flex items-center justify-between mb-6">
           <Link href="/account/profile" className="flex items-center gap-4 flex-1 hover:opacity-80 transition-opacity">
             <div className="w-16 h-16 rounded-full border-4 border-yellow-400 bg-gradient-to-br from-yellow-200 to-yellow-400 flex items-center justify-center flex-shrink-0">
@@ -32,12 +32,12 @@ export default function AccountPage() {
         </div>
 
         {/* Vouchers Banner */}
-        <div onClick={() => handleNavigate('/vouchers')} className="bg-white rounded-lg p-4 flex items-center gap-3 shadow-sm border border-pink-100 cursor-pointer hover:bg-pink-50 transition-colors">
-          <div className="bg-pink-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">✓</div>
+        <div onClick={() => handleNavigate('/vouchers')} className="bg-white rounded-lg p-4 flex items-center gap-3 shadow-sm border border-teal-100 cursor-pointer hover:bg-teal-50 transition-colors">
+          <div className="bg-teal-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">✓</div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-bold text-pink-600">52 vouchers | claim ₹1,000 vouc...</p>
+            <p className="text-sm font-bold text-teal-600">52 vouchers | claim ₹1,000 vouc...</p>
           </div>
-          <ChevronRight className="w-5 h-5 text-pink-500 flex-shrink-0" />
+          <ChevronRight className="w-5 h-5 text-teal-500 flex-shrink-0" />
         </div>
       </div>
 
@@ -59,7 +59,7 @@ export default function AccountPage() {
               <div className="text-4xl mb-3">🪙</div>
               <h3 className="text-sm font-bold text-gray-900">Coins</h3>
               <p className="text-xs text-gray-700 mb-3">250 Free Coins</p>
-              <button onClick={(e) => { e.stopPropagation(); handleNavigate('/games/coins'); }} className="bg-pink-500 hover:bg-pink-600 text-white text-xs font-bold px-4 py-2 rounded transition-colors">
+              <button onClick={(e) => { e.stopPropagation(); handleNavigate('/games/coins'); }} className="bg-teal-500 hover:bg-teal-600 text-white text-xs font-bold px-4 py-2 rounded transition-colors">
                 Collect
               </button>
             </div>
@@ -69,7 +69,7 @@ export default function AccountPage() {
               <div className="text-4xl mb-3">🎁</div>
               <h3 className="text-sm font-bold text-gray-900">4Land</h3>
               <p className="text-xs text-gray-700 mb-3">Get Free Prize!</p>
-              <button onClick={(e) => { e.stopPropagation(); handleNavigate('/games/4land'); }} className="bg-pink-500 hover:bg-pink-600 text-white text-xs font-bold px-4 py-2 rounded transition-colors">
+              <button onClick={(e) => { e.stopPropagation(); handleNavigate('/games/4land'); }} className="bg-teal-500 hover:bg-teal-600 text-white text-xs font-bold px-4 py-2 rounded transition-colors">
                 GO
               </button>
             </div>
@@ -96,11 +96,11 @@ export default function AccountPage() {
           </div>
 
           {/* Rewards Banner */}
-          <div className="bg-gradient-to-r from-purple-200 to-pink-200 rounded-lg p-4 mt-4 flex items-center justify-between hover:shadow-lg transition-shadow cursor-pointer">
+          <div className="bg-gradient-to-r from-teal-200 to-blue-200 rounded-lg p-4 mt-4 flex items-center justify-between hover:shadow-lg transition-shadow cursor-pointer">
             <p className="text-sm font-bold text-gray-900">Play to get ₹20 4Rewards!</p>
             <button 
               onClick={() => handleNavigate('/rewards')}
-              className="border-2 border-pink-500 text-pink-500 text-xs font-bold px-4 py-1.5 rounded hover:bg-pink-50 transition-colors"
+              className="border-2 border-teal-500 text-teal-500 text-xs font-bold px-4 py-1.5 rounded hover:bg-teal-50 transition-colors"
             >
               Go
             </button>
@@ -130,7 +130,7 @@ export default function AccountPage() {
                 onClick={() => handleNavigate(item.path)}
                 className="flex flex-col items-center gap-2 hover:opacity-80 transition-opacity"
               >
-                <div className="bg-pink-100 p-3 rounded-lg text-center hover:bg-pink-200 transition-colors w-full">
+                <div className="bg-teal-100 p-3 rounded-lg text-center hover:bg-teal-200 transition-colors w-full">
                   <span className="text-xl">{item.icon}</span>
                 </div>
                 <p className="text-xs text-gray-700 text-center font-medium leading-tight">{item.label}</p>
@@ -157,9 +157,9 @@ export default function AccountPage() {
             {/* PAYDAY Card */}
             <button 
               onClick={() => handleNavigate('/channels/payday')}
-              className="w-full bg-gradient-to-br from-pink-300 to-pink-200 rounded-lg p-4 hover:shadow-lg transition-shadow text-left"
+              className="w-full bg-gradient-to-br from-teal-300 to-teal-200 rounded-lg p-4 hover:shadow-lg transition-shadow text-left"
             >
-              <p className="text-xs font-bold text-pink-700 mb-3 bg-pink-500 text-white w-fit px-3 py-1 rounded">PAYDAY</p>
+              <p className="text-xs font-bold text-teal-700 mb-3 bg-teal-500 text-white w-fit px-3 py-1 rounded">PAYDAY</p>
               <div className="flex items-center justify-between">
                 <div>
                   <div className="text-3xl mb-2">🎉</div>
@@ -175,8 +175,8 @@ export default function AccountPage() {
                 className="bg-white rounded-lg p-4 border border-gray-200 hover:shadow-lg transition-shadow text-left"
               >
                 <p className="text-xs font-bold text-gray-900 mb-2">Biggest Sa...</p>
-                <p className="text-2xl font-bold text-pink-500">15%</p>
-                <p className="text-xs text-pink-500 font-bold">OFF</p>
+                <p className="text-2xl font-bold text-teal-500">15%</p>
+                <p className="text-xs text-teal-500 font-bold">OFF</p>
                 <p className="text-xs text-gray-600 mt-2">Min. spend ₹1,299</p>
               </button>
               <button
@@ -205,7 +205,7 @@ export default function AccountPage() {
               </div>
               <button 
                 onClick={() => handleNavigate('/wallet/activate')}
-                className="text-pink-500 text-xs font-bold hover:text-pink-600 transition-colors"
+                className="text-teal-500 text-xs font-bold hover:text-teal-600 transition-colors"
               >
                 Activate
               </button>
@@ -217,7 +217,7 @@ export default function AccountPage() {
               </div>
               <button 
                 onClick={() => handleNavigate('/wallet/options')}
-                className="text-pink-500 text-xs font-bold hover:text-pink-600 transition-colors"
+                className="text-teal-500 text-xs font-bold hover:text-teal-600 transition-colors"
               >
                 View
               </button>
@@ -247,7 +247,7 @@ export default function AccountPage() {
                 className="flex-shrink-0 w-28 hover:opacity-80 transition-opacity"
               >
                 <div className="bg-gray-300 rounded-lg aspect-square flex items-center justify-center text-4xl mb-2 hover:shadow-lg transition-shadow">{item.emoji}</div>
-                <p className="text-pink-600 font-bold text-sm">{item.price}</p>
+                <p className="text-teal-600 font-bold text-sm">{item.price}</p>
               </button>
             ))}
           </div>
@@ -270,9 +270,9 @@ export default function AccountPage() {
               <button 
                 key={i}
                 onClick={() => handleNavigate(item.path)}
-                className="flex flex-col items-center gap-2 p-2 hover:bg-pink-100 rounded-lg transition-colors"
+                className="flex flex-col items-center gap-2 p-2 hover:bg-teal-100 rounded-lg transition-colors"
               >
-                <div className="w-10 h-10 rounded-lg border-2 border-gray-300 flex items-center justify-center hover:border-pink-500 transition-colors hover:bg-pink-50">
+                <div className="w-10 h-10 rounded-lg border-2 border-gray-300 flex items-center justify-center hover:border-teal-500 transition-colors hover:bg-teal-50">
                   <Icon className="w-5 h-5 text-gray-700" />
                 </div>
                 <p className="text-xs text-gray-700 text-center leading-tight font-medium">{item.label}</p>
