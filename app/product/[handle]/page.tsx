@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState, use } from 'react'
+import { useEffect, useRef, useState, use, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
 import {
   ArrowLeft,
@@ -53,6 +53,7 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
   const [activeTab, setActiveTab] = useState<Tab>('Overview')
   const [selectedColor, setSelectedColor] = useState(0)
   const [wished, setWished] = useState(false)
+  const [isClient, setIsClient] = useState(false)
 
   const sectionRefs = {
     Overview: useRef<HTMLDivElement>(null),
@@ -61,9 +62,15 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
     Recommendations: useRef<HTMLDivElement>(null),
   }
 
-  const handleGoBack = () => {
-    router.back()
-  }
+  const handleGoBack = useCallback(() => {
+    if (isClient) {
+      router.back()
+    }
+  }, [router, isClient])
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   useEffect(() => {
     fetch(`/api/products/${handle}`)
