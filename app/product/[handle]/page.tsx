@@ -1,173 +1,418 @@
 'use client'
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { ArrowRight, Heart, Share2, ShoppingCart, Shield, RotateCcw, Truck } from 'lucide-react'
-import { ImageGallery } from '@/components/image-gallery'
-import { VariantChips } from '@/components/variant-chips'
-import { QuantitySelector } from '@/components/quantity-selector'
-import { Reviews } from '@/components/reviews'
-import { RelatedProducts } from '@/components/related-products'
 
-interface Variant {
-  id: string
-  title: string
-  price: string
-  available: boolean
-  compareAtPrice?: string
-}
+import { useEffect, useRef, useState, use } from 'react'
+import { useRouter } from 'next/navigation'
+import {
+  ArrowLeft,
+  Search,
+  Share2,
+  ShoppingCart,
+  Heart,
+  ChevronRight,
+  Star,
+  ShieldCheck,
+  Truck,
+  Store,
+  MessageCircle,
+  ImageIcon,
+  Languages,
+} from 'lucide-react'
+import { ProductGallery } from '@/components/product/product-gallery'
+import { ProductReviews } from '@/components/product/product-reviews'
+import { SellerSimilar } from '@/components/product/seller-similar'
 
 interface Product {
   id: string
-  title: string
-  handle: string
-  description: string
+  name: string
+  nameEn: string
+  price: number
+  originalPrice: number
+  discount: number
   images: string[]
-  variants: Variant[]
-  price: string
+  rating: number
+  reviews: number
+  sold: number
+  stock: number
+  colors: string[]
+  sizes: string[]
+  description: string
+  specifications: Record<string, string>
+  seller: { name: string; rating: number; totalSales: number }
+  shipping: { free: boolean; days: number; from: string }
+  tags: string[]
 }
 
-export default function ProductPage({ params }: { params: { handle: string } }) {
+const TABS = ['Overview', 'Reviews', 'Product Details', 'Recommendations'] as const
+type Tab = (typeof TABS)[number]
+
+export default function ProductPage({ params }: { params: Promise<{ handle: string }> }) {
+  const { handle } = use(params)
   const router = useRouter()
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
-  const [selectedVariant, setSelectedVariant] = useState(0)
-  const [quantity, setQuantity] = useState(1)
-  const [currentImage, setCurrentImage] = useState(0)
-  const [added, setAdded] = useState(false)
+  const [activeTab, setActiveTab] = useState<Tab>('Overview')
+  const [selectedColor, setSelectedColor] = useState(0)
+  const [wished, setWished] = useState(false)
 
-  useEffect(() => {
-    fetch(`/api/products/${params.handle}`)
-      .then(r => r.json())
-      .then(d => { setProduct(d); setLoading(false) })
-      .catch(() => setLoading(false))
-  }, [params.handle])
-
-  if (loading) return (
-    <div className="min-h-screen bg-[#0F0F0F] flex items-center justify-center">
-      <div className="w-10 h-10 border-2 border-[#F57224] border-t-transparent rounded-full animate-spin" />
-    </div>
-  )
-
-  if (!product) return (
-    <div className="min-h-screen bg-[#0F0F0F] flex flex-col items-center justify-center gap-4" dir="rtl">
-      <p className="text-white/60">المنتج غير موجود</p>
-      <button onClick={() => router.back()} className="text-[#F57224] text-sm">العودة</button>
-    </div>
-  )
-
-  const variant = product.variants?.[selectedVariant] || { price: product.price, available: true, title: '', id: product.id }
-  const images = product.images?.length ? product.images : ['/placeholder.png']
-  const hasVariants = (product.variants?.length ?? 0) > 1
-
-  const handleAddToCart = () => {
-    setAdded(true)
-    setTimeout(() => setAdded(false), 2000)
+  const sectionRefs = {
+    Overview: useRef<HTMLDivElement>(null),
+    Reviews: useRef<HTMLDivElement>(null),
+    'Product Details': useRef<HTMLDivElement>(null),
+    Recommendations: useRef<HTMLDivElement>(null),
   }
 
+  useEffect(() => {
+    fetch(`/api/products/${handle}`)
+      .then((r) => r.json())
+      .then((d) => {
+        setProduct(d)
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
+  }, [handle])
+
+  const scrollToSection = (tab: Tab) => {
+    setActiveTab(tab)
+    sectionRefs[tab].current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+
+  if (loading) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-white">
+        <div className="h-10 w-10 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+      </div>
+    )
+  }
+
+  if (!product) {
+    return (
+      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white">
+        <p className="text-muted-foreground">Product not found</p>
+        <button onClick={() => router.back()} className="text-primary">
+          Go back
+        </button>
+      </div>
+    )
+  }
+
+  const title = product.nameEn || product.name
+
   return (
-    <div className="min-h-screen bg-[#0F0F0F]" dir="rtl">
-      {/* AppBar */}
-      <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-4 pt-12 pb-4">
-        <button onClick={() => router.back()} className="w-9 h-9 rounded-full bg-black/50 flex items-center justify-center">
-          <ArrowRight size={18} className="text-white" />
-        </button>
-        <div className="flex gap-2">
-          <button className="w-9 h-9 rounded-full bg-black/50 flex items-center justify-center">
-            <Heart size={18} className="text-white" />
+    <div className="min-h-screen bg-muted pb-20">
+      {/* Sticky header */}
+      <header className="sticky top-0 z-40 bg-white">
+        <div className="flex items-center gap-2 px-3 py-2.5">
+          <button onClick={() => router.back()} aria-label="Back" className="p-1">
+            <ArrowLeft className="h-6 w-6 text-foreground" />
           </button>
-          <button className="w-9 h-9 rounded-full bg-black/50 flex items-center justify-center">
-            <Share2 size={18} className="text-white" />
+          <div className="flex flex-1 items-center gap-2 rounded-full border-2 border-primary px-4 py-2">
+            <Search className="h-4 w-4 text-muted-foreground" />
+            <span className="text-sm text-muted-foreground">Search in Lazada</span>
+          </div>
+          <button aria-label="Share" className="p-1">
+            <Share2 className="h-6 w-6 text-foreground" />
           </button>
+          <button aria-label="Cart" className="relative p-1">
+            <ShoppingCart className="h-6 w-6 text-foreground" />
+            <span className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center rounded-full bg-primary px-1 text-[10px] font-bold text-primary-foreground">
+              3
+            </span>
+          </button>
+        </div>
+
+        {/* Tabs */}
+        <nav className="flex items-center gap-6 overflow-x-auto px-4 scrollbar-hide">
+          {TABS.map((tab) => (
+            <button
+              key={tab}
+              onClick={() => scrollToSection(tab)}
+              className={`relative whitespace-nowrap pb-2.5 pt-1 text-base font-semibold ${
+                activeTab === tab ? 'text-primary' : 'text-muted-foreground'
+              }`}
+            >
+              {tab}
+              {activeTab === tab && (
+                <span className="absolute bottom-0 left-1/2 h-0.5 w-8 -translate-x-1/2 rounded bg-primary" />
+              )}
+            </button>
+          ))}
+        </nav>
+      </header>
+
+      {/* Overview anchor */}
+      <div ref={sectionRefs.Overview}>
+        <ProductGallery images={product.images} alt={title} discount={product.discount} />
+
+        {/* Variant thumbnails carousel */}
+        <div className="flex gap-2 overflow-x-auto bg-white px-4 py-3 scrollbar-hide">
+          {product.images.map((src, i) => (
+            <button
+              key={i}
+              onClick={() => setSelectedColor(i)}
+              className={`h-14 w-14 flex-shrink-0 overflow-hidden rounded-lg border-2 ${
+                selectedColor === i ? 'border-primary' : 'border-transparent'
+              }`}
+            >
+              <img
+                src={src || '/placeholder.svg'}
+                alt={`Variant ${i + 1}`}
+                className="h-full w-full object-cover"
+                crossOrigin="anonymous"
+              />
+            </button>
+          ))}
+        </div>
+
+        {/* Price block */}
+        <div className="bg-white px-4 pb-3">
+          <div className="flex items-end gap-2">
+            <span className="text-3xl font-extrabold text-primary">฿{product.price.toFixed(2)}</span>
+            <span className="mb-1 text-base text-muted-foreground line-through">
+              ฿{product.originalPrice.toFixed(2)}
+            </span>
+            <span className="mb-1 rounded bg-[#FFE9F2] px-1.5 py-0.5 text-sm font-bold text-primary">
+              -{product.discount}%
+            </span>
+          </div>
+
+          {/* Promo chips */}
+          <div className="mt-2 flex flex-wrap gap-2">
+            <span className="rounded bg-[#FFF0F5] px-2 py-1 text-xs font-semibold text-primary">
+              Buy ฿1.5K, extra 5% OFF
+            </span>
+            <span className="rounded bg-[#FFF0F5] px-2 py-1 text-xs font-semibold text-primary">
+              TrueMoney | Extra ฿10 Off
+            </span>
+          </div>
+        </div>
+
+        {/* Campaign voucher */}
+        <div className="bg-white px-4 pb-3">
+          <div className="flex items-center justify-between rounded-xl border border-dashed border-primary/40 p-3">
+            <div className="flex items-center gap-3">
+              <Heart className="h-6 w-6 fill-primary text-primary" />
+              <div>
+                <p className="text-lg font-bold text-primary">14% OFF</p>
+                <p className="text-xs text-muted-foreground">Min. spend ฿599, Cap ฿300</p>
+              </div>
+            </div>
+            <button className="rounded-md bg-primary px-4 py-2 text-sm font-bold text-primary-foreground">
+              Collect
+            </button>
+          </div>
+        </div>
+
+        {/* Title + translate */}
+        <div className="bg-white px-4 pb-3">
+          <div className="flex items-start gap-2">
+            <h1 className="flex-1 text-lg font-bold leading-snug text-foreground text-pretty">{title}</h1>
+            <button aria-label="Translate" className="mt-1 rounded border border-border p-1.5">
+              <Languages className="h-5 w-5 text-muted-foreground" />
+            </button>
+          </div>
+
+          {/* Best sellers banner */}
+          <div className="mt-3 flex items-center justify-between rounded-lg bg-gradient-to-r from-[#FFEFD9] to-[#FFF8EF] px-3 py-2">
+            <span className="text-sm font-bold text-[#A05A2C]">
+              Best Sellers <span className="font-semibold">TOP 18 in this category</span>
+            </span>
+            <ChevronRight className="h-4 w-4 text-[#A05A2C]" />
+          </div>
+
+          {/* Feature tags */}
+          {product.tags.length > 0 && (
+            <p className="mt-2 text-sm font-semibold text-[#A05A2C]">
+              {product.tags.slice(0, 2).join('  |  ')}
+            </p>
+          )}
+
+          {/* Rating row */}
+          <div className="mt-3 flex items-center justify-between">
+            <div className="flex items-center gap-2 text-sm">
+              <Star className="h-4 w-4 fill-[#FFB400] text-[#FFB400]" />
+              <span className="font-bold text-foreground">{product.rating}</span>
+              <span className="text-muted-foreground">({product.reviews})</span>
+              <span className="text-border">|</span>
+              <span className="text-muted-foreground">{product.sold.toLocaleString()} sold</span>
+            </div>
+            <div className="flex items-center gap-4">
+              <button onClick={() => setWished(!wished)} aria-label="Wishlist">
+                <Heart className={`h-5 w-5 ${wished ? 'fill-primary text-primary' : 'text-muted-foreground'}`} />
+              </button>
+              <button aria-label="Share">
+                <Share2 className="h-5 w-5 text-muted-foreground" />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div className="h-2 bg-muted" />
+
+        {/* Free return row */}
+        <div className="bg-white">
+          <button className="flex w-full items-center gap-3 px-4 py-3.5">
+            <ShieldCheck className="h-5 w-5 shrink-0 text-[#5B6CFF]" />
+            <span className="flex-1 text-left text-base text-foreground">Change of Mind · 7 Days Free Return</span>
+            <ChevronRight className="h-4 w-4 text-muted-foreground" />
+          </button>
+
+          {/* Delivery row */}
+          <button className="flex w-full items-start gap-3 border-t border-border px-4 py-3.5">
+            <Truck className="mt-0.5 h-5 w-5 shrink-0 text-[#5B6CFF]" />
+            <div className="flex-1 text-left">
+              <div className="flex items-center justify-between">
+                <span className="text-base font-semibold text-foreground">
+                  Guaranteed by {product.shipping.days} days
+                </span>
+                <span className="font-bold text-foreground">
+                  {product.shipping.free ? 'FREE' : `฿${(product.shipping.days * 10).toFixed(2)}`}
+                </span>
+              </div>
+              <div className="mt-0.5 flex items-center justify-between text-sm text-muted-foreground">
+                <span>Priority 48H</span>
+                <span>To {product.shipping.from}</span>
+              </div>
+            </div>
+          </button>
+
+          {/* Variant selector row */}
+          {product.colors.length > 0 && (
+            <button className="flex w-full items-center gap-3 border-t border-border px-4 py-3.5">
+              <div className="flex gap-1.5">
+                {product.images.slice(0, 2).map((src, i) => (
+                  <img
+                    key={i}
+                    src={src || '/placeholder.svg'}
+                    alt=""
+                    className="h-10 w-10 rounded border border-border object-cover"
+                    crossOrigin="anonymous"
+                  />
+                ))}
+              </div>
+              <span className="flex-1 text-right text-base font-semibold text-foreground">
+                {product.colors[selectedColor] || product.colors[0]}
+                {product.sizes[0] ? `, ${product.sizes[0]}` : ''}
+              </span>
+              <ChevronRight className="h-4 w-4 text-muted-foreground" />
+            </button>
+          )}
+        </div>
+
+        <div className="h-2 bg-muted" />
+
+        {/* Vouchers */}
+        <div className="bg-white px-4 py-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-bold text-foreground">Vouchers</h2>
+            <ChevronRight className="h-5 w-5 text-muted-foreground" />
+          </div>
+          <div className="mt-3 grid grid-cols-2 gap-3">
+            {[49, 99].map((min) => (
+              <div key={min} className="rounded-xl border border-[#06A589]/30 p-3 text-center">
+                <p className="text-2xl font-extrabold text-[#06A589]">฿30</p>
+                <p className="text-xs text-muted-foreground">Min. Spend ฿{min}</p>
+                <button className="mt-2 w-full rounded-md bg-[#06A589] py-1.5 text-sm font-bold text-white">
+                  Collect
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="h-2 bg-muted" />
+
+        {/* Buyer gallery */}
+        <div className="bg-white px-4 py-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-bold text-foreground">
+              Buyer Gallery <span className="text-muted-foreground">(203)</span>
+            </h2>
+            <button className="flex items-center gap-1 text-sm text-muted-foreground">
+              View All <ChevronRight className="h-4 w-4" />
+            </button>
+          </div>
+          <div className="mt-3 flex gap-2 overflow-x-auto scrollbar-hide">
+            {product.images.concat(product.images).slice(0, 4).map((src, i) => (
+              <div key={i} className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-muted">
+                <img
+                  src={src || '/placeholder.svg'}
+                  alt={`Buyer photo ${i + 1}`}
+                  className="h-full w-full object-cover"
+                  crossOrigin="anonymous"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 
-      {/* Image Gallery */}
-      <ImageGallery
-        images={images}
-        alt={product.title}
-        onImageChange={setCurrentImage}
-      />
+      <div className="h-2 bg-muted" />
 
-      {/* Content */}
-      <div className="rounded-t-3xl bg-[#0F0F0F] -mt-6 relative z-10 px-5 pt-5 pb-32">
-        <div className="flex items-start justify-between gap-3 mb-4">
-          <h1 className="text-white font-bold text-lg leading-snug flex-1">{product.title}</h1>
-          <div className="text-right shrink-0">
-            <div className="text-[#F57224] font-extrabold text-2xl">{variant.price} AED</div>
-            {variant.compareAtPrice && (
-              <div className="text-white/30 text-sm line-through">{variant.compareAtPrice} AED</div>
-            )}
+      {/* Reviews section */}
+      <div ref={sectionRefs.Reviews}>
+        <ProductReviews rating={product.rating} totalReviews={product.reviews} />
+      </div>
+
+      <div className="h-2 bg-muted" />
+
+      {/* Product Details section */}
+      <div ref={sectionRefs['Product Details']} className="bg-white">
+        <div className="px-4 py-4">
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-bold text-foreground">Specifications</h2>
+            <ChevronRight className="h-5 w-5 text-muted-foreground" />
+          </div>
+          <div className="mt-3 grid grid-cols-3 gap-px overflow-hidden rounded-lg bg-border">
+            {Object.entries(product.specifications).map(([key, value]) => (
+              <div key={key} className="bg-muted/50 p-3">
+                <p className="text-xs capitalize text-muted-foreground">{key.replace(/_/g, ' ')}</p>
+                <p className="mt-1 text-sm font-bold text-foreground">{value}</p>
+              </div>
+            ))}
           </div>
         </div>
 
-        {hasVariants && (
-          <VariantChips
-            variants={product.variants.map((v, i) => ({
-              ...v,
-              available: v.available !== false,
-            }))}
-            selectedIndex={selectedVariant}
-            onSelect={setSelectedVariant}
-            label="الخيارات"
-          />
-        )}
-
-        <QuantitySelector
-          quantity={quantity}
-          onQuantityChange={setQuantity}
-          min={1}
-          max={999}
-          label="Quantity"
-        />
-
-        <div className="border-t border-white/5 mb-5" />
-
-        {product.description && (
-          <div className="mb-5">
-            <p className="text-white font-bold text-sm mb-2">تفاصيل المنتج</p>
-            <p className="text-white/50 text-sm leading-relaxed">{product.description}</p>
-          </div>
-        )}
-
-        <div className="space-y-2.5">
-          <div className="flex items-center gap-2 text-white/50 text-xs">
-            <Truck size={14} className="text-[#F57224] shrink-0" />
-            <span>شحن مجاني للطلبات فوق 200 AED</span>
-          </div>
-          <div className="flex items-center gap-2 text-white/50 text-xs">
-            <RotateCcw size={14} className="text-[#F57224] shrink-0" />
-            <span>إرجاع مجاني خلال 14 يوماً</span>
-          </div>
-          <div className="flex items-center gap-2 text-white/50 text-xs">
-            <Shield size={14} className="text-[#F57224] shrink-0" />
-            <span>منتج أصلي 100%</span>
-          </div>
+        <div className="border-t border-border px-4 py-4">
+          <h2 className="text-lg font-bold text-foreground">Description</h2>
+          <p className="mt-3 text-sm leading-relaxed text-foreground/80">{product.description}</p>
+          {product.images[1] && (
+            <img
+              src={product.images[1] || '/placeholder.svg'}
+              alt={title}
+              className="mt-3 w-full rounded-lg object-cover"
+              crossOrigin="anonymous"
+            />
+          )}
         </div>
 
-        {/* Related Products */}
-        <div className="mt-8 -mx-5">
-          <RelatedProducts productHandle={product.handle} />
-        </div>
-
-        {/* Reviews Section */}
-        <div className="mt-8 -mx-5">
-          <Reviews productId={product.id} />
+        <div className="border-t border-border px-4 py-4">
+          <h3 className="text-base font-bold text-foreground">Disclaimer</h3>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Promotion and price above are valid through 06/05/2026
+          </p>
         </div>
       </div>
 
-      {/* Bottom CTA */}
-      <div className="fixed bottom-0 left-0 right-0 bg-[#1A1A1A] px-5 pt-3 pb-8">
-        <button
-          onClick={handleAddToCart}
-          disabled={!variant.available}
-          className={`w-full h-14 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-colors ${
-            !variant.available ? 'bg-white/10 text-white/40' : added ? 'bg-green-500 text-white' : 'bg-[#F57224] text-white'
-          }`}
-        >
-          <ShoppingCart size={20} />
-          {!variant.available ? 'نفد المخزون' : added ? 'تمت الإضافة ✓' : 'أضف إلى السلة'}
+      <div className="h-2 bg-muted" />
+
+      {/* Recommendations / Seller + Similar items */}
+      <div ref={sectionRefs.Recommendations}>
+        <SellerSimilar productHandle={product.id} seller={product.seller} />
+      </div>
+
+      {/* Bottom action bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 flex items-stretch border-t border-border bg-white">
+        <button className="flex w-16 flex-col items-center justify-center gap-0.5 py-2 text-muted-foreground">
+          <Store className="h-5 w-5" />
+          <span className="text-[10px]">Store</span>
         </button>
+        <button className="flex w-16 flex-col items-center justify-center gap-0.5 py-2 text-muted-foreground">
+          <MessageCircle className="h-5 w-5" />
+          <span className="text-[10px]">Chat</span>
+        </button>
+        <button className="flex-1 bg-[#FF9500] text-base font-bold text-white">Buy Now</button>
+        <button className="flex-1 bg-primary text-base font-bold text-primary-foreground">Add to Cart</button>
       </div>
     </div>
   )
-      }
+}

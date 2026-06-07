@@ -3,11 +3,12 @@ import { products } from '@/lib/data/products'
 
 export async function GET(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const product = products.find(p => p.id === params.id)
-    
+    const { id } = await params
+    const product = products.find(p => p.id === id)
+
     if (!product) {
       return NextResponse.json(
         { error: 'Product not found' },

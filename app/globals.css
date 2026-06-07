@@ -48,3 +48,12 @@ body {
   animation: shimmer 1.5s infinite;
   border-radius: 4px;
 }
+
+/* Hide scrollbars for horizontal carousels */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
