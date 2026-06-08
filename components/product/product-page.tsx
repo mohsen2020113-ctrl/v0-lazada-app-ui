@@ -64,37 +64,6 @@ export function ProductPageClient({ handle }: { handle: string }) {
       isMounted = false
     }
   }, [handle])
-        
-        clearTimeout(timeoutId)
-        
-        if (!response.ok) {
-          throw new Error(`API error: ${response.status}`)
-        }
-        
-        const data = await response.json()
-        
-        if (isMounted) {
-          setProduct(data)
-          setMainImage(data.images?.[0] || '')
-        }
-      } catch (err) {
-        console.error('[v0] Product fetch error:', err)
-        if (isMounted) {
-          setProduct(null)
-        }
-      } finally {
-        if (isMounted) {
-          setLoading(false)
-        }
-      }
-    }
-
-    fetchProduct()
-    
-    return () => {
-      isMounted = false
-    }
-  }, [handle])
 
   if (loading) {
     return (
