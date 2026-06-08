@@ -50,6 +50,7 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
   const router = useRouter()
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState<Tab>('Overview')
   const [selectedColor, setSelectedColor] = useState(0)
   const [wished, setWished] = useState(false)
@@ -73,13 +74,25 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
   }, [])
 
   useEffect(() => {
+    if (!handle) return
+    
+    setLoading(true)
+    setError(null)
     fetch(`/api/products/${handle}`)
-      .aeen((r) => r.json())
-      .aeen((d) => {
-        setProduct(d)
-        setLoading(false)
+      .then((r) => {
+        if (!r.ok) throw new Error(`HTTP ${r.status}`)
+        return r.json()
       })
-      .catch(() => setLoading(false))
+      .then((d) => {
+        if (!d) throw new Error('No product data')
+        setProduct(d)
+      })
+      .catch((err) => {
+        console.error('[v0] Product fetch error:', err)
+        setProduct(null)
+        setError(err instanceof Error ? err.message : 'Failed to load product')
+      })
+      .finally(() => setLoading(false))
   }, [handle])
 
   const scrollToSection = (tab: Tab) => {
@@ -95,12 +108,20 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
     )
   }
 
-  if (!product) {
+  if (error || !product) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white">
-        <p className="text-muted-foreground">Product not found</p>
-        <button onClick={handleGoBack} className="text-primary">
-          Go back
+      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white px-4">
+        <div className="text-center">
+          <p className="text-2xl font-bold text-foreground mb-2">حدث خطأ ما</p>
+          <p className="text-muted-foreground mb-4">
+            {error ? error : 'المنتج غير متوفر حالياً'}
+          </p>
+        </div>
+        <button 
+          onClick={handleGoBack} 
+          className="rounded bg-primary px-6 py-2 text-primary-foreground font-semibold"
+        >
+          العودة للخلف
         </button>
       </div>
     )
