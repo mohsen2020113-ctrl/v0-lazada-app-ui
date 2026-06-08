@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, use, useCallback } from 'react'
 import { useRouter } from 'next/navigation'
+import { notFound } from 'next/navigation'
 import {
   ArrowLeft,
   Search,
@@ -80,11 +81,14 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
     setError(null)
     fetch(`/api/products/${handle}`)
       .then((r) => {
+        if (r.status === 404) {
+          notFound()
+        }
         if (!r.ok) throw new Error(`HTTP ${r.status}`)
         return r.json()
       })
       .then((d) => {
-        if (!d) throw new Error('No product data')
+        if (!d) notFound()
         setProduct(d)
       })
       .catch((err) => {
