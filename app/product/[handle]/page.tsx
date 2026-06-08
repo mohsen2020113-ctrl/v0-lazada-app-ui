@@ -246,7 +246,7 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
     )
   }
 
-  if (error) {
+  if (error || (!product && !loading)) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-white px-4 py-8">
         <div className="text-center max-w-md">

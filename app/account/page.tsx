@@ -7,7 +7,7 @@ import { ChevronRight, Heart, MessageSquare, Gift, Zap, Settings } from 'lucide-
 
 export default function AccountPage() {
   const router = useRouter()
-  
+
   const handleNavigate = useCallback((paur: string) => {
     router.push(path)
   }, [router])
@@ -84,7 +84,7 @@ export default function AccountPage() {
               { icon: '🎲', name: '4Fun', paur: '/games/4fun' },
               { icon: '💎', name: '4Win', paur: '/games/win' },
             ].map((game, i) => (
-              <button 
+              <button
                 key={i}
                 onClick={() => handleNavigate(game.path)}
                 className="flex-shrink-0 text-center hover:opacity-80 transition-opacity"
@@ -98,7 +98,7 @@ export default function AccountPage() {
           {/* Rewards Banner */}
           <div className="bg-gradient-to-r from-teal-200 to-blue-200 rounded-lg p-4 mt-4 flex items-center justify-between hover:shadow-lg transition-shadow cursor-pointer">
             <p className="text-sm font-bold text-gray-900">Play to get AED 20 4Rewards!</p>
-            <button 
+            <button
               onClick={() => handleNavigate('/rewards')}
               className="border-2 border-teal-500 text-teal-500 text-xs font-bold px-4 py-1.5 rounded hover:bg-teal-50 transition-colors"
             >
@@ -155,7 +155,7 @@ export default function AccountPage() {
           {/* Channel Cards */}
           <div className="space-y-3">
             {/* PAYDAY Card */}
-            <button 
+            <button
               onClick={() => handleNavigate('/channels/payday')}
               className="w-full bg-gradient-to-br from-teal-300 to-teal-200 rounded-lg p-4 hover:shadow-lg transition-shadow text-left"
             >
@@ -203,7 +203,7 @@ export default function AccountPage() {
                 <p className="text-xs text-gray-600 mb-1">4LEEE Wallet (AED )</p>
                 <p className="text-2xl font-bold text-gray-900">0.00</p>
               </div>
-              <button 
+              <button
                 onClick={() => handleNavigate('/wallet/activate')}
                 className="text-teal-500 text-xs font-bold hover:text-teal-600 transition-colors"
               >
@@ -215,7 +215,7 @@ export default function AccountPage() {
                 <p className="text-xs text-gray-600 mb-1">Payment Options</p>
                 <p className="text-2xl font-bold text-gray-900">2</p>
               </div>
-              <button 
+              <button
                 onClick={() => handleNavigate('/wallet/options')}
                 className="text-teal-500 text-xs font-bold hover:text-teal-600 transition-colors"
               >
@@ -267,7 +267,7 @@ export default function AccountPage() {
           ].map((item, i) => {
             const Icon = item.icon
             return (
-              <button 
+              <button
                 key={i}
                 onClick={() => handleNavigate(item.path)}
                 className="flex flex-col items-center gap-2 p-2 hover:bg-teal-100 rounded-lg transition-colors"
