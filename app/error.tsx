@@ -5,24 +5,48 @@ import { Button } from '@/components/ui/button'
 
 export default function Error({
   error,
-    reset,
-    }: {
-      error: Error & { digest?: string }
-        reset: () => void
-        }) {
-          useEffect(() => {
-              console.error(error)
-                }, [error])
+  reset,
+}: {
+  error: Error & { digest?: string }
+  reset: () => void
+}) {
+  useEffect(() => {
+    console.error('[v0] Error boundary:', error)
+  }, [error])
 
-                  return (
-                      <div className="flex flex-col items-center justify-center min-h-[400px] gap-4 p-8">
-                            <h2 className="text-2xl font-bold text-red-600">حدث خطأ ما</h2>
-                                  <p className="text-gray-500 text-center max-w-md">
-                                          عذراً، حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.
-                                                </p>
-                                                      <Button onClick={reset} variant="default">
-                                                              حاول مجدداً
-                                                                    </Button>
-                                                                        </div>
-                                                                          )
-                                                                          }
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
+      <div className="w-full max-w-md space-y-6 text-center">
+        <div>
+          <h1 className="text-4xl font-bold text-gray-900">خطأ</h1>
+          <p className="mt-2 text-gray-600">حدث خطأ ما. يرجى المحاولة مجدداً.</p>
+        </div>
+
+        {process.env.NODE_ENV === 'development' && (
+          <div className="space-y-2 rounded-lg bg-red-50 p-4 text-left">
+            <p className="font-mono text-sm text-red-600">{error.message}</p>
+            {error.digest && (
+              <p className="font-mono text-xs text-red-500">ID: {error.digest}</p>
+            )}
+          </div>
+        )}
+
+        <div className="flex gap-3">
+          <Button
+            onClick={() => reset()}
+            className="flex-1 bg-orange-500 hover:bg-orange-600"
+          >
+            حاول مجدداً
+          </Button>
+          <Button
+            onClick={() => window.location.href = '/'}
+            variant="outline"
+            className="flex-1"
+          >
+            العودة للرئيسية
+          </Button>
+        </div>
+      </div>
+    </div>
+  )
+}

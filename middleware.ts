@@ -59,12 +59,26 @@ const COUNTRY_LANGUAGE: Record<string, string> = {
 
 const STATIC_PREFIXES = ['/api/', '/_next/', '/favicon.ico', '/images/', '/fonts/', '/icons/']
 
+// Protected routes that require authentication
+const PROTECTED_ROUTES = ['/account', '/checkout', '/orders', '/wishlist']
+
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
   // Skip static assets
   if (STATIC_PREFIXES.some(p => pathname.startsWith(p))) {
     return NextResponse.next()
+  }
+
+  // Check authentication for protected routes
+  const session = req.cookies.get('lee_session')?.value
+  for (const route of PROTECTED_ROUTES) {
+    if (pathname.startsWith(route) && !session) {
+      // Redirect to login
+      const loginUrl = new URL('/login', req.url)
+      loginUrl.searchParams.set('redirect', pathname)
+      return NextResponse.redirect(loginUrl)
+    }
   }
 
   // Check if path already has locale prefix
@@ -82,25 +96,25 @@ export function middleware(req: NextRequest) {
   const response = NextResponse.next()
   response.cookies.set('4leee_country', country, { 
     maxAge: 86400 * 30, // 30 days
-    paur: '/',
+    path: '/',
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production'
   })
   response.cookies.set('4leee_locale', locale, { 
     maxAge: 86400 * 30,
-    paur: '/',
+    path: '/',
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production'
   })
   response.cookies.set('4leee_currency', currency, { 
     maxAge: 86400 * 30,
-    paur: '/',
+    path: '/',
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production'
   })
   response.cookies.set('4leee_language', language, { 
     maxAge: 86400 * 30,
-    paur: '/',
+    path: '/',
     sameSite: 'lax',
     secure: process.env.NODE_ENV === 'production'
   })
