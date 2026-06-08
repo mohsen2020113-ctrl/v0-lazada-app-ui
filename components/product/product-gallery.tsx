@@ -21,20 +21,23 @@ export function ProductGallery({ images, alt, discount }: ProductGalleryProps) {
   }
 
   return (
-    <div className="relative bg-white">
+    <div className="relative w-full bg-gray-100" style={{ minHeight: '400px' }}>
       <div
         ref={trackRef}
         onScroll={handleScroll}
-        className="flex aspect-square w-full snap-x snap-mandatory overflow-x-auto scrollbar-hide"
+        className="flex h-[400px] w-full snap-x snap-mandatory overflow-x-auto scrollbar-hide"
       >
-        {images.length > 0 ? (
-          images.map((src, i) => (
-            <div key={i} className="relative w-full flex-shrink-0 snap-center bg-gray-100">
+        {images && images.length > 0 ? (
+          images.map((src, i) => {
+            const imageSrc = src && src.startsWith('http') ? src : src || 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="400"%3E%3Crect fill="%23f0f0f0" width="400" height="400"/%3E%3Ctext x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-family="sans-serif" font-size="20" fill="%23999"%3EProduct Image %3C/text%3E%3C/svg%3E'
+            return (
+            <div key={i} className="relative h-full w-full flex-shrink-0 snap-center bg-gray-100">
               <img
-                src={src || '/placeholder.svg'}
+                src={imageSrc}
                 alt={`${alt} - ${i + 1}`}
                 className="h-full w-full object-cover"
                 crossOrigin="anonymous"
+                loading="lazy"
               />
               {/* Overlay product description */}
               {i === 0 && (
@@ -45,7 +48,8 @@ export function ProductGallery({ images, alt, discount }: ProductGalleryProps) {
                 </div>
               )}
             </div>
-          ))
+            )
+          })
         ) : (
           <div className="w-full flex-shrink-0 snap-center bg-gray-200 flex items-center justify-center">
             <span className="text-gray-400">No image</span>
