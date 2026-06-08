@@ -25,11 +25,11 @@ export const EXCHANGE_RATES: Record<string, number> = {
   LBP: 88000,   // Lebanese Pound
   
   // Southeast Asia
-  AED: 33.5,    // AED (Legacy - deprecated)
   MYR: 4.35,    // Malaysian Ringgit
   SGD: 1.34,    // Singapore Dollar
   IDR: 15500,   // Indonesian Rupiah
   PHP: 55.5,    // Philippine Peso
+  THB: 33.5,    // Thai Baht (Legacy)
   VND: 24300,   // Vietnamese Dong
   MMK: 2100,    // Myanmar Kyat
   LAK: 20500,   // Lao Kip

@@ -4,6 +4,7 @@ import { Analytics } from '@vercel/analytics/next'
 import { Providers } from './providers'
 import { ServiceWorkerRegistration } from '@/components/service-worker-registration'
 import { FourLEEEAssistant } from '@/components/lee/LEEAssistant'
+import { Footer } from '@/components/lee/footer'
 import './globals.css'
 
 const _geist = Geist({ subsets: ["latin"] });
@@ -67,9 +68,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="bg-gray-100" data-scroll-behavior="smooth" suppressHydrationWarning>
-      <body className="font-sans antialiased bg-gray-100 min-h-screen min-h-dvh overflow-x-hidden">
+      <body className="font-sans antialiased bg-gray-100 min-h-screen min-h-dvh overflow-x-hidden flex flex-col">
         <Providers>
-          {children}
+          <div className="flex-1">
+            {children}
+          </div>
+          <Footer />
         </Providers>
         <ServiceWorkerRegistration />
         <FourLEEEAssistant />
