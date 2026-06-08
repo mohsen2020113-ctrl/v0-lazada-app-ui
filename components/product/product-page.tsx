@@ -15,20 +15,14 @@ interface Product {
   description: string
 }
 
-export function ProductPageClient({ handle, initialProduct }: { handle: string; initialProduct?: Product | null }) {
-  const [product, setProduct] = useState<Product | null>(initialProduct || null)
-  const [loading, setLoading] = useState(!initialProduct)
-  const [mainImage, setMainImage] = useState<string>(initialProduct?.images?.[0] || '')
+export function ProductPageClient({ handle }: { handle: string }) {
+  const [product, setProduct] = useState<Product | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [mainImage, setMainImage] = useState<string>('')
   const [quantity, setQuantity] = useState(1)
   const [activeTab, setActiveTab] = useState('details')
 
   useEffect(() => {
-    // If we already have initial product from server, no need to fetch
-    if (initialProduct) {
-      setLoading(false)
-      return
-    }
-
     let isMounted = true
     
     const fetchProduct = async () => {
@@ -40,13 +34,36 @@ export function ProductPageClient({ handle, initialProduct }: { handle: string; 
           return
         }
         
-        const controller = new AbortController()
-        const timeoutId = setTimeout(() => controller.abort(), 10000)
+        const response = await fetch(`/api/products/${handle}`)
         
-        const response = await fetch(`/api/products/${handle}`, {
-          signal: controller.signal,
-          headers: { 'Content-Type': 'application/json' }
-        })
+        if (!response.ok) {
+          throw new Error(`API error: ${response.status}`)
+        }
+        
+        const data = await response.json()
+        
+        if (isMounted) {
+          setProduct(data)
+          setMainImage(data.images?.[0] || '')
+        }
+      } catch (err) {
+        console.error('[v0] Product fetch error:', err)
+        if (isMounted) {
+          setProduct(null)
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false)
+        }
+      }
+    }
+
+    fetchProduct()
+    
+    return () => {
+      isMounted = false
+    }
+  }, [handle])
         
         clearTimeout(timeoutId)
         
