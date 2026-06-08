@@ -23,40 +23,43 @@ export function ProductPageClient({ handle }: { handle: string }) {
   const [activeTab, setActiveTab] = useState('details')
 
   useEffect(() => {
+    console.log('[v0] ProductPageClient mounted with handle:', handle)
     let isMounted = true
     
     const fetchProduct = async () => {
       try {
+        console.log('[v0] Starting fetch for handle:', handle)
+        
         if (!handle) {
+          console.log('[v0] Handle is empty!')
           if (isMounted) {
             setLoading(false)
           }
           return
         }
         
-        console.log('[v0] Fetching product:', handle)
-        const response = await fetch(`/api/products/${handle}`, {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        })
+        const url = `/api/products/${handle}`
+        console.log('[v0] Fetching from:', url)
         
-        console.log('[v0] Response status:', response.status)
+        const response = await fetch(url)
+        
+        console.log('[v0] Fetch response status:', response.status)
+        console.log('[v0] Response ok:', response.ok)
         
         if (!response.ok) {
+          console.error('[v0] Response not ok:', response.status)
           throw new Error(`API error: ${response.status}`)
         }
         
         const data = await response.json()
-        console.log('[v0] Product data loaded:', data.name)
+        console.log('[v0] Product fetched successfully:', data.name)
         
         if (isMounted) {
           setProduct(data)
           setMainImage(data.images?.[0] || '')
         }
       } catch (err) {
-        console.error('[v0] Product fetch error:', err)
+        console.error('[v0] Fetch error:', err)
         if (isMounted) {
           setProduct(null)
         }
