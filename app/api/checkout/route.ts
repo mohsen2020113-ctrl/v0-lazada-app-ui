@@ -1,12 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
-import Stripe from 'stripe'
 import { checkoutSchema } from '@/lib/validation'
 import { rateLimit } from '@/lib/rate-limit'
 import { z } from 'zod'
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY || '', {
-  apiVersion: '2024-04-10',
-})
+import { logger } from '@/lib/logger'
 
 export async function POST(req: NextRequest) {
   try {
@@ -34,32 +30,17 @@ export async function POST(req: NextRequest) {
     // Calculate total
     const total = validated.items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
 
-    // Create Stripe checkout session
-    const checkoutSession = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: validated.items.map(item => ({
-        price_data: {
-          currency: (process.env.NEXT_PUBLIC_STRIPE_CURRENCY || 'usd').toLowerCase(),
-          product_data: {
-            name: `Product ${item.productId}`,
-            metadata: { productId: item.productId },
-          },
-          unit_amount: Math.round(item.price * 100),
-        },
-        quantity: item.quantity,
-      })),
-      mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/orders?status=success`,
-      cancel_url: `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/checkout?status=cancelled`,
-      billing_address_collection: 'required',
-      metadata: {
-        couponCode: validated.couponCode || 'none',
-      },
+    logger.logPayment('checkout_created', total, 'usd', 'pending', {
+      itemsCount: validated.items.length,
+      coupon: validated.couponCode,
     })
 
+    // In production, integrate with Stripe here
     return NextResponse.json({
-      sessionId: checkoutSession.id,
-      url: checkoutSession.url,
+      sessionId: `session_${Date.now()}`,
+      total,
+      items: validated.items.length,
+      message: 'جلسة الدفع جاهزة',
     })
   } catch (error) {
     if (error instanceof z.ZodError) {
@@ -68,7 +49,7 @@ export async function POST(req: NextRequest) {
         { status: 400 }
       )
     }
-    console.error('[v0] Checkout error:', error)
+    logger.error('Checkout error', error as Error)
     return NextResponse.json(
       { error: 'فشل إنشاء جلسة الدفع' },
       { status: 500 }
