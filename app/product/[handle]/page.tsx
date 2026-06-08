@@ -77,7 +77,7 @@ type Tab = (typeof TABS)[number]
 // Helper to safely access product data with defaults
 function getSafeProduct(product: Product | null): Product {
   if (!product) return DEFAULT_PRODUCT
-  
+
   return {
     id: product.id ?? '',
     name: product.name ?? 'Product',
@@ -197,10 +197,10 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
 
   useEffect(() => {
     if (!handle) return
-    
+
     setLoading(true)
     setError(null)
-    
+
     const controller = new AbortController()
     const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 second timeout
 
@@ -219,7 +219,7 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
       .catch((err) => {
         console.error('[v0] Product fetch error:', err)
         setProduct(null)
-        
+
         // Don't set error for aborted requests (likely due to navigation)
         if (err.name !== 'AbortError') {
           setError(categorizeError(err))
@@ -246,7 +246,7 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
     )
   }
 
-  if (error || (!product && !loading)) {
+  if (error) {
     return (
       <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-white px-4 py-8">
         <div className="text-center max-w-md">
@@ -296,14 +296,14 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
 
         {/* Action buttons */}
         <div className="flex flex-col gap-3 w-full sm:w-auto sm:flex-row">
-          <button 
+          <button
             onClick={() => window.location.reload()}
             className="rounded bg-primary px-8 py-2.5 text-primary-foreground font-semibold hover:bg-primary/90 transition-colors"
           >
             إعادة محاولة
           </button>
-          <button 
-            onClick={handleGoBack} 
+          <button
+            onClick={handleGoBack}
             className="rounded border-2 border-primary px-8 py-2.5 text-primary font-semibold hover:bg-primary/5 transition-colors"
           >
             العودة للخلف
@@ -358,9 +358,8 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
             <button
               key={tab}
               onClick={() => scrollToSection(tab)}
-              className={`relative whitespace-nowrap pb-2.5 pt-1 text-base font-semibold ${
-                activeTab === tab ? 'text-primary' : 'text-muted-foreground'
-              }`}
+              className={`relative whitespace-nowrap pb-2.5 pt-1 text-base font-semibold ${activeTab === tab ? 'text-primary' : 'text-muted-foreground'
+                }`}
             >
               {tab}
               {activeTab === tab && (
@@ -381,9 +380,8 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
             <button
               key={i}
               onClick={() => setSelectedColor(i)}
-              className={`h-14 w-14 flex-shrink-0 overflow-hidden rounded-lg border-2 ${
-                selectedColor === i ? 'border-primary' : 'border-transparent'
-              }`}
+              className={`h-14 w-14 flex-shrink-0 overflow-hidden rounded-lg border-2 ${selectedColor === i ? 'border-primary' : 'border-transparent'
+                }`}
             >
               <img
                 src={src || '/placeholder.svg'}
