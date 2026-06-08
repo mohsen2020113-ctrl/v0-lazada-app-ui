@@ -23,26 +23,63 @@ export function ProductPageClient({ handle }: { handle: string }) {
   const [activeTab, setActiveTab] = useState('details')
 
   useEffect(() => {
+    let isMounted = true
+    
     const fetchProduct = async () => {
       try {
-        const response = await fetch(`/api/products/${handle}`)
-        if (!response.ok) throw new Error('Product not found')
+        if (!handle) {
+          if (isMounted) {
+            setLoading(false)
+          }
+          return
+        }
+        
+        const controller = new AbortController()
+        const timeoutId = setTimeout(() => controller.abort(), 10000)
+        
+        const response = await fetch(`/api/products/${handle}`, {
+          signal: controller.signal,
+          headers: { 'Content-Type': 'application/json' }
+        })
+        
+        clearTimeout(timeoutId)
+        
+        if (!response.ok) {
+          throw new Error(`API error: ${response.status}`)
+        }
+        
         const data = await response.json()
-        setProduct(data)
-        setMainImage(data.images?.[0] || '')
-        setLoading(false)
+        
+        if (isMounted) {
+          setProduct(data)
+          setMainImage(data.images?.[0] || '')
+        }
       } catch (err) {
-        console.error('[v0] Error:', err)
-        setLoading(false)
+        console.error('[v0] Product fetch error:', err)
+        if (isMounted) {
+          setProduct(null)
+        }
+      } finally {
+        if (isMounted) {
+          setLoading(false)
+        }
       }
     }
+
     fetchProduct()
+    
+    return () => {
+      isMounted = false
+    }
   }, [handle])
 
   if (loading) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
-        <p className="text-gray-600">جاري التحميل...</p>
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
+          <p className="text-gray-600 mt-3">جاري تحميل المنتج...</p>
+        </div>
       </div>
     )
   }
@@ -50,7 +87,16 @@ export function ProductPageClient({ handle }: { handle: string }) {
   if (!product) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-gray-50">
-        <p className="text-gray-600">المنتج غير موجود</p>
+        <div className="text-center">
+          <p className="text-gray-800 font-semibold mb-2">عذراً، المنتج غير متاح</p>
+          <p className="text-gray-600 text-sm mb-4">قد يكون المنتج قد تم حذفه أو لم يعد متوفراً</p>
+          <button 
+            onClick={() => window.history.back()}
+            className="px-4 py-2 bg-orange-500 text-white rounded-lg text-sm hover:bg-orange-600"
+          >
+            العودة للخلف
+          </button>
+        </div>
       </div>
     )
   }
