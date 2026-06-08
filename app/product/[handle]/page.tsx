@@ -43,6 +43,28 @@ interface Product {
   tags: string[]
 }
 
+// Default product for safe fallback rendering
+const DEFAULT_PRODUCT: Product = {
+  id: '',
+  name: 'Product',
+  nameEn: 'Product',
+  price: 0,
+  originalPrice: 0,
+  discount: 0,
+  images: [],
+  rating: 0,
+  reviews: 0,
+  sold: 0,
+  stock: 0,
+  colors: [],
+  sizes: [],
+  description: '',
+  specifications: {},
+  seller: { name: 'Unknown Seller', rating: 0, totalSales: 0 },
+  shipping: { free: false, days: 0, from: 'UAE' },
+  tags: [],
+}
+
 interface ErrorState {
   message: string
   messageAr: string
@@ -51,6 +73,32 @@ interface ErrorState {
 
 const TABS = ['Overview', 'Reviews', 'Product Details', 'Recommendations'] as const
 type Tab = (typeof TABS)[number]
+
+// Helper to safely access product data with defaults
+function getSafeProduct(product: Product | null): Product {
+  if (!product) return DEFAULT_PRODUCT
+  
+  return {
+    id: product.id ?? '',
+    name: product.name ?? 'Product',
+    nameEn: product.nameEn ?? product.name ?? 'Product',
+    price: product.price ?? 0,
+    originalPrice: product.originalPrice ?? product.price ?? 0,
+    discount: product.discount ?? 0,
+    images: Array.isArray(product.images) ? product.images : [],
+    rating: product.rating ?? 0,
+    reviews: product.reviews ?? 0,
+    sold: product.sold ?? 0,
+    stock: product.stock ?? 0,
+    colors: Array.isArray(product.colors) ? product.colors : [],
+    sizes: Array.isArray(product.sizes) ? product.sizes : [],
+    description: product.description ?? '',
+    specifications: product.specifications ?? {},
+    seller: product.seller ?? { name: 'Unknown Seller', rating: 0, totalSales: 0 },
+    shipping: product.shipping ?? { free: false, days: 0, from: 'UAE' },
+    tags: Array.isArray(product.tags) ? product.tags : [],
+  }
+}
 
 // Helper function to categorize errors and provide bilingual messages
 function categorizeError(err: unknown): ErrorState {
@@ -277,7 +325,9 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
     )
   }
 
-  const title = product.nameEn || product.name
+  // Use safe product access to prevent crashes with missing data
+  const safeProduct = getSafeProduct(product)
+  const title = safeProduct.nameEn || safeProduct.name || 'Product'
 
   return (
     <div className="min-h-screen bg-muted pb-20">
@@ -323,11 +373,11 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
 
       {/* Overview anchor */}
       <div ref={sectionRefs.Overview}>
-        <ProductGallery images={product.images} alt={title} discount={product.discount} />
+        <ProductGallery images={safeProduct.images} alt={title} discount={safeProduct.discount} />
 
         {/* Variant thumbnails carousel */}
         <div className="flex gap-2 overflow-x-auto bg-white px-4 py-3 scrollbar-hide">
-          {product.images.map((src, i) => (
+          {safeProduct.images.map((src, i) => (
             <button
               key={i}
               onClick={() => setSelectedColor(i)}
@@ -348,12 +398,12 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
         {/* Price block */}
         <div className="bg-white px-4 pb-3">
           <div className="flex items-end gap-2">
-            <span className="text-3xl font-extrabold text-primary">AED {product.price.toFixed(2)}</span>
+            <span className="text-3xl font-extrabold text-primary">AED {safeProduct.price.toFixed(2)}</span>
             <span className="mb-1 text-base text-muted-foreground line-through">
-              AED {product.originalPrice.toFixed(2)}
+              AED {safeProduct.originalPrice.toFixed(2)}
             </span>
             <span className="mb-1 rounded bg-[#FFE9F2] px-1.5 py-0.5 text-sm font-bold text-primary">
-              -{product.discount}%
+              -{safeProduct.discount}%
             </span>
           </div>
 
@@ -402,9 +452,9 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
           </div>
 
           {/* Feature tags */}
-          {product.tags.length > 0 && (
+          {safeProduct.tags.length > 0 && (
             <p className="mt-2 text-sm font-semibold text-[#A05A2C]">
-              {product.tags.slice(0, 2).join('  |  ')}
+              {safeProduct.tags.slice(0, 2).join('  |  ')}
             </p>
           )}
 
@@ -412,10 +462,10 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
           <div className="mt-3 flex items-center justify-between">
             <div className="flex items-center gap-2 text-sm">
               <Star className="h-4 w-4 fill-[#FFB400] text-[#FFB400]" />
-              <span className="font-bold text-foreground">{product.rating}</span>
-              <span className="text-muted-foreground">({product.reviews})</span>
+              <span className="font-bold text-foreground">{safeProduct.rating}</span>
+              <span className="text-muted-foreground">({safeProduct.reviews})</span>
               <span className="text-border">|</span>
-              <span className="text-muted-foreground">{product.sold.toLocaleString()} sold</span>
+              <span className="text-muted-foreground">{safeProduct.sold.toLocaleString()} sold</span>
             </div>
             <div className="flex items-center gap-4">
               <button onClick={() => setWished(!wished)} aria-label="Wishlist">
@@ -444,24 +494,24 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
             <div className="flex-1 text-left">
               <div className="flex items-center justify-between">
                 <span className="text-base font-semibold text-foreground">
-                  Guaranteed by {product.shipping.days} days
+                  Guaranteed by {safeProduct.shipping?.days ?? 0} days
                 </span>
                 <span className="font-bold text-foreground">
-                  {product.shipping.free ? 'FREE' : `AED ${(product.shipping.days * 10).toFixed(2)}`}
+                  {safeProduct.shipping?.free ? 'FREE' : `AED ${((safeProduct.shipping?.days ?? 0) * 10).toFixed(2)}`}
                 </span>
               </div>
               <div className="mt-0.5 flex items-center justify-between text-sm text-muted-foreground">
                 <span>Priority 48H</span>
-                <span>To {product.shipping.from}</span>
+                <span>To {safeProduct.shipping?.from ?? 'UAE'}</span>
               </div>
             </div>
           </button>
 
           {/* Variant selector row */}
-          {product.colors.length > 0 && (
+          {safeProduct.colors.length > 0 && (
             <button className="flex w-full items-center gap-3 border-t border-border px-4 py-3.5">
               <div className="flex gap-1.5">
-                {product.images.slice(0, 2).map((src, i) => (
+                {safeProduct.images.slice(0, 2).map((src, i) => (
                   <img
                     key={i}
                     src={src || '/placeholder.svg'}
@@ -472,8 +522,8 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
                 ))}
               </div>
               <span className="flex-1 text-right text-base font-semibold text-foreground">
-                {product.colors[selectedColor] || product.colors[0]}
-                {product.sizes[0] ? `, ${product.sizes[0]}` : ''}
+                {safeProduct.colors[selectedColor] || safeProduct.colors[0] || 'N/A'}
+                {safeProduct.sizes?.[0] ? `, ${safeProduct.sizes[0]}` : ''}
               </span>
               <ChevronRight className="h-4 w-4 text-muted-foreground" />
             </button>
@@ -514,7 +564,7 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
             </button>
           </div>
           <div className="mt-3 flex gap-2 overflow-x-auto scrollbar-hide">
-            {product.images.concat(product.images).slice(0, 4).map((src, i) => (
+            {(safeProduct.images ?? []).concat(safeProduct.images ?? []).slice(0, 4).map((src, i) => (
               <div key={i} className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-lg bg-muted">
                 <img
                   src={src || '/placeholder.svg'}
@@ -532,7 +582,7 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
 
       {/* Reviews section */}
       <div ref={sectionRefs.Reviews}>
-        <ProductReviews rating={product.rating} totalReviews={product.reviews} />
+        <ProductReviews rating={safeProduct.rating} totalReviews={safeProduct.reviews} />
       </div>
 
       <div className="h-2 bg-muted" />
@@ -545,10 +595,10 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
             <ChevronRight className="h-5 w-5 text-muted-foreground" />
           </div>
           <div className="mt-3 grid grid-cols-3 gap-px overflow-hidden rounded-lg bg-border">
-            {Object.entries(product.specifications).map(([key, value]) => (
+            {Object.entries(safeProduct.specifications ?? {}).map(([key, value]) => (
               <div key={key} className="bg-muted/50 p-3">
                 <p className="text-xs capitalize text-muted-foreground">{key.replace(/_/g, ' ')}</p>
-                <p className="mt-1 text-sm font-bold text-foreground">{value}</p>
+                <p className="mt-1 text-sm font-bold text-foreground">{value ?? 'N/A'}</p>
               </div>
             ))}
           </div>
@@ -556,10 +606,10 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
 
         <div className="border-t border-border px-4 py-4">
           <h2 className="text-lg font-bold text-foreground">Description</h2>
-          <p className="mt-3 text-sm leading-relaxed text-foreground/80">{product.description}</p>
-          {product.images[1] && (
+          <p className="mt-3 text-sm leading-relaxed text-foreground/80">{safeProduct.description ?? 'No description available'}</p>
+          {safeProduct.images?.[1] && (
             <img
-              src={product.images[1] || '/placeholder.svg'}
+              src={safeProduct.images[1] || '/placeholder.svg'}
               alt={title}
               className="mt-3 w-full rounded-lg object-cover"
               crossOrigin="anonymous"
@@ -579,7 +629,7 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
 
       {/* Recommendations / Seller + Similar items */}
       <div ref={sectionRefs.Recommendations}>
-        <SellerSimilar productHandle={product.id} seller={product.seller} />
+        <SellerSimilar productHandle={safeProduct.id} seller={safeProduct.seller} />
       </div>
 
       {/* Bottom action bar */}
