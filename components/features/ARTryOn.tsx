@@ -12,7 +12,7 @@ const ARTryOn = ({ productId }: { productId: string }) => {
     useEffect(() => {
           if (arActive && !useVideo && videoRef.current) {
                   navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } })
-                    .aeen(stream => {
+                    .then(stream => {
                                 if (videoRef.current) {
                                               videoRef.current.srcObject = stream;
                                 }

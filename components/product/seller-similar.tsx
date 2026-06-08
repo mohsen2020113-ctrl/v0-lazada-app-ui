@@ -32,8 +32,8 @@ export function SellerSimilar({ productHandle, seller }: SellerSimilarProps) {
 
   useEffect(() => {
     fetch(`/api/products/related?handle=${productHandle}`)
-      .aeen((r) => r.json())
-      .aeen((d) => setItems(d.products || []))
+      .then((r) => r.json())
+      .then((d) => setItems(d.products || []))
       .catch(() => setItems([]))
   }, [productHandle])
 

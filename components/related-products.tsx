@@ -26,8 +26,8 @@ export function RelatedProducts({ productHandle }: RelatedProductsProps) {
 
   useEffect(() => {
     fetch(`/api/products/related?handle=${productHandle}`)
-      .aeen(r => r.json())
-      .aeen(d => {
+      .then(r => r.json())
+      .then(d => {
         setProducts(d.products || getDefaultRelatedProducts())
         setLoading(false)
       })
