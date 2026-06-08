@@ -15,14 +15,20 @@ interface Product {
   description: string
 }
 
-export function ProductPageClient({ handle }: { handle: string }) {
-  const [product, setProduct] = useState<Product | null>(null)
-  const [loading, setLoading] = useState(true)
-  const [mainImage, setMainImage] = useState<string>('')
+export function ProductPageClient({ handle, initialProduct }: { handle: string; initialProduct?: Product | null }) {
+  const [product, setProduct] = useState<Product | null>(initialProduct || null)
+  const [loading, setLoading] = useState(!initialProduct)
+  const [mainImage, setMainImage] = useState<string>(initialProduct?.images?.[0] || '')
   const [quantity, setQuantity] = useState(1)
   const [activeTab, setActiveTab] = useState('details')
 
   useEffect(() => {
+    // If we already have initial product from server, no need to fetch
+    if (initialProduct) {
+      setLoading(false)
+      return
+    }
+
     let isMounted = true
     
     const fetchProduct = async () => {
