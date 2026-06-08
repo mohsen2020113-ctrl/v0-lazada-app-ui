@@ -43,15 +43,88 @@ interface Product {
   tags: string[]
 }
 
+interface ErrorState {
+  message: string
+  messageAr: string
+  type: 'network' | 'timeout' | 'server' | 'unauthorized' | 'unknown'
+}
+
 const TABS = ['Overview', 'Reviews', 'Product Details', 'Recommendations'] as const
 type Tab = (typeof TABS)[number]
+
+// Helper function to categorize errors and provide bilingual messages
+function categorizeError(err: unknown): ErrorState {
+  if (err instanceof TypeError) {
+    // Network error or CORS issue
+    if (err.message.includes('fetch')) {
+      return {
+        type: 'network',
+        message: 'Unable to connect to the server. Please check your internet connection.',
+        messageAr: 'تعذر الاتصال بالخادم. يرجى التحقق من اتصال الإنترنت لديك.',
+      }
+    }
+    // JSON parsing error
+    return {
+      type: 'unknown',
+      message: 'Failed to load product data. Please try again.',
+      messageAr: 'فشل تحميل بيانات المنتج. يرجى المحاولة مرة أخرى.',
+    }
+  }
+
+  if (err instanceof Error) {
+    const msg = err.message
+
+    // Timeout
+    if (msg.includes('timeout') || msg.includes('aborted')) {
+      return {
+        type: 'timeout',
+        message: 'The request took too long. Please try again.',
+        messageAr: 'استغرقت الطلب وقتاً طويلاً. يرجى المحاولة مرة أخرى.',
+      }
+    }
+
+    // Server errors
+    if (msg.includes('500') || msg.includes('502') || msg.includes('503')) {
+      return {
+        type: 'server',
+        message: 'The server is temporarily unavailable. Please try again later.',
+        messageAr: 'الخادم غير متاح مؤقتاً. يرجى المحاولة لاحقاً.',
+      }
+    }
+
+    // Unauthorized
+    if (msg.includes('401') || msg.includes('403')) {
+      return {
+        type: 'unauthorized',
+        message: 'You do not have permission to view this product.',
+        messageAr: 'ليس لديك إذن لعرض هذا المنتج.',
+      }
+    }
+
+    // Generic HTTP errors
+    if (msg.includes('HTTP')) {
+      return {
+        type: 'server',
+        message: 'Failed to load the product. Please try again.',
+        messageAr: 'فشل تحميل المنتج. يرجى المحاولة مرة أخرى.',
+      }
+    }
+  }
+
+  // Unknown error
+  return {
+    type: 'unknown',
+    message: 'Something went wrong. Please try again.',
+    messageAr: 'حدث شيء ما خطأ. يرجى المحاولة مرة أخرى.',
+  }
+}
 
 export default function ProductPage({ params }: { params: Promise<{ handle: string }> }) {
   const { handle } = use(params)
   const router = useRouter()
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
+  const [error, setError] = useState<ErrorState | null>(null)
   const [activeTab, setActiveTab] = useState<Tab>('Overview')
   const [selectedColor, setSelectedColor] = useState(0)
   const [wished, setWished] = useState(false)
@@ -79,7 +152,11 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
     
     setLoading(true)
     setError(null)
-    fetch(`/api/products/${handle}`)
+    
+    const controller = new AbortController()
+    const timeoutId = setTimeout(() => controller.abort(), 10000) // 10 second timeout
+
+    fetch(`/api/products/${handle}`, { signal: controller.signal })
       .then((r) => {
         if (r.status === 404) {
           notFound()
@@ -94,9 +171,18 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
       .catch((err) => {
         console.error('[v0] Product fetch error:', err)
         setProduct(null)
-        setError(err instanceof Error ? err.message : 'Failed to load product')
+        
+        // Don't set error for aborted requests (likely due to navigation)
+        if (err.name !== 'AbortError') {
+          setError(categorizeError(err))
+        }
       })
-      .finally(() => setLoading(false))
+      .finally(() => {
+        clearTimeout(timeoutId)
+        setLoading(false)
+      })
+
+    return () => controller.abort()
   }, [handle])
 
   const scrollToSection = (tab: Tab) => {
@@ -112,21 +198,81 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
     )
   }
 
-  if (error || !product) {
+  if (error || (!product && !loading)) {
     return (
-      <div className="flex min-h-screen flex-col items-center justify-center gap-4 bg-white px-4">
-        <div className="text-center">
-          <p className="text-2xl font-bold text-foreground mb-2">حدث خطأ ما</p>
-          <p className="text-muted-foreground mb-4">
-            {error ? error : 'المنتج غير متوفر حالياً'}
+      <div className="flex min-h-screen flex-col items-center justify-center gap-6 bg-white px-4 py-8">
+        <div className="text-center max-w-md">
+          {/* Error icon based on type */}
+          <div className="mb-6 flex justify-center">
+            {error?.type === 'network' && (
+              <div className="rounded-full bg-red-100 p-4">
+                <svg className="h-8 w-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.111 16H5m13 0h-3m0 0a8 8 0 11-16 0 8 8 0 0116 0zM9 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+            )}
+            {error?.type === 'timeout' && (
+              <div className="rounded-full bg-yellow-100 p-4">
+                <svg className="h-8 w-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+            )}
+            {error?.type === 'server' && (
+              <div className="rounded-full bg-orange-100 p-4">
+                <svg className="h-8 w-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+            )}
+            {(!error?.type || error?.type === 'unknown') && (
+              <div className="rounded-full bg-gray-100 p-4">
+                <svg className="h-8 w-8 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4v.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+            )}
+          </div>
+
+          {/* Error message */}
+          <h2 className="text-2xl font-bold text-foreground mb-2">حدث خطأ ما</h2>
+          <p className="text-sm text-muted-foreground mb-6">
+            {error?.messageAr || 'فشل تحميل المنتج. يرجى المحاولة مرة أخرى.'}
+          </p>
+
+          {/* English message */}
+          <p className="text-xs text-muted-foreground mb-4 pb-4 border-b border-border">
+            {error?.message || 'Failed to load the product. Please try again.'}
           </p>
         </div>
-        <button 
-          onClick={handleGoBack} 
-          className="rounded bg-primary px-6 py-2 text-primary-foreground font-semibold"
-        >
-          العودة للخلف
-        </button>
+
+        {/* Action buttons */}
+        <div className="flex flex-col gap-3 w-full sm:w-auto sm:flex-row">
+          <button 
+            onClick={() => window.location.reload()}
+            className="rounded bg-primary px-8 py-2.5 text-primary-foreground font-semibold hover:bg-primary/90 transition-colors"
+          >
+            إعادة محاولة
+          </button>
+          <button 
+            onClick={handleGoBack} 
+            className="rounded border-2 border-primary px-8 py-2.5 text-primary font-semibold hover:bg-primary/5 transition-colors"
+          >
+            العودة للخلف
+          </button>
+        </div>
+
+        {/* Troubleshooting tips */}
+        {error?.type === 'network' && (
+          <div className="mt-6 text-left text-sm text-muted-foreground max-w-md bg-blue-50 border border-blue-200 rounded p-4">
+            <p className="font-semibold text-blue-900 mb-2">تلميحات التحكم بالمشاكل:</p>
+            <ul className="space-y-1 text-xs">
+              <li>• تحقق من اتصال الإنترنت لديك</li>
+              <li>• أغلق وأعد فتح التطبيق</li>
+              <li>• جرب من خلال شبكة مختلفة</li>
+            </ul>
+          </div>
+        )}
       </div>
     )
   }
