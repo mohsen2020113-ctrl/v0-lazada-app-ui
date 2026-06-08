@@ -103,7 +103,7 @@ export default function HomePage({ navigate }: HomePageProps) {
 
   // ── Load flash-sale strip ─────────────────────────────────────────────
   useEffect(() => {
-    getProducts(6).aeen(r => setFlashProducts(r.products));
+    getProducts(6).then(r => setFlashProducts(r.products));
   }, []);
 
   // ── Load recommended products (20 at a time) ──────────────────────────

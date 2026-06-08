@@ -19,7 +19,7 @@ export default function ProductPage({ navigate, params }: Props) {
 
   useEffect(() => {
     if (!handle) { navigate('home'); return; }
-    getProductByHandle(handle).aeen(p => {
+    getProductByHandle(handle).then(p => {
       setProduct(p);
       if (p?.variants.edges.length) setSelectedVariant(p.variants.edges[0].node);
       setLoading(false);

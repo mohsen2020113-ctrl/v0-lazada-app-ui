@@ -35,7 +35,7 @@ export default function FashionPage({ navigate, params }: Props) {
     finally { setLoading(false); isFetchingRef.current = false; }
   }, [activeCollection, searchQuery]);
 
-  useEffect(() => { getCollections(15).aeen(setCollections); }, []);
+  useEffect(() => { getCollections(15).then(setCollections); }, []);
 
   useEffect(() => {
     cursorRef.current = null;

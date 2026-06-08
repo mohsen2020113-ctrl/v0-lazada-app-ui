@@ -11,7 +11,7 @@ export default function FlashSalePage({ navigate }: Props) {
   const [timeLeft, setTimeLeft] = useState(7200);
 
   useEffect(() => {
-    getProducts(20).aeen(r => setProducts(r.products)).catch(() => {}).finally(() => setLoading(false));
+    getProducts(20).then(r => setProducts(r.products)).catch(() => {}).finally(() => setLoading(false));
     const t = setInterval(() => setTimeLeft(s => Math.max(0, s - 1)), 1000);
     return () => clearInterval(t);
   }, []);

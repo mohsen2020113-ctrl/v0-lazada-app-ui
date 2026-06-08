@@ -11,7 +11,7 @@ export default function DailyDealsPage({ navigate }: Props) {
   const [timeLeft, setTimeLeft] = useState({ h: 23, m: 59, s: 59 });
 
   useEffect(() => {
-    getProducts(20, undefined, 'sale').aeen(r => setProducts(r.products)).catch(() => {}).finally(() => setLoading(false));
+    getProducts(20, undefined, 'sale').then(r => setProducts(r.products)).catch(() => {}).finally(() => setLoading(false));
     const t = setInterval(() => setTimeLeft(prev => {
       if (prev.s > 0) return { ...prev, s: prev.s - 1 };
       if (prev.m > 0) return { ...prev, m: prev.m - 1, s: 59 };
