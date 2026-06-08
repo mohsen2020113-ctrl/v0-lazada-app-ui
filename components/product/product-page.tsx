@@ -1,6 +1,6 @@
 'use client'
 
-import { use, useState } from 'react'
+import { useState, useEffect } from 'react'
 import { ArrowLeft, Search, Share2, ShoppingCart, Heart, Star } from 'lucide-react'
 import { ProductGallery } from '@/components/product/product-gallery'
 
@@ -30,21 +30,58 @@ interface Product {
 
 const TABS = ['Overview', 'Reviews', 'Product Details', 'Recommendations']
 
-async function getProduct(handle: string): Promise<Product> {
-  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000'}/api/products/${handle}`, {
-    cache: 'revalidate',
-    next: { revalidate: 3600 }
-  })
-  
-  if (!response.ok) throw new Error('Product not found')
-  return response.json()
-}
-
-export function ProductPage({ params }: { params: Promise<{ handle: string }> }) {
-  const { handle } = use(params)
-  const productPromise = getProduct(handle)
-  const product = use(productPromise)
+export function ProductPageClient({ handle }: { handle: string }) {
+  const [product, setProduct] = useState<Product | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
   const [activeTab, setActiveTab] = useState('Overview')
+
+  useEffect(() => {
+    if (!handle) {
+      setError('Product not found')
+      setLoading(false)
+      return
+    }
+
+    const fetchProduct = async () => {
+      try {
+        setLoading(true)
+        const response = await fetch(`/api/products/${handle}`)
+        if (!response.ok) throw new Error('Product not found')
+        const data = await response.json()
+        setProduct(data)
+        setError(null)
+      } catch (err) {
+        console.error('[v0] Error fetching product:', err)
+        setError(err instanceof Error ? err.message : 'Failed to load product')
+        setProduct(null)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchProduct()
+  }, [handle])
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <p className="text-muted-foreground">جاري التحميل...</p>
+      </div>
+    )
+  }
+
+  if (error || !product) {
+    return (
+      <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-4">
+        <h2 className="text-xl font-semibold text-foreground">خطأ</h2>
+        <p className="text-muted-foreground text-center px-4">{error || 'لم يتم العثور على المنتج'}</p>
+        <button onClick={() => window.history.back()} className="mt-4 px-4 py-2 bg-primary text-primary-foreground rounded-lg">
+          العودة
+        </button>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen bg-white pb-24">
@@ -76,152 +113,159 @@ export function ProductPage({ params }: { params: Promise<{ handle: string }> })
           </button>
         </div>
 
-        {/* Tab Navigation */}
-        <nav className="flex items-center gap-4 overflow-x-auto border-t border-border px-4 scrollbar-hide">
+        {/* Tabs */}
+        <nav className="flex items-center gap-4 overflow-x-auto px-4 py-2 border-t border-border scrollbar-hide">
           {TABS.map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`relative whitespace-nowrap py-3 text-sm font-medium transition-colors ${
-                activeTab === tab ? 'text-[#E91E63]' : 'text-muted-foreground hover:text-foreground'
+              className={`whitespace-nowrap pb-2 pt-1 text-sm font-semibold transition-colors ${
+                activeTab === tab ? 'border-b-2 border-[#E91E63] text-[#E91E63]' : 'text-muted-foreground'
               }`}
             >
               {tab}
-              {activeTab === tab && (
-                <span className="absolute bottom-0 left-0 right-0 h-1 bg-[#E91E63] rounded-t-sm" />
-              )}
             </button>
           ))}
         </nav>
       </header>
 
       {/* Product Gallery */}
-      <ProductGallery 
-        images={product.images || []} 
-        alt={product.name} 
-        discount={product.discount}
-      />
+      <section className="bg-white">
+        <ProductGallery images={product.images || []} alt={product.name} discount={product.discount} />
+      </section>
 
-      {/* Price & Info Section */}
-      <div className="px-4 py-4 border-b border-border">
-        {/* Price */}
-        <div className="flex items-center gap-3 mb-3">
-          <span className="text-2xl font-bold text-[#E91E63]">฿{product.price}</span>
-          {product.originalPrice > product.price && (
-            <>
-              <span className="text-sm line-through text-muted-foreground">฿{product.originalPrice}</span>
-              <span className="text-xs font-semibold text-[#FF3B30] bg-red-50 px-2 py-1 rounded">
-                -{product.discount}%
-              </span>
-            </>
-          )}
+      {/* Price & Basic Info */}
+      <section className="border-b border-border px-4 py-4 bg-white">
+        {/* Images Carousel for variants */}
+        <div className="flex gap-2 pb-4 overflow-x-auto scrollbar-hide">
+          {product.images?.slice(0, 5).map((img, i) => (
+            <button key={i} className="flex-shrink-0 h-12 w-12 rounded border border-border overflow-hidden">
+              <img src={img} alt={`Variant ${i + 1}`} className="h-full w-full object-cover" />
+            </button>
+          ))}
+        </div>
+
+        {/* Price Display */}
+        <div className="flex items-center gap-3 pb-3">
+          <span className="text-2xl font-bold text-[#E91E63]">฿{product.price.toFixed(2)}</span>
+          <span className="text-sm line-through text-muted-foreground">฿{product.originalPrice.toFixed(2)}</span>
+          <span className="text-xs font-semibold bg-[#FF3B30] text-white px-2 py-1 rounded">-{product.discount}%</span>
         </div>
 
         {/* Tags */}
-        <div className="flex flex-wrap gap-2 mb-4">
-          {product.tags.map((tag, i) => (
-            <span key={i} className="text-xs bg-gray-100 text-foreground px-2.5 py-1 rounded">
+        <div className="flex flex-wrap gap-2 pb-4">
+          {product.tags?.slice(0, 3).map((tag) => (
+            <span key={tag} className="text-xs font-medium bg-muted px-2 py-1 rounded text-muted-foreground">
               {tag}
             </span>
           ))}
         </div>
 
-        {/* Product Title & Rating */}
-        <h1 className="text-lg font-semibold text-foreground mb-3">{product.name}</h1>
-
-        <div className="flex items-center gap-4 mb-4">
-          <div className="flex items-center gap-1">
-            <div className="flex">
-              {Array.from({ length: 5 }).map((_, i) => (
-                <Star
-                  key={i}
-                  size={16}
-                  className={i < Math.round(product.rating) ? 'fill-[#FFB400] text-[#FFB400]' : 'text-gray-300'}
-                />
-              ))}
+        {/* Shipping & Rating */}
+        <div className="flex items-center justify-between pb-3 border-b border-border">
+          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1">
+              <Star className="h-4 w-4 fill-[#FFB400] text-[#FFB400]" />
+              <span className="text-sm font-semibold">{product.rating}</span>
+              <span className="text-xs text-muted-foreground">({product.reviews.toLocaleString()})</span>
             </div>
-            <span className="text-sm font-semibold text-foreground ml-2">{product.rating}</span>
-            <span className="text-xs text-muted-foreground">({product.reviews} reviews)</span>
+            <span className="text-xs text-muted-foreground">{product.sold.toLocaleString()} عملية بيع</span>
           </div>
-        </div>
-
-        <div className="flex items-center justify-between text-sm mb-3">
-          <span className="text-muted-foreground">{product.sold} sold</span>
-          <button className="text-[#E91E63] hover:text-[#d41e6f]">
-            <Heart size={20} />
+          <button className="p-2">
+            <Heart className="h-5 w-5 text-muted-foreground" />
           </button>
         </div>
 
         {/* Shipping Info */}
-        <div className="bg-gray-50 rounded-lg p-3 text-xs space-y-1 mb-3">
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">Shipping</span>
-            <span className="font-medium">
-              {product.shipping.free ? 'Free' : `฿${product.shipping.free ? 0 : 50}`} • {product.shipping.days} days
-            </span>
-          </div>
-          <div className="flex justify-between">
-            <span className="text-muted-foreground">From</span>
-            <span className="font-medium">{product.shipping.from}</span>
-          </div>
+        <div className="pt-3 text-sm">
+          <p className="text-muted-foreground">
+            {product.shipping.free ? '🚚 شحن مجاني' : `🚚 شحن: ${product.shipping.days} أيام`}
+          </p>
         </div>
+      </section>
 
-        {/* Guarantee Badge */}
-        <div className="flex items-start gap-2 text-xs mb-3">
-          <div className="mt-0.5">✓</div>
-          <div>
-            <div className="font-semibold">7 Days Free Return</div>
-            <div className="text-muted-foreground">No questions asked</div>
-          </div>
-        </div>
-      </div>
-
-      {/* Seller Info */}
-      {activeTab === 'Overview' && (
-        <div className="px-4 py-4 border-b border-border">
-          <h3 className="text-sm font-semibold text-foreground mb-3">Seller</h3>
-          <div className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-            <div>
-              <div className="font-semibold text-sm">{product.seller.name}</div>
-              <div className="text-xs text-muted-foreground">Rating: {product.seller.rating} • {product.seller.totalSales} sales</div>
-            </div>
-            <button className="text-[#E91E63] text-sm font-semibold">Visit</button>
-          </div>
-        </div>
-      )}
-
-      {/* Specifications */}
-      {activeTab === 'Product Details' && (
-        <div className="px-4 py-4 border-b border-border">
-          <h3 className="text-sm font-semibold text-foreground mb-3">Specifications</h3>
-          <div className="grid grid-cols-2 gap-3">
-            {Object.entries(product.specifications).map(([key, value]) => (
-              <div key={key} className="bg-gray-50 p-3 rounded-lg">
-                <div className="text-xs text-muted-foreground capitalize">{key}</div>
-                <div className="text-sm font-semibold text-foreground">{value}</div>
+      {/* Product Details by Tab */}
+      <section className="px-4 py-6 bg-white">
+        {activeTab === 'Overview' && (
+          <div className="space-y-4">
+            <h3 className="font-semibold text-foreground">{product.name}</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">{product.description}</p>
+            
+            <div className="pt-4 border-t border-border">
+              <h4 className="font-semibold text-foreground mb-3">المواصفات</h4>
+              <div className="space-y-2">
+                {Object.entries(product.specifications || {}).map(([key, value]) => (
+                  <div key={key} className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">{key}</span>
+                    <span className="font-medium text-foreground">{value}</span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* Sticky Bottom Action Bar */}
-      <div className="fixed bottom-0 left-0 right-0 border-t border-border bg-white px-4 py-3 flex gap-2 shadow-lg">
+        {activeTab === 'Reviews' && (
+          <div className="space-y-4">
+            <h3 className="font-semibold text-foreground">التقييمات ({product.reviews})</h3>
+            <div className="flex items-center gap-2 p-3 rounded-lg bg-muted">
+              <span className="text-2xl font-bold text-foreground">{product.rating}</span>
+              <div>
+                <div className="flex gap-1">
+                  {Array(5).fill(0).map((_, i) => (
+                    <Star key={i} className={`h-4 w-4 ${i < Math.floor(product.rating) ? 'fill-[#FFB400] text-[#FFB400]' : 'text-border'}`} />
+                  ))}
+                </div>
+                <p className="text-xs text-muted-foreground">{product.reviews} تقييم</p>
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'Product Details' && (
+          <div className="space-y-4">
+            <h3 className="font-semibold text-foreground">تفاصيل المنتج</h3>
+            <div className="grid gap-3">
+              {Object.entries({
+                'الفئة': product.category,
+                'المخزون': product.stock,
+                'البائع': product.seller?.name,
+                'تصنيف البائع': `${product.seller?.rating}⭐`,
+              }).map(([label, value]) => (
+                <div key={label} className="flex justify-between pb-3 border-b border-border">
+                  <span className="text-sm text-muted-foreground">{label}</span>
+                  <span className="text-sm font-medium text-foreground">{value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'Recommendations' && (
+          <div className="space-y-4">
+            <h3 className="font-semibold text-foreground">منتجات موصى بها</h3>
+            <p className="text-sm text-muted-foreground">منتجات مشابهة قريباً</p>
+          </div>
+        )}
+      </section>
+
+      {/* Fixed Bottom Action Bar */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-border shadow-lg flex items-center justify-between gap-2 px-3 py-2 z-30">
         <div className="flex gap-2 flex-1">
-          <button className="flex-1 flex items-center justify-center gap-2 text-muted-foreground text-sm font-medium">
-            <div className="text-xl">🏪</div>
-            <span className="hidden sm:inline">Store</span>
+          <button className="flex-1 flex items-center justify-center gap-2 text-muted-foreground text-sm font-medium py-3 hover:bg-muted rounded-lg transition-colors">
+            <span>🏪</span>
+            <span className="hidden sm:inline">متجر</span>
           </button>
-          <button className="flex-1 flex items-center justify-center gap-2 text-muted-foreground text-sm font-medium">
-            <div className="text-xl">💬</div>
-            <span className="hidden sm:inline">Chat</span>
+          <button className="flex-1 flex items-center justify-center gap-2 text-muted-foreground text-sm font-medium py-3 hover:bg-muted rounded-lg transition-colors">
+            <span>💬</span>
+            <span className="hidden sm:inline">دردشة</span>
           </button>
         </div>
         <button className="flex-1 bg-[#FF9500] hover:bg-[#F08500] text-white font-semibold py-3 rounded-lg transition-colors text-sm">
-          Buy Now
+          اشتر الآن
         </button>
         <button className="flex-1 bg-[#E91E63] hover:bg-[#d41e6f] text-white font-semibold py-3 rounded-lg transition-colors text-sm">
-          Add to Cart
+          أضف للعربة
         </button>
       </div>
     </div>
