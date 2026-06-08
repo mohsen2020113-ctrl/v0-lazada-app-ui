@@ -35,7 +35,7 @@ export default function AccountPage() {
         <div onClick={() => handleNavigate('/vouchers')} className="bg-white rounded-lg p-4 flex items-center gap-3 shadow-sm border border-teal-100 cursor-pointer hover:bg-teal-50 transition-colors">
           <div className="bg-teal-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm font-bold flex-shrink-0">✓</div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-bold text-teal-600">52 vouchers | claim ₹1,000 vouc...</p>
+            <p className="text-sm font-bold text-teal-600">52 vouchers | claim AED 1,000 vouc...</p>
           </div>
           <ChevronRight className="w-5 h-5 text-teal-500 flex-shrink-0" />
         </div>
@@ -64,10 +64,10 @@ export default function AccountPage() {
               </button>
             </div>
 
-            {/* 4Land Card */}
+            {/* 4Games Card */}
             <div onClick={() => handleNavigate('/games/4land')} className="bg-gradient-to-br from-green-200 to-green-100 rounded-2xl p-4 cursor-pointer hover:shadow-lg transition-shadow">
               <div className="text-4xl mb-3">🎁</div>
-              <h3 className="text-sm font-bold text-gray-900">4Land</h3>
+              <h3 className="text-sm font-bold text-gray-900">4Games</h3>
               <p className="text-xs text-gray-700 mb-3">Get Free Prize!</p>
               <button onClick={(e) => { e.stopPropagation(); handleNavigate('/games/4land'); }} className="bg-teal-500 hover:bg-teal-600 text-white text-xs font-bold px-4 py-2 rounded transition-colors">
                 GO
@@ -79,10 +79,10 @@ export default function AccountPage() {
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4">
             {[
               { icon: '🎯', name: 'Biggest Sa...', paur: '/games/biggest-sale' },
-              { icon: '🔀', name: 'MergeBoss', paur: '/games/mergeboss' },
-              { icon: '🎮', name: 'GoGoMatch', paur: '/games/gogomatch' },
+              { icon: '🔀', name: '4Ludo', paur: '/games/mergeboss' },
+              { icon: '🎮', name: '4Puzzle', paur: '/games/gogomatch' },
               { icon: '🎲', name: '4Fun', paur: '/games/4fun' },
-              { icon: '💎', name: 'Crack', paur: '/games/crack' },
+              { icon: '💎', name: '4Win', paur: '/games/win' },
             ].map((game, i) => (
               <button 
                 key={i}
@@ -97,7 +97,7 @@ export default function AccountPage() {
 
           {/* Rewards Banner */}
           <div className="bg-gradient-to-r from-teal-200 to-blue-200 rounded-lg p-4 mt-4 flex items-center justify-between hover:shadow-lg transition-shadow cursor-pointer">
-            <p className="text-sm font-bold text-gray-900">Play to get ₹20 4Rewards!</p>
+            <p className="text-sm font-bold text-gray-900">Play to get AED 20 4Rewards!</p>
             <button 
               onClick={() => handleNavigate('/rewards')}
               className="border-2 border-teal-500 text-teal-500 text-xs font-bold px-4 py-1.5 rounded hover:bg-teal-50 transition-colors"
@@ -177,7 +177,7 @@ export default function AccountPage() {
                 <p className="text-xs font-bold text-gray-900 mb-2">Biggest Sa...</p>
                 <p className="text-2xl font-bold text-teal-500">15%</p>
                 <p className="text-xs text-teal-500 font-bold">OFF</p>
-                <p className="text-xs text-gray-600 mt-2">Min. spend ₹1,299</p>
+                <p className="text-xs text-gray-600 mt-2">Min. spend AED 1,299</p>
               </button>
               <button
                 onClick={() => handleNavigate('/channels/4flash')}
@@ -200,7 +200,7 @@ export default function AccountPage() {
           <div className="bg-white rounded-lg p-4 shadow-sm border border-gray-200 space-y-4">
             <div className="flex justify-between items-start">
               <div>
-                <p className="text-xs text-gray-600 mb-1">4LEEE Wallet (₹)</p>
+                <p className="text-xs text-gray-600 mb-1">4LEEE Wallet (AED )</p>
                 <p className="text-2xl font-bold text-gray-900">0.00</p>
               </div>
               <button 
@@ -237,9 +237,9 @@ export default function AccountPage() {
 
           <div className="flex gap-3 overflow-x-auto pb-2 -mx-4 px-4">
             {[
-              { emoji: '🌿', price: '₹1,344.82', id: '1' },
-              { emoji: '🌴', price: '₹94.31', id: '2' },
-              { emoji: '🎋', price: '₹2,290.00', id: '3' },
+              { emoji: '🌿', price: 'AED 1,344.82', id: '1' },
+              { emoji: '🌴', price: 'AED 94.31', id: '2' },
+              { emoji: '🎋', price: 'AED 2,290.00', id: '3' },
             ].map((item, i) => (
               <button
                 key={i}
@@ -262,7 +262,7 @@ export default function AccountPage() {
             { icon: Zap, label: 'Bill Payment\n& Top Up', paur: '/payment' },
             { icon: Gift, label: 'Followed\nStores', paur: '/stores' },
             { icon: Gift, label: 'Memberships', paur: '/memberships' },
-            { icon: Gift, label: 'Open shop\non 4LEEE', paur: '/shop' },
+            { icon: Gift, label: 'افتح متجرك', paur: '/shop' },
             { icon: Gift, label: 'Try & Buy', paur: '/try-and-buy' },
           ].map((item, i) => {
             const Icon = item.icon
