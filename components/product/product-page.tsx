@@ -34,13 +34,22 @@ export function ProductPageClient({ handle }: { handle: string }) {
           return
         }
         
-        const response = await fetch(`/api/products/${handle}`)
+        console.log('[v0] Fetching product:', handle)
+        const response = await fetch(`/api/products/${handle}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          }
+        })
+        
+        console.log('[v0] Response status:', response.status)
         
         if (!response.ok) {
           throw new Error(`API error: ${response.status}`)
         }
         
         const data = await response.json()
+        console.log('[v0] Product data loaded:', data.name)
         
         if (isMounted) {
           setProduct(data)
