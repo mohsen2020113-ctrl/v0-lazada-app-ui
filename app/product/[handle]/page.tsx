@@ -330,18 +330,22 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
   const title = safeProduct.nameEn || safeProduct.name || 'Product'
 
   return (
-    <div className="min-h-screen bg-muted pb-20">
+    <div className="min-h-screen bg-white pb-24">
       {/* Sticky header */}
-      <header className="sticky top-0 z-40 bg-white">
-        <div className="flex items-center gap-2 px-3 py-2.5">
+      <header className="sticky top-0 z-40 border-b border-border bg-white shadow-sm">
+        <div className="flex items-center gap-2 px-3 py-3">
           <button onClick={handleGoBack} aria-label="Back" className="p-1">
             <ArrowLeft className="h-6 w-6 text-foreground" />
           </button>
-          <div className="flex flex-1 items-center gap-2 rounded-full border-2 border-primary px-4 py-2">
-            <Search className="h-4 w-4 text-muted-foreground" />
-            <span className="text-sm text-muted-foreground">Search in 4LEEE</span>
+          <div className="flex flex-1 items-center gap-2 rounded-lg border-2 border-primary px-4 py-2.5">
+            <Search className="h-5 w-5 text-muted-foreground" />
+            <input
+              type="text"
+              placeholder="Search in 4LEEE"
+              className="flex-1 bg-transparent text-sm placeholder-muted-foreground outline-none"
+            />
           </div>
-          <button aria-label="Share" className="p-1">
+          <button aria-label="Refresh" className="p-1">
             <Share2 className="h-6 w-6 text-foreground" />
           </button>
           <button aria-label="Cart" className="relative p-1">
@@ -350,20 +354,23 @@ export default function ProductPage({ params }: { params: Promise<{ handle: stri
               3
             </span>
           </button>
+          <button aria-label="More" className="p-1">
+            <span className="text-lg">⋯</span>
+          </button>
         </div>
 
         {/* Tabs */}
-        <nav className="flex items-center gap-6 overflow-x-auto px-4 scrollbar-hide">
+        <nav className="flex items-center gap-4 overflow-x-auto border-t border-border px-4 scrollbar-hide">
           {TABS.map((tab) => (
             <button
               key={tab}
               onClick={() => scrollToSection(tab)}
-              className={`relative whitespace-nowrap pb-2.5 pt-1 text-base font-semibold ${activeTab === tab ? 'text-primary' : 'text-muted-foreground'
+              className={`relative whitespace-nowrap py-3 text-sm font-semibold transition-colors ${activeTab === tab ? 'text-primary' : 'text-muted-foreground hover:text-foreground'
                 }`}
             >
               {tab}
               {activeTab === tab && (
-                <span className="absolute bottom-0 left-1/2 h-0.5 w-8 -translate-x-1/2 rounded bg-primary" />
+                <span className="absolute bottom-0 left-0 right-0 h-1 bg-primary rounded-t-sm" />
               )}
             </button>
           ))}
