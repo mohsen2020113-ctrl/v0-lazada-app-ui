@@ -3,12 +3,19 @@ import { ProductPageClient } from '@/components/product/product-page'
 
 async function getProduct(handle: string) {
   try {
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/products/${handle}`, {
+    const baseUrl = process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}`
+      : process.env.NEXT_PUBLIC_API_URL 
+      ? process.env.NEXT_PUBLIC_API_URL
+      : 'http://localhost:3000'
+    
+    const response = await fetch(`${baseUrl}/api/products/${handle}`, {
       cache: 'revalidate',
-      next: { revalidate: 3600 } // revalidate every hour
+      next: { revalidate: 3600 }
     })
     
     if (!response.ok) {
+      console.error(`[v0] API error: ${response.status}`)
       return null
     }
     
