@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /api/
 
-Sitemap: https://v0-lazada-app-ui.vercel.app/sitemap.xml
+Sitemap: https://www.4LEEE.com/sitemap.xml

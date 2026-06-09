@@ -133,7 +133,7 @@ export async function POST(request: NextRequest) {
 
     if (imageUrl) {
       try {
-        const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000';
+        const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://www.4LEEE.com';
         const visionRes = await fetch(`${baseUrl}/api/image/analyze`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },

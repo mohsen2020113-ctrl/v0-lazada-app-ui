@@ -1,3 +1,14 @@
 {
-  "buildCommand": "node .v0/inject-built-with-v0.mjs && next build"
+  "buildCommand": "node .v0/inject-built-with-v0.mjs && next build",
+  "domains": [
+    "4leee.com",
+    "www.4leee.com"
+  ],
+  "redirects": [
+    {
+      "source": "/api/:path*",
+      "destination": "/api/:path*",
+      "permanent": false
+    }
+  ]
 }
