@@ -1,161 +1,81 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { ChevronLeft, ChevronRight, Bell, Lock, HelpCircle, MessageSquare } from 'lucide-react';
-import { useState, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
+import { ChevronLeft, Eye, EyeOff } from 'lucide-react'
+import Link from 'next/link'
+import { useState } from 'react'
 
 export default function SettingsPage() {
-  const router = useRouter();
-  const [isLoggingOut, setIsLoggingOut] = useState(false);
-
-  const handleNavigateBack = useCallback(() => {
-    router.push('/account');
-  }, [router]);
-
-  const handleLogout = async () => {
-    setIsLoggingOut(true);
-    try {
-      const response = await fetch('/api/auth/logout', { method: 'POST' });
-      if (response.ok) {
-        router.push('/');
-      }
-    } catch (error) {
-      console.error('Logout failed:', error);
-      setIsLoggingOut(false);
-    }
-  };
-
-  const menuItems = [
-    { 
-      label: 'Account Information', 
-      href: '/account/settings/info',
-      icon: null 
-    },
-    { 
-      label: 'Payment Setting', 
-      href: '/account/settings/payment',
-      icon: null 
-    },
-    { 
-      label: 'Address Book', 
-      href: '/account/addresses',
-      icon: null 
-    },
-    { 
-      label: 'Messages', 
-      subtitle: 'Receive exclusive offers and personal updates',
-      href: '/messages',
-      icon: null 
-    },
-    { 
-      label: 'Country', 
-      subtitle: 'UAE is your current country',
-      hasFlag: true,
-      href: '/account/settings/country',
-      icon: null 
-    },
-    { 
-      label: 'Language', 
-      subtitle: 'English',
-      href: '/account/settings/language',
-      icon: null 
-    },
-    { 
-      label: 'Dark Mode', 
-      href: '/account/settings/darkmode',
-      icon: null 
-    },
-    { 
-      label: 'Account Security', 
-      href: '/account/settings/security',
-      icon: Lock 
-    },
-    { 
-      label: 'Policies', 
-      href: '/account/settings/policies',
-      icon: null 
-    },
-    { 
-      label: 'Help', 
-      href: '/account/settings/help',
-      icon: HelpCircle 
-    },
-    { 
-      label: 'Feedback', 
-      href: '/account/settings/feedback',
-      icon: MessageSquare 
-    },
-  ];
+  const [showPassword, setShowPassword] = useState(false)
+  const [notifications, setNotifications] = useState({
+    email: true,
+    sms: false,
+    push: true,
+  })
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      {/* Header */}
-      <header className="bg-white sticky top-0 z-50 border-b border-gray-100">
-        <div className="flex items-center px-4 py-4 gap-3">
-          <button 
-            onClick={handleNavigateBack}
-            className="p-2 -ml-2 hover:bg-gray-100 rounded-lg transition-colors"
-            aria-label="Go back"
-          >
-            <ChevronLeft className="w-6 h-6 text-gray-900" strokeWidth={2.5} />
-          </button>
+    <div className="min-h-screen bg-gray-50">
+      <div className="sticky top-0 z-40 bg-white border-b border-gray-200 px-4 md:px-8 py-4">
+        <div className="max-w-4xl mx-auto flex items-center gap-4">
+          <Link href="/account" className="p-2 hover:bg-gray-100 rounded-lg transition-colors"><ChevronLeft className="w-6 h-6" /></Link>
           <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
         </div>
-      </header>
+      </div>
 
-      <main className="flex-1 overflow-y-auto pb-32">
-        {/* Menu Items */}
-        <div className="bg-white mt-2">
-          {menuItems.map((item, index) => (
-            <Link
-              key={index}
-              href={item.href}
-              className="flex items-center px-4 py-4 hover:bg-gray-50 transition-colors active:bg-gray-100 border-b border-gray-50 last:border-b-0"
-            >
-              {/* UAE Flag for Country item */}
-              {item.hasFlag && (
-                <div className="w-9 h-6 mr-3 relative overflow-hidden rounded flex-shrink-0 flex-row flex">
-                  <div className="flex-1 bg-green-700" />
-                  <div className="flex-1 bg-white" />
-                  <div className="flex-1 bg-black" />
-                  <div className="flex-[0.2] bg-red-600" />
-                </div>
-              )}
-              
-              {/* Icon if available */}
-              {item.icon && !item.hasFlag && (
-                <div className="w-9 h-9 mr-3 flex items-center justify-center flex-shrink-0 text-pink-600">
-                  <item.icon className="w-5 h-5" />
-                </div>
-              )}
-              
-              <div className="flex-1 text-left">
-                <p className="text-base text-gray-900 font-medium">{item.label}</p>
-                {item.subtitle && (
-                  <p className="text-sm text-gray-500 mt-0.5">{item.subtitle}</p>
-                )}
+      <div className="max-w-4xl mx-auto px-4 md:px-8 py-8">
+        {/* Password */}
+        <div className="bg-white border border-gray-200 rounded-lg p-8 mb-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-6">Change Password</h2>
+          <div className="space-y-4 mb-6">
+            <div>
+              <label className="block text-sm text-gray-600 mb-2">Current Password</label>
+              <div className="relative">
+                <input type={showPassword ? "text" : "password"} placeholder="••••••••" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-600" />
+                <button onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
               </div>
-
-              <ChevronRight className="w-5 h-5 text-gray-300 flex-shrink-0 ml-2" strokeWidth={2.5} />
-            </Link>
-          ))}
+            </div>
+            <div>
+              <label className="block text-sm text-gray-600 mb-2">New Password</label>
+              <input type="password" placeholder="••••••••" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-600" />
+            </div>
+            <div>
+              <label className="block text-sm text-gray-600 mb-2">Confirm Password</label>
+              <input type="password" placeholder="••••••••" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-600" />
+            </div>
+          </div>
+          <button className="w-full bg-pink-600 text-white py-3 rounded-lg font-bold hover:bg-pink-700 transition-colors">Update Password</button>
         </div>
 
-        {/* Logout Button Section */}
-        <div className="mt-6 px-4">
-          <button
-            onClick={handleLogout}
-            disabled={isLoggingOut}
-            className="w-full py-3 bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white font-semibold rounded-lg transition-colors active:bg-red-800 disabled:opacity-70"
-          >
-            {isLoggingOut ? 'Logging out...' : 'Logout'}
-          </button>
+        {/* Notifications */}
+        <div className="bg-white border border-gray-200 rounded-lg p-8 mb-6">
+          <h2 className="text-xl font-bold text-gray-900 mb-6">Notification Preferences</h2>
+          <div className="space-y-4">
+            {Object.entries(notifications).map(([key, value]) => (
+              <label key={key} className="flex items-center gap-3 cursor-pointer">
+                <input type="checkbox" checked={value} onChange={(e) => setNotifications({ ...notifications, [key]: e.target.checked })} className="w-4 h-4 accent-pink-600" />
+                <span className="font-bold text-gray-900 capitalize">{key} Notifications</span>
+              </label>
+            ))}
+          </div>
         </div>
 
-        {/* Bottom spacing */}
-        <div className="h-12" />
-      </main>
+        {/* Privacy */}
+        <div className="bg-white border border-gray-200 rounded-lg p-8">
+          <h2 className="text-xl font-bold text-gray-900 mb-6">Privacy & Security</h2>
+          <div className="space-y-3">
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" defaultChecked className="w-4 h-4 accent-pink-600" />
+              <span className="font-bold text-gray-900">Make profile private</span>
+            </label>
+            <label className="flex items-center gap-3 cursor-pointer">
+              <input type="checkbox" className="w-4 h-4 accent-pink-600" />
+              <span className="font-bold text-gray-900">Allow others to see my purchases</span>
+            </label>
+          </div>
+          <button className="w-full mt-6 border border-red-600 text-red-600 py-3 rounded-lg font-bold hover:bg-red-50 transition-colors">Delete Account</button>
+        </div>
+      </div>
     </div>
-  );
+  )
 }

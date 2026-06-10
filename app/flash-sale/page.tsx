@@ -1,100 +1,47 @@
 'use client'
-import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
-import { ChevronLeft, Zap, ShoppingCart, Heart } from 'lucide-react'
+
+import { Heart, Flame } from 'lucide-react'
 import Link from 'next/link'
+import { useState, useEffect } from 'react'
 
-const PRODUCTS = [
-  { id: 1, name: 'سماعات لاسلكية احترافية', price: 299, original: 599, img: '', discount: 50, sold: 78 },
-  { id: 2, name: 'ساعة ذكية رياضية', price: 199, original: 399, img: '', discount: 50, sold: 45 },
-  { id: 3, name: 'كاميرا مراقبة ذكية', price: 149, original: 320, img: '', discount: 53, sold: 92 },
-  { id: 4, name: 'مكبر صوت بلوتوث', price: 89, original: 180, img: '', discount: 51, sold: 30 },
-  { id: 5, name: 'شاحن لاسلكي سريع', price: 49, original: 100, img: '', discount: 51, sold: 60 },
-  { id: 6, name: 'حافظة هاتف مع بطارية', price: 79, original: 150, img: '', discount: 47, sold: 22 },
-]
+const mockProducts = Array(8).fill(null).map((_, i) => ({ id: i + 1, name: `Flash Sale Product ${i + 1}`, price: 30 + Math.random() * 100, originalPrice: 100 + Math.random() * 200, discount: 58, rating: 4.5 + Math.random() * 0.4, reviews: 100 + Math.random() * 9900, image: `https://via.placeholder.com/200x200?text=Product${i + 1}`, sold: 100 + Math.random() * 9900 }))
 
-function useCountdown(targetSeconds: number) {
-  const [secs, setSecs] = useState(targetSeconds)
+function CountdownTimer() {
+  const [time, setTime] = useState(3600)
+
   useEffect(() => {
-    const t = setInterval(() => setSecs(s => s > 0 ? s - 1 : 0), 1000)
-    return () => clearInterval(t)
+    const interval = setInterval(() => setTime((t) => (t > 0 ? t - 1 : 0)), 1000)
+    return () => clearInterval(interval)
   }, [])
-  const h = Math.floor(secs / 3600)
-  const m = Math.floor((secs % 3600) / 60)
-  const s = secs % 60
-  return [h, m, s].map(n => String(n).padStart(2, '0'))
+
+  const hours = Math.floor(time / 3600), minutes = Math.floor((time % 3600) / 60), seconds = time % 60
+  return <div className="flex gap-1 font-bold text-sm"><span className="bg-red-600 text-white px-2 py-1 rounded">{String(hours).padStart(2, '0')}</span><span className="text-red-600">:</span><span className="bg-red-600 text-white px-2 py-1 rounded">{String(minutes).padStart(2, '0')}</span><span className="text-red-600">:</span><span className="bg-red-600 text-white px-2 py-1 rounded">{String(seconds).padStart(2, '0')}</span></div>
 }
 
 export default function FlashSalePage() {
-  const router = useRouter()
-  const [h, m, s] = useCountdown(6 * 3600 + 24 * 60 + 11)
-
   return (
-    <div className="min-h-screen bg-[#0F0F0F]" dir="rtl">
-      {/* Header */}
-      <div className="flex items-center px-4 pt-12 pb-4 gap-3">
-        <button onClick={() => router.back()} className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center">
-          <ChevronLeft size={18} className="text-white" />
-        </button>
-        <Zap size={20} className="text-[#F57224] fill-[#F57224]" />
-        <h1 className="text-white font-bold text-lg">فلاش سيل</h1>
-      </div>
-
-      {/* Timer Banner */}
-      <div className="mx-4 mb-5 rounded-2xl p-4"
-        style={{ background: 'linear-gradient(135deg, #F57224, #C13D00)' }}>
-        <p className="text-white/80 text-xs mb-2 text-center">ينتهي العرض خلال</p>
-        <div className="flex items-center justify-center gap-2">
-          {[h, m, s].map((val, i) => (
-            <div key={i} className="flex items-center gap-2">
-              <div className="bg-black/30 rounded-xl w-14 h-14 flex items-center justify-center">
-                <span className="text-white font-black text-2xl">{val}</span>
-              </div>
-              {i < 2 && <span className="text-white font-black text-xl">:</span>}
-            </div>
-          ))}
-        </div>
-        <div className="flex justify-center gap-6 mt-2">
-          {['ساعة', 'دقيقة', 'ثانية'].map(l => <span key={l} className="text-white/50 text-xs">{l}</span>)}
+    <div className="min-h-screen bg-gray-50">
+      <div className="sticky top-0 z-40 bg-gradient-to-r from-red-600 to-pink-600 text-white px-4 md:px-8 py-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center gap-3"><Flame className="w-8 h-8" /><div><h1 className="text-3xl font-bold">Flash Sale</h1><p className="text-red-100 text-sm">Limited time deals - Ends in</p></div></div>
+            <CountdownTimer />
+          </div>
         </div>
       </div>
 
-      {/* Products Grid */}
-      <div className="px-4 pb-24">
-        <div className="grid grid-cols-2 gap-3">
-          {PRODUCTS.map(p => (
-            <div key={p.id} className="bg-[#1A1A1A] rounded-2xl overflow-hidden">
-              <div className="relative aspect-square bg-[#2A2A2A] flex items-center justify-center">
-                <span className="text-5xl">📦</span>
-                <div className="absolute top-2 right-2 bg-[#F57224] text-white text-xs font-black px-2 py-0.5 rounded-lg">
-                  -{p.discount}%
-                </div>
-                <button className="absolute top-2 left-2 w-7 h-7 rounded-full bg-black/50 flex items-center justify-center">
-                  <Heart size={13} className="text-white" />
-                </button>
-              </div>
-              <div className="p-2.5">
-                <p className="text-white text-xs font-semibold line-clamp-2 mb-1.5">{p.name}</p>
-                {/* Progress bar */}
-                <div className="h-1 bg-white/10 rounded-full mb-1.5">
-                  <div className="h-1 bg-[#F57224] rounded-full" style={{ widur: p.sold + '%' }} />
-                </div>
-                <p className="text-white/30 text-xs mb-2">تم بيع {p.sold}%</p>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <span className="text-[#F57224] font-black text-base">{p.price}</span>
-                    <span className="text-[#F57224] text-xs"> AED</span>
-                    <p className="text-white/30 text-xs line-through">{p.original} AED</p>
-                  </div>
-                  <button className="w-8 h-8 rounded-xl bg-[#F57224] flex items-center justify-center">
-                    <ShoppingCart size={14} className="text-white" />
-                  </button>
-                </div>
-              </div>
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
+        <div className="bg-white border-l-4 border-red-600 rounded-lg p-6 mb-8"><h2 className="text-2xl font-bold text-gray-900 mb-2">Up to 58% Off Today!</h2><p className="text-gray-600">Flash sale products are available for a limited time only. Shop now before they&apos;re gone!</p></div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
+          {mockProducts.map((product) => (
+            <div key={product.id} className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+              <div className="relative pb-full"><img src={product.image} alt={product.name} className="w-full aspect-square object-cover hover:scale-105 transition-transform" /><div className="absolute top-2 left-2 bg-red-600 text-white px-3 py-1 rounded-full font-bold text-lg">-{product.discount}%</div><div className="absolute top-2 right-2"><button className="p-2 bg-white rounded-full hover:bg-gray-100 transition-colors shadow"><Heart className="w-5 h-5 text-gray-600" /></button></div></div>
+              <div className="p-3"><p className="font-bold text-gray-900 line-clamp-2 text-sm mb-2">{product.name}</p><div className="flex items-center gap-2 mb-3"><span className="text-2xl font-bold text-red-600">฿{product.price.toFixed(2)}</span><span className="text-sm text-gray-500 line-through">฿{product.originalPrice.toFixed(2)}</span></div><p className="text-xs text-gray-600 mb-3"><span className="text-orange-600 font-bold">{Math.floor(product.sold)}</span> sold</p><Link href={`/product/${product.id}`} className="w-full bg-red-600 text-white py-2 rounded-lg font-bold hover:bg-red-700 transition-colors text-center block">Shop Now</Link></div>
             </div>
           ))}
         </div>
+        <button className="w-full py-3 border-2 border-gray-300 rounded-lg font-bold text-gray-900 hover:bg-gray-50 transition-colors">View More Flash Deals</button>
       </div>
     </div>
   )
-          }
+}

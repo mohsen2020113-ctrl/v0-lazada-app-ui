@@ -1,130 +1,81 @@
-"use client";
+'use client'
 
-import { useEffect, useState } from 'react';
-import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import { ShoppingCart, Trash2, Heart, ChevronLeft, Plus, Minus } from 'lucide-react'
+import Link from 'next/link'
+import { useState } from 'react'
 
 export default function CartPage() {
-  const router = useRouter();
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      name: 'Premium Wireless Headphones',
-      price: 299.99,
-      image: '/products/headphones.jpg',
-      quantity: 1,
-      colors: ['Black', 'Blue'],
-      sizes: ['One Size'],
-      description: 'High-quality wireless headphones with noise cancellation'
-    },
-    {
-      id: 2,
-      name: 'Smart Watch Pro',
-      price: 399.99,
-      image: '/products/smartwatch.jpg',
-      quantity: 1,
-      colors: ['Silver', 'Gold'],
-      sizes: ['One Size'],
-      description: 'Advanced fitness tracking and notifications'
-    }
-  ]);
+  const [items, setItems] = useState([
+    { id: 1, name: 'Tissue Paper Roll - 4 Pack', price: 37.9, originalPrice: 90, quantity: 2, image: 'https://via.placeholder.com/100x100?text=Product1', stock: 15 },
+    { id: 2, name: 'Premium Hand Soap', price: 45.5, originalPrice: 120, quantity: 1, image: 'https://via.placeholder.com/100x100?text=Product2', stock: 8 },
+  ])
+
+  const updateQuantity = (id: number, qty: number) => {
+    if (qty < 1) return
+    setItems(items.map((item) => (item.id === id ? { ...item, quantity: qty } : item)))
+  }
+
+  const removeItem = (id: number) => {
+    setItems(items.filter((item) => item.id !== id))
+  }
+
+  const subtotal = items.reduce((acc, item) => acc + item.price * item.quantity, 0)
+  const shipping = subtotal > 500 ? 0 : 50
+  const discount = subtotal > 500 ? subtotal * 0.1 : 0
+  const total = subtotal + shipping - discount
 
   return (
-    <div className="min-h-screen bg-white">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-teal-500 to-teal-600 text-white p-4">
-        <div className="flex items-center justify-between">
-          <div>
-            <h1 className="text-2xl font-bold">4LEEE Shopping Cart</h1>
-            <p className="text-sm opacity-90">سلة التسوق - 4LEEE</p>
-          </div>
-          <div className="text-3xl font-bold opacity-50">4</div>
+    <div className="min-h-screen bg-gray-50">
+      <div className="sticky top-0 z-40 bg-white border-b border-gray-200 px-4 md:px-8 py-4">
+        <div className="max-w-7xl mx-auto flex items-center gap-4">
+          <Link href="/" className="p-2 hover:bg-gray-100 rounded-lg transition-colors"><ChevronLeft className="w-6 h-6" /></Link>
+          <h1 className="text-2xl font-bold text-gray-900">Shopping Cart ({items.length})</h1>
         </div>
       </div>
 
-      <div className="max-w-6xl mx-auto p-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* Cart Items */}
-          <div className="lg:col-span-2">
-            {cartItems.length > 0 ? (
-              <div className="space-y-4">
-                {cartItems.map((item) => (
-                  <div key={item.id} className="border rounded-lg p-4 hover:shadow-lg transition">
-                    <div className="flex gap-4">
-                      <div className="w-24 h-24 bg-gray-200 rounded flex items-center justify-center">
-                        <span className="text-gray-400 text-sm">Image</span>
+      <div className="max-w-7xl mx-auto px-4 md:px-8 py-8">
+        {items.length > 0 ? (
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2 space-y-4">
+              {items.map((item) => (
+                <div key={item.id} className="bg-white border border-gray-200 rounded-lg p-4 flex gap-4">
+                  <img src={item.image} alt={item.name} className="w-24 h-24 object-cover rounded-lg flex-shrink-0" />
+                  <div className="flex-1">
+                    <h3 className="font-bold text-gray-900 mb-2">{item.name}</h3>
+                    <div className="flex items-center gap-2 mb-3"><span className="text-lg font-bold text-pink-600">฿{item.price}</span><span className="text-sm text-gray-500 line-through">฿{item.originalPrice}</span></div>
+                    <p className="text-xs text-gray-600 mb-4">{item.stock} in stock</p>
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center border border-gray-300 rounded-lg">
+                        <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="px-3 py-1 hover:bg-gray-100"><Minus className="w-4 h-4" /></button>
+                        <span className="px-4 py-1 border-l border-r border-gray-300 font-bold">{item.quantity}</span>
+                        <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="px-3 py-1 hover:bg-gray-100"><Plus className="w-4 h-4" /></button>
                       </div>
-                      <div className="flex-1">
-                        <h3 className="font-semibold text-lg mb-2">{item.name}</h3>
-                        <p className="text-gray-600 text-sm mb-3">{item.description}</p>
-                        <div className="flex justify-between items-end">
-                          <div className="flex gap-4">
-                            <div>
-                              <label className="text-xs text-gray-500">Quantity</label>
-                              <input type="number" defaultValue={item.quantity} className="border rounded px-2 py-1 w-16"/>
-                            </div>
-                          </div>
-                          <div className="text-right">
-                            <p className="text-gray-500 line-through text-sm">AED {(item.price * 1.2).toFixed(2)}</p>
-                            <p className="text-2xl font-bold text-teal-600">AED {item.price.toFixed(2)}</p>
-                          </div>
-                        </div>
-                      </div>
-                      <button className="text-red-500 hover:text-red-700 text-2xl h-fit">×</button>
+                      <button onClick={() => removeItem(item.id)} className="flex items-center gap-1 text-gray-600 hover:text-red-600 transition-colors text-sm"><Trash2 className="w-4 h-4" /> Remove</button>
+                      <button className="flex items-center gap-1 text-gray-600 hover:text-pink-600 transition-colors text-sm ml-auto"><Heart className="w-4 h-4" /></button>
                     </div>
                   </div>
-                ))}
-              </div>
-            ) : (
-              <div className="text-center py-12">
-                <p className="text-gray-500 mb-4">Your cart is empty</p>
-                <Link href="/" className="text-teal-600 font-semibold hover:underline">
-                  Start Shopping on 4LEEE
-                </Link>
-              </div>
-            )}
-          </div>
+                </div>
+              ))}
+            </div>
 
-          {/* Cart Summary */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-20 bg-gray-50 rounded-lg p-6 border">
-              <h2 className="text-xl font-bold mb-4">Order Summary</h2>
-              <div className="space-y-2 mb-4 text-sm">
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Subtotal</span>
-                  <span>AED 699.98</span>
+            <div className="lg:col-span-1">
+              <div className="bg-white border border-gray-200 rounded-lg p-6 sticky top-24 space-y-4">
+                <h2 className="font-bold text-lg text-gray-900">Order Summary</h2>
+                <div className="space-y-2 text-sm border-b border-gray-200 pb-4">
+                  <div className="flex justify-between"><span className="text-gray-600">Subtotal</span><span className="font-bold">฿{subtotal.toFixed(2)}</span></div>
+                  <div className="flex justify-between"><span className="text-gray-600">Shipping</span><span className="font-bold">{shipping === 0 ? 'Free' : `฿${shipping.toFixed(2)}`}</span></div>
+                  {discount > 0 && <div className="flex justify-between text-teal-600"><span>Discount</span><span className="font-bold">-฿{discount.toFixed(2)}</span></div>}
                 </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Shipping</span>
-                  <span className="text-green-600 font-semibold">FREE</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-gray-600">Tax</span>
-                  <span>AED 52.49</span>
-                </div>
-                <div className="border-t pt-2 flex justify-between font-bold text-lg">
-                  <span>Total</span>
-                  <span className="text-teal-600">AED 752.47</span>
-                </div>
-              </div>
-              <button className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 rounded-lg mb-3 transition">
-                Proceed to Checkout
-              </button>
-              <button onClick={() => router.push('/')} className="w-full border border-teal-600 text-teal-600 hover:bg-teal-50 font-semibold py-3 rounded-lg transition">
-                Continue Shopping on 4LEEE
-              </button>
-
-              {/* Trust Badges */}
-              <div className="mt-6 pt-4 border-t space-y-2 text-xs text-gray-600">
-                <p>✓ Free Returns within 30 Days</p>
-                <p>✓ Secure 4LEEE Payment</p>
-                <p>✓ Fast 4LEEE Delivery</p>
+                <div className="flex justify-between text-lg"><span className="font-bold text-gray-900">Total</span><span className="font-bold text-pink-600">฿{total.toFixed(2)}</span></div>
+                <Link href="/checkout" className="w-full bg-pink-600 text-white py-3 rounded-lg font-bold hover:bg-pink-700 transition-colors text-center block">Proceed to Checkout</Link>
+                <Link href="/" className="w-full border border-gray-300 text-gray-900 py-3 rounded-lg font-bold hover:bg-gray-50 transition-colors text-center block">Continue Shopping</Link>
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className="flex flex-col items-center justify-center py-20"><ShoppingCart className="w-16 h-16 text-gray-300 mb-4" /><h2 className="text-2xl font-bold text-gray-900 mb-2">Your cart is empty</h2><p className="text-gray-600 mb-6">Add items to your cart to get started</p><Link href="/" className="px-6 py-3 bg-pink-600 text-white font-bold rounded-lg hover:bg-pink-700 transition-colors">Continue Shopping</Link></div>
+        )}
       </div>
     </div>
-  );
+  )
 }
