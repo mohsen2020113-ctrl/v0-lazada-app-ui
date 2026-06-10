@@ -47,7 +47,7 @@ export default function MessagesPage() {
     },
   ])
 
-  const handleNavigate = useCallback((paur: string) => {
+  const handleNavigate = useCallback((path: string) => {
     router.push(path)
   }, [router])
 
@@ -235,7 +235,7 @@ export default function MessagesPage() {
               <button
                 onClick={() => {
                   setShowNotificationModal(false)
-                  handleNavigate('/settings')
+                  handleNavigate('/account/settings')
                 }}
                 className="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-lg transition-colors text-sm"
               >
