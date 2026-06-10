@@ -146,7 +146,7 @@ export default function MerchantDashboard() {
           </div>
         </div>
         <div className="flex items-center gap-4">
-          <span className="text-sm text-gray-600">مرحباً، متجر الإبداع</span>
+          <span className="text-sm text-gray-600">Welcomeً، Store الإبداع</span>
           <div className="w-9 h-9 rounded-full bg-orange-100 flex items-center justify-center text-orange-600 font-bold">
             م
           </div>
@@ -171,9 +171,9 @@ export default function MerchantDashboard() {
             color="bg-gradient-to-br from-orange-500 to-orange-600"
           />
           <KPICard
-            label="إجمالي الطلبات"
+            label="إجمالي الOrderات"
             value="1,847"
-            sub="↑ 124 طلب هذا الأسبوع"
+            sub="↑ 124 Order هذا الأسبوع"
             color="bg-gradient-to-br from-blue-500 to-blue-600"
           />
           <KPICard
@@ -183,7 +183,7 @@ export default function MerchantDashboard() {
             color="bg-gradient-to-br from-emerald-500 to-emerald-600"
           />
           <KPICard
-            label="متوسط قيمة الطلب"
+            label="متوسط قيمة الOrder"
             value="AED 154"
             sub="↑ 6% هذا الشهر"
             color="bg-gradient-to-br from-purple-500 to-purple-600"
@@ -193,7 +193,7 @@ export default function MerchantDashboard() {
         {/* Tabs */}
         <div className="flex gap-2 mb-6 border-b border-gray-200">
           {[
-            { key: "orders", label: "آخر الطلبات" },
+            { key: "orders", label: "آخر الOrderات" },
             { key: "countries", label: "أفضل الدول" },
             { key: "stock", label: "تنبيهات المخزون" },
           ].map((tab) => (
@@ -220,7 +220,7 @@ export default function MerchantDashboard() {
               <thead className="bg-gray-50 border-b border-gray-100">
                 <tr>
                   <th className="px-5 py-4 text-right font-semibold text-gray-700">
-                    رقم الطلب
+                    رقم الOrder
                   </th>
                   <th className="px-5 py-4 text-right font-semibold text-gray-700">
                     العميل
@@ -286,7 +286,7 @@ export default function MerchantDashboard() {
         {activeTab === "countries" && (
           <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
             <h3 className="font-bold text-gray-900 mb-6 text-lg">
-              أفضل 5 دول من حيث الطلبات
+              أفضل 5 دول من حيث الOrderات
             </h3>
             <div className="space-y-5">
               {topCountries.map((country) => (
@@ -298,7 +298,7 @@ export default function MerchantDashboard() {
                         {country.name}
                       </span>
                       <span className="text-sm text-gray-500">
-                        {country.orders} طلب
+                        {country.orders} Order
                       </span>
                     </div>
                     <div className="h-2.5 bg-gray-100 rounded-full overflow-hidden">

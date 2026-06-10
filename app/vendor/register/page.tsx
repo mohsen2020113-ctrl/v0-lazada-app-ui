@@ -22,9 +22,9 @@ export default function VendorRegisterPage() {
         <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center mb-6">
           <CheckCircle className="w-10 h-10 text-green-400" />
         </div>
-        <h2 className="text-2xl font-bold mb-3">تم التسجيل بنجاح!</h2>
+        <h2 className="text-2xl font-bold mb-3">تم الRegister بSuccess!</h2>
         <p className="text-gray-400 text-sm mb-8 max-w-xs">
-          شكراً لتسجيلك كبائع. سيتم مراجعة طلبك والتواصل معك خلال 24-48 ساعة.
+          Thank youً لRegisterك كبائع. سيتم مراجعة Orderك والتواصل معك خلال 24-48 ساعة.
         </p>
         <button
           onClick={() => router.back()}
@@ -43,7 +43,7 @@ export default function VendorRegisterPage() {
         <button onClick={() => router.back()} className="text-white">
           <ChevronLeft className="w-6 h-6 rotate-180" />
         </button>
-        <h1 className="text-lg font-bold">تسجيل متجر جديد</h1>
+        <h1 className="text-lg font-bold">Register Store جديد</h1>
       </div>
 
       {/* Steps */}
@@ -66,11 +66,11 @@ export default function VendorRegisterPage() {
         {step === 1 ? (
           <>
             <div>
-              <label className="text-xs text-gray-400 mb-1.5 block">اسم المتجر</label>
+              <label className="text-xs text-gray-400 mb-1.5 block">اسم الStore</label>
               <div className="relative">
                 <Store className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" />
                 <input value={form.storeName} onChange={e => update('storeName', e.target.value)}
-                  placeholder="اسم متجرك التجاري" className={inputClass + " pr-10"} />
+                  placeholder="اسم Storeك التجاري" className={inputClass + " pr-10"} />
               </div>
             </div>
             <div>
@@ -112,7 +112,7 @@ export default function VendorRegisterPage() {
               </div>
             </div>
             <div>
-              <label className="text-xs text-gray-400 mb-1.5 block">فئة المتجر</label>
+              <label className="text-xs text-gray-400 mb-1.5 block">فئة الStore</label>
               <select value={form.category} onChange={e => update('category', e.target.value)}
                 className={inputClass}>
                 <option value="">اختر الفئة</option>
@@ -125,11 +125,11 @@ export default function VendorRegisterPage() {
               </select>
             </div>
             <div>
-              <label className="text-xs text-gray-400 mb-1.5 block">وصف المتجر</label>
+              <label className="text-xs text-gray-400 mb-1.5 block">وصف الStore</label>
               <div className="relative">
                 <FileText className="absolute right-3 top-3 w-4 h-4 text-gray-500" />
                 <textarea value={form.description} onChange={e => update('description', e.target.value)}
-                  placeholder="اكتب وصفاً مختصراً عن متجرك..."
+                  placeholder="اكتب وصفاً مختصراً عن Storeك..."
                   rows={4} className={inputClass + " pr-10 resize-none"} />
               </div>
             </div>
@@ -138,7 +138,7 @@ export default function VendorRegisterPage() {
                 رجوع
               </button>
               <button onClick={() => setSubmitted(true)} className="flex-1 py-3 bg-[#F57224] rounded-2xl font-semibold">
-                إرسال الطلب
+                إرسال الOrder
               </button>
             </div>
           </>

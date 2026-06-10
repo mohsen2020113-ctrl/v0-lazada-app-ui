@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
     const limitResult = rateLimit(req, { limit: 10, windowMs: 60000 })
     if (!limitResult.success) {
       return NextResponse.json(
-        { error: 'عدد الطلبات تم تجاوزه' },
+        { error: 'Request limit exceeded' },
         { status: 429 }
       )
     }
@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
     const session = req.cookies.get('lee_session')?.value
     if (!session) {
       return NextResponse.json(
-        { error: 'يجب تسجيل الدخول أولاً' },
+        { error: 'Please log in first' },
         { status: 401 }
       )
     }
@@ -40,18 +40,18 @@ export async function POST(req: NextRequest) {
       sessionId: `session_${Date.now()}`,
       total,
       items: validated.items.length,
-      message: 'جلسة الدفع جاهزة',
+      message: 'Checkout session ready',
     })
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'بيانات غير صحيحة' },
+        { error: 'Invalid data provided' },
         { status: 400 }
       )
     }
     logger.error('Checkout error', error as Error)
     return NextResponse.json(
-      { error: 'فشل إنشاء جلسة الدفع' },
+      { error: 'Failed to create checkout session' },
       { status: 500 }
     )
   }

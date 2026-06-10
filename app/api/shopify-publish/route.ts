@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     const body_html = `<div dir="rtl"><p>${description_ar || ''}</p></div><div><p>${description_en || ''}</p></div>`
 
     const productPayload: Record<string, unknown> = {
-      title: name || 'منتج جديد',
+      title: name || 'Product جديد',
       body_html,
       vendor: 'LEE',
       product_type: category || '',

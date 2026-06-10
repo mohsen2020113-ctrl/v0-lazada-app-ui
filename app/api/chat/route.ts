@@ -10,7 +10,7 @@ export async function POST(request: Request) {
           const apiKey = process.env.GEMINI_API_KEY
 
       if (!apiKey || !message) {
-              return NextResponse.json({ response: 'مرحباً! كيف يمكنني مساعدتك اليوم؟ 🛍️' })
+              return NextResponse.json({ response: 'Hello! How can I help you with shopping today? 🛍️' })
       }
 
       const res = await fetch(
@@ -25,8 +25,8 @@ export async function POST(request: Request) {
             )
           const data = await res.json()
           const text = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim()
-          return NextResponse.json({ response: text || 'كيف يمكنني مساعدتك في التسوق؟' })
+          return NextResponse.json({ response: text || 'How can I help you with shopping?' })
     } catch {
-          return NextResponse.json({ response: 'كيف يمكنني مساعدتك في التسوق؟' })
+          return NextResponse.json({ response: 'How can I help you with shopping?' })
     }
 }

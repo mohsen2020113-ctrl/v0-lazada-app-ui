@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     const limitResult = rateLimit(req, { limit: 5, windowMs: 900000 })
     if (!limitResult.success) {
       return NextResponse.json(
-        { error: 'عدد محاولات الدخول تم تجاوزه. حاول لاحقاً.' },
+        { error: 'Too many login attempts. Please try again later.' },
         { status: 429, headers: { 'Retry-After': '900' } }
       )
     }
@@ -27,7 +27,7 @@ export async function POST(req: NextRequest) {
     if (error) {
       console.error('[v0] Auth error:', error)
       return NextResponse.json(
-        { error: 'بريد إلكتروني أو كلمة مرور غير صحيحة' },
+        { error: 'Invalid email or password' },
         { status: 401 }
       )
     }
@@ -60,13 +60,13 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'بيانات غير صحيحة', details: error.errors },
+        { error: 'Invalid data provided', details: error.errors },
         { status: 400 }
       )
     }
     console.error('[v0] Login error:', error)
     return NextResponse.json(
-      { error: 'حدث خطأ في المصادقة' },
+      { error: 'Authentication error occurred' },
       { status: 500 }
     )
   }

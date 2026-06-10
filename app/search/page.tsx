@@ -123,7 +123,7 @@ export default function SearchPage() {
         </div>
       ) : !searched ? (
         <div className="px-4 pt-4">
-          <p className="text-white/40 text-xs font-bold tracking-wider mb-3">عمليات البحث الشائعة</p>
+          <p className="text-white/40 text-xs font-bold tracking-wider mb-3">عمليات الSearch الشائعة</p>
           <div className="flex flex-wrap gap-2">
             {POPULAR.map(term => (
               <button
@@ -144,7 +144,7 @@ export default function SearchPage() {
             <SearchX size={40} className="text-[#F57224]" />
           </div>
           <h2 className="text-white text-lg font-bold mb-2">لا توجد نتائج</h2>
-          <p className="text-white/40 text-sm">جرّب البحث بكلمة مختلفة</p>
+          <p className="text-white/40 text-sm">جرّب الSearch بكلمة مختلفة</p>
         </div>
       ) : (
         <div>

@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
 
     // Create response with cleared cookies
     const response = NextResponse.json({
-      message: 'تم تسجيل الخروج بنجاح',
+      message: 'Logged out successfully',
     })
 
     response.cookies.delete('lee_session')
@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error('[v0] Logout error:', error)
     return NextResponse.json(
-      { error: 'خطأ في تسجيل الخروج' },
+      { error: 'Logout error occurred' },
       { status: 500 }
     )
   }

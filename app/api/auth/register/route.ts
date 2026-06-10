@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
     const limitResult = rateLimit(req, { limit: 3, windowMs: 900000 })
     if (!limitResult.success) {
       return NextResponse.json(
-        { error: 'عدد محاولات التسجيل تم تجاوزه. حاول لاحقاً.' },
+        { error: 'Too many registration attempts. Please try again later.' },
         { status: 429, headers: { 'Retry-After': '900' } }
       )
     }
@@ -28,7 +28,7 @@ export async function POST(req: NextRequest) {
 
     if (existingUser) {
       return NextResponse.json(
-        { error: 'البريد الإلكتروني مسجل بالفعل' },
+        { error: 'Email is already registered' },
         { status: 400 }
       )
     }
@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
     if (authError) {
       console.error('[v0] Auth creation error:', authError)
       return NextResponse.json(
-        { error: 'فشل إنشاء الحساب' },
+        { error: 'Failed to create account' },
         { status: 400 }
       )
     }
@@ -65,7 +65,7 @@ export async function POST(req: NextRequest) {
       // Clean up auth user if profile creation fails
       await supabaseAdmin.auth.admin.deleteUser(authData.user.id)
       return NextResponse.json(
-        { error: 'فشل إنشاء الملف الشخصي' },
+        { error: 'Failed to create user profile' },
         { status: 500 }
       )
     }
@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
     const response = NextResponse.json({
       user: { id: user.id, email: user.email, name: user.name },
       token,
-      message: 'تم إنشاء الحساب بنجاح',
+      message: 'Account created successfully',
     }, { status: 201 })
 
     response.cookies.set('lee_session', token, {
@@ -95,13 +95,13 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
-        { error: 'بيانات غير صحيحة', details: error.errors },
+        { error: 'Invalid data provided', details: error.errors },
         { status: 400 }
       )
     }
     console.error('[v0] Register error:', error)
     return NextResponse.json(
-      { error: 'حدث خطأ في التسجيل' },
+      { error: 'Registration error occurred' },
       { status: 500 }
     )
   }

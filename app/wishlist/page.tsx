@@ -26,7 +26,7 @@ export default function WishlistPage() {
             <Heart size={56} className="text-white/10" />
             <p className="text-white/40 text-sm">قائمة المفضلة فارغة</p>
             <Link href="/" className="bg-[#F57224] text-white text-sm font-bold px-6 py-3 rounded-xl">
-              استكشف المنتجات
+              استكشف الProductات
             </Link>
           </div>
         ) : (

@@ -42,7 +42,7 @@ export default function CollectionsPage() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-white text-sm font-semibold line-clamp-1">{col.name}</p>
-                <p className="text-white/30 text-xs">{col.count} منتج</p>
+                <p className="text-white/30 text-xs">{col.count} Product</p>
               </div>
               <ChevronLeft size={16} className="text-white/20 shrink-0" />
             </Link>

@@ -18,8 +18,8 @@ export default function Error({
     <div className="flex min-h-screen items-center justify-center bg-gray-50 px-4">
       <div className="w-full max-w-md space-y-6 text-center">
         <div>
-          <h1 className="text-4xl font-bold text-gray-900">خطأ</h1>
-          <p className="mt-2 text-gray-600">حدث خطأ ما. يرجى المحاولة مجدداً.</p>
+          <h1 className="text-4xl font-bold text-gray-900">Error</h1>
+          <p className="mt-2 text-gray-600">حدث Error ما. يرجى المحاولة مجدداً.</p>
         </div>
 
         {process.env.NODE_ENV === 'development' && (

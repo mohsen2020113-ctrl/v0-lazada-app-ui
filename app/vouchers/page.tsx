@@ -60,7 +60,7 @@ export default function VouchersPage() {
                         style={{ background: v.color + '33', color: v.color }}>{v.type}</span>
                     </div>
                     <p className="text-white font-black text-xl">{v.discount}</p>
-                    <p className="text-white/40 text-xs mt-0.5">حد أدنى للطلب {v.min}</p>
+                    <p className="text-white/40 text-xs mt-0.5">حد أدنى للOrder {v.min}</p>
                     <p className="text-white/30 text-xs">ينتهي {v.expires}</p>
                   </div>
                   <div className="flex flex-col items-end gap-2">

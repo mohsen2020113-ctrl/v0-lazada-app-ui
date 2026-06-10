@@ -21,7 +21,7 @@ export default function StorePage({ params }: { params: { id: string } }) {
         <button onClick={() => router.back()} className="text-white">
           <ChevronLeft className="w-6 h-6 rotate-180" />
         </button>
-        <h1 className="text-lg font-bold">صفحة المتجر</h1>
+        <h1 className="text-lg font-bold">صفحة الStore</h1>
         <div className="mr-auto flex gap-3">
           <button><Share2 className="w-5 h-5 text-gray-400" /></button>
           <button><Heart className="w-5 h-5 text-gray-400" /></button>
@@ -35,7 +35,7 @@ export default function StorePage({ params }: { params: { id: string } }) {
             🏪
           </div>
           <div className="flex-1">
-            <h2 className="text-xl font-bold mb-1">متجر التقنية العصرية</h2>
+            <h2 className="text-xl font-bold mb-1">Store التقنية العصرية</h2>
             <div className="flex items-center gap-2 text-sm text-gray-400 mb-2">
               <Star className="w-4 h-4 text-yellow-400 fill-yellow-400" />
               <span className="text-white font-medium">4.7</span>
@@ -51,7 +51,7 @@ export default function StorePage({ params }: { params: { id: string } }) {
         {/* Stats */}
         <div className="grid grid-cols-3 gap-3 mt-4">
           {[
-            { label: 'منتج', value: '120+' },
+            { label: 'Product', value: '120+' },
             { label: 'مبيعات', value: '5K+' },
             { label: 'متابع', value: '890' },
           ].map(s => (
@@ -65,13 +65,13 @@ export default function StorePage({ params }: { params: { id: string } }) {
         {/* Contact */}
         <button className="mt-4 w-full py-3 bg-[#1A1A1A] rounded-xl flex items-center justify-center gap-2 text-sm text-gray-300 border border-white/10">
           <Phone className="w-4 h-4 text-[#F57224]" />
-          تواصل مع المتجر
+          تواصل مع الStore
         </button>
       </div>
 
       {/* Products */}
       <div className="px-4 pb-6">
-        <h3 className="text-base font-bold mb-3">منتجات المتجر</h3>
+        <h3 className="text-base font-bold mb-3">Productات الStore</h3>
         <div className="grid grid-cols-2 gap-3">
           {PRODUCTS.map(p => (
             <div key={p.id} className="bg-[#1A1A1A] rounded-2xl p-3 border border-white/5">

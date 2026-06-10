@@ -19,14 +19,14 @@ export default function OrdersPage() {
   return (
     <div className="min-h-screen bg-[#0F0F0F]" dir="rtl">
       <div className="bg-[#0F0F0F] px-4 py-4 border-b border-white/5">
-        <h1 className="text-white font-bold text-lg">طلباتي</h1>
+        <h1 className="text-white font-bold text-lg">Orderاتي</h1>
       </div>
 
       <div className="px-4 py-4 pb-24">
         {MOCK_ORDERS.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-24 gap-4">
             <Package size={56} className="text-white/10" />
-            <p className="text-white/40 text-sm">لا توجد طلبات بعد</p>
+            <p className="text-white/40 text-sm">لا توجد Orderات بعد</p>
             <Link href="/" className="bg-[#F57224] text-white text-sm font-bold px-6 py-3 rounded-xl">
               ابدأ التسوق
             </Link>
@@ -50,7 +50,7 @@ export default function OrdersPage() {
                   </div>
                   <div className="border-t border-white/5 pt-3 flex items-center justify-between">
                     <div>
-                      <p className="text-white/50 text-xs">{order.items} منتجات</p>
+                      <p className="text-white/50 text-xs">{order.items} Productات</p>
                       <p className="text-[#F57224] font-bold text-sm mt-0.5">{order.total} AED</p>
                     </div>
                     <button className="flex items-center gap-1 text-white/40 text-xs">

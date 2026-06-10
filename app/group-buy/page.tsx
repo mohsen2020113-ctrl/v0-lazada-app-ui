@@ -53,7 +53,7 @@ export default function GroupBuyPage() {
         <Users className="w-8 h-8 text-white" />
         <div>
           <p className="font-bold text-white text-base">اشترِ مع الآخرين</p>
-          <p className="text-white/80 text-xs">كلما زاد العدد، كلما انخفض السعر</p>
+          <p className="text-white/80 text-xs">كلما زاد العدد، كلما انخفض Price</p>
         </div>
       </div>
 

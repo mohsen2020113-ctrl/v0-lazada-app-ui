@@ -45,22 +45,22 @@ export async function POST(request: NextRequest) {
     const mimeType = imageResponse.headers.get('content-type') || 'image/jpeg';
 
     // Analyze image quality with Gemini Vision
-    const analysisPrompt = `أنت محلل جودة الصور للمتجر الإلكتروني. قيّم جودة هذه الصورة للمنتج على النقاط التالية:
-1. الإضاءة (مناسبة، متساوية، بدون ظلال قاسية)
-2. الدقة (وضوح عالي، بدون ضبابية)
-3. الخلفية (بسيطة وخالية من التشتيت)
-4. وضوح المنتج (المنتج محطة بوضوح وكاملاً في الصورة)
-5. الألوان (دقيقة وطبيعية)
+    const analysisPrompt = `You are an image quality analyzer for the online store. Evaluate the quality of this product image on the following points:
+1. Lighting (suitable, even, without harsh shadows)
+2. Resolution (high clarity, no blur)
+3. Background (simple and distraction-free)
+4. Product clarity (product is clear and complete in the image)
+5. Colors (accurate and natural)
 
-أرجع النتيجة كـ JSON:
+Return the result as JSON:
 {
   "score": (0-100),
-  "issues": ["المشاكل المكتشفة"],
-  "suggestions": ["التحسينات المقترحة"],
-  "approved": true/false (true إذا كانت الجودة مقبولة للبيع)
+  "issues": ["Issues detected"],
+  "suggestions": ["Recommended improvements"],
+  "approved": true/false (true if quality is acceptable for sale)
 }
 
-كن دقيقاً وموضوعياً في التقييم.`;
+Be precise and objective in your evaluation.`;
 
     const response = await model.generateContent([
       {

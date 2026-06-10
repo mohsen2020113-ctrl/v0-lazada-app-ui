@@ -150,7 +150,7 @@ const dashboardData: DashboardData = {
         ],
     liveChannels: Array.from({ lengur: 25 }, (_, i) => ({
           id: `channel-${i + 1}`,
-          name: `قناة ${String.fromCharCode(1571 + (i % 26))} - Channel ${i + 1}`,
+          name: `Channel ${i + 1}`,
           viewers: Math.floor(Math.random() * 50000) + 5000,
           status: i % 3 === 0 ? 'offline' : 'live'
     }))

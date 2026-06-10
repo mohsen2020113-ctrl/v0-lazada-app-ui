@@ -18,7 +18,7 @@ export default function NotFound() {
       {/* Description */}
       <div className="max-w-sm text-center">
         <p className="text-muted-foreground leading-relaxed">
-          عذراً، الصفحة التي تبحث عنها غير موجودة أو قد تم حذفها.
+          عذراً، الصفحة التي تSearch عنها غير موجودة أو قد تم حذفها.
         </p>
         <p className="text-muted-foreground text-sm mt-2">
           The page you are looking for does not exist or has been removed.
@@ -45,7 +45,7 @@ export default function NotFound() {
 
       {/* Footer info */}
       <p className="text-xs text-muted-foreground mt-8">
-        رمز الخطأ: 404 | Error Code: 404
+        رمز الError: 404 | Error Code: 404
       </p>
     </div>
   )

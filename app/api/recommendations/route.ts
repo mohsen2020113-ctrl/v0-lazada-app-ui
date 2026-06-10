@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
         })
         .slice(0, 10)
 
-      reason = 'تم اختيار أفضل المنتجات بناءً على التقييمات والمبيعات'
+      reason = 'تم اختيار أفضل الProductات بناءً على التقييمات والمبيعات'
 
       return NextResponse.json({
         recommended,
@@ -70,14 +70,14 @@ export async function POST(request: NextRequest) {
     // Use Gemini to generate personalized recommendations
     const model = genAI.getGenerativeModel({ model: 'gemini-2.5-pro' })
 
-    const prompt = `أنت متخصص في التجارة الإلكترونية والتوصيات الشخصية. اختر 10 منتجات من القائمة التالية بناءً على المعايير المعطاة.
+    const prompt = `أنت متخصص في التجارة الإلكترونية والتوصيات الشخصية. اختر 10 Productات من القائمة التالية بناءً على المعايير المعطاة.
 
-المنتجات المتاحة:
+الProductات المتاحة:
 ${JSON.stringify(productContext, null, 2)}
 
 بيانات المستخدم:
-- المنتجات المشاهدة: ${viewedProducts.length > 0 ? viewedProductDetails.map((p) => p?.title).join(', ') : 'لا توجد'}
-- عناصر السلة: ${cartItems.length > 0 ? cartProductDetails.map((p) => p?.title).join(', ') : 'لا توجد'}
+- الProductات المشاهدة: ${viewedProducts.length > 0 ? viewedProductDetails.map((p) => p?.title).join(', ') : 'لا توجد'}
+- عناصر الCart: ${cartItems.length > 0 ? cartProductDetails.map((p) => p?.title).join(', ') : 'لا توجد'}
 - الفئة المفضلة: ${category || 'جميع الفئات'}
 
 أرجع النتيجة في صيغة JSON بدون markdown:
@@ -105,7 +105,7 @@ ${JSON.stringify(productContext, null, 2)}
           return bScore - aScore
         })
         .slice(0, 10)
-      reason = 'تم اختيار أفضل المنتجات'
+      reason = 'تم اختيار أفضل الProductات'
       return NextResponse.json({
         recommended,
         reason,
@@ -129,7 +129,7 @@ ${JSON.stringify(productContext, null, 2)}
       recommended = [...recommended, ...remaining]
     }
 
-    reason = parsedResponse.reason || 'تم اختيار منتجات موصى بها شخصية'
+    reason = parsedResponse.reason || 'تم اختيار Productات موصى بها شخصية'
 
     return NextResponse.json({
       recommended,
@@ -151,7 +151,7 @@ ${JSON.stringify(productContext, null, 2)}
     return NextResponse.json(
       {
         recommended,
-        reason: 'تم اختيار أفضل المنتجات',
+        reason: 'تم اختيار أفضل الProductات',
         personalized: false,
       } as RecommendationResponse,
       { status: 200 }

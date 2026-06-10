@@ -67,7 +67,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className="bg-gray-100" data-scroll-behavior="smooth" suppressHydrationWarning>
+    <html lang="en" dir="ltr" className="bg-gray-100" data-scroll-behavior="smooth" suppressHydrationWarning>
       <body className="font-sans antialiased bg-gray-100 min-h-screen min-h-dvh overflow-x-hidden flex flex-col">
         <Providers>
           <div className="flex-1">

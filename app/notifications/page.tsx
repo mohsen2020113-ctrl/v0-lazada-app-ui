@@ -2,10 +2,10 @@
 import { Bell, Package, Tag, Info } from 'lucide-react'
 
 const NOTIFS = [
-  { id: 1, type: 'order', title: 'تم تأكيد طلبك', body: 'طلبك #1003 قيد التجهيز الآن', time: 'منذ 5 دقائق', read: false },
-  { id: 2, type: 'offer', title: 'عرض خاص لك!', body: 'خصم 20% على جميع منتجات الأزياء اليوم', time: 'منذ ساعة', read: false },
-  { id: 3, type: 'order', title: 'تم شحن طلبك', body: 'طلبك #1002 في الطريق إليك', time: 'أمس', read: true },
-  { id: 4, type: 'info', title: 'مرحباً بك في LEE ماركت', body: 'استكشف أحدث المنتجات والعروض', time: 'منذ يومين', read: true },
+  { id: 1, type: 'order', title: 'تم تأكيد Orderك', body: 'Orderك #1003 قيد التجهيز الآن', time: 'منذ 5 دقائق', read: false },
+  { id: 2, type: 'offer', title: 'عرض خاص لك!', body: 'خصم 20% على جميع Productات الأزياء اليوم', time: 'منذ ساعة', read: false },
+  { id: 3, type: 'order', title: 'تم شحن Orderك', body: 'Orderك #1002 في الطريق إليك', time: 'أمس', read: true },
+  { id: 4, type: 'info', title: 'Welcomeً بك في LEE ماركت', body: 'استكشف أحدث الProductات والعروض', time: 'منذ يومين', read: true },
 ]
 
 const TYPE_ICONS: Record<string, { Icon: any; bg: string; color: string }> = {

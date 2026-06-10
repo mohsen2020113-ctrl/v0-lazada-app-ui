@@ -4,10 +4,10 @@ import { useRouter } from 'next/navigation'
 import { ChevronLeft, Send, Paperclip, Image } from 'lucide-react'
 
 const INITIAL_MESSAGES = [
-  { id: 1, from: 'store', text: 'مرحباً! كيف يمكنني مساعدتك اليوم؟', time: '10:00' },
-  { id: 2, from: 'user', text: 'أريد الاستفسار عن المنتج رقم 123', time: '10:02' },
-  { id: 3, from: 'store', text: 'بكل سرور! هذا المنتج متوفر وسيصلك خلال 3-5 أيام عمل.', time: '10:03' },
-  { id: 4, from: 'user', text: 'هل يوجد ضمان على المنتج؟', time: '10:05' },
+  { id: 1, from: 'store', text: 'Welcomeً! كيف يمكنني مساعدتك اليوم؟', time: '10:00' },
+  { id: 2, from: 'user', text: 'أريد الاستفسار عن الProduct رقم 123', time: '10:02' },
+  { id: 3, from: 'store', text: 'بكل سرور! هذا الProduct متوفر وسيصلك خلال 3-5 أيام عمل.', time: '10:03' },
+  { id: 4, from: 'user', text: 'هل يوجد ضمان على الProduct؟', time: '10:05' },
   { id: 5, from: 'store', text: 'نعم، يأتي مع ضمان سنة كاملة من الشركة المصنعة.', time: '10:06' },
 ]
 
@@ -29,7 +29,7 @@ export default function MessagePage() {
       setMessages(prev => [...prev, {
         id: prev.length + 1,
         from: 'store',
-        text: 'شكراً على رسالتك، سنرد عليك في أقرب وقت ممكن.',
+        text: 'Thank youً على رسالتك، سنرد عليك في أقرب وقت ممكن.',
         time: new Date().toLocaleTimeString('ar', { hour: '2-digit', minute: '2-digit' }),
       }])
     }, 1000)
@@ -46,7 +46,7 @@ export default function MessagePage() {
           🏪
         </div>
         <div>
-          <p className="font-semibold text-sm">متجر التقنية العصرية</p>
+          <p className="font-semibold text-sm">Store التقنية العصرية</p>
           <p className="text-xs text-green-400">متصل الآن</p>
         </div>
       </div>
