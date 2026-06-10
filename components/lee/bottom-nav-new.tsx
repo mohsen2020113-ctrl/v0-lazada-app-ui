@@ -17,7 +17,7 @@ export function BottomNav() {
     { id: 'live', label: 'Live', icon: Radio, href: '/live', action: null },
     { id: 'messages', label: 'Messages', icon: MessageCircle, href: '/messages', badge: 99, action: null },
     { id: 'cart', label: 'Cart', icon: ShoppingCart, href: null, badge: cartCount, action: openCart },
-    { id: 'account', label: 'Account', icon: User, href: null, action: null },
+    { id: 'account', label: 'Account', icon: User, href: '/account/profile', action: null },
   ];
 
   const isActive = (href: string | null) => {
