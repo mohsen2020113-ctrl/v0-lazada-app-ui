@@ -5,9 +5,9 @@ import Link from 'next/link'
 
 export default function ProfilePage() {
   const channels = [
-    { name: 'Stay trendy...', image: 'https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?w=200&h=200&fit=crop', color: 'from-yellow-100 to-yellow-50' },
-    { name: 'Share Link t...', image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=200&h=200&fit=crop', color: 'from-pink-100 to-pink-50' },
-    { name: 'LazBEAUT...', image: 'https://images.unsplash.com/photo-1596462502278-af407b1564f7?w=200&h=200&fit=crop', color: 'from-purple-100 to-purple-50' },
+    { name: 'Stay trendy...', bgColor: 'bg-white', borderColor: 'border' },
+    { name: 'Share Link t...', bgColor: 'bg-pink-100', borderColor: 'border-pink-200' },
+    { name: 'LazBEAUT...', bgColor: 'bg-purple-100', borderColor: 'border-purple-200' },
   ]
 
   const recentlyViewed = [
@@ -56,13 +56,11 @@ export default function ProfilePage() {
           <h3 className="font-bold text-lg text-gray-900 mb-3">My Channels</h3>
           <div className="grid grid-cols-3 gap-3 mb-2">
             {channels.map((channel, idx) => (
-              <div key={idx} className="rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer">
-                <div className="bg-gray-200 aspect-square flex items-center justify-center">
-                  {channel.image ? (
-                    <img src={channel.image} alt={channel.name} className="w-full h-full object-cover" />
-                  ) : (
-                    <span className="text-4xl">📸</span>
-                  )}
+              <div key={idx} className={`rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer ${channel.bgColor} ${channel.borderColor} border`}>
+                <div className="aspect-square flex items-center justify-center text-4xl">
+                  {idx === 0 && '👗'}
+                  {idx === 1 && '🎀'}
+                  {idx === 2 && '💄'}
                 </div>
                 <p className="text-xs font-bold text-gray-900 text-center py-2">{channel.name}</p>
               </div>
