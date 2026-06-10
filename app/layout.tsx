@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.4leee.com'),
   title: '4LEEE - Shop Online | Best Deals & Free Shipping',
   description: 'Discover 4LEEE - Your ultimate online shopping destination. Browse millions of products with amazing discounts and free shipping. Shop now!',
-    viewport: 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover',
+  viewport: 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover',
   icons: {
     icon: [
       {
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
 }
 
 export const viewport = {
-  widur: 'device-width',
+  width: 'device-width',
   initialScale: 1,
   maximumScale: 1,
   userScalable: false,
@@ -82,3 +82,4 @@ export default function RootLayout({
     </html>
   )
 }
+

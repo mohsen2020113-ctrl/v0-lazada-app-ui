@@ -11,10 +11,12 @@ const dailyProducts = [
     image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=300&h=300&fit=crop",
     badge: "CHOICE by LEE",
     badgeColor: "bg-[#f85c98]",
+    handle: "premium-speaker-wireless",
   },
   {
     id: 2,
     image: "https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=300&h=300&fit=crop",
+    handle: "indoor-plant-decoration",
   },
   {
     id: 3,
@@ -23,18 +25,21 @@ const dailyProducts = [
     badgeColor: "bg-gray-700",
     hasPromo: true,
     promoAmount: "AED 550",
+    handle: "smartwatch-pro-fitness",
   },
   {
     id: 4,
     image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=300&fit=crop",
     badge: "Premium",
     badgeColor: "bg-amber-500",
+    handle: "premium-headphones-sound",
   },
   {
     id: 5,
     image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop",
     badge: "Best Seller",
     badgeColor: "bg-red-500",
+    handle: "best-seller-phone-case",
   },
 ]
 
@@ -82,7 +87,7 @@ export function DailyDeals() {
           {dailyProducts.map((product) => (
             <Link
               key={product.id}
-              href="/search"
+              href={`/product/${product.handle}`}
               className="flex-shrink-0 w-[130px] sm:w-[150px] md:w-[170px] bg-white rounded-lg overflow-hidden border border-gray-100 hover:shadow-md transition-shadow active:scale-[0.98]"
             >
               <div className="relative aspect-square bg-gray-50">

@@ -13,6 +13,7 @@ const flashProducts = [
     discount: "-54%",
     brand: "XUANYUAN",
     name: "Monstera",
+    handle: "monstera-plant-indoor",
     badges: ["9x", "Gift", "Hot"],
   },
   {
@@ -22,6 +23,7 @@ const flashProducts = [
     discount: "-44%",
     brand: "LINGDU",
     name: "1080P FHD",
+    handle: "fhd-dashcam-1080p",
     extraInfo: "10 YEAR",
     specs: ["WIFI", "G-SENSOR", "1080P"],
   },
@@ -32,6 +34,7 @@ const flashProducts = [
     discount: "-61%",
     brand: "Minasan",
     name: "Storage Basket",
+    handle: "storage-basket-fabric",
     hasCOD: true,
     has24h: true,
   },
@@ -42,6 +45,7 @@ const flashProducts = [
     discount: "-35%",
     brand: "TechPro",
     name: "Smart Watch",
+    handle: "smart-watch-fitness-tracker",
   },
   {
     id: 5,
@@ -50,6 +54,7 @@ const flashProducts = [
     discount: "-40%",
     brand: "AudioMax",
     name: "Headphones",
+    handle: "wireless-headphones-noise-cancel",
   },
 ]
 
@@ -111,7 +116,7 @@ export function FlashSale() {
           {flashProducts.map((product, index) => (
             <Link
               key={product.id}
-              href="/search"
+              href={`/product/${product.handle}`}
               className="flex-shrink-0 w-[130px] sm:w-[150px] md:w-[170px] bg-white rounded-lg overflow-hidden border border-gray-100 hover:shadow-md transition-shadow active:scale-[0.98] text-left"
             >
               <div className="relative aspect-square bg-gray-50">

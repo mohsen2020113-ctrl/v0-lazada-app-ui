@@ -5,21 +5,19 @@ import { usePathname } from 'next/navigation';
 import { Home, ShoppingBag, Radio, MessageCircle, ShoppingCart, User } from 'lucide-react';
 import { useCart } from '@/app/contexts/cart-context';
 import { useFavorites } from '@/app/contexts/favorites-context';
-import { useI18n } from '@/lib/i18n-context';
 
 export function BottomNav() {
   const pathname = usePathname();
   const { cartCount, openCart } = useCart();
   const { favorites } = useFavorites();
-  const { t } = useI18n();
 
   const navItems = [
-    { id: 'home', label: t('nav.home'), icon: Home, href: '/', action: null },
-    { id: 'fashion', label: t('nav.fashion'), icon: ShoppingBag, href: '/category/women', action: null },
-    { id: 'live', label: 'لايف', icon: Radio, href: '/live', action: null },
-    { id: 'messages', label: t('nav.messages'), icon: MessageCircle, href: '/messages', badge: 99, action: null },
-    { id: 'cart', label: t('nav.cart'), icon: ShoppingCart, href: null, badge: cartCount, action: openCart },
-    { id: 'account', label: t('nav.account'), icon: User, href: '/account', action: null },
+    { id: 'home', label: 'Home', icon: Home, href: '/', action: null },
+    { id: 'fashion', label: 'Fashion', icon: ShoppingBag, href: '/category/women', action: null },
+    { id: 'live', label: 'Live', icon: Radio, href: '/live', action: null },
+    { id: 'messages', label: 'Messages', icon: MessageCircle, href: '/messages', badge: 99, action: null },
+    { id: 'cart', label: 'Cart', icon: ShoppingCart, href: null, badge: cartCount, action: openCart },
+    { id: 'account', label: 'Account', icon: User, href: '/account', action: null },
   ];
 
   const isActive = (href: string | null) => {
@@ -83,3 +81,4 @@ export function BottomNav() {
     </nav>
   );
 }
+
