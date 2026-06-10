@@ -1,65 +1,160 @@
 'use client'
 
-import { ChevronLeft, Edit2 } from 'lucide-react'
+import { ChevronLeft, Edit2, Heart, MessageSquare, Gift, DollarSign, ShoppingBag, Star, Eye } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 
 export default function ProfilePage() {
   const [isEditing, setIsEditing] = useState(false)
 
+  const channels = [
+    { name: 'Stay trendy...', image: '👗', color: 'from-pink-200 to-pink-300' },
+    { name: 'Share Link t...', image: '🎀', color: 'from-pink-300 to-pink-400' },
+    { name: 'LazBEAUT...', image: '💄', color: 'from-purple-200 to-purple-300' },
+  ]
+
+  const recentlyViewed = [
+    { name: 'Plant 1', price: '฿1,344.82', image: '🪴' },
+    { name: 'Plant 2', price: '฿94.31', image: '🌿' },
+    { name: 'Plant 3', price: '฿2,290.00', image: '🌴' },
+  ]
+
+  const quickActions = [
+    { icon: Heart, label: 'WishList' },
+    { icon: MessageSquare, label: 'My Reviews' },
+    { icon: Gift, label: 'Chat with Customer Care' },
+    { icon: DollarSign, label: 'Bill Payment & Top Up' },
+    { icon: ShoppingBag, label: 'Followed Stores' },
+    { icon: Star, label: 'Memberships' },
+    { icon: DollarSign, label: 'Open shop on Lazada' },
+    { icon: Gift, label: 'Try & Buy' },
+  ]
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="sticky top-0 z-40 bg-white border-b border-gray-200 px-4 md:px-8 py-4">
         <div className="max-w-4xl mx-auto flex items-center gap-4">
-          <Link href="/account" className="p-2 hover:bg-gray-100 rounded-lg transition-colors"><ChevronLeft className="w-6 h-6" /></Link>
-          <h1 className="text-2xl font-bold text-gray-900">My Profile</h1>
+          <Link href="/account" className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
+            <ChevronLeft className="w-6 h-6" />
+          </Link>
+          <h1 className="text-2xl font-bold text-gray-900">Mohsen Alattas</h1>
+          <button className="ml-auto p-2 hover:bg-gray-100 rounded-lg transition-colors">
+            <Edit2 className="w-5 h-5 text-gray-600" />
+          </button>
         </div>
       </div>
 
-      <div className="max-w-4xl mx-auto px-4 md:px-8 py-8">
-        {/* Profile Picture */}
-        <div className="bg-white border border-gray-200 rounded-lg p-8 mb-6">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold text-gray-900">Profile Picture</h2>
-            <button onClick={() => setIsEditing(!isEditing)} className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
-              <Edit2 className="w-4 h-4" /> Edit
-            </button>
+      <div className="max-w-4xl mx-auto px-4 py-6">
+        {/* Profile Section */}
+        <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+          <div className="flex items-center gap-4 mb-6">
+            <div className="w-20 h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-full flex items-center justify-center text-4xl border-4 border-yellow-200">👤</div>
+            <div>
+              <h2 className="text-2xl font-bold text-gray-900">Mohsen Alattas</h2>
+              <p className="text-sm text-gray-600">Premium Member</p>
+            </div>
           </div>
-          <div className="w-32 h-32 bg-gradient-to-br from-pink-600 to-red-600 rounded-full flex items-center justify-center text-6xl mb-4">👤</div>
-          {isEditing && <input type="file" accept="image/*" className="px-4 py-2 border border-gray-300 rounded-lg" />}
+          {isEditing && (
+            <div className="space-y-3">
+              <input type="file" accept="image/*" className="w-full px-4 py-2 border border-gray-300 rounded-lg" />
+              <div className="flex gap-2">
+                <button onClick={() => setIsEditing(false)} className="flex-1 bg-pink-600 text-white py-2 rounded-lg font-bold hover:bg-pink-700">Save</button>
+                <button onClick={() => setIsEditing(false)} className="flex-1 border border-gray-300 text-gray-900 py-2 rounded-lg font-bold hover:bg-gray-50">Cancel</button>
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Personal Info */}
-        <div className="bg-white border border-gray-200 rounded-lg p-8">
-          <h2 className="text-xl font-bold text-gray-900 mb-6">Personal Information</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* My Channels */}
+        <div className="mb-6">
+          <h3 className="font-bold text-lg text-gray-900 mb-3">My Channels</h3>
+          <div className="grid grid-cols-3 gap-3 mb-3">
+            {channels.map((channel, idx) => (
+              <div key={idx} className={`bg-gradient-to-br ${channel.color} rounded-lg p-4 text-center hover:shadow-lg transition-shadow cursor-pointer`}>
+                <div className="text-3xl mb-2">{channel.image}</div>
+                <p className="text-xs font-bold text-gray-800 line-clamp-2">{channel.name}</p>
+              </div>
+            ))}
+          </div>
+          <button className="w-full text-center py-2 text-gray-600 font-bold hover:bg-gray-100 rounded">View more channels ∨</button>
+        </div>
+
+        {/* Lazada Wallet */}
+        <div className="bg-white border border-gray-200 rounded-lg p-6 mb-6">
+          <div className="flex items-center gap-2 mb-4">
+            <Eye className="w-5 h-5 text-pink-600" />
+            <h3 className="font-bold text-lg text-gray-900">Lazada Wallet</h3>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-gradient-to-br from-pink-50 to-pink-100 rounded-lg p-4 text-center border border-pink-200">
+              <p className="text-sm text-gray-600 mb-1">Lazada Wallet (฿)</p>
+              <p className="text-3xl font-bold text-pink-600 mb-2">0.00</p>
+              <button className="w-full text-sm font-bold text-pink-600 hover:bg-pink-200 rounded py-1">Activate</button>
+            </div>
+            <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-4 text-center border border-blue-200">
+              <p className="text-sm text-gray-600 mb-1">Payment Options</p>
+              <p className="text-3xl font-bold text-blue-600 mb-2">2</p>
+              <button className="w-full text-sm font-bold text-blue-600 hover:bg-blue-200 rounded py-1">View</button>
+            </div>
+          </div>
+        </div>
+
+        {/* Recently Viewed */}
+        <div className="mb-6">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="font-bold text-lg text-gray-900">Recently Viewed</h3>
+            <Link href="#" className="text-gray-600 text-sm">View More &gt;</Link>
+          </div>
+          <div className="grid grid-cols-3 gap-3">
+            {recentlyViewed.map((item, idx) => (
+              <div key={idx} className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
+                <div className="bg-gradient-to-br from-gray-100 to-gray-200 h-24 flex items-center justify-center text-4xl">{item.image}</div>
+                <div className="p-3">
+                  <p className="text-sm font-bold text-gray-900 mb-1">Product Name</p>
+                  <p className="text-lg font-bold text-pink-600">{item.price}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Quick Actions Grid */}
+        <div className="mb-6">
+          <h3 className="font-bold text-lg text-gray-900 mb-3">Quick Actions</h3>
+          <div className="grid grid-cols-4 gap-2">
+            {quickActions.map((action, idx) => {
+              const Icon = action.icon
+              return (
+                <button key={idx} className="flex flex-col items-center gap-2 p-3 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
+                  <Icon className="w-5 h-5 text-pink-600" />
+                  <p className="text-xs font-bold text-gray-900 text-center line-clamp-2">{action.label}</p>
+                </button>
+              )
+            })}
+          </div>
+        </div>
+
+        {/* Personal Information */}
+        <div className="bg-white border border-gray-200 rounded-lg p-6">
+          <h2 className="font-bold text-lg text-gray-900 mb-4">Personal Information</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div>
               <label className="block text-sm text-gray-600 mb-2">First Name</label>
-              <input type="text" defaultValue="John" disabled={!isEditing} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-600 disabled:bg-gray-50" />
+              <input type="text" defaultValue="Mohsen" disabled={!isEditing} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-600 disabled:bg-gray-50" />
             </div>
             <div>
               <label className="block text-sm text-gray-600 mb-2">Last Name</label>
-              <input type="text" defaultValue="Doe" disabled={!isEditing} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-600 disabled:bg-gray-50" />
+              <input type="text" defaultValue="Alattas" disabled={!isEditing} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-600 disabled:bg-gray-50" />
             </div>
             <div>
               <label className="block text-sm text-gray-600 mb-2">Email</label>
-              <input type="email" defaultValue="john@example.com" disabled={!isEditing} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-600 disabled:bg-gray-50" />
+              <input type="email" defaultValue="mohsen@example.com" disabled={!isEditing} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-600 disabled:bg-gray-50" />
             </div>
             <div>
               <label className="block text-sm text-gray-600 mb-2">Phone</label>
               <input type="tel" defaultValue="+66 12 345 6789" disabled={!isEditing} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-600 disabled:bg-gray-50" />
             </div>
-            <div className="md:col-span-2">
-              <label className="block text-sm text-gray-600 mb-2">Bio</label>
-              <textarea defaultValue="Premium member since 2022" disabled={!isEditing} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-pink-600 disabled:bg-gray-50" rows={3} />
-            </div>
           </div>
-          {isEditing && (
-            <div className="flex gap-4 mt-6">
-              <button className="flex-1 bg-pink-600 text-white py-3 rounded-lg font-bold hover:bg-pink-700 transition-colors" onClick={() => setIsEditing(false)}>Save Changes</button>
-              <button className="flex-1 border border-gray-300 text-gray-900 py-3 rounded-lg font-bold hover:bg-gray-50 transition-colors" onClick={() => setIsEditing(false)}>Cancel</button>
-            </div>
-          )}
         </div>
       </div>
     </div>
