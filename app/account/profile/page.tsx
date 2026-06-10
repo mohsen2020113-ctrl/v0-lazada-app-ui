@@ -1,126 +1,126 @@
 'use client'
 
-import { ChevronLeft, Edit2, Heart, MessageSquare, Gift, DollarSign, ShoppingBag, Star, Eye, Settings } from 'lucide-react'
+import { Eye, Heart, MessageCircle, CreditCard, Store, Star, DollarSign, Gift, Settings } from 'lucide-react'
 import Link from 'next/link'
 
 export default function ProfilePage() {
-  const channels = [
-    { name: 'Stay trendy...', bgColor: 'bg-white', borderColor: 'border' },
-    { name: 'Share Link t...', bgColor: 'bg-pink-100', borderColor: 'border-pink-200' },
-    { name: 'LazBEAUT...', bgColor: 'bg-purple-100', borderColor: 'border-purple-200' },
-  ]
-
-  const recentlyViewed = [
-    { name: 'Plant', price: '฿1,344.82', image: '🪴' },
-    { name: 'Plant', price: '฿94.31', image: '🌿' },
-    { name: 'Plant', price: '฿2,290.00', image: '🌴' },
-  ]
-
-  const quickActions = [
-    { icon: Heart, label: 'WishList' },
-    { icon: MessageSquare, label: 'My Reviews' },
-    { icon: Gift, label: 'Chat with Customer Care' },
-    { icon: DollarSign, label: 'Bill Payment & Top Up' },
-    { icon: ShoppingBag, label: 'Followed Stores' },
-    { icon: Star, label: 'Memberships' },
-    { icon: DollarSign, label: 'Open shop on Lazada' },
-    { icon: Gift, label: 'Try & Buy' },
-  ]
-
   return (
     <div className="min-h-screen bg-white pb-20">
       {/* Header */}
-      <div className="sticky top-0 z-40 bg-white border-b border-gray-200 px-4 py-4 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <Link href="/account" className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-            <ChevronLeft className="w-6 h-6" />
+      <div className="sticky top-0 z-40 bg-white border-b border-gray-200 px-4 py-4">
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-600 border-2 border-yellow-300 flex items-center justify-center text-white font-bold">MA</div>
+            <h2 className="font-bold text-gray-900 text-lg">Mohsen Alattas</h2>
+          </div>
+          <Link href="/account/settings">
+            <Settings className="w-6 h-6 text-gray-700" />
           </Link>
-          <h1 className="text-xl font-bold text-gray-900">Mohsen Alattas</h1>
         </div>
-        <Link href="/account/settings" className="p-2 hover:bg-gray-100 rounded-lg transition-colors">
-          <Settings className="w-5 h-5 text-gray-600" />
-        </Link>
       </div>
 
-      {/* Profile Info */}
-      <div className="px-4 py-4">
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-16 h-16 bg-gradient-to-br from-yellow-300 to-yellow-600 rounded-full flex items-center justify-center text-2xl border-4 border-yellow-200">👤</div>
-          <div>
-            <h2 className="text-lg font-bold text-gray-900">Mohsen Alattas</h2>
-          </div>
-        </div>
-
+      {/* Content */}
+      <div className="px-4 py-6 space-y-6">
         {/* My Channels */}
-        <div className="mb-6">
-          <h3 className="font-bold text-lg text-gray-900 mb-3">My Channels</h3>
-          <div className="grid grid-cols-3 gap-3 mb-2">
-            {channels.map((channel, idx) => (
-              <div key={idx} className={`rounded-lg overflow-hidden hover:shadow-lg transition-shadow cursor-pointer ${channel.bgColor} ${channel.borderColor} border`}>
-                <div className="aspect-square flex items-center justify-center text-4xl">
-                  {idx === 0 && '👗'}
-                  {idx === 1 && '🎀'}
-                  {idx === 2 && '💄'}
-                </div>
-                <p className="text-xs font-bold text-gray-900 text-center py-2">{channel.name}</p>
-              </div>
-            ))}
+        <div>
+          <h3 className="font-bold text-lg text-gray-900 mb-4">My Channels</h3>
+          <div className="grid grid-cols-3 gap-3 mb-3">
+            <div className="rounded-lg overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop" alt="Stay trendy" className="w-full aspect-square object-cover rounded-lg" />
+              <p className="text-xs font-bold text-gray-900 text-center py-2">Stay trendy...</p>
+            </div>
+            <div className="rounded-lg overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=200&h=200&fit=crop" alt="Share Link" className="w-full aspect-square object-cover rounded-lg" />
+              <p className="text-xs font-bold text-gray-900 text-center py-2">Share Link t...</p>
+            </div>
+            <div className="rounded-lg overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1596462502278-af407b1564f7?w=200&h=200&fit=crop" alt="LazBEAUT" className="w-full aspect-square object-cover rounded-lg" />
+              <p className="text-xs font-bold text-gray-900 text-center py-2">LazBEAUT...</p>
+            </div>
           </div>
-          <button className="w-full text-center py-2 text-gray-700 font-bold hover:bg-gray-50 rounded">View more channels ∨</button>
+          <button className="w-full text-center py-2 text-gray-700 font-bold text-sm hover:bg-gray-50 rounded">View more channels ∨</button>
         </div>
 
         {/* Lazada Wallet */}
-        <div className="mb-6">
-          <div className="flex items-center gap-2 mb-3">
-            <Eye className="w-5 h-5 text-gray-900" />
-            <h3 className="font-bold text-lg text-gray-900">Lazada Wallet</h3>
-          </div>
-          <div className="grid grid-cols-2 gap-3">
-            <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 text-center">
-              <p className="text-xs text-gray-600 mb-1">Lazada Wallet (฿)</p>
-              <p className="text-2xl font-bold text-gray-900 mb-2">0.00</p>
-              <button className="w-full text-xs font-bold text-gray-700 hover:bg-gray-100 rounded py-1">Activate</button>
-            </div>
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-center">
-              <p className="text-xs text-gray-600 mb-1">Payment Options</p>
-              <p className="text-2xl font-bold text-blue-600 mb-2">2</p>
-              <button className="w-full text-xs font-bold text-blue-600 hover:bg-blue-100 rounded py-1">View</button>
+        <div className="border-t pt-6">
+          <h3 className="font-bold text-lg text-gray-900 mb-4 flex items-center gap-2">
+            Lazada Wallet <Eye className="w-5 h-5" />
+          </h3>
+          <div className="bg-gray-50 rounded-lg p-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="text-center">
+                <p className="text-gray-700 font-bold text-sm mb-1">Lazada</p>
+                <p className="text-gray-500 text-xs mb-2">Wallet (฿)</p>
+                <p className="text-2xl font-bold text-gray-900 mb-1">0.00</p>
+                <button className="text-blue-600 font-bold text-xs hover:underline">Activate</button>
+              </div>
+              <div className="text-center">
+                <p className="text-gray-700 font-bold text-sm mb-1">Payment</p>
+                <p className="text-gray-500 text-xs mb-2">Options</p>
+                <p className="text-2xl font-bold text-gray-900 mb-1">2</p>
+                <button className="text-blue-600 font-bold text-xs hover:underline">View</button>
+              </div>
             </div>
           </div>
         </div>
 
         {/* Recently Viewed */}
-        <div className="mb-6">
-          <div className="flex items-center justify-between mb-3">
+        <div className="border-t pt-6">
+          <div className="flex items-center justify-between mb-4">
             <h3 className="font-bold text-lg text-gray-900">Recently Viewed</h3>
-            <a href="#" className="text-gray-600 text-sm font-bold">View More &gt;</a>
+            <button className="text-gray-700 font-bold text-sm hover:underline">View More {'>'}</button>
           </div>
           <div className="grid grid-cols-3 gap-3">
-            {recentlyViewed.map((item, idx) => (
-              <div key={idx} className="bg-white border border-gray-200 rounded-lg overflow-hidden hover:shadow-lg transition-shadow">
-                <div className="bg-gray-100 h-20 flex items-center justify-center text-3xl">{item.image}</div>
-                <div className="p-2">
-                  <p className="text-xs font-bold text-gray-900 mb-1">Product</p>
-                  <p className="text-sm font-bold text-pink-600">{item.price}</p>
-                </div>
-              </div>
-            ))}
+            <div className="rounded-lg overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1545241045-f4e1a81ddccf?w=150&h=150&fit=crop" alt="Plant 1" className="w-full aspect-square object-cover rounded-lg" />
+              <p className="font-bold text-red-600 text-sm mt-2">฿1,344.82</p>
+            </div>
+            <div className="rounded-lg overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=150&h=150&fit=crop" alt="Plant 2" className="w-full aspect-square object-cover rounded-lg" />
+              <p className="font-bold text-red-600 text-sm mt-2">฿94.31</p>
+            </div>
+            <div className="rounded-lg overflow-hidden">
+              <img src="https://images.unsplash.com/photo-1520763185298-1b434c919eba?w=150&h=150&fit=crop" alt="Plant 3" className="w-full aspect-square object-cover rounded-lg" />
+              <p className="font-bold text-red-600 text-sm mt-2">฿2,290.00</p>
+            </div>
           </div>
         </div>
 
         {/* Quick Actions */}
-        <div className="mb-6">
-          <h3 className="font-bold text-lg text-gray-900 mb-3">Quick Actions</h3>
-          <div className="grid grid-cols-4 gap-2">
-            {quickActions.map((action, idx) => {
-              const Icon = action.icon
-              return (
-                <button key={idx} className="flex flex-col items-center gap-2 p-2 bg-white border border-gray-200 rounded-lg hover:shadow-lg transition-shadow">
-                  <Icon className="w-5 h-5 text-gray-900" />
-                  <p className="text-xs font-bold text-gray-900 text-center line-clamp-2">{action.label}</p>
-                </button>
-              )
-            })}
+        <div className="border-t pt-6">
+          <div className="grid grid-cols-4 gap-4 text-center">
+            <button className="flex flex-col items-center gap-2 hover:opacity-70">
+              <Heart className="w-6 h-6 text-gray-700" strokeWidth={1.5} />
+              <p className="text-xs font-bold text-gray-900">WishList</p>
+            </button>
+            <button className="flex flex-col items-center gap-2 hover:opacity-70">
+              <MessageCircle className="w-6 h-6 text-gray-700" strokeWidth={1.5} />
+              <p className="text-xs font-bold text-gray-900">My Reviews</p>
+            </button>
+            <button className="flex flex-col items-center gap-2 hover:opacity-70">
+              <MessageCircle className="w-6 h-6 text-gray-700" strokeWidth={1.5} />
+              <p className="text-xs font-bold text-gray-900 leading-tight">Chat with<br/>Customer Care</p>
+            </button>
+            <button className="flex flex-col items-center gap-2 hover:opacity-70">
+              <CreditCard className="w-6 h-6 text-gray-700" strokeWidth={1.5} />
+              <p className="text-xs font-bold text-gray-900 leading-tight">Bill Payment<br/>& Top Up</p>
+            </button>
+            <button className="flex flex-col items-center gap-2 hover:opacity-70">
+              <Store className="w-6 h-6 text-gray-700" strokeWidth={1.5} />
+              <p className="text-xs font-bold text-gray-900 leading-tight">Followed<br/>Stores</p>
+            </button>
+            <button className="flex flex-col items-center gap-2 hover:opacity-70">
+              <Star className="w-6 h-6 text-gray-700" strokeWidth={1.5} />
+              <p className="text-xs font-bold text-gray-900">Memberships</p>
+            </button>
+            <button className="flex flex-col items-center gap-2 hover:opacity-70">
+              <DollarSign className="w-6 h-6 text-gray-700" strokeWidth={1.5} />
+              <p className="text-xs font-bold text-gray-900 leading-tight">Open shop<br/>on Lazada</p>
+            </button>
+            <button className="flex flex-col items-center gap-2 hover:opacity-70">
+              <Gift className="w-6 h-6 text-gray-700" strokeWidth={1.5} />
+              <p className="text-xs font-bold text-gray-900">Try & Buy</p>
+            </button>
           </div>
         </div>
       </div>
