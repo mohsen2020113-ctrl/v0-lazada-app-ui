@@ -94,8 +94,7 @@ export default function LoginPage() {
         </div>
 
         <p className="text-center mt-8 text-white/40 text-sm">
-          ليس لديك حساب؟{' '}
-          <Link href="/register" className="text-[#F57224] font-bold">إنشاء حساب</Link>
+          ليس لديك حساب؟ تواصل معنا للمزيد من المعلومات
         </p>
       </div>
     </div>
