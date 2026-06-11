@@ -12,6 +12,7 @@ import { ProductActions } from '@/components/product/product-actions'
 import { mockProduct } from '@/lib/product-data'
 
 export default function ProductPage({ params }: { params: { handle: string } }) {
+  // For now, use mockProduct - dynamic fetching requires server component
   const product = mockProduct
   const [activeTab, setActiveTab] = useState('overview')
   const [quantity, setQuantity] = useState(1)
@@ -52,9 +53,9 @@ export default function ProductPage({ params }: { params: { handle: string } }) 
               discount={product.discount}
               rating={product.rating}
               reviewCount={product.reviewCount}
-              soldCount={product.soldCount}
+              soldCount={product.soldCount || 2042}
               tags={product.tags}
-              specifications={product.specifications}
+              specifications={product.specifications || []}
             />
 
             {/* Quantity and Seller Section */}
@@ -83,7 +84,7 @@ export default function ProductPage({ params }: { params: { handle: string } }) 
               <div className="border-t border-gray-200 pt-4">
                 <div className="flex items-center justify-between mb-4">
                   <div>
-                    <h4 className="font-bold text-gray-900">{product.seller.name}</h4>
+                    <h4 className="font-bold text-gray-900">{typeof product.seller === 'string' ? product.seller : product.seller?.name || 'Store'}</h4>
                     <p className="text-xs text-gray-600">Seller Rating 97% | Active 2 hours ago</p>
                   </div>
                   <button className="px-4 py-2 border border-pink-600 text-pink-600 font-bold rounded hover:bg-pink-50 transition-colors">
@@ -94,7 +95,7 @@ export default function ProductPage({ params }: { params: { handle: string } }) 
             </div>
 
             {/* Shipping Info */}
-            <ShippingInfo shipping={product.shipping} vouchers={product.vouchers} />
+            <ShippingInfo shipping={product.shipping} vouchers={product.vouchers || []} />
 
             {/* Tab Navigation for Desktop */}
             <div className="border-t border-gray-200 pt-6">
