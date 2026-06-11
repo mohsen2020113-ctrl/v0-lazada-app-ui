@@ -32,7 +32,7 @@ const categories = [
     name: "LEELand",
     icon: MapPin,
     gradient: "from-[#4caf50] to-[#2e7d32]",
-    href: "/category/الأفضل-مبيعاً",
+    href: "/category/best-sellers",
   },
   {
     id: 3,
@@ -53,7 +53,7 @@ const categories = [
     name: "Flash Sale",
     icon: Zap,
     gradient: "from-[#ff5722] to-[#f44336]",
-    href: "/category/الأفضل-مبيعاً",
+    href: "/category/best-sellers",
   },
   {
     id: 6,

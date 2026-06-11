@@ -38,7 +38,7 @@ export async function POST(request: NextRequest) {
         })
         .slice(0, 10)
 
-      reason = 'تم اختيار أفضل الProductات بناءً على التقييمات والمبيعات'
+      reason = 'Selected best products based on ratings and sales'
 
       return NextResponse.json({
         recommended,

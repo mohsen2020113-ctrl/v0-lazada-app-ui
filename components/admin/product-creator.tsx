@@ -137,21 +137,21 @@ export default function ProductCreator() {
 
   const statusLabels: Record<ProcessStatus, string> = {
     idle: '',
-    analyzing: '🔍 تحليل الصورة...',
-    colors: '🎨 استخراج الألوان...',
-    description: '📝 كتابة الوصف بالعربية...',
-    translating: '🌐 الترجمة إلى الإنجليزية...',
-    done: '✅ اكتمل!',
-    error: '❌ حدث خطأ'
+    analyzing: '🔍 Analyzing image...',
+    colors: '🎨 Extracting colors...',
+    description: '📝 Writing description...',
+    translating: '🌐 Translating to English...',
+    done: '✅ Complete!',
+    error: '❌ Error occurred'
   }
 
   return (
-    <div className="min-h-screen bg-gray-950 text-white p-4 font-sans" dir="rtl">
+    <div className="min-h-screen bg-gray-950 text-white p-4 font-sans" dir="ltr">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-orange-500 mb-2">🎨 منشئ صفحات المنتجات</h1>
-          <p className="text-gray-400">صورة واحدة → تحليل AI → صفحة منتج احترافية كاملة</p>
+          <h1 className="text-3xl font-bold text-orange-500 mb-2">🎨 Product Page Creator</h1>
+          <p className="text-gray-400">Single image → AI Analysis → Complete professional product page</p>
         </div>
 
         {!result ? (
@@ -170,7 +170,7 @@ export default function ProductCreator() {
               ) : (
                 <>
                   <div className="text-5xl mb-3">📸</div>
-                  <p className="text-gray-300 font-semibold">اسحب الصورة هنا أو اضغط للاختيار</p>
+                  <p className="text-gray-300 font-semibold">Drag image here or click to select</p>
                   <p className="text-gray-500 text-sm mt-1">JPG, PNG, WEBP</p>
                 </>
               )}
@@ -180,31 +180,31 @@ export default function ProductCreator() {
             {/* Product Info */}
             <div className="grid grid-cols-1 gap-4 mb-6 md:grid-cols-2">
               <div>
-                <label className="block text-sm font-bold text-gray-300 mb-2">اسم المنتج *</label>
+                <label className="block text-sm font-bold text-gray-300 mb-2">Product Name *</label>
                 <input
                   type="text"
                   value={productName}
                   onChange={e => setProductName(e.target.value)}
-                  placeholder="مثال: سماعة بلوتوث JBL"
+                  placeholder="Example: JBL Bluetooth Headphones"
                   className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500"
                 />
               </div>
               <div>
-                <label className="block text-sm font-bold text-gray-300 mb-2">الفئة</label>
+                <label className="block text-sm font-bold text-gray-300 mb-2">Category</label>
                 <select
                   value={category}
                   onChange={e => setCategory(e.target.value)}
                   className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-orange-500"
                 >
-                  <option value="">-- اختر الفئة --</option>
-                  <option value="electronics">إلكترونيات</option>
-                  <option value="clothing">ملابس</option>
-                  <option value="accessories">إكسسوارات</option>
-                  <option value="home">منزل ومطبخ</option>
-                  <option value="sports">رياضة</option>
-                  <option value="beauty">جمال وعناية</option>
-                  <option value="toys">ألعاب</option>
-                  <option value="other">أخرى</option>
+                  <option value="">-- Select Category --</option>
+                  <option value="electronics">Electronics</option>
+                  <option value="clothing">Clothing</option>
+                  <option value="accessories">Accessories</option>
+                  <option value="home">Home & Kitchen</option>
+                  <option value="sports">Sports</option>
+                  <option value="beauty">Beauty & Care</option>
+                  <option value="toys">Toys</option>
+                  <option value="other">Other</option>
                 </select>
               </div>
             </div>
@@ -219,7 +219,7 @@ export default function ProductCreator() {
                 <div className="w-full bg-gray-700 rounded-full h-3">
                   <div
                     className="bg-orange-500 h-3 rounded-full transition-all duration-500"
-                    style={{ widur: `${progress}%` }}
+                    style={{ width: `${progress}%` }}
                   />
                 </div>
                 <p className="text-gray-400 text-sm mt-2 text-center">{progress}%</p>
@@ -238,7 +238,7 @@ export default function ProductCreator() {
               disabled={!imageFile || !productName || (status !== 'idle' && status !== 'error')}
               className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-bold py-4 rounded-xl text-lg transition-colors"
             >
-              {status !== 'idle' && status !== 'error' ? '⏳ جاري المعالجة...' : '🚀 إنشاء صفحة المنتج'}
+              {status !== 'idle' && status !== 'error' ? '⏳ Processing...' : '🚀 Create Product Page'}
             </button>
           </div>
         ) : (
@@ -246,35 +246,35 @@ export default function ProductCreator() {
           <div className="space-y-6">
             <div className="bg-gray-900 rounded-2xl p-6 border border-gray-800">
               <div className="flex items-center justify-between mb-6">
-                <h2 className="text-2xl font-bold text-green-400">✅ تم الإنشاء بنجاح!</h2>
+                <h2 className="text-2xl font-bold text-green-400">✅ Created Successfully!</h2>
                 <button onClick={reset} className="bg-gray-800 hover:bg-gray-700 px-4 py-2 rounded-lg text-sm">
-                  ➕ منتج جديد
+                  ➕ New Product
                 </button>
               </div>
 
               {/* Titles */}
               <div className="grid md:grid-cols-2 gap-4 mb-6">
                 <div className="bg-gray-800 rounded-xl p-4">
-                  <div className="text-xs text-gray-500 mb-1">🇸🇦 العنوان بالعربية</div>
-                  <h3 className="font-bold text-orange-400">{result.descriptions.ar.title}</h3>
-                  <p className="text-gray-300 text-sm mt-2">{result.descriptions.ar.mainDescription}</p>
-                </div>
-                <div className="bg-gray-800 rounded-xl p-4" dir="ltr">
                   <div className="text-xs text-gray-500 mb-1">🇬🇧 English Title</div>
                   <h3 className="font-bold text-blue-400">{result.descriptions.en.title}</h3>
                   <p className="text-gray-300 text-sm mt-2">{result.descriptions.en.mainDescription}</p>
+                </div>
+                <div className="bg-gray-800 rounded-xl p-4">
+                  <div className="text-xs text-gray-500 mb-1">🇸🇦 Arabic Title (Optional)</div>
+                  <h3 className="font-bold text-orange-400">{result.descriptions.ar.title}</h3>
+                  <p className="text-gray-300 text-sm mt-2">{result.descriptions.ar.mainDescription}</p>
                 </div>
               </div>
 
               {/* Colors */}
               {result.colors.length > 0 && (
                 <div className="mb-6">
-                  <h4 className="font-bold text-gray-300 mb-3">🎨 الألوان المستخرجة</h4>
+                  <h4 className="font-bold text-gray-300 mb-3">🎨 Extracted Colors</h4>
                   <div className="flex gap-3 flex-wrap">
                     {result.colors.map((color, i) => (
                       <div key={i} className="flex items-center gap-2 bg-gray-800 rounded-lg px-3 py-2">
                         <div className="w-6 h-6 rounded-full border border-gray-600" style={{ backgroundColor: color.hexCode }} />
-                        <span className="text-sm">{color.name_ar}</span>
+                        <span className="text-sm">{color.name_en}</span>
                         <span className="text-xs text-gray-500">{color.hexCode}</span>
                       </div>
                     ))}
@@ -285,9 +285,9 @@ export default function ProductCreator() {
               {/* Features */}
               <div className="grid md:grid-cols-2 gap-4 mb-6">
                 <div>
-                  <h4 className="font-bold text-gray-300 mb-3">✨ المميزات</h4>
+                  <h4 className="font-bold text-gray-300 mb-3">✨ Features</h4>
                   <ul className="space-y-1">
-                    {result.descriptions.ar.features.map((f, i) => (
+                    {result.descriptions.en.features.map((f, i) => (
                       <li key={i} className="flex gap-2 text-sm text-gray-300">
                         <span className="text-orange-500">•</span>{f}
                       </li>
@@ -295,9 +295,9 @@ export default function ProductCreator() {
                   </ul>
                 </div>
                 <div>
-                  <h4 className="font-bold text-gray-300 mb-3">🏷️ الكلمات المفتاحية</h4>
+                  <h4 className="font-bold text-gray-300 mb-3">🏷️ Keywords</h4>
                   <div className="flex flex-wrap gap-2">
-                    {result.descriptions.ar.keywords.map((k, i) => (
+                    {result.descriptions.en.keywords.map((k, i) => (
                       <span key={i} className="bg-orange-500/20 text-orange-400 text-xs px-2 py-1 rounded-full">{k}</span>
                     ))}
                   </div>
@@ -307,14 +307,14 @@ export default function ProductCreator() {
               {/* Shopify success message */}
               {shopifyStatus === 'success' && shopifyUrl && (
                 <div className="bg-green-900/30 border border-green-700 rounded-xl p-4 mb-4 flex items-center justify-between">
-                  <span className="text-green-400 font-semibold">✅ تم النشر على Shopify بنجاح!</span>
+                  <span className="text-green-400 font-semibold">✅ Published to Shopify successfully!</span>
                   <a
                     href={shopifyUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="bg-green-700 hover:bg-green-600 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors"
                   >
-                    عرض المنتج في Shopify ↗
+                    View Product in Shopify ↗
                   </a>
                 </div>
               )}
@@ -322,7 +322,7 @@ export default function ProductCreator() {
               {/* Shopify error message */}
               {shopifyStatus === 'error' && shopifyError && (
                 <div className="bg-red-900/30 border border-red-700 rounded-xl p-4 mb-4 text-red-400">
-                  ❌ فشل النشر: {shopifyError}
+                  ❌ Publish failed: {shopifyError}
                 </div>
               )}
 
@@ -333,10 +333,10 @@ export default function ProductCreator() {
                 className="w-full bg-green-600 hover:bg-green-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-bold py-3 rounded-xl transition-colors"
               >
                 {shopifyStatus === 'loading'
-                  ? '⏳ جاري النشر على Shopify...'
+                  ? '⏳ Publishing to Shopify...'
                   : shopifyStatus === 'success'
-                  ? '✅ تم النشر على Shopify'
-                  : '🛍️ إضافة إلى Shopify'}
+                  ? '✅ Published to Shopify'
+                  : '🛍️ Add to Shopify'}
               </button>
             </div>
           </div>

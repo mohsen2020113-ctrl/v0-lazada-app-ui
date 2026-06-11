@@ -81,7 +81,7 @@ export function CartDrawer() {
             <ShoppingBag className="w-20 h-20 text-gray-200 mb-4" />
             <h3 className="text-lg font-semibold text-gray-900 mb-2">{t('cart.empty')}</h3>
             <p className="text-gray-500 text-sm text-center mb-6">
-              {isRTL ? 'يبدو أنك لم تضف أي شيء إلى سلتك بعد.' : "Looks like you haven't added anything to your cart yet."}
+              Looks like you haven't added anything to your cart yet.
             </p>
             <button
               onClick={closeCart}
@@ -172,7 +172,7 @@ export function CartDrawer() {
               
               {/* Shipping Note */}
               <p className="text-xs text-gray-500 text-center">
-                {isRTL ? 'يتم حساب الشحن والضرائب عند الدفع' : 'Shipping & taxes calculated at checkout'}
+                Shipping & taxes calculated at checkout
               </p>
 
               {/* Checkout Button */}

@@ -14,7 +14,7 @@ export function FourLEEEAssistant() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: 'مرحباً! أنا 4LEEE، مساعدك الذكي في التسوق. كيف يمكنني مساعدتك اليوم؟',
+      content: 'Hello! I am 4LEEE, your smart shopping assistant. How can I help you today?',
       timestamp: new Date().toISOString(),
     },
   ]);
