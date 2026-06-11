@@ -36,7 +36,7 @@ export default function ProductPage({ params }: { params: { handle: string } }) 
   const [added, setAdded] = useState(false)
 
   useEffect(() => {
-    fetch(`/api/products/${params.handle}`)
+    fetch(`/api/product/${params.handle}`)
       .then(r => r.json())
       .then(d => { setProduct(d); setLoading(false) })
       .catch(() => setLoading(false))
@@ -170,4 +170,4 @@ export default function ProductPage({ params }: { params: { handle: string } }) 
       </div>
     </div>
   )
-      }
+}
