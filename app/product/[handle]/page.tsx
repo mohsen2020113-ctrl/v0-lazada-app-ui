@@ -36,10 +36,10 @@ interface RelatedProduct {
 }
 
 const MOCK_REVIEWS = [
-  { id: 1, name: 'Ø£Ø­ÙØ¯ ÙØ­ÙØ¯', rating: 5, date: 'ÙÙØ° 3 Ø£ÙØ§Ù', comment: 'ÙÙØªØ¬ ÙÙØªØ§Ø² Ø¬Ø¯Ø§ÙØ Ø§ÙØ¬ÙØ¯Ø© Ø±Ø§Ø¦Ø¹Ø© ÙØ³Ø±ÙØ¹ Ø§ÙØ´Ø­Ù. Ø£ÙØµØ­ Ø¨Ù Ø¨Ø´Ø¯Ø©.', helpful: 24, verified: true, avatar: 'Ø£' },
-  { id: 2, name: 'Ø³Ø§Ø±Ø© Ø¹ÙÙ', rating: 5, date: 'ÙÙØ° Ø£Ø³Ø¨ÙØ¹', comment: 'ÙØµÙ Ø¨Ø´ÙÙ Ø³Ø±ÙØ¹ ÙØ§ÙØªØºÙÙÙ ÙØ§Ù ÙÙØªØ§Ø²Ø§Ù. Ø§ÙÙÙØªØ¬ ÙØ·Ø§Ø¨Ù Ø§ÙÙØµÙ ØªÙØ§ÙØ§Ù.', helpful: 18, verified: true, avatar: 'Ø³' },
-  { id: 3, name: 'ÙØ­ÙØ¯ Ø®Ø§ÙØ¯', rating: 4, date: 'ÙÙØ° Ø£Ø³Ø¨ÙØ¹ÙÙ', comment: 'ÙÙØªØ¬ Ø¬ÙØ¯ ÙÙÙ Ø§ÙØªÙØµÙÙ ØªØ£Ø®Ø± ÙÙÙÙØ§Ù. Ø§ÙØ¬ÙØ¯Ø© ÙÙØ¨ÙÙØ© Ø¨ÙØ°Ø§ Ø§ÙØ³Ø¹Ø±.', helpful: 12, verified: true, avatar: 'Ù' },
-  { id: 4, name: 'ÙØ§Ø·ÙØ© Ø­Ø³Ù', rating: 5, date: 'ÙÙØ° Ø´ÙØ±', comment: 'Ø£ÙØ¶Ù ÙÙØªØ¬ Ø§Ø´ØªØ±ÙØªÙ ÙÙ ÙØ°Ø§ Ø§ÙÙØªØ¬Ø±! Ø³Ø£Ø´ØªØ±Ù ÙØ¬Ø¯Ø¯Ø§Ù Ø¨Ø§ÙØªØ£ÙÙØ¯.', helpful: 31, verified: true, avatar: 'Ù' },
+  { id: 1, name: 'أحمد محمد', rating: 5, date: 'منذ 3 أيام', comment: 'منتج ممتاز جداً، الجودة رائعة وسريع الشحن. أنصح به بشدة.', helpful: 24, verified: true, avatar: 'أ' },
+  { id: 2, name: 'سارة علي', rating: 5, date: 'منذ أسبوع', comment: 'وصل بشكل سريع والتغليف كان ممتازاً. المنتج يطابق الوصف تماماً.', helpful: 18, verified: true, avatar: 'س' },
+  { id: 3, name: 'محمد خالد', rating: 4, date: 'منذ أسبوعين', comment: 'منتج جيد لكن التوصيل تأخر قليلاً. الجودة مقبولة بهذا السعر.', helpful: 12, verified: true, avatar: 'م' },
+  { id: 4, name: 'فاطمة حسن', rating: 5, date: 'منذ شهر', comment: 'أفضل منتج اشتريته من هذا المتجر! سأشتري مجدداً بالتأكيد.', helpful: 31, verified: true, avatar: 'ف' },
 ]
 
 export default function ProductPage() {
@@ -114,16 +114,16 @@ export default function ProductPage() {
     <div className="min-h-screen bg-white flex items-center justify-center" dir="rtl">
       <div className="text-center">
         <div className="w-12 h-12 border-4 border-[#F50057] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-        <p className="text-gray-500 text-sm">Ø¬Ø§Ø±Ù ØªØ­ÙÙÙ Ø§ÙÙÙØªØ¬...</p>
+        <p className="text-gray-500 text-sm">جارٍ تحميل المنتج...</p>
       </div>
     </div>
   )
 
   if (!product) return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-4" dir="rtl">
-      <p className="text-gray-500">Ø§ÙÙÙØªØ¬ ØºÙØ± ÙÙØ¬ÙØ¯</p>
+      <p className="text-gray-500">المنتج غير موجود</p>
       <button onClick={() => router.push('/')} className="bg-[#F50057] text-white px-6 py-2 rounded-lg text-sm">
-        Ø§ÙØ¹ÙØ¯Ø© ÙÙØ±Ø¦ÙØ³ÙØ©
+        العودة للرئيسية
       </button>
     </div>
   )
@@ -165,7 +165,7 @@ export default function ProductPage() {
             <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
-              placeholder="Ø§Ø¨Ø­Ø« ÙÙ 4LEEE..."
+              placeholder="ابحث في 4LEEE..."
               className="w-full pr-9 pl-4 py-2.5 rounded-lg text-sm bg-white text-gray-800 outline-none"
             />
           </div>
@@ -175,27 +175,27 @@ export default function ProductPage() {
               className="flex flex-col items-center gap-0.5"
             >
               <Heart size={22} className={wishlist ? 'text-yellow-300 fill-yellow-300' : 'text-white'} />
-              <span className="text-white text-[10px]">Ø§ÙÙØ§Ø¦ÙØ©</span>
+              <span className="text-white text-[10px]">القائمة</span>
             </button>
             <button className="flex flex-col items-center gap-0.5 relative">
               <div className="relative">
                 <ShoppingCart size={22} className="text-white" />
                 <span className="absolute -top-1 -left-1 bg-yellow-400 text-black text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">3</span>
               </div>
-              <span className="text-white text-[10px]">Ø§ÙØ³ÙØ©</span>
+              <span className="text-white text-[10px]">السلة</span>
             </button>
             <button className="flex flex-col items-center gap-0.5">
               <div className="w-6 h-6 rounded-full bg-white/30 flex items-center justify-center">
-                <span className="text-white text-xs font-bold">Ù</span>
+                <span className="text-white text-xs font-bold">م</span>
               </div>
-              <span className="text-white text-[10px]">Ø­Ø³Ø§Ø¨Ù</span>
+              <span className="text-white text-[10px]">حسابي</span>
             </button>
           </div>
         </div>
         {/* Sub-nav */}
         <div className="border-t border-white/20">
           <div className="max-w-7xl mx-auto px-4 flex items-center gap-6 py-2 overflow-x-auto scrollbar-hide text-sm text-white/90">
-            {['Ø§ÙØ±Ø¦ÙØ³ÙØ©','Ø§ÙØ¥ÙÙØªØ±ÙÙÙØ§Øª','Ø§ÙÙÙØ¶Ø©','Ø§ÙÙÙØ²Ù','Ø§ÙØ¬ÙØ§Ù','Ø§ÙØ±ÙØ§Ø¶Ø©','Ø¹Ø±ÙØ¶ Ø§ÙÙÙÙ','ÙØ§Ø±ÙØ§Öª'].map((cat, i) => (
+            {['الرئيسية','الإلكترونيات','الموضة','المنزل','الجمال','الرياضة','عروض اليوم','ماركا֪'].map((cat, i) => (
               <button key={i} className="whitespace-nowrap hover:text-white transition-colors">{cat}</button>
             ))}
           </div>
@@ -205,9 +205,9 @@ export default function ProductPage() {
       {/* ===== BREADCRUMBS ===== */}
       <div className="max-w-7xl mx-auto px-4 py-2.5">
         <div className="flex items-center gap-1.5 text-xs text-gray-500">
-          <button className="hover:text-[#F50057] transition-colors">Ø§ÙØ±Ø¦ÙØ³ÙØ©</button>
+          <button className="hover:text-[#F50057] transition-colors">الرئيسية</button>
           <ChevronLeft size={12} />
-          <button className="hover:text-[#F50057] transition-colors">Ø§ÙØ¥ÙÙØªØ±ÙÙÙØ§Øª</button>
+          <button className="hover:text-[#F50057] transition-colors">الإلكترونيات</button>
           <ChevronLeft size={12} />
           <span className="text-gray-700 font-medium truncate max-w-xs">{product.title}</span>
         </div>
@@ -269,10 +269,10 @@ export default function ProductPage() {
               )}
               {/* Share */}
               <div className="flex items-center gap-2 text-sm text-gray-500 pt-1">
-                <span>ÙØ´Ø§Ø±ÙØ©:</span>
+                <span>مشاركة:</span>
                 <button className="flex items-center gap-1.5 text-gray-400 hover:text-[#F50057] transition-colors">
                   <Share2 size={16} />
-                  <span>ÙØ´Ø§Ø±ÙØ©</span>
+                  <span>مشاركة</span>
                 </button>
               </div>
             </div>
@@ -300,11 +300,11 @@ export default function ProductPage() {
                   ))}
                 </div>
                 <span className="text-yellow-500 font-bold text-sm">4.9</span>
-                <button className="text-[#F50057] text-sm hover:underline">2,042 ØªÙÙÙÙ</button>
+                <button className="text-[#F50057] text-sm hover:underline">2,042 تقييم</button>
                 <span className="text-gray-300">|</span>
                 <span className="text-gray-500 text-sm flex items-center gap-1">
                   <TrendingUp size={14} className="text-green-500" />
-                  +5,000 ÙØ¨ÙØ¹Ø§Ù
+                  +5,000 مبيعاً
                 </span>
               </div>
 
@@ -312,26 +312,26 @@ export default function ProductPage() {
               <div className="bg-gradient-to-l from-red-50 to-pink-50 rounded-xl p-4 border border-pink-100">
                 <div className="flex items-baseline gap-3">
                   <span className="text-3xl font-black text-[#F50057]">
-                    {variant.price} <span className="text-lg">Ø¯.Ø¥</span>
+                    {variant.price} <span className="text-lg">د.إ</span>
                   </span>
                   {variant.compareAtPrice && (
-                    <span className="text-gray-400 line-through text-base">{variant.compareAtPrice} Ø¯.Ø¥</span>
+                    <span className="text-gray-400 line-through text-base">{variant.compareAtPrice} د.إ</span>
                   )}
                   {discount > 0 && (
                     <span className="bg-[#F50057] text-white text-xs font-bold px-2 py-0.5 rounded-md">
-                      ÙÙÙØ± {discount}%
+                      وفّر {discount}%
                     </span>
                   )}
                 </div>
                 <p className="text-gray-500 text-xs mt-1 flex items-center gap-1">
                   <CheckCircle size={12} className="text-green-500" />
-                  Ø§ÙØ³Ø¹Ø± Ø´Ø§ÙÙ Ø¶Ø±ÙØ¨Ø© Ø§ÙÙÙÙØ© Ø§ÙÙØ¶Ø§ÙØ©
+                  السعر شامل ضريبة القيمة المضافة
                 </p>
               </div>
 
               {/* Store Info */}
               <div className="border border-gray-100 rounded-xl p-4 bg-gray-50">
-                <p className="text-gray-500 text-xs mb-2">ÙØ¨Ø§Ø¹ Ø¨ÙØ§Ø³Ø·Ø©</p>
+                <p className="text-gray-500 text-xs mb-2">يباع بواسطة</p>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-9 h-9 bg-[#F50057] rounded-lg flex items-center justify-center">
@@ -341,12 +341,12 @@ export default function ProductPage() {
                       <p className="text-sm font-semibold text-gray-800">Better Home Life - Official Store</p>
                       <div className="flex items-center gap-2 mt-0.5">
                         <span className="text-xs text-gray-400">Store 7600</span>
-                        <span className="text-xs bg-orange-100 text-orange-600 px-1.5 py-0.5 rounded font-medium">ÙØªØ¬Ø± Ø±Ø³ÙÙ â</span>
+                        <span className="text-xs bg-orange-100 text-orange-600 px-1.5 py-0.5 rounded font-medium">متجر رسمي ✓</span>
                       </div>
                     </div>
                   </div>
                   <button className="text-xs text-[#F50057] border border-[#F50057] px-3 py-1.5 rounded-lg hover:bsg-red-50 transition-colors font-medium">
-                   Ø²ÙØ§Ø±Ø© Ø§ÙÙØªØ¬Ø±
+                   زيارة المتجر
                   </button>
                 </div>
               </div>
@@ -354,7 +354,7 @@ export default function ProductPage() {
               {/* Variants */}
               {hasVariants && (
                 <div>
-                  <p className="text-sm font-semibold text-gray-700 mb-2">Ø§ÙØ®ÙØ§Ø±Ø§Öª Ø§ÙÙØªØ§Ø­Ø©</p>
+                  <p className="text-sm font-semibold text-gray-700 mb-2">الخيارا֪ المتاحة</p>
                   <div className="flex flex-wrap gap-2">
                     {product.variants.map((v, i) => (
                       <button
@@ -376,13 +376,13 @@ export default function ProductPage() {
               {/* Quantity + Stock */}
               <div className="flex items-center gap-4">
                 <div>
-                  <p className="text-sm font-semibold text-gray-700 mb-2">Ø§ÙÙÙÙØ©</p>
+                  <p className="text-sm font-semibold text-gray-700 mb-2">الكمية</p>
                   <div className="flex items-center border border-gray-200 rounded-xl overflow-hidden w-fit">
                     <button
                       onClick={() => setQuantity(q => Math.max(1, q - 1))}
                       className="w-10 h-10 bg-gray-50 text-gray-700 text-lg hover:bg-gray-100 transition-colors font-bold"
                     >
-                      â
+                      −
                     </button>
                     <span className="w-14 text-center text-base font-semibold text-gray-800">{quantity}</span>
                     <button
@@ -395,7 +395,7 @@ export default function ProductPage() {
                 </div>
                 <div className="flex items-center gap-1.5 text-green-600 text-sm font-medium mt-6">
                   <div className="w-2 h-2 rounded-full bg-green-500" />
-                  ÙØªÙÙØ± ÙÙ Ø§ÙÙØ®Ø²ÙÙ
+                  متوفر في المخزون
                 </div>
               </div>
 
@@ -413,22 +413,22 @@ export default function ProductPage() {
                   }`}
                 >
                   <ShoppingCart size={20} />
-                  {!variant.available ? 'ÙÙØ¯ Ø§ÙÙØ®Ø²ÙÙ' : addedToCart ? 'ØªÙØª Ø§ÙØ¥Ø¸Ø§ÙØ© â' : 'Ø£ØºÙ Ø¥ÙÙ Ø§ÙØ³ÙØ© ð¥'}
+                  {!variant.available ? 'نفد المخزون' : addedToCart ? 'تمت الإظافة ✓' : 'أغف إلى السلة 🔥'}
                 </button>
                 <button
                   disabled={!variant.available}
                   className="flex-1 py-3.5 rounded-xl font-bold text-base bg-orange-500 text-white hover:bg-orange-600 active:scale-95 transition-all shadow-sm disabled:opacity-40"
                 >
-                  Ø§Ø´ØªØ±Ù Ø§ÙØ¢Ù ð±
+                  اشتري الآن 📱
                 </button>
               </div>
 
               {/* Guarantees */}
               <div className="grid grid-cols-3 gap-3 pt-2">
                 {[
-                  { icon: <Truck size={18} className="text-[#F50057]" />, title: 'Ø´Ø­Ù ÙØ¬Ø§ÙÙ', sub: 'ÙÙÙ AED 200' },
-                  { icon: <RotateCcw size={18} className="text-[#F50057]" />, title: 'Ø¥Ø±Ø¬Ø§Ø¹ ÙØ¬Ø§ÙÙ', sub: 'Ø®ÙØ§Ù 14 ÙÙÙ' },
-                  { icon: <Shield size={18} className="text-[#F50057]" />, title: 'ÙÙØªØ¬ Ø£ØµÙÙ', sub: '100% ÙØ¶ÙÙÙ' },
+                  { icon: <Truck size={18} className="text-[#F50057]" />, title: 'شحن مجاني', sub: 'فوق AED 200' },
+                  { icon: <RotateCcw size={18} className="text-[#F50057]" />, title: 'إرجاع مجاني', sub: 'خلال 14 يوم' },
+                  { icon: <Shield size={18} className="text-[#F50057]" />, title: 'منتج أصلي', sub: '100% مضمون' },
                 ].map((g, i) => (
                   <div key={i} className="flex flex-col items-center text-center p-3 bg-gray-50 rounded-xl gap-1">
                     {g.icon}
@@ -447,9 +447,9 @@ export default function ProductPage() {
         <div className="bg-white rounded-xl shadow-sm overflow-hidden">
           <div className="flex border-b border-gray-100">
             {[
-              { key: 'description', label: 'ØªÙØ§ØµÙÙ Ø§ÙÙÙØªØ¬' },
-              { key: 'reviews', label: `Ø§ÙØªÙÙÙÙØ§Öª (2,042)` },
-              { key: 'shipping', label: 'Ø§ÙØ´Ø­Ù ÙØ§ÙØ¥Ø±Ø¬Ø§Ø¹' },
+              { key: 'description', label: 'تفاصيل المنتج' },
+              { key: 'reviews', label: `التقييما֪ (2,042)` },
+              { key: 'shipping', label: 'الشحن والإرجاع' },
             ].map(tab => (
               <button
                 key={tab.key}
@@ -468,33 +468,33 @@ export default function ProductPage() {
           <div className="p-6">
             {activeTab === 'description' && (
               <div className="text-gray-700 text-sm leading-8">
-                {product.description || 'ÙØ§ ÙÙØªØ¯ ÙØµÙ ÙØªØ§Ø­ ÙÙØ°Ø§ Ø§ÙÙÙØªØ¬.'}
+                {product.description || 'لا يوتد وصف متاح لهذا المنتج.'}
               </div>
             )}
             {activeTab === 'reviews' && (
-              <p className="text-gray-500 text-sm text-center py-4">Ø§Ø·ÙÙØ¹ Ø¹ÙÙ Ø§ÙØªÙÙÙÙØ§Öª Ø§ÙØªÙØµÙÙÙØ§Öª Ø£Ø¯ÙØ§</p>
+              <p className="text-gray-500 text-sm text-center py-4">اطّلع على التقييما֪ التفصيليا֪ أدنا</p>
             )}
             {activeTab === 'shipping' && (
               <div className="space-y-4 text-sm text-gray-700">
                 <div className="flex items-start gap-3 p-4 bg-blue-50 rounded-xl">
                   <Truck size={20} className="text-blue-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-blue-900">Ø´Ø­Ù ÙØ¬Ø§ÙÙ</p>
-                    <p className="text-blue-700 mt-1">ÙÙØ·ÙØ¨Ø§Øª Ø§ÙØªÙ ØªØªØ¬Ø§ÙØ² 200 Ø¯Ø±ÙÙ Ø¥ÙØ§Ø±Ø§ØªÙ. Ø§ÙØªÙØµÙÙ Ø®ÙØ§Ù 3-5 Ø£ÙØ§Ù Ø¹ÙÙ.</p>
+                    <p className="font-semibold text-blue-900">شحن مجاني</p>
+                    <p className="text-blue-700 mt-1">للطلبات التي تتجاوز 200 درهم إماراتي. التوصيل خلال 3-5 أيام عمل.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-4 bg-green-50 rounded-xl">
                   <RotateCcw size={20} className="text-green-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-green-900">Ø³ÙØ§Ø³Ø© Ø§ÙØ¥Ø±Ø¬Ø§Ø¹</p>
-                    <p className="text-green-700 mt-1">Ø¥Ø±Ø¬Ø§Ø¹ ÙØ¬Ø§ÙÙ Ø®ÙØ§Ù 14 ÙÙÙØ§Ù ÙÙ Ø§Ø³ØªÙØ§Ù Ø§ÙÙÙØªØ¬ Ø¨Ø´Ø±Ø· Ø£Ù ÙÙÙÙ Ø¨Ø­Ø§ÙØªÙ Ø§ÙØ£ØµÙÙØ©.</p>
+                    <p className="font-semibold text-green-900">سياسة الإرجاع</p>
+                    <p className="text-green-700 mt-1">إرجاع مجاني خلال 14 يوماً من استلام المنتج بشرط أن يكون بحالته الأصلية.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-4 bg-purple-50 rounded-xl">
                   <Shield size={20} className="text-purple-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-purple-900">Ø¶ÙØ§Ù Ø§ÙØ£ØµØ§ÙØ©</p>
-                    <p className="text-purple-700 mt-1">Ø¬ÙÙØ¹ ÙÙØªØ¬Ø§ÖªÙØ§ Ø£ØµÙÙØ© 100% ÙØ¶ÙÙÙØ©. ÙØ¹ÙÙ ÙØ¹ ÙÙØ±Ø¯ÙÙ ÙØ¹ØªÙØ¯ÙÙ ÙÙØ·.</p>
+                    <p className="font-semibold text-purple-900">ضمان الأصالة</p>
+                    <p className="text-purple-700 mt-1">جميع منتجا֪نا أصلية 100% مضمونة. نعمل مع موردين معتمدين فقط.</p>
                   </div>
                 </div>
               </div>
@@ -510,9 +510,9 @@ export default function ProductPage() {
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
                 <Tag size={20} className="text-[#F50057]" />
-                ÙÙØªØ¬Ø§Ùª ÙØ´Ø§Ø¨ÙØ©
+                منتجا٪�مشابهة
               </h2>
-              <button className="text-sm text-[#F50057] hover:underline font-medium">Ø¹Ø±Ø¶ Ø§ÙÙÙ</button>
+              <button className="text-sm text-[#F50057] hover:underline font-medium">عرض الكل</button>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
               {relatedProducts.map(rp => (
@@ -536,7 +536,7 @@ export default function ProductPage() {
                   </div>
                   <div className="p-2">
                     <p className="text-xs text-gray-700 font-medium line-clamp-2 leading-4 mb-1">{rp.title}</p>
-                    <p className="text-sm font-bold text-[#F50057]">{rp.price} Ø¯.Ø¥</p>
+                    <p className="text-sm font-bold text-[#F50057]">{rp.price} د.إ</p>
                     <div className="flex items-center gap-0.5 mt-1">
                       {[1,2,3,4,5].map(s => <Star key={s} size={10} className="fill-yellow-400 text-yellow-400" />)}
                     </div>
@@ -553,7 +553,7 @@ export default function ProductPage() {
         <div className="bg-white rounded-xl shadow-sm p-6">
           <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-6">
             <Star size={20} className="fill-yellow-400 text-yellow-400" />
-            ØªÙÙÙÙØ§Ùª Ø§ÙØ¹ÙÙØ§Ø¡
+            تقييما٪�العملاء
           </h2>
           <div className="flex flex-col lg:flex-row gap-8">
             {/* Rating Summary */}
@@ -563,12 +563,12 @@ export default function ProductPage() {
                 <div className="flex items-center justify-center gap-1 my-2">
                   {[1,2,3,4,5].map(s => <Star key={s} size={20} className="fill-yellow-400 text-yellow-400" />)}
                 </div>
-                <p className="text-gray-500 text-sm">Ø¨ÙØ§Ø¡Ù Ø¹ÙÙ 2,042 ØªÙÙÙÙ</p>
+                <p className="text-gray-500 text-sm">بناءً على 2,042 تقييم</p>
               </div>
               <div className="space-y-2">
                 {ratingBreakdown.map(r => (
                   <div key={r.stars} className="flex items-center gap-2">
-                    <span className="text-xs text-gray-600 w-10 text-left">{r.stars} â</span>
+                    <span className="text-xs text-gray-600 w-10 text-left">{r.stars} ★</span>
                     <div className="flex-1 bg-gray-100 rounded-full h-2 overflow-hidden">
                       <div
                         className="h-full bg-yellow-400 rounded-full"
@@ -583,11 +583,11 @@ export default function ProductPage() {
                 <div className="grid grid-cols-2 gap-2 text-center">
                   <div className="bg-green-50 rounded-lg p-2">
                     <p className="text-xl font-bold text-green-600">98%</p>
-                    <p className="text-xs text-gray-500">Ø±Ø§Ø¶ÙÙ Ø¹Ù Ø§ÙÙÙØªØ¬</p>
+                    <p className="text-xs text-gray-500">راضون عن المنتج</p>
                   </div>
                   <div className="bg-blue-50 rounded-lg p-2">
                     <p className="text-xl font-bold text-blue-600">95%</p>
-                    <p className="text-xs text-gray-500">Ø³ÙØ¸ØªØ±ÙÙ ÙØ¬Ø¯Ø¯Ø§Ù</p>
+                    <p className="text-xs text-gray-500">سيظترون مجدداً</p>
                   </div>
                 </div>
               </div>
@@ -596,14 +596,14 @@ export default function ProductPage() {
             {/* Reviews List */}
             <div className="flex-1">
               <div className="flex items-center justify-between mb-4">
-                <p className="text-sm text-gray-600">{sortedReviews.length} ØªÙÙÙÙ ÙØ¹Ø±ÙØ¶</p>
+                <p className="text-sm text-gray-600">{sortedReviews.length} تقييم معروض</p>
                 <select
                   value={reviewSortBy}
                   onChange={e => setReviewSortBy(e.target.value as any)}
                   className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 outline-none text-gray-700"
                 >
-                  <option value="newest">Ø§ÙØ£Ø­Ø¯Ø«</option>
-                  <option value="helpful">Ø§ÙØ£ÙØ«Ø± ÙØ§Ø¦Ø¯Ø©</option>
+                  <option value="newest">الأحدث</option>
+                  <option value="helpful">الأكثر فائدة</option>
                 </select>
               </div>
               <div className="space-y-4">
@@ -626,7 +626,7 @@ export default function ProductPage() {
                               {review.verified && (
                                 <span className="text-xs text-green-600 flex items-center gap-0.5">
                                   <CheckCircle size={10} />
-                                  ÙØ´ØªØ±Ù ÙÙØ«ÙÙ
+                                  مشتري موثّق
                                 </span>
                               )}
                             </div>
@@ -646,7 +646,7 @@ export default function ProductPage() {
                           }`}
                         >
                           <ThumbsUp size={12} />
-                          ÙÙÙØ¯ ({review.helpful + (helpfulVotes.has(review.id) ? 1 : 0)})
+                          مفيد ({review.helpful + (helpfulVotes.has(review.id) ? 1 : 0)})
                         </button>
                       </div>
                     </div>
@@ -654,7 +654,7 @@ export default function ProductPage() {
                 ))}
               </div>
               <button className="w-full mt-4 py-3 border-2 border-dashed border-gray-200 rounded-xl text-sm text-gray-500 hover:border-[#F50057] hover:text-[#F50057] transition-colors font-medium">
-                Ø¹Ø±Ø¶ Ø¬ÙÙØ¹ Ø§ÙØªÙÙÙÙØ§Öª (2,042)
+                عرض جميع التقييما֪ (2,042)
               </button>
             </div>
           </div>
@@ -667,7 +667,7 @@ export default function ProductPage() {
           <div className="bg-white rounded-xl shadow-sm p-6">
             <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4">
               <Clock size={20} className="text-gray-500" />
-              Ø´Ø§ÙØ¯ØªÙØ§ ÙØ¤Ø®Ø±Ø§Ù
+              شاهدتها مؤخراً
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
               {recentlyViewed.map(rp => (
@@ -687,7 +687,7 @@ export default function ProductPage() {
                   </div>
                   <div className="p-2">
                     <p className="text-xs text-gray-700 font-medium line-clamp-2 leading-4 mb-1">{rp.title}</p>
-                    <p className="text-sm font-bold text-[#F50057]">{rp.price} Ø¯.Ø¥</p>
+                    <p className="text-sm font-bold text-[#F50057]">{rp.price} د.إ</p>
                   </div>
                 </button>
               ))}
@@ -704,18 +704,18 @@ export default function ProductPage() {
               <MessageCircle size={22} className="text-white" />
             </div>
             <div>
-              <p className="font-bold text-gray-800">ÙÙ ÙØ¯ÙÙ Ø³Ø¤Ø§ÙØ</p>
-              <p className="text-gray-500 text-sm">ØªÙØ§ØµÙ ÙØ¹ Ø®Ø¯ÙØ© Ø§ÙØ¹ÙÙØ§Ø¡ Ø£Ù Ø§ÙØ¨Ø§ÙØ¹ ÙØ¨Ø§Ø¸Ø±Ø©</p>
+              <p className="font-bold text-gray-800">هل لديك سؤال؟</p>
+              <p className="text-gray-500 text-sm">تواصل مع خدمة العملاء أو البايع مباظرة</p>
             </div>
           </div>
           <div className="flex gap-3">
             <button className="bg-[#F50057] text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#d4004d] transition-colors flex items-center gap-2">
               <MessageCircle size={16} />
-              Ø§ÙØ¯Ø±Ø¯Ø¸Ø©
+              الدردظة
             </button>
             <button className="border-2 border-[#F50057] text-[#F50057] px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-red-50 transition-colors flex items-center gap-2">
               <Store size={16} />
-              Ø²ÙØ§Ø±Ø© Ø§ÙÙØªØ¬Ø±
+              زيارة المتجر
             </button>
           </div>
         </div>
@@ -727,29 +727,29 @@ export default function ProductPage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div>
               <h3 className="text-xl font-black text-[#F50057] mb-3">4LEEE</h3>
-              <p className="text-gray-400 text-sm">Ø§ÙØªØ³ÙÙ Ø§ÙØ£ÙØ¸Ù ÙÙ 260 Ø¯ÙÙØ© Ø­ÙÙ Ø§ÙØ¹Ø§ÙÙ</p>
+              <p className="text-gray-400 text-sm">التسوق الأفظل من 260 دولة حول العالم</p>
             </div>
             <div>
-              <h4 className="font-semibold text-sm mb-3">ÙØ³Ø§Ø¹Ø¯Ø©</h4>
-              {['ØªØªØ¨Ø¹ Ø·ÙØ¨Ù','Ø³ÙØ§Ø³Ø© Ø§ÙØ¥Ø±Ø¬Ø§Ø¹','Ø·Ø±Ù Ø§ÙØ¯ÙØ¹','Ø§ØªØµÙ Ø¨ÙØ§'].map(l => (
+              <h4 className="font-semibold text-sm mb-3">مساعدة</h4>
+              {['تتبع طلبي','سياسة الإرجاع','طرق الدفع','اتصل بنا'].map(l => (
                 <p key={l} className="text-gray-400 text-sm mb-2 cursor-pointer hover:text-white transition-colors">{l}</p>
               ))}
             </div>
             <div>
-              <h4 className="font-semibold text-sm mb-3">Ø§ÙØ¨Ø§Ø¦Ø¹ÙÙ</h4>
-              {['Ø¨ÙÙ Ø¹ÙÙ 4LEEE','Ø¯ÙÙÙ Ø§ÙØ¨Ø§ÙØ¹','ÙØ±ÙØ² Ø§ÙØ¨Ø§ÙØ¹'].map(l => (
+              <h4 className="font-semibold text-sm mb-3">البائعون</h4>
+              {['بيى على 4LEEE','دليل البايع','مركز البايع'].map(l => (
                 <p key={l} className="text-gray-400 text-sm mb-2 cursor-pointer hover:text-white transition-colors">{l}</p>
               ))}
             </div>
             <div>
-              <h4 className="font-semibold text-sm mb-3">ØªØ§Ø¨Ø¹ÙØ§</h4>
+              <h4 className="font-semibold text-sm mb-3">تابعنا</h4>
               {['Instagram','Twitter','TikTok','YouTube'].map(l => (
                 <p key={l} className="text-gray-400 text-sm mb-2 cursor-pointer hover:text-white transition-colors">{l}</p>
               ))}
             </div>
           </div>
           <div className="border-t border-gray-800 pt-6 text-center text-gray-500 text-xs">
-            Â© 2024 4LEEE. Ø¬ÙÙØ¹ Ø§ÙØ­ÙÙÙ ÙØ­ÙÙØ¸Ø©.
+            © 2024 4LEEE. جميع الحقوق محفوظة.
           </div>
         </div>
       </footer>
