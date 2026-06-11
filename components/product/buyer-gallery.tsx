@@ -30,6 +30,8 @@ export function BuyerGallery({ images }: BuyerGalleryProps) {
               src={img}
               alt={`Buyer photo ${idx + 1}`}
               className="w-full h-full object-cover group-hover:scale-105 transition"
+              loading="lazy"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
             />
             <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition" />
           </div>
