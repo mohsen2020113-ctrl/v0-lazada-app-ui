@@ -118,7 +118,7 @@ export default function ProductPage({ params }: { params: { handle: string } }) 
               <div className="space-y-6">
                 {activeTab === 'overview' && (
                   <>
-                    <BuyerGallery images={product.images.map((img) => 'https://via.placeholder.com/100x100?text=Buyer+Photo')} />
+                    <BuyerGallery images={product.images} />
                   </>
                 )}
 
