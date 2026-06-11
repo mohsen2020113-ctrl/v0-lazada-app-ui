@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect } from 'react'
-import { useRouter } from 'next/navigation'
+import { useRouter, useParams } from 'next/navigation'
 import { ArrowRight, Heart, Share2, ShoppingCart, Shield, RotateCcw, Truck } from 'lucide-react'
 import { ImageGallery } from '@/components/image-gallery'
 import { VariantChips } from '@/components/variant-chips'
@@ -26,8 +26,10 @@ interface Product {
   price: string
 }
 
-export default function ProductPage({ params }: { params: { handle: string } }) {
+export default function ProductPage() {
   const router = useRouter()
+  const params = useParams()
+  const handle = params.handle as string
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
   const [selectedVariant, setSelectedVariant] = useState(0)
@@ -36,11 +38,12 @@ export default function ProductPage({ params }: { params: { handle: string } }) 
   const [added, setAdded] = useState(false)
 
   useEffect(() => {
-    fetch(`/api/product/${params.handle}`)
+    if (!handle) return
+    fetch(`/api/product/${handle}`)
       .then(r => r.json())
       .then(d => { setProduct(d); setLoading(false) })
       .catch(() => setLoading(false))
-  }, [params.handle])
+  }, [handle])
 
   if (loading) return (
     <div className="min-h-screen bg-[#0F0F0F] flex items-center justify-center">
@@ -48,7 +51,7 @@ export default function ProductPage({ params }: { params: { handle: string } }) 
     </div>
   )
 
-  if (!product) return (
+  if (!product || (product as any).error) return (
     <div className="min-h-screen bg-[#0F0F0F] flex flex-col items-center justify-center gap-4" dir="rtl">
       <p className="text-white/60">المنتج غير موجود</p>
       <button onClick={() => router.back()} className="text-[#F57224] text-sm">العودة</button>
@@ -66,7 +69,6 @@ export default function ProductPage({ params }: { params: { handle: string } }) 
 
   return (
     <div className="min-h-screen bg-[#0F0F0F]" dir="rtl">
-      {/* AppBar */}
       <div className="absolute top-0 left-0 right-0 z-10 flex items-center justify-between px-4 pt-12 pb-4">
         <button onClick={() => router.back()} className="w-9 h-9 rounded-full bg-black/50 flex items-center justify-center">
           <ArrowRight size={18} className="text-white" />
@@ -81,14 +83,12 @@ export default function ProductPage({ params }: { params: { handle: string } }) 
         </div>
       </div>
 
-      {/* Image Gallery */}
       <ImageGallery
         images={images}
         alt={product.title}
         onImageChange={setCurrentImage}
       />
 
-      {/* Content */}
       <div className="rounded-t-3xl bg-[#0F0F0F] -mt-6 relative z-10 px-5 pt-5 pb-32">
         <div className="flex items-start justify-between gap-3 mb-4">
           <h1 className="text-white font-bold text-lg leading-snug flex-1">{product.title}</h1>
@@ -144,18 +144,15 @@ export default function ProductPage({ params }: { params: { handle: string } }) 
           </div>
         </div>
 
-        {/* Related Products */}
         <div className="mt-8 -mx-5">
           <RelatedProducts productHandle={product.handle} />
         </div>
 
-        {/* Reviews Section */}
         <div className="mt-8 -mx-5">
           <Reviews productId={product.id} />
         </div>
       </div>
 
-      {/* Bottom CTA */}
       <div className="fixed bottom-0 left-0 right-0 bg-[#1A1A1A] px-5 pt-3 pb-8">
         <button
           onClick={handleAddToCart}
