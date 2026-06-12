@@ -16,7 +16,7 @@ import { AnimatedAdsBottom } from "@/components/lee/animated-ads-bottom"
 import { fetchAllProducts } from "@/lib/shopify"
 import { cookies } from 'next/headers'
 
-export const revalidate = 30 // Homepage refreshes every 30 seconds
+export const dynamic = 'force-dynamic'
 
 function ProductsLoading() {
   return (
