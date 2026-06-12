@@ -151,8 +151,15 @@ export async function getProduct(handle: string) {
   const QUERY = `
     query getProduct($handle: String!) {
       productByHandle(handle: $handle) {
-        id title handle description
-        priceRange { minVariantPrice { amount currencyCode } }
+        id title handle description vendor
+        availableForSale
+        priceRange { 
+          minVariantPrice { amount currencyCode }
+          maxVariantPrice { amount currencyCode }
+        }
+        compareAtPriceRange { 
+          minVariantPrice { amount currencyCode }
+        }
         images(first: 10) { edges { node { url altText } } }
         variants(first: 100) {
           edges { node { id title price { amount currencyCode } availableForSale } }
@@ -160,8 +167,18 @@ export async function getProduct(handle: string) {
       }
     }
   `
-  const data = await shopifyFetch<{ productByHandle: any }>(QUERY, { handle })
-  return data?.productByHandle ?? null
+  try {
+    const data = await shopifyFetch<{ productByHandle: any }>(QUERY, { handle })
+    if (data?.productByHandle) {
+      console.log(`[v0] Found product: ${data.productByHandle.title}`)
+      return data.productByHandle
+    }
+    console.log(`[v0] Product not found for handle: ${handle}`)
+    return null
+  } catch (error) {
+    console.error(`[v0] Error fetching product ${handle}:`, error)
+    return null
+  }
 }
 
 // Get all collections
