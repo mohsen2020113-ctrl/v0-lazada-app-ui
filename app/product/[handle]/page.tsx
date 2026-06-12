@@ -36,10 +36,10 @@ interface RelatedProduct {
 }
 
 const MOCK_REVIEWS = [
-  { id: 1, name: '#-E/ E-E/', rating: 5, date: 'EF0 3 #J'E', comment: 'EF*, EE*'2 ,/'K 'D,H/) 1'&9) H31J9 'D4-F. #F5- (G (4/).', helpful: 24, verified: true, avatar: '#' },
-  { id: 2, name: '3'1) 9DJ', rating: 5, date: 'EF0 #3(H9', comment: 'H5D (4CD 31J9 H'D*:DJA C'F EE*'2'K. 'DEF*, J7'(B 'DH5A *E'E'K.', helpful: 18, verified: true, avatar: '3' },
-  { id: 3, name: 'E-E/ .'D/', rating: 4, date: 'EF0 #3(H9JF', comment: 'EF*, ,J/ DCF 'D*H5JD *#.1 BDJD'K. 'D,H/) EB(HD) (G0' 'D391.', helpful: 12, verified: true, avatar: 'E' },
-  { id: 4, name: 'A'7E) -3F', rating: 5, date: 'EF0 4G1', comment: '#A6D EF*, '4*1J*G EF G0' 'DE*,1! 3#4*1J E,//'K ('D*#CJ/.', helpful: 31, verified: true, avatar: 'A' },
+  { id: 1, name: 'أحمد محمد', rating: 5, date: 'منذ 3 أيام', comment: 'منتج ممتاز جداً، الجودة ر��ئعة وسريع الشحن. أنصح به بشدة.', helpful: 24, verified: true, avatar: 'أ' },
+  { id: 2, name: 'سارة علي', rating: 5, date: 'منذ أسبوع', comment: 'وصل بشكل سريع والتغليف كان ممتازاً. المنتج يطابق الوصف تماماً.', helpful: 18, verified: true, avatar: 'س' },
+  { id: 3, name: 'محمد خالد', rating: 4, date: 'منذ أسبوعين', comment: 'منتج جيد لكن التوصيل تأخر قليلاً. الجودة مقبولة بهذا السعر.', helpful: 12, verified: true, avatar: 'م' },
+  { id: 4, name: 'فاطمة حسن', rating: 5, date: 'منذ شهر', comment: 'أفضل منتج اشتريته من هذا المتجر! سأشتري مجدداً بالتأكي��.', helpful: 31, verified: true, avatar: 'ف' },
 ]
 
 export default function ProductPage() {
@@ -114,16 +114,16 @@ export default function ProductPage() {
     <div className="min-h-screen bg-white flex items-center justify-center" dir="rtl">
       <div className="text-center">
         <div className="w-12 h-12 border-4 border-[#F50057] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-        <p className="text-gray-500 text-sm">,'1M *-EJD 'DEF*,...</p>
+        <p className="text-gray-500 text-sm">جارٍ تحميل المنتج...</p>
       </div>
     </div>
   )
 
   if (!product) return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-4" dir="rtl">
-      <p className="text-gray-500">'DEF*, :J1 EH,H/</p>
+      <p className="text-gray-500">المنتج غير موجود</p>
       <button onClick={() => router.push('/')} className="bg-[#F50057] text-white px-6 py-2 rounded-lg text-sm">
-        'D9H/) DD1&J3J)
+        العودة للرئيسية
       </button>
     </div>
   )
@@ -165,7 +165,7 @@ export default function ProductPage() {
             <Search size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400" />
             <input
               type="text"
-              placeholder="'(-+ AJ 4LEEE..."
+              placeholder="ابحث في 4LEEE..."
               className="w-full pr-9 pl-4 py-2.5 rounded-lg text-sm bg-white text-gray-800 outline-none"
             />
           </div>
@@ -175,27 +175,27 @@ export default function ProductPage() {
               className="flex flex-col items-center gap-0.5"
             >
               <Heart size={22} className={wishlist ? 'text-yellow-300 fill-yellow-300' : 'text-white'} />
-              <span className="text-white text-[10px]">'DB'&E)</span>
+              <span className="text-white text-[10px]">القائمة</span>
             </button>
             <button className="flex flex-col items-center gap-0.5 relative">
               <div className="relative">
                 <ShoppingCart size={22} className="text-white" />
                 <span className="absolute -top-1 -left-1 bg-yellow-400 text-black text-[9px] font-bold w-4 h-4 rounded-full flex items-center justify-center">3</span>
               </div>
-              <span className="text-white text-[10px]">'D3D)</span>
+              <span className="text-white text-[10px]">السلة</span>
             </button>
             <button className="flex flex-col items-center gap-0.5">
               <div className="w-6 h-6 rounded-full bg-white/30 flex items-center justify-center">
-                <span className="text-white text-xs font-bold">E</span>
+                <span className="text-white text-xs font-bold">م</span>
               </div>
-              <span className="text-white text-[10px]">-3'(J</span>
+              <span className="text-white text-[10px]">حسابي</span>
             </button>
           </div>
         </div>
         {/* Sub-nav */}
         <div className="border-t border-white/20">
           <div className="max-w-7xl mx-auto px-4 flex items-center gap-6 py-2 overflow-x-auto scrollbar-hide text-sm text-white/90">
-            {[''D1&J3J)',''D%DC*1HFJ'*',''DEH6)',''DEF2D',''D,E'D',''D1J'6)','91H6 'DJHE','E'1C'�'].map((cat, i) => (
+            {['الرئيسية', 'الإلكترونيات', 'الموضة', 'المنزل', 'الجمال', 'الرياضة', 'عروض اليوم', 'ماركات'].map((cat, i) => (
               <button key={i} className="whitespace-nowrap hover:text-white transition-colors">{cat}</button>
             ))}
           </div>
@@ -205,9 +205,9 @@ export default function ProductPage() {
       {/* ===== BREADCRUMBS ===== */}
       <div className="max-w-7xl mx-auto px-4 py-2.5">
         <div className="flex items-center gap-1.5 text-xs text-gray-500">
-          <button className="hover:text-[#F50057] transition-colors">'D1&J3J)</button>
+          <button className="hover:text-[#F50057] transition-colors">الرئيسية</button>
           <ChevronLeft size={12} />
-          <button className="hover:text-[#F50057] transition-colors">'D%DC*1HFJ'*</button>
+          <button className="hover:text-[#F50057] transition-colors">الإلكترونيات</button>
           <ChevronLeft size={12} />
           <span className="text-gray-700 font-medium truncate max-w-xs">{product.title}</span>
         </div>
@@ -269,16 +269,16 @@ export default function ProductPage() {
               )}
               {/* Share */}
               <div className="flex items-center gap-2 text-sm text-gray-500 pt-1">
-                <span>E4'1C):</span>
+                <span>مشاركة:</span>
                 <button className="flex items-center gap-1.5 text-gray-400 hover:text-[#F50057] transition-colors">
                   <Share2 size={16} />
-                  <span>E4'1C)</span>
+                  <span>مشاركة</span>
                 </button>
               </div>
             </div>
 
             {/* RIGHT: Info */}
-            <div className="lg:w-[55%] p-6 flex flex-col gap-4">
+            <div className="lg:w#[55%] p-6 flex flex-col gap-4">
               {/* Title + Wishlist */}
               <div className="flex items-start gap-3">
                 <h1 className="flex-1 text-xl font-bold text-gray-900 leading-snug">{product.title}</h1>
@@ -300,11 +300,11 @@ export default function ProductPage() {
                   ))}
                 </div>
                 <span className="text-yellow-500 font-bold text-sm">4.9</span>
-                <button className="text-[#F50057] text-sm hover:underline">2,042 *BJJE</button>
+                <button className="text-[#F50057] text-sm hover:underline">2,042 تقييم</button>
                 <span className="text-gray-300">|</span>
                 <span className="text-gray-500 text-sm flex items-center gap-1">
                   <TrendingUp size={14} className="text-green-500" />
-                  +5,000 E(J9'K
+                  +5,000 مبيعاً
                 </span>
               </div>
 
@@ -312,26 +312,26 @@ export default function ProductPage() {
               <div className="bg-gradient-to-l from-red-50 to-pink-50 rounded-xl p-4 border border-pink-100">
                 <div className="flex items-baseline gap-3">
                   <span className="text-3xl font-black text-[#F50057]">
-                    {variant.price} <span className="text-lg">/.%</span>
+                    {variant.price} <span className="text-lg">د.إ</span>
                   </span>
                   {variant.compareAtPrice && (
-                    <span className="text-gray-400 line-through text-base">{variant.compareAtPrice} /.%</span>
+                    <span className="text-gray-400 line-through text-base">{variant.compareAtPrice} د.إ</span>
                   )}
                   {discount > 0 && (
                     <span className="bg-[#F50057] text-white text-xs font-bold px-2 py-0.5 rounded-md">
-                      HAQ1 {discount}%
+                      وفّر {discount}%
                     </span>
                   )}
                 </div>
                 <p className="text-gray-500 text-xs mt-1 flex items-center gap-1">
                   <CheckCircle size={12} className="text-green-500" />
-                  'D391 4'ED 61J() 'DBJE) 'DE6'A)
+                  السعر شامل ضريبة القيمة المضافة
                 </p>
               </div>
 
               {/* Store Info */}
               <div className="border border-gray-100 rounded-xl p-4 bg-gray-50">
-                <p className="text-gray-500 text-xs mb-2">J('9 (H'37)</p>
+                <p className="text-gray-500 text-xs mb-2">يباع بواسطة</p>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div className="w-9 h-9 bg-[#F50057] rounded-lg flex items-center justify-center">
@@ -341,12 +341,12 @@ export default function ProductPage() {
                       <p className="text-sm font-semibold text-gray-800">Better Home Life - Official Store</p>
                       <div className="flex items-center gap-2 mt-0.5">
                         <span className="text-xs text-gray-400">Store 7600</span>
-                        <span className="text-xs bg-orange-100 text-orange-600 px-1.5 py-0.5 rounded font-medium">E*,1 13EJ </span>
+                        <span className="text-xs bg-orange-100 text-orange-600 px-1.5 py-0.5 rounded font-medium">متجر رسمي</span>
                       </div>
                     </div>
                   </div>
-                  <button className="text-xs text-[#F50057] border border-[#F50057] px-3 py-1.5 rounded-lg hover:bsg-red-50 transition-colors font-medium">
-                   2J'1) 'DE*,1
+                  <button className="text-xs text-[#F50057] border border-[#F50057] px-3 py-1.5 rounded-lg hover:bg-red-50 transition-colors font-medium">
+                    زيارة المتجر
                   </button>
                 </div>
               </div>
@@ -354,7 +354,7 @@ export default function ProductPage() {
               {/* Variants */}
               {hasVariants && (
                 <div>
-                  <p className="text-sm font-semibold text-gray-700 mb-2">'D.J'1'� 'DE*'-)</p>
+                  <p className="text-sm font-semibold text-gray-700 mb-2">الخيارات المتاحة</p>
                   <div className="flex flex-wrap gap-2">
                     {product.variants.map((v, i) => (
                       <button
@@ -376,13 +376,13 @@ export default function ProductPage() {
               {/* Quantity + Stock */}
               <div className="flex items-center gap-4">
                 <div>
-                  <p className="text-sm font-semibold text-gray-700 mb-2">'DCEJ)</p>
+                  <p className="text-sm font-semibold text-gray-700 mb-2">الكمية</p>
                   <div className="flex items-center border border-gray-200 rounded-xl overflow-hidden w-fit">
                     <button
                       onClick={() => setQuantity(q => Math.max(1, q - 1))}
                       className="w-10 h-10 bg-gray-50 text-gray-700 text-lg hover:bg-gray-100 transition-colors font-bold"
                     >
-                      
+                      −
                     </button>
                     <span className="w-14 text-center text-base font-semibold text-gray-800">{quantity}</span>
                     <button
@@ -395,7 +395,7 @@ export default function ProductPage() {
                 </div>
                 <div className="flex items-center gap-1.5 text-green-600 text-sm font-medium mt-6">
                   <div className="w-2 h-2 rounded-full bg-green-500" />
-                  E*HA1 AJ 'DE.2HF
+                  متوفر في المخزون
                 </div>
               </div>
 
@@ -413,22 +413,22 @@ export default function ProductPage() {
                   }`}
                 >
                   <ShoppingCart size={20} />
-                  {!variant.available ? 'FA/ 'DE.2HF' : addedToCart ? '*E* 'D%8'A) ' : '#:A %DI 'D3D) =%'}
+                  {!variant.available ? 'نفد المخزون' : addedToCart ? 'تمت الإظافة ✓' : 'أضف إلى السلة 🛒'}
                 </button>
                 <button
                   disabled={!variant.available}
                   className="flex-1 py-3.5 rounded-xl font-bold text-base bg-orange-500 text-white hover:bg-orange-600 active:scale-95 transition-all shadow-sm disabled:opacity-40"
                 >
-                  '4*1J 'D"F =�
+                  اشتري الآن ⚡
                 </button>
               </div>
 
               {/* Guarantees */}
               <div className="grid grid-cols-3 gap-3 pt-2">
                 {[
-                  { icon: <Truck size={18} className="text-[#F50057]" />, title: '4-F E,'FJ', sub: 'AHB AED 200' },
-                  { icon: <RotateCcw size={18} className="text-[#F50057]" />, title: '%1,'9 E,'FJ', sub: '.D'D 14 JHE' },
-                  { icon: <Shield size={18} className="text-[#F50057]" />, title: 'EF*, #5DJ', sub: '100% E6EHF' },
+                  { icon: <Truck size={18} className="text-[#F50057]" />, title: 'شحن مجاني', sub: 'فوق 200 درهم' },
+                  { icon: <RotateCcw size={18} className="text-[#F50057]" />, title: 'إرجاع مجاني', sub: 'خلال 14 يوم' },
+                  { icon: <Shield size={18} className="text-[#F50057]" />, title: 'منتج أصلي', sub: '100% مضمون' },
                 ].map((g, i) => (
                   <div key={i} className="flex flex-col items-center text-center p-3 bg-gray-50 rounded-xl gap-1">
                     {g.icon}
@@ -447,9 +447,9 @@ export default function ProductPage() {
         <div className="bg-white rounded-xl shadow-sm overflow-hidden">
           <div className="flex border-b border-gray-100">
             {[
-              { key: 'description', label: '*A'5JD 'DEF*,' },
-              { key: 'reviews', label: `'D*BJJE'� (2,042)` },
-              { key: 'shipping', label: ''D4-F H'D%1,'9' },
+              { key: 'description', label: 'تفاصيل المنتج' },
+              { key: 'reviews', label: `التقييمات (2,042)` },
+              { key: 'shipping', label: 'الشحن والإرجاع' },
             ].map(tab => (
               <button
                 key={tab.key}
@@ -468,33 +468,33 @@ export default function ProductPage() {
           <div className="p-6">
             {activeTab === 'description' && (
               <div className="text-gray-700 text-sm leading-8">
-                {product.description || 'D' JH*/ H5A E*'- DG0' 'DEF*,.'}
+                {product.description || 'لا يوجد وصف متاح لهذا المنتج.'}
               </div>
             )}
             {activeTab === 'reviews' && (
-              <p className="text-gray-500 text-sm text-center py-4">'7QD9 9DI 'D*BJJE'� 'D*A5JDJ'� #/F'</p>
+              <p className="text-gray-500 text-sm text-center py-4">اطّلع على التقييمات التفصيلية أدناه</p>
             )}
             {activeTab === 'shipping' && (
               <div className="space-y-4 text-sm text-gray-700">
                 <div className="flex items-start gap-3 p-4 bg-blue-50 rounded-xl">
                   <Truck size={20} className="text-blue-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-blue-900">4-F E,'FJ</p>
-                    <p className="text-blue-700 mt-1">DD7D('* 'D*J **,'H2 200 /1GE %E'1'*J. 'D*H5JD .D'D 3-5 #J'E 9ED.</p>
+                    <p className="font-semibold text-blue-900">شحن مجاني</p>
+                    <p className="text-blue-700 mt-1">للطلبات التي تتجاوز 200 درهم إماراتي. التوصيل خلال 3-5 أيام عمل.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-4 bg-green-50 rounded-xl">
                   <RotateCcw size={20} className="text-green-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-green-900">3J'3) 'D%1,'9</p>
-                    <p className="text-green-700 mt-1">%1,'9 E,'FJ .D'D 14 JHE'K EF '3*D'E 'DEF*, (417 #F JCHF (-'D*G 'D#5DJ).</p>
+                    <p className="font-semibold text-green-900">سياسة الإرجاع</p>
+                    <p className="text-green-700 mt-1">إرجاع مجاني خلال 14 يوماً من استلام المنتج بشرط أن يكون بحالته الأصلية.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-4 bg-purple-50 rounded-xl">
                   <Shield size={20} className="text-purple-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <p className="font-semibold text-purple-900">6E'F 'D#5'D)</p>
-                    <p className="text-purple-700 mt-1">,EJ9 EF*,'�F' #5DJ) 100% E6EHF). F9ED E9 EH1/JF E9*E/JF AB7.</p>
+                    <p className="font-semibold text-purple-900">ضمان الأصالة</p>
+                    <p className="text-purple-700 mt-1">جميع منتجاتنا أصلية 100% مضمونة. نعمل مع موردين معتمدين فقط.</p>
                   </div>
                 </div>
               </div>
@@ -502,257 +502,50 @@ export default function ProductPage() {
           </div>
         </div>
       </div>
-
-      {/* ===== RELATED PRODUCTS ===== */}
-      {relatedProducts.length > 0 && (
-        <div className="max-w-7xl mx-auto px-4 pb-4">
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <div className="flex items-center justify-between mb-4">
-              <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                <Tag size={20} className="text-[#F50057]" />
-                EF*,'j�E4'(G)
-              </h2>
-              <button className="text-sm text-[#F50057] hover:underline font-medium">916 'DCD</button>
-            </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-              {relatedProducts.map(rp => (
-                <button
-                  key={rp.id}
-                  onClick={() => router.push(`/product/${rp.handle}`)}
-                  className="group text-right hover:shadow-md transition-shadow rounded-xl overflow-hidden border border-gray-100"
-                >
-                  <div className="aspect-square bg-gray-50 overflow-hidden">
-                    {rp.image ? (
-                      <img
-                        src={rp.image}
-                        alt={rp.title}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                      />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <Package size={28} className="text-gray-300" />
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-2">
-                    <p className="text-xs text-gray-700 font-medium line-clamp-2 leading-4 mb-1">{rp.title}</p>
-                    <p className="text-sm font-bold text-[#F50057]">{rp.price} /.%</p>
-                    <div className="flex items-center gap-0.5 mt-1">
-                      {[1,2,3,4,5].map(s => <Star key={s} size={10} className="fill-yellow-400 text-yellow-400" />)}
-                    </div>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ===== DETAILED REVIEWS ===== */}
-      <div className="max-w-7xl mx-auto px-4 pb-4">
-        <div className="bg-white rounded-xl shadow-sm p-6">
-          <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-6">
-            <Star size={20} className="fill-yellow-400 text-yellow-400" />
-            *BJJE'j�'D9ED'!
-          </h2>
-          <div className="flex flex-col lg:flex-row gap-8">
-            {/* Rating Summary */}
-            <div className="lg:w-64 flex-shrink-0">
-              <div className="text-center mb-4">
-                <div className="text-6xl font-black text-gray-900">4.9</div>
-                <div className="flex items-center justify-center gap-1 my-2">
-                  {[1,2,3,4,5].map(s => <Star key={s} size={20} className="fill-yellow-400 text-yellow-400" />)}
-                </div>
-                <p className="text-gray-500 text-sm">(F'!K 9DI 2,042 *BJJE</p>
-              </div>
-              <div className="space-y-2">
-                {ratingBreakdown.map(r => (
-                  <div key={r.stars} className="flex items-center gap-2">
-                    <span className="text-xs text-gray-600 w-10 text-left">{r.stars} </span>
-                    <div className="flex-1 bg-gray-100 rounded-full h-2 overflow-hidden">
-                      <div
-                        className="h-full bg-yellow-400 rounded-full"
-                        style={{ width: `${r.pct}%` }}
-                      />
-                    </div>
-                    <span className="text-xs text-gray-500 w-8">{r.pct}%</span>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-6 pt-4 border-t border-gray-100">
-                <div className="grid grid-cols-2 gap-2 text-center">
-                  <div className="bg-green-50 rounded-lg p-2">
-                    <p className="text-xl font-bold text-green-600">98%</p>
-                    <p className="text-xs text-gray-500">1'6HF 9F 'DEF*,</p>
-                  </div>
-                  <div className="bg-blue-50 rounded-lg p-2">
-                    <p className="text-xl font-bold text-blue-600">95%</p>
-                    <p className="text-xs text-gray-500">3J8*1HF E,//'K</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Reviews List */}
-            <div className="flex-1">
-              <div className="flex items-center justify-between mb-4">
-                <p className="text-sm text-gray-600">{sortedReviews.length} *BJJE E91H6</p>
-                <select
-                  value={reviewSortBy}
-                  onChange={e => setReviewSortBy(e.target.value as any)}
-                  className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 outline-none text-gray-700"
-                >
-                  <option value="newest">'D#-/+</option>
-                  <option value="helpful">'D#C+1 A'&/)</option>
-                </select>
-              </div>
-              <div className="space-y-4">
-                {sortedReviews.map(review => (
-                  <div key={review.id} className="border border-gray-100 rounded-xl p-4">
-                    <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 rounded-full bg-[#F50057] flex items-center justify-center text-white font-bold flex-shrink-0">
-                        {review.avatar}
-                      </div>
-                      <div className="flex-1">
-                        <div className="flex items-center justify-between flex-wrap gap-2">
-                          <div>
-                            <p className="font-semibold text-gray-800 text-sm">{review.name}</p>
-                            <div className="flex items-center gap-2 mt-0.5">
-                              <div className="flex items-center gap-0.5">
-                                {[1,2,3,4,5].map(s => (
-                                  <Star key={s} size={12} className={s <= review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-200 fill-gray-200'} />
-                                ))}
-                              </div>
-                              {review.verified && (
-                                <span className="text-xs text-green-600 flex items-center gap-0.5">
-                                  <CheckCircle size={10} />
-                                  E4*1J EH+QB
-                                </span>
-                              )}
-                            </div>
-                          </div>
-                          <span className="text-xs text-gray-400">{review.date}</span>
-                        </div>
-                        <p className="text-sm text-gray-700 mt-2 leading-6">{review.comment}</p>
-                        <button
-                          onClick={() => {
-                            const next = new Set(helpfulVotes)
-                            if (next.has(review.id)) next.delete(review.id)
-                            else next.add(review.id)
-                            setHelpfulVotes(next)
-                          }}
-                          className={`flex items-center gap-1.5 mt-3 text-xs transition-colors ${
-                            helpfulVotes.has(review.id) ? 'text-[#F50057]' : 'text-gray-400 hover:text-gray-600'
-                          }`}
-                        >
-                          <ThumbsUp size={12} />
-                          EAJ/ ({review.helpful + (helpfulVotes.has(review.id) ? 1 : 0)})
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <button className="w-full mt-4 py-3 border-2 border-dashed border-gray-200 rounded-xl text-sm text-gray-500 hover:border-[#F50057] hover:text-[#F50057] transition-colors font-medium">
-                916 ,EJ9 'D*BJJE'� (2,042)
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* ===== RECENTLY VIEWED ===== */}
-      {recentlyViewed.length > 0 && (
-        <div className="max-w-7xl mx-auto px-4 pb-4">
-          <div className="bg-white rounded-xl shadow-sm p-6">
-            <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4">
-              <Clock size={20} className="text-gray-500" />
-              4'G/*G' E$.1'K
-            </h2>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
-              {recentlyViewed.map(rp => (
-                <button
-                  key={rp.id}
-                  onClick={() => router.push(`/product/${rp.handle}`)}
-                  className="group text-right hover:shadow-md transition-shadow rounded-xl overflow-hidden border border-gray-100"
-                >
-                  <div className="aspect-square bg-gray-50 overflow-hidden">
-                    {rp.image ? (
-                      <img src={rp.image} alt={rp.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
-                    ) : (
-                      <div className="w-full h-full flex items-center justify-center">
-                        <Package size={28} className="text-gray-300" />
-                      </div>
-                    )}
-                  </div>
-                  <div className="p-2">
-                    <p className="text-xs text-gray-700 font-medium line-clamp-2 leading-4 mb-1">{rp.title}</p>
-                    <p className="text-sm font-bold text-[#F50057]">{rp.price} /.%</p>
-                  </div>
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* ===== CHAT SUPPORT BANNER ===== */}
-      <div className="max-w-7xl mx-auto px-4 pb-4">
-        <div className="bg-gradient-to-l from-pink-50 to-red-50 border border-pink-100 rounded-xl p-5 flex items-center justify-between flex-wrap gap-4">
-          <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-[#F50057] rounded-full flex items-center justify-center">
-              <MessageCircle size={22} className="text-white" />
-            </div>
-            <div>
-              <p className="font-bold text-gray-800">GD D/JC 3$'D</p>
-              <p className="text-gray-500 text-sm">*H'5D E9 ./E) 'D9ED'! #H 'D('J9 E('81)</p>
-            </div>
-          </div>
-          <div className="flex gap-3">
-            <button className="bg-[#F50057] text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#d4004d] transition-colors flex items-center gap-2">
-              <MessageCircle size={16} />
-              'D/1/8)
-            </button>
-            <button className="border-2 border-[#F50057] text-[#F50057] px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-red-50 transition-colors flex items-center gap-2">
-              <Store size={16} />
-              2J'1) 'DE*,1
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* ===== FOOTER ===== */}
-      <footer className="bg-gray-900 text-white mt-4">
-        <div className="max-w-7xl mx-auto px-4 py-10">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-            <div>
-              <h3 className="text-xl font-black text-[#F50057] mb-3">4LEEE</h3>
-              <p className="text-gray-400 text-sm">'D*3HB 'D#A8D EF 260 /HD) -HD 'D9'DE</p>
-            </div>
-            <div>
-              <h4 className="font-semibold text-sm mb-3">E3'9/)</h4>
-              {['**(9 7D(J','3J'3) 'D%1,'9','71B 'D/A9',''*5D (F''].map(l => (
-                <p key={l} className="text-gray-400 text-sm mb-2 cursor-pointer hover:text-white transition-colors">{l}</p>
-              ))}
-            </div>
-            <div>
-              <h4 className="font-semibold text-sm mb-3">'D('&9HF</h4>
-              {['(JI 9DI 4LEEE','/DJD 'D('J9','E1C2 'D('J9'].map(l => (
-                <p key={l} className="text-gray-400 text-sm mb-2 cursor-pointer hover:text-white transition-colors">{l}</p>
-              ))}
-            </div>
-            <div>
-              <h4 className="font-semibold text-sm mb-3">*'(9F'</h4>
-              {['Instagram','Twitter','TikTok','YouTube'].map(l => (
-                <p key={l} className="text-gray-400 text-sm mb-2 cursor-pointer hover:text-white transition-colors">{l}</p>
-              ))}
-            </div>
-          </div>
-          <div className="border-t border-gray-800 pt-6 text-center text-gray-500 text-xs">
-            � 2024 4LEEE. ,EJ9 'D-BHB E-AH8).
-          </div>
-        </div>
-      </footer>
-    </div>
-  )
-}
+�&V�FVE&�GV7G2���'�����'WGF���W�׷'�GТ��6Ɩ6�ײ����&�WFW"�W6���&�GV7B�G�'��F�W��Т6�74��S�&w&�WFW�B�&�v�B��fW#�6�F�r��BG&�6�F����6�F�r&�V�FVB׆��fW&f��rֆ�FFV�&�&FW"&�&FW"�w&�� ���F�b6�74��S�&7V7B�7V&R&r�w&��S�fW&f��rֆ�FFV�#��'��vR���Ɩ�p�7&3׷'��vWТ�C׷'�F�F�WТ6�74��S�'r�gV����gV���&�V7B�6�fW"w&�Wֆ�fW#�66�R�RG&�6�F����G&�6f�&� ��������F�b6�74��S�'r�gV����gV��f�W��FV�2�6V�FW"�W7F�g��6V�FW"#��6�vR6��S׳#��6�74��S�'FW�B�w&��3"����F�c��Т��F�c��F�b6�74��S�'�"#��6�74��S�'FW�Bׇ2FW�B�w&��sf��B��VF�V�Ɩ�R�6���"�VF��r�B�"�#�'�F�F�W�����6�74��S�'FW�B�6�f��B�&��BFW�Bղ4cSSu�#�'�&�6W�
+���S����F�b6�74��S�&f�W��FV�2�6V�FW"v��R�B�#����"�2�B�U����2���7F"�W�׷7�6��S׳�6�74��S�&f���זV���r�CFW�BזV���r�C"��Т��F�c���F�c���'WGF�����Т��F�c���F�c���F�c��Р��������DUD��TB$Ud�Uu2�������Т�F�b6�74��S�&���r�w��ׂ�WF���B"�B#��F�b6�74��S�&&r�v��FR&�V�FVB׆�6�F�r�6��b#�ƃ"6�74��S�'FW�B��rf��B�&��BFW�B�w&�ӓf�W��FV�2�6V�FW"v�"�"�b#��7F"6��S׳#�6�74��S�&f���זV���r�CFW�BזV���r�C"��
+���-�����]�}��
+�}�M���]�M�}�����#��F�b6�74��S�&f�W�f�W��6���s�f�W��&�rvӂ#���&F��r7V��'���Т�F�b6�74��S�&�s�r�cBf�W��6�&���#��F�b6�74��S�'FW�B�6V�FW"�"�B#��F�b6�74��S�'FW�B�g��f��B�&�6�FW�B�w&�ӓ#�B���F�c��F�b6�74��S�&f�W��FV�2�6V�FW"�W7F�g��6V�FW"v�ג�"#����"�2�B�U����2���7F"�W�׷7�6��S׳#�6�74��S�&f���זV���r�CFW�BזV���r�C"��Т��F�c��6�74��S�'FW�B�w&��SFW�B�6�#튍�m�}���
+���M��"�C"
+���-�����S�����F�c��F�b6�74��S�'76Rג�"#��&F��t'&V�F�v����"�����F�b�W�׷"�7F'7�6�74��S�&f�W��FV�2�6V�FW"v�"#��7�6�74��S�'FW�Bׇ2FW�B�w&��cr�FW�B��VgB#�"�7F'7�)�S��7���F�b6�74��S�&f�W��&r�w&��&�V�FVB�gV����"�fW&f��rֆ�FFV�#��F�`�6�74��S�&��gV��&rזV���r�C&�V�FVB�gV�� �7G��S׷�v�GF��G�"�7G�V�Т����F�c��7�6�74��S�'FW�Bׇ2FW�B�w&��Srӂ#�"�7G�S��7����F�c���Т��F�c��F�b6�74��S�&�B�bB�B&�&FW"�B&�&FW"�w&��#��F�b6�74��S�&w&�Bw&�B�6��2�"v�"FW�B�6V�FW"#��F�b6�74��S�&&r�w&VV��S&�V�FVB��r�"#��6�74��S�'FW�B׆�f��B�&��BFW�B�w&VV��c#㓂S����6�74��S�'FW�Bׇ2FW�B�w&��S#��}�m���b
+���b
+�}�M�]�m���������F�c��F�b6�74��S�&&r�&�VR�S&�V�FVB��r�"#��6�74��S�'FW�B׆�f��B�&��BFW�B�&�VR�c#�RS����6�74��S�'FW�Bׇ2FW�B�w&��S#�=���M������b
+�]�͊����}�������F�c���F�c���F�c���F�cࠢ��&Wf�Ww2Ɨ7B��Т�F�b6�74��S�&f�W��#��F�b6�74��S�&f�W��FV�2�6V�FW"�W7F�g��&WGvVV��"�B#��6�74��S�'FW�B�6�FW�B�w&��c#�6�'FVE&Wf�Ww2��V�wF��
+���-�����R
+�]������c����6V�V7@�f�VS׷&Wf�Wu6�'D'�Т��6��vS׶R��6WE&Wf�Wu6�'D'��R�F&vWB�f�VR2璗Т6�74��S�'FW�B�6�&�&FW"&�&FW"�w&��#&�V�FVB��r��2���R�WFƖ�R����RFW�B�w&��s ����F���f�VS�&�WvW7B#�}�M�=�݊������F������F���f�VS�&�V�gV�#�}�M�=�=���
+��}�m�������F������6V�V7C���F�c��F�b6�74��S�'76Rג�B#��6�'FVE&Wf�Ww2���&Wf�Wr�����F�b�W�׷&Wf�Wr�G�6�74��S�&&�&FW"&�&FW"�w&��&�V�FVB׆��B#��F�b6�74��S�&f�W��FV�2�7F'Bv�2#��F�b6�74��S�'r���&�V�FVB�gV��&rղ4cSSu�f�W��FV�2�6V�FW"�W7F�g��6V�FW"FW�B�v��FRf��B�&��Bf�W��6�&���#��&Wf�Wr�fF'Т��F�c��F�b6�74��S�&f�W��#��F�b6�74��S�&f�W��FV�2�6V�FW"�W7F�g��&WGvVV�f�W��w&v�"#��F�c��6�74��S�&f��B�6V֖&��BFW�B�w&�ӃFW�B�6�#�&Wf�Wr���W�����F�b6�74��S�&f�W��FV�2�6V�FW"v�"�B��R#��F�b6�74��S�&f�W��FV�2�6V�FW"v��R#����"�2�B�U����2�����7F"�W�׷7�6��S׳'�6�74��S׷2��&Wf�Wr�&F��r�vf���זV���r�CFW�BזV���r�Cr�wFW�B�w&��#f����w&��#w�����Т��F�c��&Wf�Wr�fW&�f�VBbb���7�6�74��S�'FW�Bׇ2FW�B�w&VV��cf�W��FV�2�6V�FW"v��R#��6�V6�6�&6�R6��S׳���
+�]�M�����
+�]������ ���7���Т��F�c���F�c��7�6�74��S�'FW�Bׇ2FW�B�w&��C#�&Wf�Wr�FFW���7����F�c��6�74��S�'FW�B�6�FW�B�w&��s�B�"�VF��r�b#�&Wf�Wr�6���V�G�����'WGF����6Ɩ6�ײ������6��7B�W�B��Wr6WB��V�gV�f�FW2���b��W�B�2�&Wf�Wr�B���W�B�FV�WFR�&Wf�Wr�B��V�6R�W�B�FB�&Wf�Wr�B��6WD�V�gV�f�FW2��W�B���Т6�74��S׶f�W��FV�2�6V�FW"v��R�B�2FW�Bׇ2G&�6�F����6���'2G���V�gV�f�FW2�2�&Wf�Wr�B��wFW�Bղ4cSSu�r�wFW�B�w&��C��fW#�FW�B�w&��cp��Т��F�V�'5W6��S׳'���
+�]�������&Wf�Wr�V�gV����V�gV�f�FW2�2�&Wf�Wr�B����Ґ���'WGF�����F�c���F�c���F�c���Т��F�c��'WGF��6�74��S�'r�gV���B�B��2&�&FW"�"&�&FW"�F6�VB&�&FW"�w&��#&�V�FVB׆�FW�B�6�FW�B�w&��S��fW#�&�&FW"ղ4cSSu���fW#�FW�Bղ4cSSu�G&�6�F����6���'2f��B��VF�V�#�
+����b
+�͘]����
+�}�M���-�����]�}���"�C"����'WGF�����F�c���F�c���F�c���F�cࠢ�������$T4T�DŒd�UtTB�������Т�&V6V�FǕf�WvVB��V�wF��bb���F�b6�74��S�&���r�w��ׂ�WF���B"�B#��F�b6�74��S�&&r�v��FR&�V�FVB׆�6�F�r�6��b#�ƃ"6�74��S�'FW�B��rf��B�&��BFW�B�w&�ӓf�W��FV�2�6V�FW"v�"�"�B#��6��6�6��S׳#�6�74��S�'FW�B�w&��S"��
+�M�}�}�����}�r
+�]�M���}������#��F�b6�74��S�&w&�Bw&�B�6��2�"6Ӧw&�B�6��2�2�C�w&�B�6��2�B�s�w&�B�6��2�bv�2#��&V6V�FǕf�WvVB���'�����'WGF���W�׷'�GТ��6Ɩ6�ײ����&�WFW"�W6���&�GV7B�G�'��F�W��Т6�74��S�&w&�WFW�B�&�v�B��fW#�6�F�r��BG&�6�F����6�F�r&�V�FVB׆��fW&f��rֆ�FFV�&�&FW"&�&FW"�w&�� ���F�b6�74��S�&7V7B�7V&R&r�w&��S�fW&f��rֆ�FFV�#��'��vR���Ɩ�r7&3׷'��vW��C׷'�F�F�W�6�74��S�'r�gV����gV���&�V7B�6�fW"w&�Wֆ�fW#�66�R�RG&�6�F����G&�6f�&�"�������F�b6�74��S�'r�gV����gV��f�W��FV�2�6V�FW"�W7F�g��6V�FW"#��6�vR6��S׳#��6�74��S�'FW�B�w&��3"����F�c��Т��F�c��F�b6�74��S�'�"#��6�74��S�'FW�Bׇ2FW�B�w&��sf��B��VF�V�Ɩ�R�6���"�VF��r�B�"�#�'�F�F�W�����6�74��S�'FW�B�6�f��B�&��BFW�Bղ4cSSu�#�'�&�6W�
+���S�����F�c���'WGF�����Т��F�c���F�c���F�c��Р��������4�B5U�%B$��U"�������Т�F�b6�74��S�&���r�w��ׂ�WF���B"�B#��F�b6�74��S�&&r�w&F�V�B�F���g&������SF��&VB�S&�&FW"&�&FW"����&�V�FVB׆��Rf�W��FV�2�6V�FW"�W7F�g��&WGvVV�f�W��w&v�B#��F�b6�74��S�&f�W��FV�2�6V�FW"v�2#��F�b6�74��S�'r�"��"&rղ4cSSu�&�V�FVB�gV��f�W��FV�2�6V�FW"�W7F�g��6V�FW"#���W76vT6�&6�R6��S׳#'�6�74��S�'FW�B�v��FR"����F�c��F�c��6�74��S�&f��B�&��BFW�B�w&�Ӄ#�}�B
+�M�����2
+�=�M�}�M������6�74��S�'FW�B�w&��SFW�B�6�#튭���}�]�B
+�]��
+����]��
+�}�M���]�M�}�
+�=��
+�}�M���}�m��
+�]���}�M��������F�c���F�c��F�b6�74��S�&f�W�v�2#��'WGF��6�74��S�&&rղ4cSSu�FW�B�v��FR��R��"�R&�V�FVB׆�FW�B�6�f��B�6V֖&��B��fW#�&rղ6CCFE�G&�6�F����6���'2f�W��FV�2�6V�FW"v�"#���W76vT6�&6�R6��S׳g���
+�}�M������M�����'WGF����'WGF��6�74��S�&&�&FW"�"&�&FW"ղ4cSSu�FW�Bղ4cSSu���R��"�R&�V�FVB׆�FW�B�6�f��B�6V֖&��B��fW#�&r�&VB�SG&�6�F����6���'2f�W��FV�2�6V�FW"v�"#��7F�&R6��S׳g���
+�-���}���
+�}�M�]���͋���'WGF�����F�c���F�c���F�cࠢ�������d��DU"�������Т�f��FW"6�74��S�&&r�w&�ӓFW�B�v��FR�B�B#��F�b6�74��S�&���r�w��ׂ�WF���B��#��F�b6�74��S�&w&�Bw&�B�6��2�"�C�w&�B�6��2�Bvӂ�"ӂ#��F�c�ƃ26�74��S�'FW�B׆�f��B�&�6�FW�Bղ4cSSu��"�2#�D�TTS���3��6�74��S�'FW�B�w&��CFW�B�6�#�}�M���=���"
+�}�M�=��m�B
+�]�b#c
+�����M��
+�ݘ��B
+�}�M���}�M�S�����F�c��F�c�ƃB6�74��S�&f��B�6V֖&��BFW�B�6��"�2#�]�=�}���������C���}��������
+�}�M����r�}�=���}�=��
+�}�M�]��͊}��r�}�}��"
+�}�M�����r�}�}���]�B
+���m�ru�����������W�׶��6�74��S�'FW�B�w&��CFW�B�6��"�"7W'6�"����FW"��fW#�FW�B�v��FRG&�6�F����6���'2#��������Т��F�c��F�c�ƃB6�74��S�&f��B�6V֖&��BFW�B�6��"�2#�}�M���}�m�����c���C���}������
+���M��D�TTRr�}���M���B
+�}�M���}�m��r�}�]��=�"
+�}�M���}�m��u�����������W�׶��6�74��S�'FW�B�w&��CFW�B�6��"�"7W'6�"����FW"��fW#�FW�B�v��FRG&�6�F����6���'2#��������Т��F�c��F�c�ƃB6�74��S�&f��B�6V֖&��BFW�B�6��"�2#튭�}�����m�s���C���t��7Fw&�r�uGv�GFW"r�uF��F��r�u��UGV&Ru�����������W�׶��6�74��S�'FW�B�w&��CFW�B�6��"�"7W'6�"����FW"��fW#�FW�B�v��FRG&�6�F����6���'2#��������Т��F�c���F�c��F�b6�74��S�&&�&FW"�B&�&FW"�w&�ӃB�bFW�B�6V�FW"FW�B�w&��SFW�Bׇ2#�*�##BD�TTR�
+�͘]����
+�}�M�ݘ-���"
+�]�ݘ���������F�c���F�c���f��FW#���F�c����
