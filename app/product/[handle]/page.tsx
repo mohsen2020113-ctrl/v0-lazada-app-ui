@@ -491,7 +491,7 @@ export default function ProductPage() {
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-4 bg-purple-50 rounded-xl">
-                  <Shield size={20}"0} className="text-purple-600 flex-shrink-0 mt-0.5" />
+                  <Shield size={20} className="text-purple-600 flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="font-semibold text-purple-900">ضمان الأصالة</p>
                     <p className="text-purple-700 mt-1">جميع منتجاتنا أصلية 100% مضمونة. نعمل مع موردين معتمدين فقط.</p>
