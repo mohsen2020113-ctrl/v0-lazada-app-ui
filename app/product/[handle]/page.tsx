@@ -13,15 +13,12 @@ import { ProductPageClient } from '@/components/product/product-page-client'
 async function getProductData(handle: string) {
   try {
     const decodedHandle = decodeURIComponent(handle)
-    console.log('[v0] ========== PRODUCT PAGE ==========')
-    console.log('[v0] Fetching product with handle:', decodedHandle)
+    console.log('[v0] Fetching product:', decodedHandle)
     
-    // Fetch from Shopify
     const shopifyProduct = await getProduct(decodedHandle)
-    console.log('[v0] Shopify response:', shopifyProduct ? `Got ${shopifyProduct.title}` : 'NULL')
     
     if (shopifyProduct?.id) {
-      console.log('[v0] ✅ Found product in Shopify:', shopifyProduct.title)
+      console.log('[v0] Found in Shopify:', shopifyProduct.title)
       
       let discount = 0
       if (shopifyProduct.compareAtPriceRange?.minVariantPrice?.amount) {
@@ -30,7 +27,7 @@ async function getProductData(handle: string) {
         discount = Math.round(((originalPrice - currentPrice) / originalPrice) * 100)
       }
       
-      const result = {
+      return {
         ...shopifyProduct,
         name: shopifyProduct.title,
         price: parseFloat(shopifyProduct.priceRange?.minVariantPrice?.amount || '0'),
@@ -52,20 +49,12 @@ async function getProductData(handle: string) {
         similarProducts: [],
         reviews: [],
       }
-      console.log('[v0] ✅ Returning Shopify product:', result.name)
-      console.log('[v0] ========== END PRODUCT PAGE ==========')
-      return result
     }
     
-    console.log('[v0] ❌ Product NOT found in Shopify')
-    console.log('[v0] Requested handle:', decodedHandle)
-    console.log('[v0] ✅ Using mockProduct as fallback')
-    console.log('[v0] ========== END PRODUCT PAGE ==========')
+    console.log('[v0] Product not found, using mock:', decodedHandle)
     return mockProduct
   } catch (error: any) {
-    console.error('[v0] ❌ EXCEPTION fetching product:', error?.message || error)
-    console.log('[v0] ✅ Using mockProduct on error')
-    console.log('[v0] ========== END PRODUCT PAGE ==========')
+    console.error('[v0] Error fetching product:', error?.message)
     return mockProduct
   }
 }
