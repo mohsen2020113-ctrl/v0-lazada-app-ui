@@ -36,10 +36,10 @@ interface RelatedProduct {
 }
 
 const MOCK_REVIEWS = [
-  { id: 1, name: 'أحمد محمد', rating: 5, date: 'منذ 3 أيام', comment: 'منتج ممتاز جداً، الجودة ر��ئعة وسريع الشحن. أنصح به بشدة.', helpful: 24, verified: true, avatar: 'أ' },
+  { id: 1, name: 'أحمد محمد', rating: 5, date: 'منذ 3 أيام', comment: 'منتج ممتاز جداً، الجودة رائعة وسريع الشحن. أنصح به بشدة.', helpful: 24, verified: true, avatar: 'أ' },
   { id: 2, name: 'سارة علي', rating: 5, date: 'منذ أسبوع', comment: 'وصل بشكل سريع والتغليف كان ممتازاً. المنتج يطابق الوصف تماماً.', helpful: 18, verified: true, avatar: 'س' },
   { id: 3, name: 'محمد خالد', rating: 4, date: 'منذ أسبوعين', comment: 'منتج جيد لكن التوصيل تأخر قليلاً. الجودة مقبولة بهذا السعر.', helpful: 12, verified: true, avatar: 'م' },
-  { id: 4, name: 'فاطمة حسن', rating: 5, date: 'منذ شهر', comment: 'أفضل منتج اشتريته من هذا المتجر! سأشتري مجدداً بالتأكي��.', helpful: 31, verified: true, avatar: 'ف' },
+  { id: 4, name: 'فاطمة حسن', rating: 5, date: 'منذ شهر', comment: 'أفضل منتج اشتريته من هذا المتجر! سأشتري مجدداً بالتأكيد.', helpful: 31, verified: true, avatar: 'ف' },
 ]
 
 export default function ProductPage() {
@@ -278,7 +278,7 @@ export default function ProductPage() {
             </div>
 
             {/* RIGHT: Info */}
-            <div className="lg:w#[55%] p-6 flex flex-col gap-4">
+            <div className="lg:w-[55%] p-6 flex flex-col gap-4">
               {/* Title + Wishlist */}
               <div className="flex items-start gap-3">
                 <h1 className="flex-1 text-xl font-bold text-gray-900 leading-snug">{product.title}</h1>
@@ -413,7 +413,7 @@ export default function ProductPage() {
                   }`}
                 >
                   <ShoppingCart size={20} />
-                  {!variant.available ? 'نفد المخزون' : addedToCart ? 'تمت الإظافة ✓' : 'أضف إلى السلة 🛒'}
+                  {!variant.available ? 'نفد المخزون' : addedToCart ? 'تمت الإضافة ✓' : 'أضف إلى السلة 🛒'}
                 </button>
                 <button
                   disabled={!variant.available}
@@ -447,7 +447,7 @@ export default function ProductPage() {
         <div className="bg-white rounded-xl shadow-sm overflow-hidden">
           <div className="flex border-b border-gray-100">
             {[
-              { key: 'description', label: 'تفاصيل المنتج' },
+              { key: 'description', label: 'تقاصيل المنتج' },
               { key: 'reviews', label: `التقييمات (2,042)` },
               { key: 'shipping', label: 'الشحن والإرجاع' },
             ].map(tab => (
@@ -487,11 +487,11 @@ export default function ProductPage() {
                   <RotateCcw size={20} className="text-green-600 flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="font-semibold text-green-900">سياسة الإرجاع</p>
-                    <p className="text-green-700 mt-1">إرجاع مجاني خلال 14 يوماً من استلام المنتج بشرط أن يكون بحالته الأصلية.</p>
+                    <p className="text-green-700 mt-1">إرجاع مجاني خلال 14 يومًً min استلام المنتج بشر أن يكون بحالته الأصلية.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-4 bg-purple-50 rounded-xl">
-                  <Shield size={20} className="text-purple-600 flex-shrink-0 mt-0.5" />
+                  <Shield size={20}"0} className="text-purple-600 flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="font-semibold text-purple-900">ضمان الأصالة</p>
                     <p className="text-purple-700 mt-1">جميع منتجاتنا أصلية 100% مضمونة. نعمل مع موردين معتمدين فقط.</p>
@@ -502,50 +502,258 @@ export default function ProductPage() {
           </div>
         </div>
       </div>
-�&V�FVE&�GV7G2���'�����'WGF���W�׷'�GТ��6Ɩ6�ײ����&�WFW"�W6���&�GV7B�G�'��F�W��Т6�74��S�&w&�WFW�B�&�v�B��fW#�6�F�r��BG&�6�F����6�F�r&�V�FVB׆��fW&f��rֆ�FFV�&�&FW"&�&FW"�w&�� ���F�b6�74��S�&7V7B�7V&R&r�w&��S�fW&f��rֆ�FFV�#��'��vR���Ɩ�p�7&3׷'��vWТ�C׷'�F�F�WТ6�74��S�'r�gV����gV���&�V7B�6�fW"w&�Wֆ�fW#�66�R�RG&�6�F����G&�6f�&� ��������F�b6�74��S�'r�gV����gV��f�W��FV�2�6V�FW"�W7F�g��6V�FW"#��6�vR6��S׳#��6�74��S�'FW�B�w&��3"����F�c��Т��F�c��F�b6�74��S�'�"#��6�74��S�'FW�Bׇ2FW�B�w&��sf��B��VF�V�Ɩ�R�6���"�VF��r�B�"�#�'�F�F�W�����6�74��S�'FW�B�6�f��B�&��BFW�Bղ4cSSu�#�'�&�6W�
-���S����F�b6�74��S�&f�W��FV�2�6V�FW"v��R�B�#����"�2�B�U����2���7F"�W�׷7�6��S׳�6�74��S�&f���זV���r�CFW�BזV���r�C"��Т��F�c���F�c���'WGF�����Т��F�c���F�c���F�c��Р��������DUD��TB$Ud�Uu2�������Т�F�b6�74��S�&���r�w��ׂ�WF���B"�B#��F�b6�74��S�&&r�v��FR&�V�FVB׆�6�F�r�6��b#�ƃ"6�74��S�'FW�B��rf��B�&��BFW�B�w&�ӓf�W��FV�2�6V�FW"v�"�"�b#��7F"6��S׳#�6�74��S�&f���זV���r�CFW�BזV���r�C"��
-���-�����]�}��
-�}�M���]�M�}�����#��F�b6�74��S�&f�W�f�W��6���s�f�W��&�rvӂ#���&F��r7V��'���Т�F�b6�74��S�&�s�r�cBf�W��6�&���#��F�b6�74��S�'FW�B�6V�FW"�"�B#��F�b6�74��S�'FW�B�g��f��B�&�6�FW�B�w&�ӓ#�B���F�c��F�b6�74��S�&f�W��FV�2�6V�FW"�W7F�g��6V�FW"v�ג�"#����"�2�B�U����2���7F"�W�׷7�6��S׳#�6�74��S�&f���זV���r�CFW�BזV���r�C"��Т��F�c��6�74��S�'FW�B�w&��SFW�B�6�#튍�m�}���
-���M��"�C"
-���-�����S�����F�c��F�b6�74��S�'76Rג�"#��&F��t'&V�F�v����"�����F�b�W�׷"�7F'7�6�74��S�&f�W��FV�2�6V�FW"v�"#��7�6�74��S�'FW�Bׇ2FW�B�w&��cr�FW�B��VgB#�"�7F'7�)�S��7���F�b6�74��S�&f�W��&r�w&��&�V�FVB�gV����"�fW&f��rֆ�FFV�#��F�`�6�74��S�&��gV��&rזV���r�C&�V�FVB�gV�� �7G��S׷�v�GF��G�"�7G�V�Т����F�c��7�6�74��S�'FW�Bׇ2FW�B�w&��Srӂ#�"�7G�S��7����F�c���Т��F�c��F�b6�74��S�&�B�bB�B&�&FW"�B&�&FW"�w&��#��F�b6�74��S�&w&�Bw&�B�6��2�"v�"FW�B�6V�FW"#��F�b6�74��S�&&r�w&VV��S&�V�FVB��r�"#��6�74��S�'FW�B׆�f��B�&��BFW�B�w&VV��c#㓂S����6�74��S�'FW�Bׇ2FW�B�w&��S#��}�m���b
-���b
-�}�M�]�m���������F�c��F�b6�74��S�&&r�&�VR�S&�V�FVB��r�"#��6�74��S�'FW�B׆�f��B�&��BFW�B�&�VR�c#�RS����6�74��S�'FW�Bׇ2FW�B�w&��S#�=���M������b
-�]�͊����}�������F�c���F�c���F�c���F�cࠢ��&Wf�Ww2Ɨ7B��Т�F�b6�74��S�&f�W��#��F�b6�74��S�&f�W��FV�2�6V�FW"�W7F�g��&WGvVV��"�B#��6�74��S�'FW�B�6�FW�B�w&��c#�6�'FVE&Wf�Ww2��V�wF��
-���-�����R
-�]������c����6V�V7@�f�VS׷&Wf�Wu6�'D'�Т��6��vS׶R��6WE&Wf�Wu6�'D'��R�F&vWB�f�VR2璗Т6�74��S�'FW�B�6�&�&FW"&�&FW"�w&��#&�V�FVB��r��2���R�WFƖ�R����RFW�B�w&��s ����F���f�VS�&�WvW7B#�}�M�=�݊������F������F���f�VS�&�V�gV�#�}�M�=�=���
-��}�m�������F������6V�V7C���F�c��F�b6�74��S�'76Rג�B#��6�'FVE&Wf�Ww2���&Wf�Wr�����F�b�W�׷&Wf�Wr�G�6�74��S�&&�&FW"&�&FW"�w&��&�V�FVB׆��B#��F�b6�74��S�&f�W��FV�2�7F'Bv�2#��F�b6�74��S�'r���&�V�FVB�gV��&rղ4cSSu�f�W��FV�2�6V�FW"�W7F�g��6V�FW"FW�B�v��FRf��B�&��Bf�W��6�&���#��&Wf�Wr�fF'Т��F�c��F�b6�74��S�&f�W��#��F�b6�74��S�&f�W��FV�2�6V�FW"�W7F�g��&WGvVV�f�W��w&v�"#��F�c��6�74��S�&f��B�6V֖&��BFW�B�w&�ӃFW�B�6�#�&Wf�Wr���W�����F�b6�74��S�&f�W��FV�2�6V�FW"v�"�B��R#��F�b6�74��S�&f�W��FV�2�6V�FW"v��R#����"�2�B�U����2�����7F"�W�׷7�6��S׳'�6�74��S׷2��&Wf�Wr�&F��r�vf���זV���r�CFW�BזV���r�Cr�wFW�B�w&��#f����w&��#w�����Т��F�c��&Wf�Wr�fW&�f�VBbb���7�6�74��S�'FW�Bׇ2FW�B�w&VV��cf�W��FV�2�6V�FW"v��R#��6�V6�6�&6�R6��S׳���
-�]�M�����
-�]������ ���7���Т��F�c���F�c��7�6�74��S�'FW�Bׇ2FW�B�w&��C#�&Wf�Wr�FFW���7����F�c��6�74��S�'FW�B�6�FW�B�w&��s�B�"�VF��r�b#�&Wf�Wr�6���V�G�����'WGF����6Ɩ6�ײ������6��7B�W�B��Wr6WB��V�gV�f�FW2���b��W�B�2�&Wf�Wr�B���W�B�FV�WFR�&Wf�Wr�B��V�6R�W�B�FB�&Wf�Wr�B��6WD�V�gV�f�FW2��W�B���Т6�74��S׶f�W��FV�2�6V�FW"v��R�B�2FW�Bׇ2G&�6�F����6���'2G���V�gV�f�FW2�2�&Wf�Wr�B��wFW�Bղ4cSSu�r�wFW�B�w&��C��fW#�FW�B�w&��cp��Т��F�V�'5W6��S׳'���
-�]�������&Wf�Wr�V�gV����V�gV�f�FW2�2�&Wf�Wr�B����Ґ���'WGF�����F�c���F�c���F�c���Т��F�c��'WGF��6�74��S�'r�gV���B�B��2&�&FW"�"&�&FW"�F6�VB&�&FW"�w&��#&�V�FVB׆�FW�B�6�FW�B�w&��S��fW#�&�&FW"ղ4cSSu���fW#�FW�Bղ4cSSu�G&�6�F����6���'2f��B��VF�V�#�
-����b
-�͘]����
-�}�M���-�����]�}���"�C"����'WGF�����F�c���F�c���F�c���F�cࠢ�������$T4T�DŒd�UtTB�������Т�&V6V�FǕf�WvVB��V�wF��bb���F�b6�74��S�&���r�w��ׂ�WF���B"�B#��F�b6�74��S�&&r�v��FR&�V�FVB׆�6�F�r�6��b#�ƃ"6�74��S�'FW�B��rf��B�&��BFW�B�w&�ӓf�W��FV�2�6V�FW"v�"�"�B#��6��6�6��S׳#�6�74��S�'FW�B�w&��S"��
-�M�}�}�����}�r
-�]�M���}������#��F�b6�74��S�&w&�Bw&�B�6��2�"6Ӧw&�B�6��2�2�C�w&�B�6��2�B�s�w&�B�6��2�bv�2#��&V6V�FǕf�WvVB���'�����'WGF���W�׷'�GТ��6Ɩ6�ײ����&�WFW"�W6���&�GV7B�G�'��F�W��Т6�74��S�&w&�WFW�B�&�v�B��fW#�6�F�r��BG&�6�F����6�F�r&�V�FVB׆��fW&f��rֆ�FFV�&�&FW"&�&FW"�w&�� ���F�b6�74��S�&7V7B�7V&R&r�w&��S�fW&f��rֆ�FFV�#��'��vR���Ɩ�r7&3׷'��vW��C׷'�F�F�W�6�74��S�'r�gV����gV���&�V7B�6�fW"w&�Wֆ�fW#�66�R�RG&�6�F����G&�6f�&�"�������F�b6�74��S�'r�gV����gV��f�W��FV�2�6V�FW"�W7F�g��6V�FW"#��6�vR6��S׳#��6�74��S�'FW�B�w&��3"����F�c��Т��F�c��F�b6�74��S�'�"#��6�74��S�'FW�Bׇ2FW�B�w&��sf��B��VF�V�Ɩ�R�6���"�VF��r�B�"�#�'�F�F�W�����6�74��S�'FW�B�6�f��B�&��BFW�Bղ4cSSu�#�'�&�6W�
-���S�����F�c���'WGF�����Т��F�c���F�c���F�c��Р��������4�B5U�%B$��U"�������Т�F�b6�74��S�&���r�w��ׂ�WF���B"�B#��F�b6�74��S�&&r�w&F�V�B�F���g&������SF��&VB�S&�&FW"&�&FW"����&�V�FVB׆��Rf�W��FV�2�6V�FW"�W7F�g��&WGvVV�f�W��w&v�B#��F�b6�74��S�&f�W��FV�2�6V�FW"v�2#��F�b6�74��S�'r�"��"&rղ4cSSu�&�V�FVB�gV��f�W��FV�2�6V�FW"�W7F�g��6V�FW"#���W76vT6�&6�R6��S׳#'�6�74��S�'FW�B�v��FR"����F�c��F�c��6�74��S�&f��B�&��BFW�B�w&�Ӄ#�}�B
-�M�����2
-�=�M�}�M������6�74��S�'FW�B�w&��SFW�B�6�#튭���}�]�B
-�]��
-����]��
-�}�M���]�M�}�
-�=��
-�}�M���}�m��
-�]���}�M��������F�c���F�c��F�b6�74��S�&f�W�v�2#��'WGF��6�74��S�&&rղ4cSSu�FW�B�v��FR��R��"�R&�V�FVB׆�FW�B�6�f��B�6V֖&��B��fW#�&rղ6CCFE�G&�6�F����6���'2f�W��FV�2�6V�FW"v�"#���W76vT6�&6�R6��S׳g���
-�}�M������M�����'WGF����'WGF��6�74��S�&&�&FW"�"&�&FW"ղ4cSSu�FW�Bղ4cSSu���R��"�R&�V�FVB׆�FW�B�6�f��B�6V֖&��B��fW#�&r�&VB�SG&�6�F����6���'2f�W��FV�2�6V�FW"v�"#��7F�&R6��S׳g���
-�-���}���
-�}�M�]���͋���'WGF�����F�c���F�c���F�cࠢ�������d��DU"�������Т�f��FW"6�74��S�&&r�w&�ӓFW�B�v��FR�B�B#��F�b6�74��S�&���r�w��ׂ�WF���B��#��F�b6�74��S�&w&�Bw&�B�6��2�"�C�w&�B�6��2�Bvӂ�"ӂ#��F�c�ƃ26�74��S�'FW�B׆�f��B�&�6�FW�Bղ4cSSu��"�2#�D�TTS���3��6�74��S�'FW�B�w&��CFW�B�6�#�}�M���=���"
-�}�M�=��m�B
-�]�b#c
-�����M��
-�ݘ��B
-�}�M���}�M�S�����F�c��F�c�ƃB6�74��S�&f��B�6V֖&��BFW�B�6��"�2#�]�=�}���������C���}��������
-�}�M����r�}�=���}�=��
-�}�M�]��͊}��r�}�}��"
-�}�M�����r�}�}���]�B
-���m�ru�����������W�׶��6�74��S�'FW�B�w&��CFW�B�6��"�"7W'6�"����FW"��fW#�FW�B�v��FRG&�6�F����6���'2#��������Т��F�c��F�c�ƃB6�74��S�&f��B�6V֖&��BFW�B�6��"�2#�}�M���}�m�����c���C���}������
-���M��D�TTRr�}���M���B
-�}�M���}�m��r�}�]��=�"
-�}�M���}�m��u�����������W�׶��6�74��S�'FW�B�w&��CFW�B�6��"�"7W'6�"����FW"��fW#�FW�B�v��FRG&�6�F����6���'2#��������Т��F�c��F�c�ƃB6�74��S�&f��B�6V֖&��BFW�B�6��"�2#튭�}�����m�s���C���t��7Fw&�r�uGv�GFW"r�uF��F��r�u��UGV&Ru�����������W�׶��6�74��S�'FW�B�w&��CFW�B�6��"�"7W'6�"����FW"��fW#�FW�B�v��FRG&�6�F����6���'2#��������Т��F�c���F�c��F�b6�74��S�&&�&FW"�B&�&FW"�w&�ӃB�bFW�B�6V�FW"FW�B�w&��SFW�Bׇ2#�*�##BD�TTR�
-�͘]����
-�}�M�ݘ-���"
-�]�ݘ���������F�c���F�c���f��FW#���F�c����
+
+      {/* ===== RELATED PRODUCTS ===== */}
+      {relatedProducts.length > 0 && (
+        <div className="max-w-7xl mx-auto px-4 pb-4">
+          <div className="bg-white rounded-xl shadow-sm p-6">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
+                <Tag size={20} className="text-[#F50057]" />
+                منتجات مشابهة
+              </h2>
+              <button className="text-sm text-[#F50057] hover:underline font-medium">عرض الكل</button>
+            </div>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+              {relatedProducts.map(rp => (
+                <button
+                  key={rp.id}
+                  onClick={() => router.push(`/product/${rp.handle}`)}
+                  className="group text-right hover:shadow-md transition-shadow rounded-xl overflow-hidden border border-gray-100"
+                >
+                  <div className="aspect-square bg-gray-50 overflow-hidden">
+                    {rp.image ? (
+                      <img
+                        src={rp.image}
+                        alt={rp.title}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <Package size={28} className="text-gray-300" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-2">
+                    <p className="text-xs text-gray-700 font-medium line-clamp-2 leading-4 mb-1">{rp.title}</p>
+                    <p className="text-sm font-bold text-[#F50057]">{rp.price} د.إ</p>
+                    <div className="flex items-center gap-0.5 mt-1">
+                      {[1,2,3,4,5].map(s => <Star key={s} size={10} className="fill-yellow-400 text-yellow-400" />)}
+                    </div>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ===== DETAILED REVIEWS ===== */}
+      <div className="max-w-7xl mx-auto px-4 pb-4">
+        <div className="bg-white rounded-xl shadow-sm p-6">
+          <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-6">
+            <Star size={20} className="fill-yellow-400 text-yellow-400" />
+            تقييمات العملاء
+          </h2>
+          <div className="flex flex-col lg:flex-row gap-8">
+            {/* Rating Summary */}
+            <div className="lg:w-64 flex-shrink-0">
+              <div className="text-center mb-4">
+                <div className="text-6xl font-black text-gray-900">4.9</div>
+                <div className="flex items-center justify-center gap-1 my-2">
+                  {[1,2,3,4,5].map(s => <Star key={s} size={20} className="fill-yellow-400 text-yellow-400" />)}
+                </div>
+                <p className="text-gray-500 text-sm">بناءً على 2,042 تقييم</p>
+              </div>
+              <div className="space-y-2">
+                {ratingBreakdown.map(r => (
+                  <div key={r.stars} className="flex items-center gap-2">
+                    <span className="text-xs text-gray-600 w-10 text-left">{r.stars} ★</span>
+                    <div className="flex-1 bg-gray-100 rounded-full h-2 overflow-hidden">
+                      <div
+                        className="h-full bg-yellow-400 rounded-full"
+                        style={{ width: `${r.pct}%` }}
+                      />
+                    </div>
+                    <span className="text-xs text-gray-500 w-8">{r.pct}%</span>
+                  </div>
+                ))}
+              </div>
+              <div className="mt-6 pt-4 border-t border-gray-100">
+                <div className="grid grid-cols-2 gap-2 text-center">
+                  <div className="bg-green-50 rounded-lg p-2">
+                    <p className="text-xl font-bold text-green-600">98%</p>
+                    <p className="text-xs text-gray-500">راضون عن المنتج</p>
+                  </div>
+                  <div className="bg-blue-50 rounded-lg p-2">
+                    <p className="text-xl font-bold text-blue-600">95%</p>
+                    <p className="text-xs text-gray-500">سيشترون مجدداً</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Reviews List */}
+            <div className="flex-1">
+              <div className="flex items-center justify-between mb-4">
+                <p className="text-sm text-gray-600">{sortedReviews.length} تقييم معروض</p>
+                <select
+                  value={reviewSortBy}
+                  onChange={e => setReviewSortBy(e.target.value as any)}
+                  className="text-sm border border-gray-200 rounded-lg px-3 py-1.5 outline-none text-gray-700"
+                >
+                  <option value="newest">الأحدث</option>
+                  <option value="helpful">الأكثر فائدة</option>
+                </select>
+              </div>
+              <div className="space-y-4">
+                {sortedReviews.map(review => (
+                  <div key={review.id} className="border border-gray-100 rounded-xl p-4">
+                    <div className="flex items-start gap-3">
+                      <div className="w-10 h-10 rounded-full bg-[#F50057] flex items-center justify-center text-white font-bold flex-shrink-0">
+                        {review.avatar}
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between flex-wrap gap-2">
+                          <div>
+                            <p className="font-semibold text-gray-800 text-sm">{review.name}</p>
+                            <div className="flex items-center gap-2 mt-0.5">
+                              <div className="flex items-center gap-0.5">
+                                {[1,2,3,4,5].map(s => (
+                                  <Star key={s} size={12} className={s <= review.rating ? 'fill-yellow-400 text-yellow-400' : 'text-gray-200 fill-gray-200'} />
+                                ))}
+                              </div>
+                              {review.verified && (
+                                <span className="text-xs text-green-600 flex items-center gap-0.5">
+                                  <CheckCircle size={10} />
+                                  مشترٍ موثّق
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                          <span className="text-xs text-gray-400">{review.date}</span>
+                        </div>
+                        <p className="text-sm text-gray-700 mt-2 leading-6">{review.comment}</p>
+                        <button
+                          onClick={() => {
+                            const next = new Set(helpfulVotes)
+                            if (next.has(review.id)) next.delete(review.id)
+                            else next.add(review.id)
+                            setHelpfulVotes(next)
+                          }}
+                          className={`flex items-center gap-1.5 mt-3 text-xs transition-colors ${
+                            helpfulVotes.has(review.id) ? 'text-[#F50057]' : 'text-gray-400 hover:text-gray-600'
+                          }`}
+                        >
+                          <ThumbsUp size={12} />
+                          مفيد ({review.helpful + (helpfulVotes.has(review.id) ? 1 : 0)})
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              <button className="w-full mt-4 py-3 border-2 border-dashed border-gray-200 rounded-xl text-sm text-gray-500 hover:border-[#F50057] hover:text-[#F50057] transition-colors font-medium">
+                عرض جميع التقييم (2,042)
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* ===== RECENTLY VIEWED ===== */}
+      {recentlyViewed.length > 0 && (
+        <div className="max-w-7xl mx-auto px-4 pb-4">
+          <div className="bg-white rounded-xl shadow-sm p-6">
+            <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4">
+              <Clock size={20} className="text-gray-500" />
+              شاهكت مؤخر مؤخر
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+              {recentlyViewed.map(rp => (
+                <button
+                  key={rp.id}
+                  onClick={() => router.push(`/product/${rp.handle}`)}
+                  className="group text-right hover:shadow-md transition-shadow rounded-xl overflow-hidden border border-gray-100"
+                >
+                  <div className="aspect-square bg-gray-50 overflow-hidden">
+                    {rp.image ? (
+                      <img src={rp.image} alt={rp.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center">
+                        <Package size={28} className="text-gray-300" />
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-2">
+                    <p className="text-xs text-gray-700 font-medium line-clamp-2 leading-4 mb-1">{rp.title}</p>
+                    <p className="text-sm font-bold text-[#F50057]">{rp.price} د.إ</p>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* ===== CHAT SUPPORT BANNER ===== */}
+      <div className="max-w-7xl mx-auto px-4 pb-4">
+        <div className="bg-gradient-to-l from-pink-50 to-red-50 border border-pink-100 rounded-xl p-5 flex items-center justify-between flex-wrap gap-4">
+          <div className="flex items-center gap-3">
+            <div className="w-12 h-12 bg-[#F50057] rounded-full flex items-center justify-center">
+              <MessageCircle size={22} className="text-white" />
+            </div>
+            <div>
+              <p className="font-bold text-gray-800">هل لديك سؤال؟</p>
+              <p className="text-gray-500 text-sm">حواصل مع خرديك العملاء ال بائع  مباعرى</p>
+            </div>
+          </div>
+iv>
+          <div className="flex gap-3">
+            <button className="bg-[#F50057] text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#d4004d] transition-colors flex items-center gap-2">
+              <MessageCircle size={16} />
+              الدردشة
+            </button>
+            <button className="border-2 border-[#F50057] text-[#F50057] px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-red-50 transition-colors flex items-center gap-2">
+              <Store size={16} />
+              زيارة المتجر
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {/* ===== FOOTER ===== */}
+      <footer className="bg-gray-900 text-white mt-4">
+        <div className="max-w-7xl mx-auto px-4 py-10">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+            <div>
+              <h3 className="text-xl font-black text-[#F50057] mb-3">4LEEE</h3>
+              <p className="text-gray-400 text-sm">التسوق الأفضل من 260 دولة حول العامب</p>
+            </div>
+            <div>
+              <h4 className="font-semibold text-sm mb-3">مساعدة</h4>
+              {['تتبع طلبي', 'سياسة الإرجاع', 'طرق الدفع', 'اتصل بنا'].map(l => (
+                <p key={l} className="text-gray-400 text-sm mb-2 cursor-pointer hover:text-white transition-colors">{l}</p>
+              ))}
+            </div>
+            <div>
+              <h4 className="font-semibold text-sm mb-3">البائعون</h4>
+              {['بيع على 4LEEE', 'دليل البائع', 'مركز البائع'].map(l => (
+                <p key={l} className="text-gray-400 text-sm mb-2 cursor-pointer hover:text-white transition-colors">{l}</p>
+              ))}
+            </div>
+            <div>
+              <h4 className="font-semibold text-sm mb-3">تابعنا</h4>
+              {['Instagram', 'Twitter', 'TikTok', 'YouTube'].map(l => (
+                <p key={l} className="text-gray-400 text-sm mb-2 cursor-pointer hover:text-white transition-colors">{l}</p>
+              ))}
+            </div>
+          </div>
+          <div className="border-t border-gray-800 pt-6 text-center text-gray-500 text-xs">
+            © 2024 4LEEE. جميع الحقوق محفوظة.
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
+}
