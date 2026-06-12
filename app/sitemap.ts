@@ -38,7 +38,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     const { products } = await fetchAllProducts();
-    productPages = products.slice(0, 500).map((product) => ({
+    productPages = products.slice(0, 500).filter((product) => product?.handle).map((product) => ({
       url: `${BASE_URL}/product/${product.handle}`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
@@ -50,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     const collections = await getCollections();
-    collectionPages = collections.map((collection) => ({
+    collectionPages = collections.filter((collection) => collection?.node?.handle).map((collection) => ({
       url: `${BASE_URL}/category/${collection.node.handle}`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
