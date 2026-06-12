@@ -59,11 +59,9 @@ async function getProductData(handle: string) {
   }
 }
 
-export default async function ProductPage({ params }: { params: { handle: string } }) {
-  const product = await getProductData(params.handle)
+export default async function ProductPage({ params }: { params: Promise<{ handle: string }> }) {
+  const { handle } = await params
+  const product = await getProductData(handle)
 
-  
-  return (
-    <ProductPageClient product={product} />
-  )
+  return <ProductPageClient product={product} />
 }
