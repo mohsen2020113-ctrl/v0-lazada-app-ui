@@ -705,10 +705,9 @@ export default function ProductPage() {
             </div>
             <div>
               <p className="font-bold text-gray-800">هل لديك سؤال؟</p>
-              <p className="text-gray-500 text-sm">حواصل مع خرديك العملاء ال بائع  مباعرى</p>
+              <p className="text-gray-500 text-sm">تواصل مع خدمة العملاء أو البائع مباشرة</p>
             </div>
           </div>
-iv>
           <div className="flex gap-3">
             <button className="bg-[#F50057] text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#d4004d] transition-colors flex items-center gap-2">
               <MessageCircle size={16} />
