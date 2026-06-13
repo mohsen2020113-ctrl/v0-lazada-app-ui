@@ -51,7 +51,7 @@ export async function shopifyFetch<T>(
       'X-Shopify-Storefront-Access-Token': SHOPIFY_TOKEN,
     },
     body: JSON.stringify({ query: contextualQuery, variables }),
-    next: { revalidate: 60 },
+    cache: 'no-store' as RequestCache,
   })
 
   if (!res.ok) throw new Error(`Shopify fetch failed: ${res.status}`)
