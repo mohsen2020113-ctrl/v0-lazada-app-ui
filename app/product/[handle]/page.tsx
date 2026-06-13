@@ -61,6 +61,10 @@ export default function ProductPage() {
 
   useEffect(() => {
     if (!handle) return
+    setLoading(true)
+    setProduct(null)
+    setSelectedVariant(0)
+    setCurrentImage(0)
     fetch(`/api/product/${handle}`)
       .then(r => r.json())
       .then((d: Product) => {
