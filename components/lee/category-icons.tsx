@@ -21,6 +21,13 @@ import {
 
 const categories = [
   {
+    id: 0,
+    name: "All Products",
+    icon: LayoutGrid,
+    gradient: "from-[#f85c98] to-[#ec407a]",
+    href: "/products",
+  },
+  {
     id: 1,
     name: "LEEMall",
     icon: ShoppingBag,
