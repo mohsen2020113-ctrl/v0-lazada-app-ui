@@ -23,7 +23,7 @@ export default function DailyDealsPage({ navigate }: Props) {
 
   return (
     <div className="bg-gray-50 min-h-full">
-      <div className="bg-orange-500 px-4 pt-12 pb-6">
+      <div className="bg-[#C2185B] px-4 pt-12 pb-6">
         <div className="flex items-center gap-3 mb-4">
           <button onClick={() => navigate('home')} className="text-white"><ChevronLeft size={22} /></button>
           <h1 className="text-xl font-bold text-white">Daily Deals 🔥</h1>
