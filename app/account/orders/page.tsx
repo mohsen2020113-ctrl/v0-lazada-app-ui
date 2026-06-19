@@ -61,7 +61,7 @@ export default function OrdersPage() {
                   <div className="flex items-center justify-between">
                     <div>
                       <p className="text-xs text-gray-500 mb-0.5">{order.items} items</p>
-                      <p className="text-base sm:text-lg font-bold text-[#f85c98]">AED {order.total * 1000}</p>
+                      <p className="text-base sm:text-lg font-bold text-[#c2185b]">AED {order.total * 1000}</p>
                     </div>
                     <ChevronRight className="w-5 h-5 text-gray-400" />
                   </div>
