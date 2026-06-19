@@ -57,7 +57,7 @@ export function ReviewsSection({
         <h3 className="text-lg font-bold text-gray-900">Reviews</h3>
         <button
           onClick={onWriteReview}
-          className="px-4 py-2 bg-gradient-to-r from-[#f85c98] to-[#e91e8c] text-white rounded-lg text-sm font-medium"
+          className="px-4 py-2 bg-gradient-to-r from-[#c2185b] to-[#e91e8c] text-white rounded-lg text-sm font-medium"
         >
           Write Review
         </button>
@@ -75,7 +75,7 @@ export function ReviewsSection({
                     key={i}
                     className={`w-4 h-4 ${
                       i <= Math.round(avgRating)
-                        ? 'fill-[#f85c98] text-[#f85c98]'
+                        ? 'fill-[#c2185b] text-[#c2185b]'
                         : 'text-gray-300'
                     }`}
                   />
@@ -107,7 +107,7 @@ export function ReviewsSection({
                         key={i}
                         className={`w-4 h-4 ${
                           i <= review.rating
-                            ? 'fill-[#f85c98] text-[#f85c98]'
+                            ? 'fill-[#c2185b] text-[#c2185b]'
                             : 'text-gray-300'
                         }`}
                       />
