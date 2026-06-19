@@ -15,7 +15,7 @@ export default function AccountPage({ navigate }: Props) {
     { icon: Heart, label: 'Wishlist', desc: 'Saved products', page: 'wishlist' as PageId, color: 'text-pink-500 bg-pink-50' },
     { icon: Wallet, label: 'Wallet', desc: 'Balance & transactions', page: 'wallet' as PageId, color: 'text-green-500 bg-green-50' },
     { icon: Tag, label: 'Vouchers', desc: 'Coupons & discounts', page: 'vouchers' as PageId, color: 'text-purple-500 bg-purple-50' },
-    { icon: Bell, label: 'Notifications', desc: 'Manage alerts', page: 'notifications' as PageId, color: 'text-orange-500 bg-orange-50' },
+    { icon: Bell, label: 'Notifications', desc: 'Manage alerts', page: 'notifications' as PageId, color: 'text-[#C2185B] bg-pink-50' },
   ];
 
   const supportItems = [
@@ -28,13 +28,13 @@ export default function AccountPage({ navigate }: Props) {
   return (
     <div className="bg-gray-50 min-h-full">
       {/* Header */}
-      <div className="bg-gradient-to-b from-orange-500 to-orange-400 px-4 pt-12 pb-20">
+      <div className="bg-gradient-to-b from-[#880E4F] to-[#C2185B] px-4 pt-12 pb-20">
         <h1 className="text-white text-xl font-bold">Account</h1>
       </div>
 
       {/* Profile card */}
       <div className="mx-4 -mt-12 card p-4 flex items-center gap-4 mb-4">
-        <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center text-white text-2xl font-bold flex-none">
+        <div className="w-16 h-16 bg-gradient-to-br from-[#880E4F] to-[#C2185B] rounded-full flex items-center justify-center text-white text-2xl font-bold flex-none">
           {customer ? customer.firstName?.[0]?.toUpperCase() ?? '\u{1F464}' : '\u{1F464}'}
         </div>
         <div className="flex-1 min-w-0">
@@ -42,7 +42,7 @@ export default function AccountPage({ navigate }: Props) {
             <>
               <h2 className="font-bold text-gray-900 text-lg">{customer.firstName} {customer.lastName}</h2>
               <p className="text-sm text-gray-500 truncate">{customer.email}</p>
-              <p className="text-xs text-orange-500 font-medium mt-0.5">LEE Member</p>
+              <p className="text-xs text-[#C2185B] font-medium mt-0.5">LEE Member</p>
             </>
           ) : (
             <>
@@ -67,7 +67,7 @@ export default function AccountPage({ navigate }: Props) {
             { label: 'Points', value: '0' },
           ].map(({ label, value }) => (
             <div key={label} className="card p-3 text-center">
-              <p className="text-xl font-bold text-orange-500">{value}</p>
+              <p className="text-xl font-bold text-[#C2185B]">{value}</p>
               <p className="text-xs text-gray-500">{label}</p>
             </div>
           ))}
