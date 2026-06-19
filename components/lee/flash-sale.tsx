@@ -155,7 +155,7 @@ export function FlashSale() {
                       </span>
                     )}
                     {product.hasCOD && (
-                      <span className="bg-orange-500 text-white text-[6px] sm:text-[7px] px-1 py-0.5 rounded font-bold">
+                      <span className="bg-[#C2185B] text-white text-[6px] sm:text-[7px] px-1 py-0.5 rounded font-bold">
                         COD
                       </span>
                     )}
