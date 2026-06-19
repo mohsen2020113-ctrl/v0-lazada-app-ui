@@ -22,7 +22,7 @@ export default function RegisterPage() {
       </div>
 
       <div className="flex flex-col items-center py-6">
-        <div className="w-16 h-16 rounded-3xl bg-[#C2185B] flex items-center justify-center mb-3 shadow-lg shadow-orange-500/30">
+        <div className="w-16 h-16 rounded-3xl bg-[#C2185B] flex items-center justify-center mb-3 shadow-lg shadow-[#C2185B]/30">
           <span className="text-white font-black text-2xl">L</span>
         </div>
         <p className="text-white/40 text-sm">انضم إلى مجتمع LEE ماركت</p>
@@ -61,7 +61,7 @@ export default function RegisterPage() {
 
         <button
           onClick={() => window.open(`${STORE_URL}/account/register`, '_blank')}
-          className="w-full mt-6 bg-[#C2185B] text-white font-bold py-4 rounded-2xl text-base shadow-lg shadow-orange-500/30"
+          className="w-full mt-6 bg-[#C2185B] text-white font-bold py-4 rounded-2xl text-base shadow-lg shadow-[#C2185B]/30"
         >
           إنشاء الحساب
         </button>
