@@ -37,7 +37,7 @@ export function JustForYou({ products }: JustForYouProps) {
         <h2 className="text-lg font-bold text-gray-900">Just4U</h2>
         <Link 
           href="/search"
-          className={`text-[#f85c98] text-sm font-semibold flex items-center gap-1 hover:underline ${isRTL ? 'flex-row-reverse' : ''}`}
+          className={`text-[#c2185b] text-sm font-semibold flex items-center gap-1 hover:underline ${isRTL ? 'flex-row-reverse' : ''}`}
         >
           {t('action.seeAll')} <span>{isRTL ? '‹' : '›'}</span>
         </Link>
@@ -79,7 +79,7 @@ export function JustForYou({ products }: JustForYouProps) {
                     <Heart
                       className={`w-3.5 h-3.5 ${
                         isFavorite(product.handle)
-                          ? 'fill-[#f85c98] text-[#f85c98]'
+                          ? 'fill-[#c2185b] text-[#c2185b]'
                           : 'text-gray-400'
                       }`}
                     />
@@ -94,7 +94,7 @@ export function JustForYou({ products }: JustForYouProps) {
                   </p>
                   
                   {/* Price */}
-                  <p className="text-[#f85c98] font-bold text-[10px]">
+                  <p className="text-[#c2185b] font-bold text-[10px]">
                     {formatPrice(product.priceRange.minVariantPrice.amount)}
                   </p>
                 </div>
