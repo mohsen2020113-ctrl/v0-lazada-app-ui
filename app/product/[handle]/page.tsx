@@ -117,7 +117,7 @@ export default function ProductPage() {
   if (loading) return (
     <div className="min-h-screen bg-white flex items-center justify-center" dir="rtl">
       <div className="text-center">
-        <div className="w-12 h-12 border-4 border-[#F50057] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+        <div className="w-12 h-12 border-4 border-[#C2185B] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
         <p className="text-gray-500 text-sm">جارٍ تحميل المنتج...</p>
       </div>
     </div>
@@ -126,7 +126,7 @@ export default function ProductPage() {
   if (!product) return (
     <div className="min-h-screen bg-white flex flex-col items-center justify-center gap-4" dir="rtl">
       <p className="text-gray-500">المنتج غير موجود</p>
-      <button onClick={() => router.push('/')} className="bg-[#F50057] text-white px-6 py-2 rounded-lg text-sm">
+      <button onClick={() => router.push('/')} className="bg-[#C2185B] text-white px-6 py-2 rounded-lg text-sm">
         العودة للرئيسية
       </button>
     </div>
@@ -160,7 +160,7 @@ export default function ProductPage() {
     <div className="min-h-screen bg-gray-50" dir="rtl">
 
       {/* ===== HEADER ===== */}
-      <header className="bg-[#F50057] sticky top-0 z-50 shadow-md">
+      <header className="bg-[#C2185B] sticky top-0 z-50 shadow-md">
         <div className="max-w-7xl mx-auto px-4 py-3 flex items-center gap-4">
           <button onClick={() => router.push('/')} className="text-white font-black text-2xl tracking-tight flex-shrink-0">
             4LEEE
@@ -209,9 +209,9 @@ export default function ProductPage() {
       {/* ===== BREADCRUMBS ===== */}
       <div className="max-w-7xl mx-auto px-4 py-2.5">
         <div className="flex items-center gap-1.5 text-xs text-gray-500">
-          <button className="hover:text-[#F50057] transition-colors">الرئيسية</button>
+          <button className="hover:text-[#C2185B] transition-colors">الرئيسية</button>
           <ChevronLeft size={12} />
-          <button className="hover:text-[#F50057] transition-colors">الإلكترونيات</button>
+          <button className="hover:text-[#C2185B] transition-colors">الإلكترونيات</button>
           <ChevronLeft size={12} />
           <span className="text-gray-700 font-medium truncate max-w-xs">{product.title}</span>
         </div>
@@ -226,7 +226,7 @@ export default function ProductPage() {
             <div className="lg:w-[45%] p-6 flex flex-col gap-4">
               <div className="relative bg-gray-50 rounded-xl overflow-hidden aspect-square">
                 {discount > 0 && (
-                  <div className="absolute top-3 right-3 z-10 bg-[#F50057] text-white text-xs font-bold px-2 py-1 rounded-md">
+                  <div className="absolute top-3 right-3 z-10 bg-[#C2185B] text-white text-xs font-bold px-2 py-1 rounded-md">
                     -{discount}%
                   </div>
                 )}
@@ -263,7 +263,7 @@ export default function ProductPage() {
                       key={i}
                       onClick={() => setCurrentImage(i)}
                       className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-colors ${
-                        currentImage === i ? 'border-[#F50057]' : 'border-gray-200'
+                        currentImage === i ? 'border-[#C2185B]' : 'border-gray-200'
                       }`}
                     >
                       <img src={img} alt="" className="w-full h-full object-cover" />
@@ -274,7 +274,7 @@ export default function ProductPage() {
               {/* Share */}
               <div className="flex items-center gap-2 text-sm text-gray-500 pt-1">
                 <span>مشاركة:</span>
-                <button className="flex items-center gap-1.5 text-gray-400 hover:text-[#F50057] transition-colors">
+                <button className="flex items-center gap-1.5 text-gray-400 hover:text-[#C2185B] transition-colors">
                   <Share2 size={16} />
                   <span>مشاركة</span>
                 </button>
@@ -289,10 +289,10 @@ export default function ProductPage() {
                 <button
                   onClick={() => setWishlist(!wishlist)}
                   className={`p-2 rounded-full border transition-colors flex-shrink-0 ${
-                    wishlist ? 'border-[#F50057] bg-red-50' : 'border-gray-200'
+                    wishlist ? 'border-[#C2185B] bg-red-50' : 'border-gray-200'
                   }`}
                 >
-                  <Heart size={20} className={wishlist ? 'fill-[#F50057] text-[#F50057]' : 'text-gray-400'} />
+                  <Heart size={20} className={wishlist ? 'fill-[#C2185B] text-[#C2185B]' : 'text-gray-400'} />
                 </button>
               </div>
 
@@ -304,7 +304,7 @@ export default function ProductPage() {
                   ))}
                 </div>
                 <span className="text-yellow-500 font-bold text-sm">4.9</span>
-                <button className="text-[#F50057] text-sm hover:underline">2,042 تقييم</button>
+                <button className="text-[#C2185B] text-sm hover:underline">2,042 تقييم</button>
                 <span className="text-gray-300">|</span>
                 <span className="text-gray-500 text-sm flex items-center gap-1">
                   <TrendingUp size={14} className="text-green-500" />
@@ -315,14 +315,14 @@ export default function ProductPage() {
               {/* Price Block */}
               <div className="bg-gradient-to-l from-red-50 to-pink-50 rounded-xl p-4 border border-pink-100">
                 <div className="flex items-baseline gap-3">
-                  <span className="text-3xl font-black text-[#F50057]">
+                  <span className="text-3xl font-black text-[#C2185B]">
                     {variant.price} <span className="text-lg">د.إ</span>
                   </span>
                   {variant.compareAtPrice && (
                     <span className="text-gray-400 line-through text-base">{variant.compareAtPrice} د.إ</span>
                   )}
                   {discount > 0 && (
-                    <span className="bg-[#F50057] text-white text-xs font-bold px-2 py-0.5 rounded-md">
+                    <span className="bg-[#C2185B] text-white text-xs font-bold px-2 py-0.5 rounded-md">
                       وفّر {discount}%
                     </span>
                   )}
@@ -338,18 +338,18 @@ export default function ProductPage() {
                 <p className="text-gray-500 text-xs mb-2">يباع بواسطة</p>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
-                    <div className="w-9 h-9 bg-[#F50057] rounded-lg flex items-center justify-center">
+                    <div className="w-9 h-9 bg-[#C2185B] rounded-lg flex items-center justify-center">
                       <Store size={18} className="text-white" />
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-gray-800">Better Home Life - Official Store</p>
                       <div className="flex items-center gap-2 mt-0.5">
                         <span className="text-xs text-gray-400">Store 7600</span>
-                        <span className="text-xs bg-orange-100 text-orange-600 px-1.5 py-0.5 rounded font-medium">متجر رسمي</span>
+                        <span className="text-xs bg-[#C2185B]/10 text-[#C2185B] px-1.5 py-0.5 rounded font-medium">متجر رسمي</span>
                       </div>
                     </div>
                   </div>
-                  <button className="text-xs text-[#F50057] border border-[#F50057] px-3 py-1.5 rounded-lg hover:bg-red-50 transition-colors font-medium">
+                  <button className="text-xs text-[#C2185B] border border-[#C2185B] px-3 py-1.5 rounded-lg hover:bg-red-50 transition-colors font-medium">
                     زيارة المتجر
                   </button>
                 </div>
@@ -366,7 +366,7 @@ export default function ProductPage() {
                         onClick={() => setSelectedVariant(i)}
                         className={`px-4 py-2 rounded-lg text-sm border-2 transition-all ${
                           selectedVariant === i
-                            ? 'border-[#F50057] bg-red-50 text-[#F50057] font-medium'
+                            ? 'border-[#C2185B] bg-red-50 text-[#C2185B] font-medium'
                             : 'border-gray-200 text-gray-600 hover:border-gray-300'
                         } ${!v.available ? 'opacity-40 line-through cursor-not-allowed' : ''}`}
                       >
@@ -413,7 +413,7 @@ export default function ProductPage() {
                       ? 'bg-green-500 text-white'
                       : !variant.available
                       ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                      : 'bg-[#F50057] text-white hover:bg-[#d4004d] active:scale-95'
+                      : 'bg-[#C2185B] text-white hover:bg-[#C2185B]/90 active:scale-95'
                   }`}
                 >
                   <ShoppingCart size={20} />
@@ -421,7 +421,7 @@ export default function ProductPage() {
                 </button>
                 <button
                   disabled={!variant.available}
-                  className="flex-1 py-3.5 rounded-xl font-bold text-base bg-orange-500 text-white hover:bg-orange-600 active:scale-95 transition-all shadow-sm disabled:opacity-40"
+                  className="flex-1 py-3.5 rounded-xl font-bold text-base border-2 border-[#C2185B] text-[#C2185B] bg-white hover:bg-[#C2185B]/10 active:scale-95 transition-all shadow-sm disabled:opacity-40"
                 >
                   اشتري الآن ⚡
                 </button>
@@ -430,9 +430,9 @@ export default function ProductPage() {
               {/* Guarantees */}
               <div className="grid grid-cols-3 gap-3 pt-2">
                 {[
-                  { icon: <Truck size={18} className="text-[#F50057]" />, title: 'شحن مجاني', sub: 'فوق 200 درهم' },
-                  { icon: <RotateCcw size={18} className="text-[#F50057]" />, title: 'إرجاع مجاني', sub: 'خلال 14 يوم' },
-                  { icon: <Shield size={18} className="text-[#F50057]" />, title: 'منتج أصلي', sub: '100% مضمون' },
+                  { icon: <Truck size={18} className="text-[#C2185B]" />, title: 'شحن مجاني', sub: 'فوق 200 درهم' },
+                  { icon: <RotateCcw size={18} className="text-[#C2185B]" />, title: 'إرجاع مجاني', sub: 'خلال 14 يوم' },
+                  { icon: <Shield size={18} className="text-[#C2185B]" />, title: 'منتج أصلي', sub: '100% مضمون' },
                 ].map((g, i) => (
                   <div key={i} className="flex flex-col items-center text-center p-3 bg-gray-50 rounded-xl gap-1">
                     {g.icon}
@@ -451,7 +451,7 @@ export default function ProductPage() {
         <div className="bg-white rounded-xl shadow-sm overflow-hidden">
           <div className="flex border-b border-gray-100">
             {[
-              { key: 'description', label: 'تقاصيل المنتج' },
+              { key: 'description', label: 'تفاصيل المنتج' },
               { key: 'reviews', label: `التقييمات (2,042)` },
               { key: 'shipping', label: 'الشحن والإرجاع' },
             ].map(tab => (
@@ -459,12 +459,12 @@ export default function ProductPage() {
                 key={tab.key}
                 onClick={() => setActiveTab(tab.key as any)}
                 className={`flex-1 py-4 text-sm font-semibold transition-colors relative ${
-                  activeTab === tab.key ? 'text-[#F50057]' : 'text-gray-500 hover:text-gray-700'
+                  activeTab === tab.key ? 'text-[#C2185B]' : 'text-gray-500 hover:text-gray-700'
                 }`}
               >
                 {tab.label}
                 {activeTab === tab.key && (
-                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#F50057] rounded-full" />
+                  <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#C2185B] rounded-full" />
                 )}
               </button>
             ))}
@@ -491,7 +491,7 @@ export default function ProductPage() {
                   <RotateCcw size={20} className="text-green-600 flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="font-semibold text-green-900">سياسة الإرجاع</p>
-                    <p className="text-green-700 mt-1">إرجاع مجاني خلال 14 يومًً min استلام المنتج بشر أن يكون بحالته الأصلية.</p>
+                    <p className="text-green-700 mt-1">إرجاع مجاني خلال 14 يوماً من استلام المنتج بشرط أن يكون بحالته الأصلية.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3 p-4 bg-purple-50 rounded-xl">
@@ -513,10 +513,10 @@ export default function ProductPage() {
           <div className="bg-white rounded-xl shadow-sm p-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
-                <Tag size={20} className="text-[#F50057]" />
+                <Tag size={20} className="text-[#C2185B]" />
                 منتجات مشابهة
               </h2>
-              <button className="text-sm text-[#F50057] hover:underline font-medium">عرض الكل</button>
+              <button className="text-sm text-[#C2185B] hover:underline font-medium">عرض الكل</button>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
               {relatedProducts.map(rp => (
@@ -540,7 +540,7 @@ export default function ProductPage() {
                   </div>
                   <div className="p-2">
                     <p className="text-xs text-gray-700 font-medium line-clamp-2 leading-4 mb-1">{rp.title}</p>
-                    <p className="text-sm font-bold text-[#F50057]">{rp.price} د.إ</p>
+                    <p className="text-sm font-bold text-[#C2185B]">{rp.price} د.إ</p>
                     <div className="flex items-center gap-0.5 mt-1">
                       {[1,2,3,4,5].map(s => <Star key={s} size={10} className="fill-yellow-400 text-yellow-400" />)}
                     </div>
@@ -614,7 +614,7 @@ export default function ProductPage() {
                 {sortedReviews.map(review => (
                   <div key={review.id} className="border border-gray-100 rounded-xl p-4">
                     <div className="flex items-start gap-3">
-                      <div className="w-10 h-10 rounded-full bg-[#F50057] flex items-center justify-center text-white font-bold flex-shrink-0">
+                      <div className="w-10 h-10 rounded-full bg-[#C2185B] flex items-center justify-center text-white font-bold flex-shrink-0">
                         {review.avatar}
                       </div>
                       <div className="flex-1">
@@ -646,7 +646,7 @@ export default function ProductPage() {
                             setHelpfulVotes(next)
                           }}
                           className={`flex items-center gap-1.5 mt-3 text-xs transition-colors ${
-                            helpfulVotes.has(review.id) ? 'text-[#F50057]' : 'text-gray-400 hover:text-gray-600'
+                            helpfulVotes.has(review.id) ? 'text-[#C2185B]' : 'text-gray-400 hover:text-gray-600'
                           }`}
                         >
                           <ThumbsUp size={12} />
@@ -657,7 +657,7 @@ export default function ProductPage() {
                   </div>
                 ))}
               </div>
-              <button className="w-full mt-4 py-3 border-2 border-dashed border-gray-200 rounded-xl text-sm text-gray-500 hover:border-[#F50057] hover:text-[#F50057] transition-colors font-medium">
+              <button className="w-full mt-4 py-3 border-2 border-dashed border-gray-200 rounded-xl text-sm text-gray-500 hover:border-[#C2185B] hover:text-[#C2185B] transition-colors font-medium">
                 عرض جميع التقييم (2,042)
               </button>
             </div>
@@ -671,7 +671,7 @@ export default function ProductPage() {
           <div className="bg-white rounded-xl shadow-sm p-6">
             <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2 mb-4">
               <Clock size={20} className="text-gray-500" />
-              شاهكت مؤخر مؤخر
+              شاهدت مؤخراً
             </h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
               {recentlyViewed.map(rp => (
@@ -691,7 +691,7 @@ export default function ProductPage() {
                   </div>
                   <div className="p-2">
                     <p className="text-xs text-gray-700 font-medium line-clamp-2 leading-4 mb-1">{rp.title}</p>
-                    <p className="text-sm font-bold text-[#F50057]">{rp.price} د.إ</p>
+                    <p className="text-sm font-bold text-[#C2185B]">{rp.price} د.إ</p>
                   </div>
                 </button>
               ))}
@@ -704,7 +704,7 @@ export default function ProductPage() {
       <div className="max-w-7xl mx-auto px-4 pb-4">
         <div className="bg-gradient-to-l from-pink-50 to-red-50 border border-pink-100 rounded-xl p-5 flex items-center justify-between flex-wrap gap-4">
           <div className="flex items-center gap-3">
-            <div className="w-12 h-12 bg-[#F50057] rounded-full flex items-center justify-center">
+            <div className="w-12 h-12 bg-[#C2185B] rounded-full flex items-center justify-center">
               <MessageCircle size={22} className="text-white" />
             </div>
             <div>
@@ -713,11 +713,11 @@ export default function ProductPage() {
             </div>
           </div>
           <div className="flex gap-3">
-            <button className="bg-[#F50057] text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#d4004d] transition-colors flex items-center gap-2">
+            <button className="bg-[#C2185B] text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-[#C2185B]/90 transition-colors flex items-center gap-2">
               <MessageCircle size={16} />
               الدردشة
             </button>
-            <button className="border-2 border-[#F50057] text-[#F50057] px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-red-50 transition-colors flex items-center gap-2">
+            <button className="border-2 border-[#C2185B] text-[#C2185B] px-5 py-2.5 rounded-xl text-sm font-semibold hover:bg-red-50 transition-colors flex items-center gap-2">
               <Store size={16} />
               زيارة المتجر
             </button>
@@ -730,8 +730,8 @@ export default function ProductPage() {
         <div className="max-w-7xl mx-auto px-4 py-10">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             <div>
-              <h3 className="text-xl font-black text-[#F50057] mb-3">4LEEE</h3>
-              <p className="text-gray-400 text-sm">التسوق الأفضل من 260 دولة حول العامب</p>
+              <h3 className="text-xl font-black text-[#C2185B] mb-3">4LEEE</h3>
+              <p className="text-gray-400 text-sm">التسوق الأفضل من 260 دولة حول العالم</p>
             </div>
             <div>
               <h4 className="font-semibold text-sm mb-3">مساعدة</h4>
