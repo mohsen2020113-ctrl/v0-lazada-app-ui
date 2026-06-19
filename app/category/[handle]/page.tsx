@@ -1,83 +1,188 @@
 'use client'
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { ArrowRight, SlidersHorizontal, Heart } from 'lucide-react'
 import { ProductGridSkeletonDark } from '@/components/skeleton-loader'
 import { BottomSheetFilter } from '@/components/bottom-sheet-filter'
+import { ProductFilterSheet, type FilterState } from '@/components/product-filter-sheet'
 import { useInfiniteScroll } from '@/hooks/use-infinite-scroll'
 import { InfiniteScrollLoaderDark } from '@/components/infinite-scroll-loader'
+
+interface RawShopifyProduct {
+  id: string
+  title: string
+  handle: string
+  availableForSale?: boolean
+  vendor?: string
+  productType?: string
+  tags?: string[]
+  priceRange: { minVariantPrice: { amount: string } }
+  compareAtPriceRange?: { minVariantPrice: { amount: string } } | null
+  featuredImage?: { url: string } | null
+  images?: { edges: { node: { url: string } }[] }
+}
 
 interface Product {
   id: string
   title: string
   handle: string
-  price: string
+  price: number
+  compareAtPrice: number | null
   image: string
-  rating?: number
+  available: boolean
+  vendor: string | null
+  productType: string | null
+  tags: string[]
 }
 
+function mapProduct(node: RawShopifyProduct): Product {
+  const price = parseFloat(node.priceRange?.minVariantPrice?.amount || '0')
+  const compareRaw = node.compareAtPriceRange?.minVariantPrice?.amount
+  const compareAtPrice = compareRaw ? parseFloat(compareRaw) : null
+  const image = node.featuredImage?.url || node.images?.edges?.[0]?.node?.url || ''
+  return {
+    id: node.id,
+    title: node.title,
+    handle: node.handle,
+    price,
+    compareAtPrice: compareAtPrice && compareAtPrice > price ? compareAtPrice : null,
+    image,
+    available: node.availableForSale ?? true,
+    vendor: node.vendor || null,
+    productType: node.productType || null,
+    tags: node.tags || [],
+  }
+}
+
+const SHIPPING_TAG_OPTIONS = [
+  { value: 'free-shipping', label: 'توصيل مجاني' },
+  { value: 'fast-delivery', label: 'توصيل سريع' },
+  { value: 'express-shipping', label: 'شحن سريع' },
+]
+
 const FILTER_OPTIONS = [
-  { label: 'Most Popular', value: 'trending' },
-  { label: 'Newest', value: 'newest' },
-  { label: 'Price: Low to High', value: 'price-low' },
-  { label: 'Price: High to Low', value: 'price-high' },
-  { label: 'Best Rating', value: 'rating' },
+  { label: 'الأكثر شيوعاً', value: 'trending' },
+  { label: 'الأحدث', value: 'newest' },
+  { label: 'السعر: من الأقل للأعلى', value: 'price-low' },
+  { label: 'السعر: من الأعلى للأقل', value: 'price-high' },
+  { label: 'الأعلى تقييماً', value: 'rating' },
+]
+
+const QUICK_FILTERS = [
+  { label: 'الكل', value: 'trending' },
+  { label: 'الأكثر مبيعاً', value: 'trending' },
+  { label: 'الأعلى تقييماً', value: 'rating' },
+  { label: 'السعر من الأقل للأعلى', value: 'price-low' },
 ]
 
 const PRODUCTS_PER_PAGE = 8
 
+function defaultFilterState(bounds: [number, number]): FilterState {
+  return { subcategory: null, priceMin: bounds[0], priceMax: bounds[1], brands: [], shipping: [] }
+}
+
+function applyFilters(products: Product[], filters: FilterState): Product[] {
+  return products.filter((p) => {
+    if (filters.subcategory && p.productType !== filters.subcategory) return false
+    if (p.price < filters.priceMin || p.price > filters.priceMax) return false
+    if (filters.brands.length > 0 && (!p.vendor || !filters.brands.includes(p.vendor))) return false
+    if (filters.shipping.length > 0 && !filters.shipping.some((s) => p.tags.includes(s))) return false
+    return true
+  })
+}
+
+function sortProducts(products: Product[], sortBy: string): Product[] {
+  const copy = [...products]
+  switch (sortBy) {
+    case 'newest':
+      return copy.sort((a, b) => b.id.localeCompare(a.id))
+    case 'price-low':
+      return copy.sort((a, b) => a.price - b.price)
+    case 'price-high':
+      return copy.sort((a, b) => b.price - a.price)
+    default:
+      return copy
+  }
+}
+
 export default function CategoryPage({ params }: { params: { handle: string } }) {
   const router = useRouter()
   const [allProducts, setAllProducts] = useState<Product[]>([])
-  const [displayedProducts, setDisplayedProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
   const [isLoadingMore, setIsLoadingMore] = useState(false)
   const [title, setTitle] = useState(decodeURIComponent(params.handle).replace(/-/g, ' '))
   const [activeFilter, setActiveFilter] = useState('trending')
+  const [showSortSheet, setShowSortSheet] = useState(false)
   const [showFilterSheet, setShowFilterSheet] = useState(false)
-  const [page, setPage] = useState(1)
-  const [hasMore, setHasMore] = useState(true)
-
-  const observerTarget = useInfiniteScroll({
-    onLoadMore: () => loadMoreProducts(),
-    isLoading: isLoadingMore,
-    hasMore,
-  })
+  const [priceBounds, setPriceBounds] = useState<[number, number]>([0, 1000])
+  const [filters, setFilters] = useState<FilterState>(defaultFilterState([0, 1000]))
+  const [visibleCount, setVisibleCount] = useState(PRODUCTS_PER_PAGE)
 
   useEffect(() => {
     setLoading(true)
     fetch(`/api/products?collection=${params.handle}`)
-      .then(r => r.json())
-      .then(data => {
-        const allProds = data.products || []
-        setAllProducts(allProds)
-        const firstBatch = allProds.slice(0, PRODUCTS_PER_PAGE)
-        setDisplayedProducts(firstBatch)
-        setHasMore(allProds.length > PRODUCTS_PER_PAGE)
+      .then((r) => r.json())
+      .then((data) => {
+        const rawProducts: RawShopifyProduct[] = data.products || []
+        const mapped = rawProducts.map(mapProduct)
+        setAllProducts(mapped)
+        if (mapped.length > 0) {
+          const prices = mapped.map((p) => p.price)
+          const bounds: [number, number] = [Math.floor(Math.min(...prices)), Math.ceil(Math.max(...prices))]
+          setPriceBounds(bounds)
+          setFilters(defaultFilterState(bounds))
+        }
         if (data.title) setTitle(data.title)
         setLoading(false)
+        setVisibleCount(PRODUCTS_PER_PAGE)
       })
       .catch(() => setLoading(false))
   }, [params.handle])
 
+  const subcategories = useMemo(
+    () => Array.from(new Set(allProducts.map((p) => p.productType).filter(Boolean))) as string[],
+    [allProducts]
+  )
+  const brands = useMemo(
+    () => Array.from(new Set(allProducts.map((p) => p.vendor).filter(Boolean))) as string[],
+    [allProducts]
+  )
+  const shippingOptions = useMemo(
+    () => SHIPPING_TAG_OPTIONS.filter((opt) => allProducts.some((p) => p.tags.includes(opt.value))),
+    [allProducts]
+  )
+
+  const filteredProducts = useMemo(() => applyFilters(allProducts, filters), [allProducts, filters])
+  const sortedProducts = useMemo(() => sortProducts(filteredProducts, activeFilter), [filteredProducts, activeFilter])
+
+  useEffect(() => {
+    setVisibleCount(PRODUCTS_PER_PAGE)
+  }, [filters, activeFilter])
+
+  const displayedProducts = sortedProducts.slice(0, visibleCount)
+  const hasMore = visibleCount < sortedProducts.length
+
   const loadMoreProducts = useCallback(() => {
     if (isLoadingMore || !hasMore) return
     setIsLoadingMore(true)
-    
-    // Simulate network delay
     setTimeout(() => {
-      const nextPage = page + 1
-      const start = nextPage * PRODUCTS_PER_PAGE
-      const end = start + PRODUCTS_PER_PAGE
-      const newProducts = allProducts.slice(0, end)
-      
-      setDisplayedProducts(newProducts)
-      setPage(nextPage)
-      setHasMore(end < allProducts.length)
+      setVisibleCount((c) => Math.min(c + PRODUCTS_PER_PAGE, sortedProducts.length))
       setIsLoadingMore(false)
-    }, 600)
-  }, [page, allProducts, isLoadingMore, hasMore])
+    }, 400)
+  }, [isLoadingMore, hasMore, sortedProducts.length])
+
+  const observerTarget = useInfiniteScroll({
+    onLoadMore: loadMoreProducts,
+    isLoading: isLoadingMore,
+    hasMore,
+  })
+
+  const activeFilterCount =
+    (filters.subcategory ? 1 : 0) +
+    (filters.priceMin !== priceBounds[0] || filters.priceMax !== priceBounds[1] ? 1 : 0) +
+    filters.brands.length +
+    filters.shipping.length
 
   return (
     <div className="min-h-screen bg-[#0F0F0F]" dir="rtl">
@@ -89,11 +194,38 @@ export default function CategoryPage({ params }: { params: { handle: string } })
           </button>
           <h1 className="text-white font-bold text-lg capitalize">{title}</h1>
         </div>
+      </div>
+
+      {/* Quick filter chip bar */}
+      <div className="px-3 py-3 flex items-center gap-2 overflow-x-auto scrollbar-hide border-b border-white/5">
+        {QUICK_FILTERS.map((qf, i) => (
+          <button
+            key={i}
+            onClick={() => setActiveFilter(qf.value)}
+            className={`flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium whitespace-nowrap border transition-colors ${
+              activeFilter === qf.value ? 'bg-[#C2185B] border-[#C2185B] text-white' : 'border-white/15 text-white/70'
+            }`}
+          >
+            {qf.label}
+          </button>
+        ))}
         <button
           onClick={() => setShowFilterSheet(true)}
-          className="w-9 h-9 rounded-full bg-[#1A1A1A] flex items-center justify-center hover:bg-[#2A2A2A] transition-colors"
+          className="flex-shrink-0 flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-medium whitespace-nowrap border border-white/15 text-white/80"
         >
-          <SlidersHorizontal size={16} className="text-white" />
+          <SlidersHorizontal size={13} />
+          فلتر
+          {activeFilterCount > 0 && (
+            <span className="w-4 h-4 rounded-full bg-[#C2185B] text-white text-[10px] flex items-center justify-center">
+              {activeFilterCount}
+            </span>
+          )}
+        </button>
+        <button
+          onClick={() => setShowSortSheet(true)}
+          className="flex-shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium whitespace-nowrap border border-white/15 text-white/80"
+        >
+          ترتيب
         </button>
       </div>
 
@@ -104,25 +236,12 @@ export default function CategoryPage({ params }: { params: { handle: string } })
         ) : displayedProducts.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 gap-3">
             <div className="text-5xl text-white/10">📦</div>
-            <p className="text-white/40 text-sm">لا توجد منتجات في هذا التصنيف</p>
+            <p className="text-white/40 text-sm">لا توجد منتجات تطابق هذا الفلتر</p>
           </div>
         ) : (
           <>
             <div className="grid grid-cols-2 gap-3">
-              {[...displayedProducts].sort((a, b) => {
-                switch (activeFilter) {
-                  case 'newest':
-                    return b.id.localeCompare(a.id)
-                  case 'price-low':
-                    return parseFloat(a.price) - parseFloat(b.price)
-                  case 'price-high':
-                    return parseFloat(b.price) - parseFloat(a.price)
-                  case 'rating':
-                    return (b.rating || 0) - (a.rating || 0)
-                  default: // trending
-                    return 0
-                }
-              }).map(product => (
+              {displayedProducts.map((product) => (
                 <Link key={product.id} href={`/product/${product.handle}`}>
                   <div className="bg-[#1A1A1A] rounded-2xl overflow-hidden">
                     <div className="relative aspect-[4/5] bg-[#2A2A2A]">
@@ -148,21 +267,34 @@ export default function CategoryPage({ params }: { params: { handle: string } })
 
             {/* Infinite Scroll Observer */}
             <div ref={observerTarget} className="h-1 w-full" />
-            
+
             {/* Loading Indicator */}
             <InfiniteScrollLoaderDark isLoading={isLoadingMore} />
           </>
         )}
       </div>
 
-      {/* Bottom Sheet Filter */}
+      {/* Sort Bottom Sheet */}
       <BottomSheetFilter
-        isOpen={showFilterSheet}
-        onClose={() => setShowFilterSheet(false)}
+        isOpen={showSortSheet}
+        onClose={() => setShowSortSheet(false)}
         options={FILTER_OPTIONS}
         activeFilter={activeFilter}
         onFilterChange={setActiveFilter}
-        title="Sort By"
+        title="ترتيب حسب"
+      />
+
+      {/* Advanced Filter Bottom Sheet */}
+      <ProductFilterSheet
+        isOpen={showFilterSheet}
+        onClose={() => setShowFilterSheet(false)}
+        subcategories={subcategories}
+        brands={brands}
+        shippingOptions={shippingOptions}
+        priceBounds={priceBounds}
+        value={filters}
+        onApply={setFilters}
+        computeCount={(state) => applyFilters(allProducts, state).length}
       />
     </div>
   )
