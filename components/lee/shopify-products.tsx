@@ -68,7 +68,7 @@ function ProductCard({ product }: { product: Product }) {
         <div className="p-2">
           <p className="text-xs text-gray-800 line-clamp-2 leading-tight mb-1">{product.title}</p>
           <div className="flex items-baseline gap-1.5 flex-wrap">
-            <span className="text-sm font-bold text-orange-500">
+            <span className="text-sm font-bold text-[#C2185B]">
               {product.priceRange.minVariantPrice.currencyCode} {price.toFixed(2)}
             </span>
             {comparePrice && comparePrice > price && (
