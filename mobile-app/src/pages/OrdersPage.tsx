@@ -8,7 +8,7 @@ interface Props { navigate: (page: PageId, params?: NavigationParams) => void; p
 const STATUS_COLORS: Record<string, string> = {
   PAID: 'text-green-600 bg-green-50', PENDING: 'text-yellow-600 bg-yellow-50',
   REFUNDED: 'text-red-600 bg-red-50', FULFILLED: 'text-blue-600 bg-blue-50',
-  UNFULFILLED: 'text-orange-600 bg-orange-50',
+  UNFULFILLED: 'text-[#C2185B] bg-pink-50',
 };
 
 export default function OrdersPage({ navigate }: Props) {
@@ -45,7 +45,7 @@ export default function OrdersPage({ navigate }: Props) {
               <p className="text-xs text-gray-400 mb-2">{new Date(order.processedAt).toLocaleDateString()}</p>
               <p className="text-sm text-gray-600 mb-2">{order.lineItems?.edges?.map((e: any) => e.node.title).join(', ')}</p>
               <div className="flex items-center justify-between">
-                <p className="font-bold text-orange-500">{formatMoney(order.currentTotalPrice.amount, order.currentTotalPrice.currencyCode)}</p>
+                <p className="font-bold text-[#C2185B]">{formatMoney(order.currentTotalPrice.amount, order.currentTotalPrice.currencyCode)}</p>
                 <span className={`text-xs px-2 py-0.5 rounded-full ${STATUS_COLORS[order.fulfillmentStatus] || 'text-gray-600 bg-gray-50'}`}>{order.fulfillmentStatus}</span>
               </div>
             </div>
