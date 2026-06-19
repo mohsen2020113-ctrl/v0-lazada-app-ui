@@ -15,7 +15,7 @@ export function Header({ title, showBack = false, showSearch = false, onSearchCh
   const router = useRouter();
 
   return (
-    <div className="bg-gradient-to-r from-[#f85c98] to-[#ec407a] text-white sticky top-0 z-40 safe-area-top">
+    <div className="bg-gradient-to-r from-[#c2185b] to-[#ec407a] text-white sticky top-0 z-40 safe-area-top">
       <div className="flex items-center gap-3 px-3 py-3 sm:px-4 sm:py-4">
         {showBack && (
           <button
