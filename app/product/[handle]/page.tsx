@@ -7,6 +7,7 @@ import {
   MessageCircle, Package, Award, ZoomIn, ThumbsUp,
   Clock, Eye, Tag, TrendingUp, CheckCircle
 } from 'lucide-react'
+import { ImageLightbox } from '@/components/image-lightbox'
 
 interface Variant {
   id: string
@@ -58,6 +59,7 @@ export default function ProductPage() {
   const [recentlyViewed, setRecentlyViewed] = useState<RelatedProduct[]>([])
   const [helpfulVotes, setHelpfulVotes] = useState<Set<number>>(new Set())
   const [reviewSortBy, setReviewSortBy] = useState<'newest' | 'helpful'>('newest')
+const [lightboxOpen, setLightboxOpen] = useState(false)
 
   useEffect(() => {
     if (!handle) return
@@ -158,6 +160,7 @@ export default function ProductPage() {
 
   return (
     <div className="min-h-screen bg-gray-50" dir="rtl">
+<ImageLightbox images={images} initialIndex={currentImage} isOpen={lightboxOpen} onClose={() => setLightboxOpen(false)} />
 
       {/* ===== HEADER ===== */}
       <header className="bg-[#C2185B] sticky top-0 z-50 shadow-md">
@@ -230,7 +233,7 @@ export default function ProductPage() {
                     -{discount}%
                   </div>
                 )}
-                <button className="absolute top-3 left-3 z-10 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center">
+                <button onClick={() => setLightboxOpen(true)} className="absolute top-3 left-3 z-10 w-8 h-8 bg-white rounded-full shadow flex items-center justify-center">
                   <ZoomIn size={16} className="text-gray-600" />
                 </button>
                 {images.length > 1 && (
@@ -252,7 +255,8 @@ export default function ProductPage() {
                 <img
                   src={images[currentImage]}
                   alt={product.title}
-                  className="w-full h-full object-contain p-4"
+                  className="w-full h-full object-contain p-4 cursor-zoom-in"
+                  onClick={() => setLightboxOpen(true)}
                 />
               </div>
               {/* Thumbnails */}
