@@ -56,7 +56,7 @@ export default function MessagesPage(_: Props) {
     <div className="flex flex-col h-full bg-gray-50">
       <div className="bg-white px-4 pt-12 pb-3 border-b border-gray-100 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center">
+          <div className="w-10 h-10 bg-gradient-to-br from-[#880E4F] to-[#C2185B] rounded-full flex items-center justify-center">
             <Bot size={20} className="text-white" />
           </div>
           <div>
@@ -76,12 +76,12 @@ export default function MessagesPage(_: Props) {
         {messages.map(msg => (
           <div key={msg.id} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'} gap-2`}>
             {msg.role === 'model' && (
-              <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center flex-none mt-1">
+              <div className="w-8 h-8 bg-gradient-to-br from-[#880E4F] to-[#C2185B] rounded-full flex items-center justify-center flex-none mt-1">
                 <Sparkles size={14} className="text-white" />
               </div>
             )}
             <div className={`max-w-[78%] ${msg.role === 'user' ? 'order-last' : ''}`}>
-              <div className={`rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${msg.role === 'user' ? 'bg-orange-500 text-white rounded-tr-sm' : 'bg-white text-gray-800 rounded-tl-sm shadow-sm'}`}>
+              <div className={`rounded-2xl px-4 py-3 text-sm leading-relaxed whitespace-pre-wrap ${msg.role === 'user' ? 'bg-[#C2185B] text-white rounded-tr-sm' : 'bg-white text-gray-800 rounded-tl-sm shadow-sm'}`}>
                 {msg.text}
               </div>
               <p className="text-[10px] text-gray-400 mt-1 px-1">
@@ -97,7 +97,7 @@ export default function MessagesPage(_: Props) {
         ))}
         {loading && (
           <div className="flex justify-start gap-2">
-            <div className="w-8 h-8 bg-gradient-to-br from-orange-400 to-red-500 rounded-full flex items-center justify-center flex-none">
+            <div className="w-8 h-8 bg-gradient-to-br from-[#880E4F] to-[#C2185B] rounded-full flex items-center justify-center flex-none">
               <Sparkles size={14} className="text-white" />
             </div>
             <div className="bg-white rounded-2xl rounded-tl-sm px-4 py-3 shadow-sm">
@@ -117,7 +117,7 @@ export default function MessagesPage(_: Props) {
           <div className="flex gap-2 overflow-x-auto pb-1">
             {QUICK_PROMPTS.map(p => (
               <button key={p.en} onClick={() => sendMsg(p.en)}
-                className="flex-none text-xs bg-orange-50 text-orange-600 border border-orange-200 px-3 py-1.5 rounded-full whitespace-nowrap">
+                className="flex-none text-xs bg-pink-50 text-[#C2185B] border border-pink-200 px-3 py-1.5 rounded-full whitespace-nowrap">
                 {p.ar} / {p.en}
               </button>
             ))}
@@ -129,10 +129,10 @@ export default function MessagesPage(_: Props) {
         <input type="text" value={input} onChange={e => setInput(e.target.value)}
           onKeyDown={e => e.key === 'Enter' && sendMsg(input)}
           placeholder="Ask / اسأل عن المنتجات والطلبات..."
-          className="flex-1 bg-gray-100 rounded-full px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400"
+          className="flex-1 bg-gray-100 rounded-full px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#C2185B]"
           disabled={loading} />
         <button onClick={() => sendMsg(input)} disabled={!input.trim() || loading}
-          className="w-10 h-10 bg-orange-500 rounded-full flex items-center justify-center text-white active:bg-orange-600 disabled:opacity-50 transition-colors flex-none">
+          className="w-10 h-10 bg-[#C2185B] rounded-full flex items-center justify-center text-white active:bg-[#C2185B] disabled:opacity-50 transition-colors flex-none">
           <Send size={16} />
         </button>
       </div>
