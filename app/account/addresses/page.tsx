@@ -41,7 +41,7 @@ export default function AddressesPage() {
               <div key={addr.id} className="bg-white rounded-lg p-3 sm:p-4 border-2 border-gray-100">
                 <div className="flex items-start justify-between mb-2">
                   <div className="flex items-start gap-2">
-                    <MapPin className="w-5 h-5 text-[#f85c98] flex-shrink-0 mt-0.5" />
+                    <MapPin className="w-5 h-5 text-[#c2185b] flex-shrink-0 mt-0.5" />
                     <div>
                       <h3 className="font-bold text-sm sm:text-base text-gray-900">{addr.name}</h3>
                       {addr.isDefault && (
@@ -71,7 +71,7 @@ export default function AddressesPage() {
           {/* Add New Address Button */}
           <button
             onClick={() => setShowForm(!showForm)}
-            className="w-full mt-4 flex items-center justify-center gap-2 border-2 border-dashed border-[#f85c98] text-[#f85c98] py-4 rounded-lg font-semibold hover:bg-pink-50 transition-colors"
+            className="w-full mt-4 flex items-center justify-center gap-2 border-2 border-dashed border-[#c2185b] text-[#c2185b] py-4 rounded-lg font-semibold hover:bg-pink-50 transition-colors"
           >
             <Plus className="w-5 h-5" />
             Add New Address
@@ -83,32 +83,32 @@ export default function AddressesPage() {
               <input
                 type="text"
                 placeholder="Full Name"
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#f85c98]"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#c2185b]"
               />
               <input
                 type="text"
                 placeholder="Address"
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#f85c98]"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#c2185b]"
               />
               <div className="grid grid-cols-2 gap-2">
                 <input
                   type="text"
                   placeholder="City"
-                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#f85c98]"
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#c2185b]"
                 />
                 <input
                   type="text"
                   placeholder="Postal Code"
-                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#f85c98]"
+                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#c2185b]"
                 />
               </div>
               <input
                 type="text"
                 placeholder="Phone Number"
-                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#f85c98]"
+                className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-[#c2185b]"
               />
               <div className="flex gap-2">
-                <button className="flex-1 bg-[#f85c98] text-white py-2.5 rounded-lg font-semibold hover:bg-[#ec407a] transition-colors">
+                <button className="flex-1 bg-[#c2185b] text-white py-2.5 rounded-lg font-semibold hover:bg-[#ec407a] transition-colors">
                   Save Address
                 </button>
                 <button
