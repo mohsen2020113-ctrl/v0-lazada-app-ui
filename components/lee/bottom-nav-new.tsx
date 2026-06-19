@@ -43,7 +43,7 @@ export function BottomNav() {
                 onClick={() => item.action!()}
                 className="flex-1 flex flex-col items-center justify-center py-2 px-2 relative group transition-all"
               >
-                <div className={`relative ${active ? 'text-[#f85c98]' : 'text-gray-600'}`}>
+                <div className={`relative ${active ? 'text-[#c2185b]' : 'text-gray-600'}`}>
                   <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                   {item.badge && item.badge > 0 && (
                     <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[8px] sm:text-[9px] rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center font-bold min-w-[16px]">
@@ -51,7 +51,7 @@ export function BottomNav() {
                     </span>
                   )}
                 </div>
-                <span className={`text-[9px] sm:text-[10px] mt-1 font-medium transition-colors ${active ? 'text-[#f85c98]' : 'text-gray-600'}`}>
+                <span className={`text-[9px] sm:text-[10px] mt-1 font-medium transition-colors ${active ? 'text-[#c2185b]' : 'text-gray-600'}`}>
                   {item.label}
                 </span>
               </button>
@@ -65,7 +65,7 @@ export function BottomNav() {
               href={item.href || '/'}
               className="flex-1 flex flex-col items-center justify-center py-2 px-2 relative group transition-all"
             >
-              <div className={`relative ${active ? 'text-[#f85c98]' : 'text-gray-600'}`}>
+              <div className={`relative ${active ? 'text-[#c2185b]' : 'text-gray-600'}`}>
                 <Icon className="w-5 h-5 sm:w-6 sm:h-6" />
                 {item.badge && item.badge > 0 && (
                   <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[8px] sm:text-[9px] rounded-full w-4 h-4 sm:w-5 sm:h-5 flex items-center justify-center font-bold min-w-[16px]">
@@ -73,7 +73,7 @@ export function BottomNav() {
                   </span>
                 )}
               </div>
-              <span className={`text-[9px] sm:text-[10px] mt-1 font-medium transition-colors ${active ? 'text-[#f85c98]' : 'text-gray-600'}`}>
+              <span className={`text-[9px] sm:text-[10px] mt-1 font-medium transition-colors ${active ? 'text-[#c2185b]' : 'text-gray-600'}`}>
                 {item.label}
               </span>
             </Link>
