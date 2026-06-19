@@ -12,7 +12,7 @@ const config: CapacitorConfig = {
   plugins: {
     SplashScreen: {
       launchShowDuration: 2000,
-      backgroundColor: '#F57C00',
+      backgroundColor: '#C2185B',
       showSpinner: false,
       androidSplashResourceName: 'splash',
       iosSplashResourceName: 'Default',
@@ -22,7 +22,7 @@ const config: CapacitorConfig = {
     },
     StatusBar: {
       style: 'light',
-      backgroundColor: '#F57C00',
+      backgroundColor: '#C2185B',
     },
   },
 };
