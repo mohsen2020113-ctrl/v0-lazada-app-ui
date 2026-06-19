@@ -71,7 +71,7 @@ export function DailyDeals() {
         <div className="px-3 sm:px-4 md:px-6 flex items-center justify-between mb-3 sm:mb-4">
           <div className="flex items-center gap-2 sm:gap-3">
             <h3 className="font-bold text-gray-900 text-sm sm:text-base">Daily 9.-</h3>
-            <span className="bg-[#f57224] text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded">CHOICE</span>
+            <span className="bg-[#c2185b] text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded">CHOICE</span>
           </div>
           <button className="flex items-center text-gray-500 text-xs sm:text-sm hover:text-[#f85c98] transition-colors">
             Buy 5 Get 1 Free <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />

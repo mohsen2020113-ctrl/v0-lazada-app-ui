@@ -136,8 +136,8 @@ export function RelatedProducts({ productHandle }: RelatedProductsProps) {
                     -{product.discount}%
                   </div>
                 )}
-                <button className="absolute bottom-2 right-2 w-7 h-7 rounded-lg bg-[#F57224]/15 flex items-center justify-center hover:bg-[#F57224]/25 transition-colors">
-                  <Heart size={12} className="text-[#F57224]" />
+                <button className="absolute bottom-2 right-2 w-7 h-7 rounded-lg bg-[#C2185B]/15 flex items-center justify-center hover:bg-[#C2185B]/25 transition-colors">
+                  <Heart size={12} className="text-[#C2185B]" />
                 </button>
               </div>
 
@@ -145,7 +145,7 @@ export function RelatedProducts({ productHandle }: RelatedProductsProps) {
               <div className="p-2.5">
                 <p className="text-white text-xs font-semibold line-clamp-2 mb-2 h-8">{product.title}</p>
                 <div className="flex items-center justify-between gap-1">
-                  <span className="text-[#F57224] text-sm font-bold">{product.price}</span>
+                  <span className="text-[#C2185B] text-sm font-bold">{product.price}</span>
                   {product.rating && (
                     <span className="text-[10px] text-white/60 flex items-center gap-0.5">
                       ⭐ {product.rating}

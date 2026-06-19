@@ -9,7 +9,7 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
   return (
     <button
       onClick={() => onChange(!checked)}
-      className={`relative w-11 h-6 rounded-full transition-colors ${checked ? 'bg-[#F57224]' : 'bg-white/20'}`}
+      className={`relative w-11 h-6 rounded-full transition-colors ${checked ? 'bg-[#C2185B]' : 'bg-white/20'}`}
     >
       <span className={`absolute top-0.5 w-5 h-5 rounded-full bg-white shadow transition-transform ${checked ? 'translate-x-5' : 'translate-x-0.5'}`} />
     </button>
@@ -19,7 +19,7 @@ function Toggle({ checked, onChange }: { checked: boolean; onChange: (v: boolean
 function ToggleRow({ icon: Icon, title, subtitle, checked, onChange }: any) {
   return (
     <div className="flex items-center gap-3 px-4 py-3">
-      <Icon size={20} className="text-[#F57224]" />
+      <Icon size={20} className="text-[#C2185B]" />
       <div className="flex-1">
         <p className="text-white text-sm font-medium">{title}</p>
         <p className="text-white/30 text-xs">{subtitle}</p>
@@ -37,7 +37,7 @@ function LinkRow({ icon: Icon, title, trailing, href }: any) {
       rel="noopener noreferrer"
       className="flex items-center gap-3 px-4 py-3.5 hover:bg-white/5 transition-colors"
     >
-      <Icon size={20} className="text-[#F57224]" />
+      <Icon size={20} className="text-[#C2185B]" />
       <span className="flex-1 text-white text-sm font-medium">{title}</span>
       {trailing ? <span className="text-white/30 text-xs">{trailing}</span> : null}
       <ChevronLeft size={18} className="text-white/30" />
@@ -92,7 +92,7 @@ export default function SettingsPage() {
       </Section>
 
       <div className="text-center py-8">
-        <p className="text-[#F57224] text-sm font-bold">LEE ماركت</p>
+        <p className="text-[#C2185B] text-sm font-bold">LEE ماركت</p>
         <p className="text-white/30 text-xs mt-0.5">4leee.com</p>
       </div>
     </div>

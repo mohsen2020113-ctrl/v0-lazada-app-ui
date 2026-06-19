@@ -86,7 +86,7 @@ export function FlashSale() {
         <div className="px-3 sm:px-4 md:px-6 flex items-center justify-between mb-3 sm:mb-4">
           <div className="flex items-center gap-2 sm:gap-3">
             <h3 className="font-bold text-gray-900 text-sm sm:text-base">
-              LEEFla<span className="text-[#f57224]">&#9889;</span>h Sale
+              LEEFla<span className="text-[#c2185b]">&#9889;</span>h Sale
             </h3>
             <div className="flex items-center gap-0.5 sm:gap-1">
               <span className="bg-[#1a1a2e] text-white text-[10px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded min-w-[20px] sm:min-w-[24px] text-center">

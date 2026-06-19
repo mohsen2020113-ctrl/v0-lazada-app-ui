@@ -31,7 +31,7 @@ export default function StorePage({ params }: { params: { id: string } }) {
       {/* Store Banner */}
       <div className="bg-gradient-to-b from-[#1A1A1A] to-[#0F0F0F] px-4 py-6">
         <div className="flex items-center gap-4">
-          <div className="w-20 h-20 rounded-2xl bg-[#F57224]/20 flex items-center justify-center text-4xl">
+          <div className="w-20 h-20 rounded-2xl bg-[#C2185B]/20 flex items-center justify-center text-4xl">
             🏪
           </div>
           <div className="flex-1">
@@ -56,7 +56,7 @@ export default function StorePage({ params }: { params: { id: string } }) {
             { label: 'متابع', value: '890' },
           ].map(s => (
             <div key={s.label} className="bg-[#1A1A1A] rounded-xl p-3 text-center border border-white/5">
-              <p className="text-[#F57224] font-bold text-lg">{s.value}</p>
+              <p className="text-[#C2185B] font-bold text-lg">{s.value}</p>
               <p className="text-gray-400 text-xs">{s.label}</p>
             </div>
           ))}
@@ -64,7 +64,7 @@ export default function StorePage({ params }: { params: { id: string } }) {
 
         {/* Contact */}
         <button className="mt-4 w-full py-3 bg-[#1A1A1A] rounded-xl flex items-center justify-center gap-2 text-sm text-gray-300 border border-white/10">
-          <Phone className="w-4 h-4 text-[#F57224]" />
+          <Phone className="w-4 h-4 text-[#C2185B]" />
           تواصل مع المتجر
         </button>
       </div>
@@ -84,11 +84,11 @@ export default function StorePage({ params }: { params: { id: string } }) {
                 <span className="text-xs text-gray-400">{p.rating}</span>
               </div>
               <div className="flex items-baseline gap-1 mb-2">
-                <span className="text-[#F57224] font-bold text-sm">{p.price}</span>
+                <span className="text-[#C2185B] font-bold text-sm">{p.price}</span>
                 <span className="text-gray-500 text-xs line-through">{p.original}</span>
                 <span className="text-xs text-gray-400">د.إ</span>
               </div>
-              <button className="w-full py-1.5 bg-[#F57224] rounded-lg flex items-center justify-center gap-1 text-xs font-semibold">
+              <button className="w-full py-1.5 bg-[#C2185B] rounded-lg flex items-center justify-center gap-1 text-xs font-semibold">
                 <ShoppingCart className="w-3 h-3" />
                 أضف
               </button>

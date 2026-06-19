@@ -119,7 +119,7 @@ export default function SearchPage() {
 
       {loading ? (
         <div className="flex items-center justify-center py-24">
-          <div className="w-8 h-8 border-2 border-[#F57224] border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-2 border-[#C2185B] border-t-transparent rounded-full animate-spin" />
         </div>
       ) : !searched ? (
         <div className="px-4 pt-4">
@@ -131,7 +131,7 @@ export default function SearchPage() {
                 onClick={() => handleSearch(term)}
                 className="flex items-center gap-1.5 bg-[#1A1A1A] border border-white/8 rounded-full px-4 py-2"
               >
-                <TrendingUp size={13} className="text-[#F57224]" />
+                <TrendingUp size={13} className="text-[#C2185B]" />
                 <span className="text-white/70 text-sm">{term}</span>
               </button>
             ))}
@@ -140,8 +140,8 @@ export default function SearchPage() {
       ) : results.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-24 px-6">
           <div className="w-20 h-20 rounded-full flex items-center justify-center mb-4"
-            style={{ background: 'rgba(245,114,36,0.1)' }}>
-            <SearchX size={40} className="text-[#F57224]" />
+            style={{ background: 'rgba(194,24,91,0.1)' }}>
+            <SearchX size={40} className="text-[#C2185B]" />
           </div>
           <h2 className="text-white text-lg font-bold mb-2">لا توجد نتائج</h2>
           <p className="text-white/40 text-sm">جرّب البحث بكلمة مختلفة</p>
@@ -159,7 +159,7 @@ export default function SearchPage() {
                 />
                 <div className="p-2.5">
                   <p className="text-white text-xs font-semibold line-clamp-2 mb-1">{product.title}</p>
-                  <p className="text-[#F57224] text-sm font-bold">{product.price} AED</p>
+                  <p className="text-[#C2185B] text-sm font-bold">{product.price} AED</p>
                 </div>
               </Link>
             ))}

@@ -30,7 +30,7 @@ export default function LivePage() {
 
       {/* Featured Live */}
       <div className="mx-4 mb-5 rounded-2xl overflow-hidden bg-[#1A1A1A]">
-        <div className="relative h-48 bg-gradient-to-br from-[#F57224]/20 to-[#1A1A1A] flex items-center justify-center">
+        <div className="relative h-48 bg-gradient-to-br from-[#C2185B]/20 to-[#1A1A1A] flex items-center justify-center">
           <span className="text-8xl">{STREAMS[3].emoji}</span>
           <div className="absolute top-3 right-3 flex items-center gap-1.5 bg-red-500 text-white text-xs font-bold px-2.5 py-1 rounded-full">
             <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" /> LIVE
@@ -44,7 +44,7 @@ export default function LivePage() {
           </div>
         </div>
         <div className="flex gap-2 p-3">
-          <button className="flex-1 bg-[#F57224] text-white py-2.5 rounded-xl text-sm font-bold">مشاهدة</button>
+          <button className="flex-1 bg-[#C2185B] text-white py-2.5 rounded-xl text-sm font-bold">مشاهدة</button>
           <button className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center"><Heart size={16} className="text-white" /></button>
           <button className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center"><Share2 size={16} className="text-white" /></button>
         </div>

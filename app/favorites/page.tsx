@@ -25,7 +25,7 @@ export default function FavoritesPage() {
         </button>
         <h1 className="text-white font-bold text-lg">المفضلة</h1>
         {items.length > 0 && (
-          <span className="mr-auto bg-[#F57224]/20 text-[#F57224] text-xs font-bold px-2.5 py-1 rounded-full">
+          <span className="mr-auto bg-[#C2185B]/20 text-[#C2185B] text-xs font-bold px-2.5 py-1 rounded-full">
             {items.length} منتج
           </span>
         )}
@@ -33,12 +33,12 @@ export default function FavoritesPage() {
 
       {items.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-24 px-6">
-          <div className="w-24 h-24 rounded-full bg-[#F57224]/10 flex items-center justify-center mb-5">
-            <Heart size={48} className="text-[#F57224]" />
+          <div className="w-24 h-24 rounded-full bg-[#C2185B]/10 flex items-center justify-center mb-5">
+            <Heart size={48} className="text-[#C2185B]" />
           </div>
           <h2 className="text-white text-xl font-bold mb-2">قائمتك فارغة</h2>
           <p className="text-white/40 text-sm mb-7">أضف المنتجات التي تعجبك إلى المفضلة</p>
-          <Link href="/" className="bg-[#F57224] text-white font-bold px-8 py-3.5 rounded-2xl">
+          <Link href="/" className="bg-[#C2185B] text-white font-bold px-8 py-3.5 rounded-2xl">
             استكشف المنتجات
           </Link>
         </div>
@@ -52,7 +52,7 @@ export default function FavoritesPage() {
               <div className="flex-1 min-w-0">
                 <p className="text-white text-sm font-semibold line-clamp-2 mb-1">{item.name}</p>
                 <div className="flex items-center gap-2">
-                  <span className="text-[#F57224] font-black text-base">{item.price} AED</span>
+                  <span className="text-[#C2185B] font-black text-base">{item.price} AED</span>
                   <span className="text-white/30 text-xs line-through">{item.original} AED</span>
                 </div>
               </div>
@@ -60,7 +60,7 @@ export default function FavoritesPage() {
                 <button onClick={() => remove(item.id)} className="text-white/20 hover:text-red-400">
                   <Trash2 size={16} />
                 </button>
-                <button className="w-8 h-8 rounded-xl bg-[#F57224] flex items-center justify-center">
+                <button className="w-8 h-8 rounded-xl bg-[#C2185B] flex items-center justify-center">
                   <ShoppingCart size={14} className="text-white" />
                 </button>
               </div>

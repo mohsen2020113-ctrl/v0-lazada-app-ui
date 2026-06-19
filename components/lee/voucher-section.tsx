@@ -84,7 +84,7 @@ export function VoucherSection() {
             className={`text-white font-semibold px-3 sm:px-4 py-2.5 sm:py-3 md:py-3.5 rounded-lg text-xs sm:text-sm whitespace-nowrap transition-all active:scale-95 flex-shrink-0 ${
               collected.length === vouchers.length 
                 ? 'bg-gray-300 cursor-not-allowed' 
-                : 'bg-[#f57224] hover:bg-[#e56318]'
+                : 'bg-[#c2185b] hover:bg-[#e56318]'
             }`}
           >
             {isCollecting ? (

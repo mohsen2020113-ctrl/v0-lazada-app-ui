@@ -23,15 +23,15 @@ export default function DailyDealsPage() {
         <button onClick={() => router.back()} className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center">
           <ChevronLeft size={18} className="text-white" />
         </button>
-        <Sun size={20} className="text-[#F57224]" />
+        <Sun size={20} className="text-[#C2185B]" />
         <h1 className="text-white font-bold text-lg">عروض اليوم</h1>
       </div>
 
       {/* Banner */}
       <div className="mx-4 mb-5 rounded-2xl p-4 flex items-center justify-between"
-        style={{ background: 'linear-gradient(135deg, #1A1A2E 0%, #16213E 100%)', border: '1px solid #F57224/20' }}>
+        style={{ background: 'linear-gradient(135deg, #1A1A2E 0%, #16213E 100%)', border: '1px solid #C2185B/20' }}>
         <div>
-          <p className="text-[#F57224] font-black text-lg">عروض يومية 🔥</p>
+          <p className="text-[#C2185B] font-black text-lg">عروض يومية 🔥</p>
           <p className="text-white/50 text-xs">تتجدد كل يوم الساعة 12 ظهراً</p>
         </div>
         <div className="text-right">
@@ -43,7 +43,7 @@ export default function DailyDealsPage() {
       {/* Categories */}
       <div className="flex gap-2 px-4 mb-5 overflow-x-auto no-scrollbar">
         {CATEGORIES.map((c, i) => (
-          <button key={c} className={`shrink-0 px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${i === 0 ? 'bg-[#F57224] text-white' : 'bg-[#1A1A1A] text-white/50'}`}>
+          <button key={c} className={`shrink-0 px-4 py-2 rounded-xl text-sm font-semibold transition-colors ${i === 0 ? 'bg-[#C2185B] text-white' : 'bg-[#1A1A1A] text-white/50'}`}>
             {c}
           </button>
         ))}
@@ -56,7 +56,7 @@ export default function DailyDealsPage() {
             <div key={p.id} className="bg-[#1A1A1A] rounded-2xl overflow-hidden">
               <div className="relative aspect-square bg-[#2A2A2A] flex items-center justify-center">
                 <span className="text-5xl">{p.emoji}</span>
-                <div className="absolute top-2 right-2 bg-[#F57224] text-white text-xs font-black px-2 py-0.5 rounded-lg">-{p.discount}%</div>
+                <div className="absolute top-2 right-2 bg-[#C2185B] text-white text-xs font-black px-2 py-0.5 rounded-lg">-{p.discount}%</div>
                 <button className="absolute top-2 left-2 w-7 h-7 rounded-full bg-black/50 flex items-center justify-center">
                   <Heart size={13} className="text-white" />
                 </button>
@@ -65,11 +65,11 @@ export default function DailyDealsPage() {
                 <p className="text-white text-xs font-semibold line-clamp-2 mb-2">{p.name}</p>
                 <div className="flex items-end justify-between">
                   <div>
-                    <span className="text-[#F57224] font-black text-base">{p.price.toLocaleString()}</span>
-                    <span className="text-[#F57224] text-xs"> AED</span>
+                    <span className="text-[#C2185B] font-black text-base">{p.price.toLocaleString()}</span>
+                    <span className="text-[#C2185B] text-xs"> AED</span>
                     <p className="text-white/30 text-xs line-through">{p.original.toLocaleString()} AED</p>
                   </div>
-                  <button className="w-8 h-8 rounded-xl bg-[#F57224] flex items-center justify-center">
+                  <button className="w-8 h-8 rounded-xl bg-[#C2185B] flex items-center justify-center">
                     <ShoppingCart size={14} className="text-white" />
                   </button>
                 </div>

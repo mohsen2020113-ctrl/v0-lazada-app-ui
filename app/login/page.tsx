@@ -22,7 +22,7 @@ export default function LoginPage() {
 
       {/* Logo */}
       <div className="flex flex-col items-center py-8">
-        <div className="w-20 h-20 rounded-3xl bg-[#F57224] flex items-center justify-center mb-4 shadow-lg shadow-orange-500/30">
+        <div className="w-20 h-20 rounded-3xl bg-[#C2185B] flex items-center justify-center mb-4 shadow-lg shadow-orange-500/30">
           <span className="text-white font-black text-3xl">L</span>
         </div>
         <h1 className="text-white text-2xl font-black mb-1">LEE ماركت</h1>
@@ -35,7 +35,7 @@ export default function LoginPage() {
           <div>
             <label className="text-white/60 text-xs mb-1.5 block">رقم الهاتف</label>
             <div className="flex items-center bg-[#1A1A1A] rounded-2xl px-4 h-14 gap-3">
-              <Phone size={18} className="text-[#F57224] shrink-0" />
+              <Phone size={18} className="text-[#C2185B] shrink-0" />
               <input
                 type="tel"
                 value={phone}
@@ -48,7 +48,7 @@ export default function LoginPage() {
           <div>
             <label className="text-white/60 text-xs mb-1.5 block">كلمة المرور</label>
             <div className="flex items-center bg-[#1A1A1A] rounded-2xl px-4 h-14 gap-3">
-              <Lock size={18} className="text-[#F57224] shrink-0" />
+              <Lock size={18} className="text-[#C2185B] shrink-0" />
               <input
                 type={show ? 'text' : 'password'}
                 value={password}
@@ -63,13 +63,13 @@ export default function LoginPage() {
           </div>
           <div className="text-left">
             <a href={`${STORE_URL}/account/login`} target="_blank" rel="noopener noreferrer"
-              className="text-[#F57224] text-xs">نسيت كلمة المرور؟</a>
+              className="text-[#C2185B] text-xs">نسيت كلمة المرور؟</a>
           </div>
         </div>
 
         <button
           onClick={() => window.open(`${STORE_URL}/account/login`, '_blank')}
-          className="w-full mt-6 bg-[#F57224] text-white font-bold py-4 rounded-2xl text-base shadow-lg shadow-orange-500/30"
+          className="w-full mt-6 bg-[#C2185B] text-white font-bold py-4 rounded-2xl text-base shadow-lg shadow-orange-500/30"
         >
           تسجيل الدخول
         </button>
@@ -95,7 +95,7 @@ export default function LoginPage() {
 
         <p className="text-center mt-8 text-white/40 text-sm">
           ليس لديك حساب؟{' '}
-          <Link href="/register" className="text-[#F57224] font-bold">إنشاء حساب</Link>
+          <Link href="/register" className="text-[#C2185B] font-bold">إنشاء حساب</Link>
         </p>
       </div>
     </div>

@@ -22,7 +22,7 @@ export default function RegisterPage() {
       </div>
 
       <div className="flex flex-col items-center py-6">
-        <div className="w-16 h-16 rounded-3xl bg-[#F57224] flex items-center justify-center mb-3 shadow-lg shadow-orange-500/30">
+        <div className="w-16 h-16 rounded-3xl bg-[#C2185B] flex items-center justify-center mb-3 shadow-lg shadow-orange-500/30">
           <span className="text-white font-black text-2xl">L</span>
         </div>
         <p className="text-white/40 text-sm">انضم إلى مجتمع LEE ماركت</p>
@@ -38,7 +38,7 @@ export default function RegisterPage() {
             <div key={label}>
               <label className="text-white/60 text-xs mb-1.5 block">{label}</label>
               <div className="flex items-center bg-[#1A1A1A] rounded-2xl px-4 h-14 gap-3">
-                <Icon size={18} className="text-[#F57224] shrink-0" />
+                <Icon size={18} className="text-[#C2185B] shrink-0" />
                 <input type={type} value={value} onChange={e => set(e.target.value)}
                   placeholder={placeholder}
                   className="flex-1 bg-transparent text-white placeholder-white/20 outline-none text-sm" />
@@ -48,7 +48,7 @@ export default function RegisterPage() {
           <div>
             <label className="text-white/60 text-xs mb-1.5 block">كلمة المرور</label>
             <div className="flex items-center bg-[#1A1A1A] rounded-2xl px-4 h-14 gap-3">
-              <Lock size={18} className="text-[#F57224] shrink-0" />
+              <Lock size={18} className="text-[#C2185B] shrink-0" />
               <input type={show ? 'text' : 'password'} value={password} onChange={e => setPassword(e.target.value)}
                 placeholder="••••••••"
                 className="flex-1 bg-transparent text-white placeholder-white/20 outline-none text-sm" />
@@ -61,14 +61,14 @@ export default function RegisterPage() {
 
         <button
           onClick={() => window.open(`${STORE_URL}/account/register`, '_blank')}
-          className="w-full mt-6 bg-[#F57224] text-white font-bold py-4 rounded-2xl text-base shadow-lg shadow-orange-500/30"
+          className="w-full mt-6 bg-[#C2185B] text-white font-bold py-4 rounded-2xl text-base shadow-lg shadow-orange-500/30"
         >
           إنشاء الحساب
         </button>
 
         <p className="text-center mt-6 text-white/40 text-sm">
           لديك حساب؟{' '}
-          <Link href="/login" className="text-[#F57224] font-bold">تسجيل الدخول</Link>
+          <Link href="/login" className="text-[#C2185B] font-bold">تسجيل الدخول</Link>
         </p>
 
         <p className="text-center mt-4 text-white/20 text-xs px-4">

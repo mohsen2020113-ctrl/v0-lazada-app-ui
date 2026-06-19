@@ -9,7 +9,7 @@ const NOTIFS = [
 ]
 
 const TYPE_ICONS: Record<string, { Icon: any; bg: string; color: string }> = {
-  order: { Icon: Package, bg: 'bg-[#F57224]/15', color: 'text-[#F57224]' },
+  order: { Icon: Package, bg: 'bg-[#C2185B]/15', color: 'text-[#C2185B]' },
   offer: { Icon: Tag, bg: 'bg-green-500/15', color: 'text-green-400' },
   info: { Icon: Info, bg: 'bg-blue-500/15', color: 'text-blue-400' },
 }
@@ -22,7 +22,7 @@ export default function NotificationsPage() {
       <div className="bg-[#0F0F0F] px-4 py-4 border-b border-white/5 flex items-center justify-between">
         <h1 className="text-white font-bold text-lg">الإشعارات</h1>
         {unread > 0 && (
-          <span className="bg-[#F57224] text-white text-xs font-bold px-2.5 py-0.5 rounded-full">{unread}</span>
+          <span className="bg-[#C2185B] text-white text-xs font-bold px-2.5 py-0.5 rounded-full">{unread}</span>
         )}
       </div>
 
@@ -37,14 +37,14 @@ export default function NotificationsPage() {
             const type = TYPE_ICONS[notif.type] || TYPE_ICONS.info
             const Icon = type.Icon
             return (
-              <div key={notif.id} className={`flex gap-3 p-4 rounded-2xl ${notif.read ? 'bg-[#1A1A1A]' : 'bg-[#1A1A1A] border border-[#F57224]/20'}`}>
+              <div key={notif.id} className={`flex gap-3 p-4 rounded-2xl ${notif.read ? 'bg-[#1A1A1A]' : 'bg-[#1A1A1A] border border-[#C2185B]/20'}`}>
                 <div className={`w-11 h-11 rounded-xl ${type.bg} flex items-center justify-center shrink-0`}>
                   <Icon size={20} className={type.color} />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-start justify-between gap-2">
                     <p className={`text-sm font-semibold ${notif.read ? 'text-white/70' : 'text-white'}`}>{notif.title}</p>
-                    {!notif.read && <div className="w-2 h-2 rounded-full bg-[#F57224] shrink-0 mt-1" />}
+                    {!notif.read && <div className="w-2 h-2 rounded-full bg-[#C2185B] shrink-0 mt-1" />}
                   </div>
                   <p className="text-white/40 text-xs mt-0.5 line-clamp-2">{notif.body}</p>
                   <p className="text-white/25 text-xs mt-1.5">{notif.time}</p>

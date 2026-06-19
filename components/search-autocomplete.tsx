@@ -50,7 +50,7 @@ export function SearchAutocomplete({
             {showHistory ? (
               <Clock size={16} className="text-white/30 flex-shrink-0" />
             ) : (
-              <TrendingUp size={16} className="text-[#F57224] flex-shrink-0" />
+              <TrendingUp size={16} className="text-[#C2185B] flex-shrink-0" />
             )}
             <span className="flex-1 text-white/80 text-sm">{item}</span>
             {showHistory && (

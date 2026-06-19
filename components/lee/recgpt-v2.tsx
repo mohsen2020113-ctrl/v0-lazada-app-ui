@@ -92,7 +92,7 @@ export function RecGPTV2({ userId, limit = 12 }: RecGPTV2Props) {
           <h2 className="text-lg font-bold text-gray-900">
             {isRTL ? 'خصيصًا لك' : 'Just For You'}
           </h2>
-          <span className="text-[10px] bg-gradient-to-r from-[#f85c98] to-[#f57224] text-white px-2 py-1 rounded-full font-semibold whitespace-nowrap">
+          <span className="text-[10px] bg-gradient-to-r from-[#f85c98] to-[#c2185b] text-white px-2 py-1 rounded-full font-semibold whitespace-nowrap">
             {isRTL ? 'بواسطة Mercury AI' : 'Powered by Mercury AI'}
           </span>
         </div>

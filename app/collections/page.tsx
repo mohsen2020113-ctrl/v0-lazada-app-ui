@@ -27,7 +27,7 @@ export default function CollectionsPage() {
         <button onClick={() => router.back()} className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center">
           <ChevronLeft size={18} className="text-white" />
         </button>
-        <Grid3X3 size={20} className="text-[#F57224]" />
+        <Grid3X3 size={20} className="text-[#C2185B]" />
         <h1 className="text-white font-bold text-lg">جميع الأقسام</h1>
       </div>
 

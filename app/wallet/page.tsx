@@ -25,7 +25,7 @@ export default function WalletPage() {
 
       {/* Balance Card */}
       <div className="mx-4 mb-5 rounded-3xl overflow-hidden"
-        style={{ background: 'linear-gradient(135deg, #F57224 0%, #C13D00 100%)' }}>
+        style={{ background: 'linear-gradient(135deg, #C2185B 0%, #C13D00 100%)' }}>
         <div className="p-6">
           <p className="text-white/70 text-sm mb-1">الرصيد المتاح</p>
           <p className="text-white font-black text-4xl mb-4">85.00 <span className="text-2xl">AED</span></p>

@@ -135,9 +135,9 @@ export default function CategoryPage({ params }: { params: { handle: string } })
                     <div className="p-2.5">
                       <p className="text-white text-xs font-semibold line-clamp-2 mb-2">{product.title}</p>
                       <div className="flex items-center justify-between">
-                        <span className="text-[#F57224] text-sm font-bold">{product.price} AED</span>
-                        <button className="w-7 h-7 rounded-lg bg-[#F57224]/15 flex items-center justify-center">
-                          <Heart size={13} className="text-[#F57224]" />
+                        <span className="text-[#C2185B] text-sm font-bold">{product.price} AED</span>
+                        <button className="w-7 h-7 rounded-lg bg-[#C2185B]/15 flex items-center justify-center">
+                          <Heart size={13} className="text-[#C2185B]" />
                         </button>
                       </div>
                     </div>

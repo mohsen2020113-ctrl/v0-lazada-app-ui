@@ -30,14 +30,14 @@ export default function CartPage() {
       {isEmpty ? (
         <div className="flex flex-col items-center justify-center py-24 px-6">
           <div className="w-24 h-24 rounded-full flex items-center justify-center mb-5"
-            style={{ background: 'rgba(245,114,36,0.15)' }}>
-            <ShoppingCart size={48} className="text-[#F57224]" />
+            style={{ background: 'rgba(194,24,91,0.15)' }}>
+            <ShoppingCart size={48} className="text-[#C2185B]" />
           </div>
           <h2 className="text-white text-xl font-bold mb-2">سلتك فارغة</h2>
           <p className="text-white/40 text-sm mb-7">أضف منتجات للبدء في التسوق</p>
           <Link
             href="/"
-            className="bg-[#F57224] text-white font-bold px-8 py-3.5 rounded-2xl"
+            className="bg-[#C2185B] text-white font-bold px-8 py-3.5 rounded-2xl"
           >
             ابدأ التسوق
           </Link>
@@ -58,7 +58,7 @@ export default function CartPage() {
                   {item.variant && item.variant !== 'Default Title' && (
                     <p className="text-white/40 text-xs mt-0.5">{item.variant}</p>
                   )}
-                  <p className="text-[#F57224] text-base font-bold mt-1.5">
+                  <p className="text-[#C2185B] text-base font-bold mt-1.5">
                     {(item.price * item.quantity).toFixed(2)} AED
                   </p>
                 </div>
@@ -99,12 +99,12 @@ export default function CartPage() {
               </div>
               <div className="flex justify-between">
                 <span className="text-white/40 text-sm">الشحن</span>
-                <span className="text-[#F57224] text-xs">يُحسب عند الدفع</span>
+                <span className="text-[#C2185B] text-xs">يُحسب عند الدفع</span>
               </div>
             </div>
             <button
               onClick={handleCheckout}
-              className="w-full mt-4 bg-[#F57224] text-white font-bold py-3.5 rounded-2xl flex items-center justify-center gap-2"
+              className="w-full mt-4 bg-[#C2185B] text-white font-bold py-3.5 rounded-2xl flex items-center justify-center gap-2"
             >
               <Lock size={16} />
               إتمام الشراء
