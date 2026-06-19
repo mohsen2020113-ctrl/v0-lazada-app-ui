@@ -92,7 +92,7 @@ export function LEEAssistant() {
       {/* Floating Button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-24 right-4 z-40 w-14 h-14 bg-[#f85c98] text-white rounded-full shadow-lg hover:shadow-xl active:scale-95 flex items-center justify-center transition-all"
+        className="fixed bottom-24 right-4 z-40 w-14 h-14 bg-[#c2185b] text-white rounded-full shadow-lg hover:shadow-xl active:scale-95 flex items-center justify-center transition-all"
         aria-label="Open LEE Assistant"
       >
         {isOpen ? (
@@ -106,7 +106,7 @@ export function LEEAssistant() {
       {isOpen && (
         <div className="fixed bottom-40 right-4 z-40 w-96 max-w-[calc(100vw-2rem)] h-96 bg-gray-950 rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-gray-800">
           {/* Header */}
-          <div className="bg-gradient-to-r from-[#f85c98] to-[#e91e8c] p-4 text-white flex items-center justify-between">
+          <div className="bg-gradient-to-r from-[#c2185b] to-[#e91e8c] p-4 text-white flex items-center justify-between">
             <div>
               <h3 className="font-bold">LEE Assistant</h3>
               <p className="text-xs opacity-90">مساعدك الذكي في التسوق</p>
@@ -123,7 +123,7 @@ export function LEEAssistant() {
                 <div
                   className={`max-w-xs px-4 py-2 rounded-lg text-sm ${
                     msg.role === 'user'
-                      ? 'bg-[#f85c98] text-white'
+                      ? 'bg-[#c2185b] text-white'
                       : 'bg-gray-800 text-gray-100'
                   }`}
                 >
@@ -150,14 +150,14 @@ export function LEEAssistant() {
               onChange={(e) => setInput(e.target.value)}
               onKeyPress={handleKeyPress}
               placeholder="اكتب رسالتك..."
-              className="flex-1 bg-gray-800 text-white rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#f85c98] placeholder-gray-500"
+              className="flex-1 bg-gray-800 text-white rounded-lg px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-[#c2185b] placeholder-gray-500"
               dir="rtl"
               disabled={isLoading}
             />
             <button
               onClick={handleSendMessage}
               disabled={isLoading || !input.trim()}
-              className="bg-[#f85c98] text-white rounded-lg p-2 hover:bg-[#e91e8c] active:scale-95 disabled:opacity-50 transition-all flex items-center justify-center"
+              className="bg-[#c2185b] text-white rounded-lg p-2 hover:bg-[#e91e8c] active:scale-95 disabled:opacity-50 transition-all flex items-center justify-center"
               aria-label="Send message"
             >
               <Send className="w-4 h-4" />
