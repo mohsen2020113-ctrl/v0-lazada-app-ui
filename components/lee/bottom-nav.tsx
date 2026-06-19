@@ -29,7 +29,7 @@ const navItems = [
 ]
 
 function NavIcon({ id, isActive }: { id: string; isActive: boolean }) {
-  const color = isActive ? "#f85c98" : "#6b7280"
+  const color = isActive ? "#c2185b" : "#6b7280"
   
   switch (id) {
     case "foryou":
@@ -89,12 +89,12 @@ export function BottomNav() {
               <div className="relative">
                 <NavIcon id={item.id} isActive={isActive} />
                 {item.badge && (
-                  <span className="absolute -top-1.5 -right-3 sm:-right-4 bg-[#f85c98] text-white text-[8px] sm:text-[9px] font-bold px-1 sm:px-1.5 py-0.5 rounded-full min-w-[16px] sm:min-w-[18px] text-center shadow-sm">
+                  <span className="absolute -top-1.5 -right-3 sm:-right-4 bg-[#c2185b] text-white text-[8px] sm:text-[9px] font-bold px-1 sm:px-1.5 py-0.5 rounded-full min-w-[16px] sm:min-w-[18px] text-center shadow-sm">
                     {item.badge}
                   </span>
                 )}
               </div>
-              <span className={`text-[9px] sm:text-[10px] mt-0.5 sm:mt-1 font-medium transition-colors ${isActive ? "text-[#f85c98]" : "text-gray-500"}`}>
+              <span className={`text-[9px] sm:text-[10px] mt-0.5 sm:mt-1 font-medium transition-colors ${isActive ? "text-[#c2185b]" : "text-gray-500"}`}>
                 {item.label}
               </span>
             </button>
