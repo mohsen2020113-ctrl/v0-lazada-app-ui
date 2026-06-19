@@ -22,7 +22,7 @@ export default function LoginPage() {
 
       {/* Logo */}
       <div className="flex flex-col items-center py-8">
-        <div className="w-20 h-20 rounded-3xl bg-[#C2185B] flex items-center justify-center mb-4 shadow-lg shadow-orange-500/30">
+        <div className="w-20 h-20 rounded-3xl bg-[#C2185B] flex items-center justify-center mb-4 shadow-lg shadow-[#C2185B]/30">
           <span className="text-white font-black text-3xl">L</span>
         </div>
         <h1 className="text-white text-2xl font-black mb-1">LEE ماركت</h1>
@@ -69,7 +69,7 @@ export default function LoginPage() {
 
         <button
           onClick={() => window.open(`${STORE_URL}/account/login`, '_blank')}
-          className="w-full mt-6 bg-[#C2185B] text-white font-bold py-4 rounded-2xl text-base shadow-lg shadow-orange-500/30"
+          className="w-full mt-6 bg-[#C2185B] text-white font-bold py-4 rounded-2xl text-base shadow-lg shadow-[#C2185B]/30"
         >
           تسجيل الدخول
         </button>
