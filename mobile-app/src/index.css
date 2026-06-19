@@ -28,11 +28,11 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-orange-500 text-white font-semibold py-3 px-6 rounded-xl active:scale-95 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-[#C2185B] text-white font-semibold py-3 px-6 rounded-xl active:scale-95 transition-all duration-150 disabled:opacity-50 disabled:cursor-not-allowed;
   }
 
   .btn-secondary {
-    @apply border border-orange-500 text-orange-500 font-semibold py-3 px-6 rounded-xl active:scale-95 transition-all duration-150;
+    @apply border border-[#C2185B] text-[#C2185B] font-semibold py-3 px-6 rounded-xl active:scale-95 transition-all duration-150;
   }
 
   .card {
@@ -44,7 +44,7 @@
   }
 
   .input-field {
-    @apply w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-transparent bg-white;
+    @apply w-full border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-[#C2185B] focus:border-transparent bg-white;
   }
 
   .section-title {
@@ -64,7 +64,7 @@
   }
 
   .price-tag {
-    @apply text-orange-500 font-bold;
+    @apply text-[#C2185B] font-bold;
   }
 
   .compare-price {
