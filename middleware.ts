@@ -1,36 +1,39 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-const COUNTRY_LOCALE: Record<string, string> = {
-  AE: 'ae', SA: 'sa', EG: 'eg', KW: 'kw', QA: 'qa', BH: 'bh', OM: 'om',
-  TH: 'th', MY: 'my', SG: 'sg', ID: 'id', PH: 'ph', VN: 'vn', MM: 'mm',
-  IN: 'in', PK: 'pk', BD: 'bd', LK: 'lk', NP: 'np', TR: 'tr',
-  GB: 'gb', DE: 'de', FR: 'fr', IT: 'it', ES: 'es',
-  US: 'us', CA: 'ca', AU: 'au', NZ: 'nz',
-  CN: 'cn', JP: 'jp', KR: 'kr',
-  NG: 'ng', ZA: 'za', KE: 'ke', GH: 'gh',
+const COUNTRY_COOKIE = 'lee_country'
+const DEFAULT_COUNTRY = 'AE'
+
+// Derive country from Accept-Language or CF-IPCountry header
+function detectCountry(req: NextRequest): string {
+  const cfCountry = req.headers.get('cf-ipcountry')
+  if (cfCountry && cfCountry !== 'XX') return cfCountry.toUpperCase()
+
+  const acceptLang = req.headers.get('accept-language') ?? ''
+  const match = acceptLang.match(/[-_]([A-Z]{2})/i)
+  if (match) return match[1].toUpperCase()
+
+  return DEFAULT_COUNTRY
 }
 
-const STATIC_PREFIXES = ['/api/', '/_next/', '/favicon.ico', '/images/', '/fonts/', '/icons/']
-
 export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl
+  const response = NextResponse.next()
 
-  if (STATIC_PREFIXES.some(p => pathname.startsWith(p))) {
-    return NextResponse.next()
+  // Only set the cookie if it's not already present — prevents CDN cache bypass
+  const existingCountry = req.cookies.get(COUNTRY_COOKIE)?.value
+  if (!existingCountry) {
+    const country = detectCountry(req)
+    response.cookies.set(COUNTRY_COOKIE, country, {
+      maxAge: 86400,
+      path: '/',
+      sameSite: 'lax',
+    })
   }
 
-  const locales = Object.values(COUNTRY_LOCALE)
-  const hasLocale = locales.some(l => pathname === `/${l}` || pathname.startsWith(`/${l}/`))
-  if (hasLocale) return NextResponse.next()
-
-  const country = req.geo?.country || req.headers.get('x-vercel-ip-country') || 'AE'
-  const locale = COUNTRY_LOCALE[country] || 'ae'
-
-  const response = NextResponse.next()
-  response.cookies.set('lee_country', country, { maxAge: 86400, path: '/' })
   return response
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|images|fonts|icons).*)'],
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+  ],
 }
