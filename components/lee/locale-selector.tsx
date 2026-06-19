@@ -76,7 +76,7 @@ export function LocaleSelector() {
             onClick={() => setActiveTab('language')}
             className={`flex-1 py-3 text-sm font-medium transition-colors ${
               activeTab === 'language'
-                ? 'text-[#f85c98] border-b-2 border-[#f85c98]'
+                ? 'text-[#c2185b] border-b-2 border-[#c2185b]'
                 : 'text-gray-500'
             }`}
           >
@@ -86,7 +86,7 @@ export function LocaleSelector() {
             onClick={() => setActiveTab('currency')}
             className={`flex-1 py-3 text-sm font-medium transition-colors ${
               activeTab === 'currency'
-                ? 'text-[#f85c98] border-b-2 border-[#f85c98]'
+                ? 'text-[#c2185b] border-b-2 border-[#c2185b]'
                 : 'text-gray-500'
             }`}
           >
@@ -121,7 +121,7 @@ export function LocaleSelector() {
                       </div>
                     </div>
                     {isSelected && (
-                      <Check className="w-5 h-5 text-[#f85c98]" />
+                      <Check className="w-5 h-5 text-[#c2185b]" />
                     )}
                   </button>
                 );
@@ -154,7 +154,7 @@ export function LocaleSelector() {
                       </div>
                     </div>
                     {isSelected && (
-                      <Check className="w-5 h-5 text-[#f85c98]" />
+                      <Check className="w-5 h-5 text-[#c2185b]" />
                     )}
                   </button>
                 );
@@ -250,7 +250,7 @@ function LocaleSelectorModal({ onClose }: { onClose: () => void }) {
             onClick={() => setActiveTab('language')}
             className={`flex-1 py-3 text-sm font-medium transition-colors ${
               activeTab === 'language'
-                ? 'text-[#f85c98] border-b-2 border-[#f85c98]'
+                ? 'text-[#c2185b] border-b-2 border-[#c2185b]'
                 : 'text-gray-500'
             }`}
           >
@@ -260,7 +260,7 @@ function LocaleSelectorModal({ onClose }: { onClose: () => void }) {
             onClick={() => setActiveTab('currency')}
             className={`flex-1 py-3 text-sm font-medium transition-colors ${
               activeTab === 'currency'
-                ? 'text-[#f85c98] border-b-2 border-[#f85c98]'
+                ? 'text-[#c2185b] border-b-2 border-[#c2185b]'
                 : 'text-gray-500'
             }`}
           >
@@ -293,7 +293,7 @@ function LocaleSelectorModal({ onClose }: { onClose: () => void }) {
                       <p className="text-sm text-gray-500">{config.name}</p>
                     </div>
                   </div>
-                  {isSelected && <Check className="w-5 h-5 text-[#f85c98]" />}
+                  {isSelected && <Check className="w-5 h-5 text-[#c2185b]" />}
                 </button>
               );
             })
@@ -322,7 +322,7 @@ function LocaleSelectorModal({ onClose }: { onClose: () => void }) {
                       <p className="text-sm text-gray-500">{currencyLabels[currency]}</p>
                     </div>
                   </div>
-                  {isSelected && <Check className="w-5 h-5 text-[#f85c98]" />}
+                  {isSelected && <Check className="w-5 h-5 text-[#c2185b]" />}
                 </button>
               );
             })
