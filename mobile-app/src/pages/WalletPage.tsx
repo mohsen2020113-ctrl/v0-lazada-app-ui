@@ -19,8 +19,8 @@ export default function WalletPage({ navigate }: Props) {
         <button onClick={() => navigate('account')}><ChevronLeft size={22} /></button>
         <h1 className="text-xl font-bold text-gray-900">Wallet</h1>
       </div>
-      <div className="bg-gradient-to-br from-orange-500 to-red-500 mx-4 mt-4 rounded-2xl p-6 text-white">
-        <p className="text-orange-100 text-sm mb-1">Available Balance</p>
+      <div className="bg-gradient-to-br from-[#880E4F] to-[#C2185B] mx-4 mt-4 rounded-2xl p-6 text-white">
+        <p className="text-pink-100 text-sm mb-1">Available Balance</p>
         <p className="text-4xl font-bold mb-4">$0.00</p>
         <div className="flex gap-3">
           <button className="flex-1 bg-white/20 rounded-xl py-2.5 text-sm font-medium flex items-center justify-center gap-1.5"><Plus size={16} /> Top Up</button>
