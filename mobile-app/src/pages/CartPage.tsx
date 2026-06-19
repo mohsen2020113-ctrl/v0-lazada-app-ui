@@ -11,7 +11,7 @@ export default function CartPage({ navigate }: Props) {
 
   if (loading && !cart) return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="w-8 h-8 border-4 border-orange-500 border-t-transparent rounded-full spinner" />
+      <div className="w-8 h-8 border-4 border-[#C2185B] border-t-transparent rounded-full spinner" />
     </div>
   );
 
@@ -58,7 +58,7 @@ export default function CartPage({ navigate }: Props) {
               <div className="flex justify-between text-gray-600"><span>Subtotal ({cart?.totalQuantity} items)</span><span>{formatMoney(cart?.cost.subtotalAmount.amount ?? '0', cart?.cost.subtotalAmount.currencyCode ?? 'USD')}</span></div>
               <div className="flex justify-between text-gray-600"><span>Shipping</span><span className="text-green-600 font-medium">Free</span></div>
               <div className="h-px bg-gray-100 my-2" />
-              <div className="flex justify-between font-bold text-base"><span>Total</span><span className="text-orange-500">{formatMoney(cart?.cost.totalAmount.amount ?? '0', cart?.cost.totalAmount.currencyCode ?? 'USD')}</span></div>
+              <div className="flex justify-between font-bold text-base"><span>Total</span><span className="text-[#C2185B]">{formatMoney(cart?.cost.totalAmount.amount ?? '0', cart?.cost.totalAmount.currencyCode ?? 'USD')}</span></div>
             </div>
           </div>
           <div className="px-4 pb-6">
