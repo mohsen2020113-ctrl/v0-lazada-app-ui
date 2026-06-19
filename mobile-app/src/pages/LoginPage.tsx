@@ -25,7 +25,7 @@ export default function LoginPage({ navigate }: Props) {
       <div className="px-4 pt-12 pb-4"><button onClick={() => navigate('account')} className="text-gray-600"><ChevronLeft size={22} /></button></div>
       <div className="flex-1 px-6 pt-4">
         <div className="text-center mb-8">
-          <div className="w-16 h-16 bg-gradient-to-br from-orange-400 to-red-500 rounded-2xl mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">L</div>
+          <div className="w-16 h-16 bg-gradient-to-br from-[#880E4F] to-[#C2185B] rounded-2xl mx-auto mb-4 flex items-center justify-center text-white text-2xl font-bold">L</div>
           <h1 className="text-2xl font-bold text-gray-900">{isLogin ? 'Welcome back!' : 'Create account'}</h1>
           <p className="text-gray-500 text-sm mt-1">{isLogin ? 'Sign in to your LEE account' : 'Join LEE for exclusive deals'}</p>
         </div>
@@ -49,7 +49,7 @@ export default function LoginPage({ navigate }: Props) {
         </button>
         <p className="text-center text-sm text-gray-500 mt-4">
           {isLogin ? "Don't have an account?" : 'Already have an account?'}{' '}
-          <button onClick={() => { setIsLogin(l => !l); clearError(); }} className="text-orange-500 font-medium">{isLogin ? 'Sign Up' : 'Sign In'}</button>
+          <button onClick={() => { setIsLogin(l => !l); clearError(); }} className="text-[#C2185B] font-medium">{isLogin ? 'Sign Up' : 'Sign In'}</button>
         </p>
       </div>
     </div>
