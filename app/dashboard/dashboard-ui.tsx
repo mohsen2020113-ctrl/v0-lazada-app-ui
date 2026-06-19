@@ -81,14 +81,14 @@ export default function DashboardUI({ data }: { data: DashboardData }) {
     <div dir="rtl" className="min-h-screen bg-gray-50 font-sans">
       <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between shadow-sm sticky top-0 z-10">
         <div className="flex items-center gap-3">
-          <Link href="/" className="w-10 h-10 rounded-xl bg-[#F50057] flex items-center justify-center text-white font-bold text-lg">4</Link>
+          <Link href="/" className="w-10 h-10 rounded-xl bg-[#C2185B] flex items-center justify-center text-white font-bold text-lg">4</Link>
           <div>
             <h1 className="text-lg font-bold text-gray-900">4LEEE</h1>
             <p className="text-xs text-gray-500">لوحة تحكم التاجر</p>
           </div>
         </div>
         <div className="flex items-center gap-3">
-          <Link href="/" className="text-xs text-[#F50057] border border-[#F50057] rounded-lg px-3 py-1.5 hover:bg-pink-50 transition-colors">← الموقع</Link>
+          <Link href="/" className="text-xs text-[#C2185B] border border-[#C2185B] rounded-lg px-3 py-1.5 hover:bg-[#C2185B]/10 transition-colors">← الموقع</Link>
         </div>
       </header>
 
@@ -109,7 +109,7 @@ export default function DashboardUI({ data }: { data: DashboardData }) {
         </div>
 
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-10">
-          <KPICard label="إجمالي المبيعات" value={kpis.totalSales > 0 ? `AED ${kpis.totalSales.toLocaleString('ar-AE', { maximumFractionDigits: 0 })}` : 'AED 0'} sub={kpis.totalSales > 0 ? 'من Supabase' : 'لا توجد مبيعات بعد'} color="bg-gradient-to-br from-[#F50057] to-pink-600" />
+          <KPICard label="إجمالي المبيعات" value={kpis.totalSales > 0 ? `AED ${kpis.totalSales.toLocaleString('ar-AE', { maximumFractionDigits: 0 })}` : 'AED 0'} sub={kpis.totalSales > 0 ? 'من Supabase' : 'لا توجد مبيعات بعد'} color="bg-gradient-to-br from-[#C2185B] to-[#ec407a]" />
           <KPICard label="إجمالي الطلبات" value={kpis.totalOrders.toLocaleString('ar-AE')} sub={kpis.totalOrders > 0 ? 'طلب حقيقي' : 'لا توجد طلبات بعد'} color="bg-gradient-to-br from-blue-500 to-blue-600" />
           <KPICard label="متوسط قيمة الطلب" value={kpis.avgOrderValue > 0 ? `AED ${kpis.avgOrderValue.toFixed(0)}` : 'AED —'} sub="محسوب من الطلبات الفعلية" color="bg-gradient-to-br from-purple-500 to-purple-600" />
           <KPICard label="منتجات Shopify" value={kpis.shopifyProductsCount.toLocaleString('ar-AE')} sub="منتج نشط" color="bg-gradient-to-br from-emerald-500 to-emerald-600" />
@@ -122,7 +122,7 @@ export default function DashboardUI({ data }: { data: DashboardData }) {
             { key: 'countries' as const, label: `الدول (${topCountries.length})` },
             { key: 'stock' as const, label: `تنبيهات المخزون (${lowStock.length})` },
           ]).map(tab => (
-            <button key={tab.key} onClick={() => setActiveTab(tab.key)} className={`px-5 py-2.5 text-sm font-medium rounded-t-lg transition-colors ${activeTab === tab.key ? 'bg-[#F50057] text-white' : 'text-gray-600 hover:text-[#F50057]'}`}>{tab.label}</button>
+            <button key={tab.key} onClick={() => setActiveTab(tab.key)} className={`px-5 py-2.5 text-sm font-medium rounded-t-lg transition-colors ${activeTab === tab.key ? 'bg-[#C2185B] text-white' : 'text-gray-600 hover:text-[#C2185B]'}`}>{tab.label}</button>
           ))}
         </div>
 
@@ -141,7 +141,7 @@ export default function DashboardUI({ data }: { data: DashboardData }) {
                     const dateStr = order.created_at ? new Date(order.created_at).toLocaleDateString('ar-AE') : '—'
                     return (
                       <tr key={order.id} className={`border-b border-gray-50 hover:bg-pink-50 transition-colors ${i % 2 === 0 ? 'bg-white' : 'bg-gray-50/30'}`}>
-                        <td className="px-4 py-3 font-mono text-[#F50057] font-semibold text-xs">{order.id.slice(0, 8).toUpperCase()}</td>
+                        <td className="px-4 py-3 font-mono text-[#C2185B] font-semibold text-xs">{order.id.slice(0, 8).toUpperCase()}</td>
                         <td className="px-4 py-3"><span className={`px-2 py-0.5 rounded-full text-xs font-medium ${STATUS_COLORS[statusKey] ?? 'bg-gray-100 text-gray-700'}`}>{STATUS_AR[statusKey] ?? statusKey}</span></td>
                         <td className="px-4 py-3 font-semibold text-gray-900">{order.currency ?? 'AED'} {parseFloat(String(order.total ?? 0)).toFixed(2)}</td>
                         <td className="px-4 py-3 text-gray-500 text-xs">{order.payment_method ?? '—'}</td>
@@ -164,7 +164,7 @@ export default function DashboardUI({ data }: { data: DashboardData }) {
                   <div key={c.name} className="flex items-center gap-4">
                     <div className="flex-1">
                       <div className="flex justify-between mb-1"><span className="text-sm font-medium text-gray-800">{c.name}</span><span className="text-sm text-gray-500">{c.orders} طلب</span></div>
-                      <div className="h-2 bg-gray-100 rounded-full overflow-hidden"><div className="h-full bg-gradient-to-l from-pink-400 to-[#F50057] rounded-full" style={{ width: `${Math.round((c.orders / maxCountryOrders) * 100)}%` }} /></div>
+                      <div className="h-2 bg-gray-100 rounded-full overflow-hidden"><div className="h-full bg-gradient-to-l from-[#ec407a] to-[#C2185B] rounded-full" style={{ width: `${Math.round((c.orders / maxCountryOrders) * 100)}%` }} /></div>
                     </div>
                   </div>
                 ))}
