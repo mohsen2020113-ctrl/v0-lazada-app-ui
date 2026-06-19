@@ -48,3 +48,9 @@ body {
   animation: shimmer 1.5s infinite;
   border-radius: 4px;
 }
+
+
+/* Standardize all icon stroke widths */
+.lucide {
+  stroke-width: 1.5;
+}
