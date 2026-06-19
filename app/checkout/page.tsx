@@ -124,7 +124,7 @@ export default function CheckoutPage() {
       {/* Bottom CTA */}
       <div className="fixed bottom-0 left-0 right-0 p-4 bg-[#0F0F0F]/95 backdrop-blur-sm">
         <button onClick={() => step < 2 ? setStep(s => s+1) : setStep(3)}
-          className="w-full bg-[#C2185B] text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-orange-500/30">
+          className="w-full bg-[#C2185B] text-white font-bold py-4 rounded-2xl flex items-center justify-center gap-2 shadow-lg shadow-[#C2185B]/30">
           {step === 2 ? 'تأكيد الطلب' : 'التالي'}
           <ChevronLeft size={18} />
         </button>
