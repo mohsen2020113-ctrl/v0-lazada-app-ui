@@ -97,7 +97,7 @@ ONLY return the JSON array.`;
     if (!jsonMatch) return products;
 
     const ranked = JSON.parse(jsonMatch[0]);
-    const rankedMap = new Map(ranked.map((r: any) => [r.id, r]));
+    const rankedMap = new Map<string, any>(ranked.map((r: any) => [r.id, r]));
 
     return products
       .map((p) => ({
