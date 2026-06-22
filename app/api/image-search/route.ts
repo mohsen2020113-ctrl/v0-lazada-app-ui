@@ -95,7 +95,7 @@ Be specific about the product type and characteristics. Return only valid JSON.`
         }
 
         // Match by attributes or colors
-        const productText = `${product.title} ${product.description} ${product.tags?.join(' ') || ''}`.toLowerCase()
+        const productText = `${product.name} ${product.description} ${product.tags?.join(' ') || ''}`.toLowerCase()
         const searchTerms = [...analysis.attributes, ...analysis.colors]
 
         return searchTerms.some(term => productText.includes(term.toLowerCase()))
