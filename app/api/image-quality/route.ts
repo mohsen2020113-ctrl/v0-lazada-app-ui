@@ -28,7 +28,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    const client = new GoogleGenerativeAI({ apiKey });
+    const client = new GoogleGenerativeAI(apiKey);
     const model = client.getGenerativeModel({ model: 'gemini-2.5-pro-vision' });
 
     // Fetch image and convert to base64
