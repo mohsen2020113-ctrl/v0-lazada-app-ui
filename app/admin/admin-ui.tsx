@@ -17,7 +17,7 @@ import {
 } from 'lucide-react'
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, BarChart, Bar, PieChart as RechartsPie, Pie, Cell } from 'recharts'
 
-// âââ TYPES ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── TYPES ────────────────────────────────────────────────────────────────────
 type Section =
   | 'dashboard' | 'orders' | 'products' | 'customers' | 'ai'
   | 'design' | 'marketing' | 'marketplace' | 'employees' | 'finance'
@@ -25,54 +25,54 @@ type Section =
 
 interface AdminData { orders: any[]; profiles: any[]; inventory: any[]; products: any[] }
 
-// âââ MOCK DATA âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── MOCK DATA ─────────────────────────────────────────────────────────────────
 const REVENUE_DATA = [
   { d: 'Jan', rev: 12400, profit: 4200 }, { d: 'Feb', rev: 18200, profit: 6100 },
   { d: 'Mar', rev: 15800, profit: 5400 }, { d: 'Apr', rev: 22100, profit: 8200 },
   { d: 'May', rev: 19400, profit: 7100 }, { d: 'Jun', rev: 28900, profit: 11200 },
 ]
 const ORDER_STATUS_DATA = [
-  { name: 'ÙÙØ³ÙÙÙÙ', value: 42, color: '#22c55e' },
-  { name: 'ÙÙØ¯ Ø§ÙØ´Ø­Ù', value: 28, color: '#3b82f6' },
-  { name: 'ÙØ¹Ø§ÙØ¬Ø©', value: 18, color: '#f59e0b' },
-  { name: 'ÙÙØºÙ', value: 12, color: '#ef4444' },
+  { name: 'مُسلَّم', value: 42, color: '#22c55e' },
+  { name: 'قيد الشحن', value: 28, color: '#3b82f6' },
+  { name: 'معالجة', value: 18, color: '#f59e0b' },
+  { name: 'ملغي', value: 12, color: '#ef4444' },
 ]
 const MOCK_ORDERS = [
-  { id: '#4521', customer: 'Ø£Ø­ÙØ¯ Ø§ÙØ²ÙØ±Ø§ÙÙ', total: 'AED 389', status: 'delivered', date: '2026-06-15', items: 3 },
-  { id: '#4520', customer: 'ÙØ§Ø·ÙØ© Ø§ÙØ¹ÙØ±Ù', total: 'AED 129', status: 'shipped', date: '2026-06-14', items: 1 },
-  { id: '#4519', customer: 'ÙØ­ÙØ¯ Ø§ÙØ¹Ø³ÙØ±Ù', total: 'AED 749', status: 'processing', date: '2026-06-14', items: 5 },
-  { id: '#4518', customer: 'ÙÙØ±Ø© Ø§ÙÙØ­Ø·Ø§ÙÙ', total: 'AED 215', status: 'pending', date: '2026-06-13', items: 2 },
-  { id: '#4517', customer: 'Ø¹Ø¨Ø¯Ø§ÙÙÙ Ø§ÙØ´ÙØ±Ù', total: 'AED 980', status: 'delivered', date: '2026-06-13', items: 4 },
-  { id: '#4516', customer: 'Ø³Ø§Ø±Ø© Ø§ÙÙØ§ÙÙÙ', total: 'AED 67', status: 'cancelled', date: '2026-06-12', items: 1 },
+  { id: '#4521', customer: 'أحمد الزهراني', total: 'AED 389', status: 'delivered', date: '2026-06-15', items: 3 },
+  { id: '#4520', customer: 'فاطمة العمري', total: 'AED 129', status: 'shipped', date: '2026-06-14', items: 1 },
+  { id: '#4519', customer: 'محمد العسيري', total: 'AED 749', status: 'processing', date: '2026-06-14', items: 5 },
+  { id: '#4518', customer: 'نورة القحطاني', total: 'AED 215', status: 'pending', date: '2026-06-13', items: 2 },
+  { id: '#4517', customer: 'عبدالله الشهري', total: 'AED 980', status: 'delivered', date: '2026-06-13', items: 4 },
+  { id: '#4516', customer: 'سارة المالكي', total: 'AED 67', status: 'cancelled', date: '2026-06-12', items: 1 },
 ]
 const MOCK_PRODUCTS = [
-  { id: 'p1', name: 'Ø³ÙØ§Ø¹Ø© 4LEEE Ultra Pro', category: 'Ø¥ÙÙØªØ±ÙÙÙØ§Øª', price: 299, stock: 145, status: 'active', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=60&h=60&fit=crop' },
-  { id: 'p2', name: 'Ø³Ø§Ø¹Ø© Ø°ÙÙØ© ProSeries X', category: 'Ø¥ÙÙØªØ±ÙÙÙØ§Øª', price: 549, stock: 88, status: 'active', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=60&h=60&fit=crop' },
-  { id: 'p3', name: 'Ø­ÙÙØ¨Ø© Ø³ÙØ± Titan 28"', category: 'Ø­ÙØ§Ø¦Ø¨', price: 189, stock: 0, status: 'out_of_stock', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=60&h=60&fit=crop' },
-  { id: 'p4', name: 'ÙØ§ÙÙØ±Ø§ Mirrorless Z6', category: 'Ø¥ÙÙØªØ±ÙÙÙØ§Øª', price: 3200, stock: 22, status: 'active', image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=60&h=60&fit=crop' },
-  { id: 'p5', name: 'Ø¹Ø·Ø± Noir Ãlite 100ml', category: 'Ø¹ÙØ§ÙØ©', price: 145, stock: 210, status: 'active', image: 'https://images.unsplash.com/photo-1541643600914-78b084683702?w=60&h=60&fit=crop' },
+  { id: 'p1', name: 'سماعة 4LEEE Ultra Pro', category: 'إلكترونيات', price: 299, stock: 145, status: 'active', image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=60&h=60&fit=crop' },
+  { id: 'p2', name: 'ساعة ذكية ProSeries X', category: 'إلكترونيات', price: 549, stock: 88, status: 'active', image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=60&h=60&fit=crop' },
+  { id: 'p3', name: 'حقيبة سفر Titan 28"', category: 'حقائب', price: 189, stock: 0, status: 'out_of_stock', image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=60&h=60&fit=crop' },
+  { id: 'p4', name: 'كاميرا Mirrorless Z6', category: 'إلكترونيات', price: 3200, stock: 22, status: 'active', image: 'https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=60&h=60&fit=crop' },
+  { id: 'p5', name: 'عطر Noir Élite 100ml', category: 'عناية', price: 145, stock: 210, status: 'active', image: 'https://images.unsplash.com/photo-1541643600914-78b084683702?w=60&h=60&fit=crop' },
 ]
 const MOCK_CUSTOMERS = [
-  { id: 'c1', name: 'Ø£Ø­ÙØ¯ Ø§ÙØ²ÙØ±Ø§ÙÙ', email: 'ahmed@email.com', orders: 12, spent: 'AED 4,280', status: 'VIP', joined: '2025-01-10' },
-  { id: 'c2', name: 'ÙØ§Ø·ÙØ© Ø§ÙØ¹ÙØ±Ù', email: 'fatima@email.com', orders: 8, spent: 'AED 1,920', status: 'Regular', joined: '2025-03-22' },
-  { id: 'c3', name: 'ÙØ­ÙØ¯ Ø§ÙØ¹Ø³ÙØ±Ù', email: 'mohammed@email.com', orders: 31, spent: 'AED 11,450', status: 'VIP', joined: '2024-11-05' },
-  { id: 'c4', name: 'ÙÙØ±Ø© Ø§ÙÙØ­Ø·Ø§ÙÙ', email: 'noura@email.com', orders: 3, spent: 'AED 645', status: 'New', joined: '2026-05-18' },
+  { id: 'c1', name: 'أحمد الزهراني', email: 'ahmed@email.com', orders: 12, spent: 'AED 4,280', status: 'VIP', joined: '2025-01-10' },
+  { id: 'c2', name: 'فاطمة العمري', email: 'fatima@email.com', orders: 8, spent: 'AED 1,920', status: 'Regular', joined: '2025-03-22' },
+  { id: 'c3', name: 'محمد العسيري', email: 'mohammed@email.com', orders: 31, spent: 'AED 11,450', status: 'VIP', joined: '2024-11-05' },
+  { id: 'c4', name: 'نورة القحطاني', email: 'noura@email.com', orders: 3, spent: 'AED 645', status: 'New', joined: '2026-05-18' },
 ]
 const MOCK_EMPLOYEES = [
-  { id: 'e1', name: 'Ù. ÙÙØ¯ Ø§ÙØ²ÙØ±Ø§ÙÙ', role: 'Admin', dept: 'ØªÙÙÙØ© Ø§ÙÙØ¹ÙÙÙØ§Øª', email: 'fahad@4leee.com', status: 'active' },
-  { id: 'e2', name: 'ÙÙØ¯ Ø§ÙÙØ§Ø¬Ø¯', role: 'Manager', dept: 'Ø§ÙØ¹ÙÙÙØ§Øª Ø§ÙÙÙØ¬Ø³ØªÙØ©', email: 'hind@4leee.com', status: 'active' },
-  { id: 'e3', name: 'Ø³ÙØ·Ø§Ù Ø§ÙØºØ§ÙØ¯Ù', role: 'Support', dept: 'Ø®Ø¯ÙØ© Ø§ÙØ¹ÙÙØ§Ø¡', email: 'sultan@4leee.com', status: 'active' },
+  { id: 'e1', name: 'م. فهد الزهراني', role: 'Admin', dept: 'تقنية المعلومات', email: 'fahad@4leee.com', status: 'active' },
+  { id: 'e2', name: 'هند الماجد', role: 'Manager', dept: 'العمليات اللوجستية', email: 'hind@4leee.com', status: 'active' },
+  { id: 'e3', name: 'سلطان الغامدي', role: 'Support', dept: 'خدمة العملاء', email: 'sultan@4leee.com', status: 'active' },
 ]
 const AI_AGENTS = [
-  { name: 'ÙÙÙÙ Ø§ÙÙÙØªØ¬Ø§Øª', icon: Package, status: 'active', tasks: 128, desc: 'ØªØ­Ø³ÙÙ Ø§ÙØ£Ø³Ø¹Ø§Ø± ÙØ¥Ø¯Ø§Ø±Ø© Ø§ÙÙØªØ§ÙÙØ¬' },
-  { name: 'ÙÙÙÙ Ø§ÙØªØ³ÙÙÙ', icon: Megaphone, status: 'active', tasks: 94, desc: 'Ø¥ÙØ´Ø§Ø¡ Ø§ÙØ­ÙÙØ§Øª ÙØ§ÙÙØ­ØªÙÙ' },
-  { name: 'ÙÙÙÙ Ø§ÙÙØ§ÙÙØ©', icon: DollarSign, status: 'active', tasks: 57, desc: 'ØªØ­ÙÙÙ Ø§ÙØ£Ø±Ø¨Ø§Ø­ ÙØ§ÙØªÙÙØ¹Ø§Øª' },
-  { name: 'ÙÙÙÙ Ø§ÙØ¹ÙÙØ§Ø¡', icon: Users, status: 'idle', tasks: 23, desc: 'ØªØ­ÙÙÙ Ø§ÙØ³ÙÙÙ ÙØªÙØµÙØ§Øª CRM' },
-  { name: 'ÙÙÙÙ SEO', icon: Target, status: 'active', tasks: 76, desc: 'ØªØ­Ø³ÙÙ ÙØ­Ø±ÙØ§Øª Ø§ÙØ¨Ø­Ø«' },
-  { name: 'ÙÙÙÙ Ø§ÙØ£ÙÙ', icon: Shield, status: 'active', tasks: 12, desc: 'ÙØ±Ø§ÙØ¨Ø© Ø§ÙØªÙØ¯ÙØ¯Ø§Øª ÙØ§ÙØ¥Ø´Ø¹Ø§Ø±Ø§Øª' },
+  { name: 'وكيل المنتجات', icon: Package, status: 'active', tasks: 128, desc: 'تحسين الأسعار وإدارة الكتالوج' },
+  { name: 'وكيل التسويق', icon: Megaphone, status: 'active', tasks: 94, desc: 'إنشاء الحملات والمحتوى' },
+  { name: 'وكيل المالية', icon: DollarSign, status: 'active', tasks: 57, desc: 'تحليل الأرباح والتوقعات' },
+  { name: 'وكيل العملاء', icon: Users, status: 'idle', tasks: 23, desc: 'تحليل السلوك وتوصيات CRM' },
+  { name: 'وكيل SEO', icon: Target, status: 'active', tasks: 76, desc: 'تحسين محركات البحث' },
+  { name: 'وكيل الأمن', icon: Shield, status: 'active', tasks: 12, desc: 'مراقبة التهديدات والإشعارات' },
 ]
 
-// âââ HELPERS âââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── HELPERS ───────────────────────────────────────────────────────────────────
 const STATUS_BADGE: Record<string, string> = {
   delivered: 'bg-green-100 text-green-700',
   shipped:   'bg-blue-100 text-blue-700',
@@ -86,12 +86,12 @@ const STATUS_BADGE: Record<string, string> = {
   New:       'bg-gray-100 text-gray-600',
 }
 const STATUS_LABEL: Record<string, string> = {
-  delivered:'ÙÙØ³ÙÙÙÙ', shipped:'ÙÙØ¯ Ø§ÙØ´Ø­Ù', processing:'ÙØ¹Ø§ÙØ¬Ø©',
-  pending:'Ø§ÙØªØ¸Ø§Ø±', cancelled:'ÙÙØºÙ', active:'ÙØ´Ø·', out_of_stock:'ÙÙØ¯',
-  VIP:'VIP', Regular:'Ø¹Ø§Ø¯Ù', New:'Ø¬Ø¯ÙØ¯'
+  delivered:'مُسلَّم', shipped:'قيد الشحن', processing:'معالجة',
+  pending:'انتظار', cancelled:'ملغي', active:'نشط', out_of_stock:'نفد',
+  VIP:'VIP', Regular:'عادي', New:'جديد'
 }
 
-// âââ SUB-COMPONENTS ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── SUB-COMPONENTS ────────────────────────────────────────────────────────────
 function KPICard({ label, value, sub, icon: Icon, trend, color = 'blue' }: any) {
   const colors: Record<string, string> = {
     blue: 'bg-blue-50 text-blue-600', green: 'bg-green-50 text-green-600',
@@ -107,7 +107,7 @@ function KPICard({ label, value, sub, icon: Icon, trend, color = 'blue' }: any) 
         {trend !== undefined && (
           <div className={`flex items-center gap-1 mt-2 text-xs font-semibold ${trend >= 0 ? 'text-green-600' : 'text-red-500'}`}>
             {trend >= 0 ? <TrendingUp className="w-3 h-3" /> : <TrendingDown className="w-3 h-3" />}
-            <span>{Math.abs(trend)}% ÙÙØ§Ø±ÙØ© Ø¨Ø§ÙØ´ÙØ± Ø§ÙÙØ§Ø¶Ù</span>
+            <span>{Math.abs(trend)}% مقارنة بالشهر الماضي</span>
           </div>
         )}
       </div>
@@ -138,36 +138,36 @@ function SectionHeader({ title, subtitle, action }: { title: string; subtitle?: 
   )
 }
 
-// âââ SECTIONS ââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââââ
+// ─── SECTIONS ──────────────────────────────────────────────────────────────────
 
 function DashboardSection() {
   return (
     <div className="space-y-6">
-      <SectionHeader title="ÙÙØ­Ø© Ø§ÙØªØ­ÙÙ Ø§ÙØ±Ø¦ÙØ³ÙØ©" subtitle="ÙØ¸Ø±Ø© Ø¹Ø§ÙØ© Ø¹ÙÙ Ø£Ø¯Ø§Ø¡ Ø§ÙÙÙØµØ© ÙÙ Ø§ÙÙØ§Ù Ø§ÙÙÙØª Ø§ÙÙØ¹ÙÙ'" />
+      <SectionHeader title="لوحة التحكم الرئيسية" subtitle="نظرة عامة على أداء المنصة في امواق الىقت الفعلي'" />
 
       {/* KPI Row 1 */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <KPICard label="Ø¥ÙØ±Ø§Ø¯Ø§Øª Ø§ÙÙÙÙ" value="AED 4,280" sub="23 Ø·ÙØ¨ ÙÙØªÙÙ" icon={DollarSign} trend={12} color="green" />
-        <KPICard label="Ø¥ÙØ±Ø§Ø¯Ø§Øª Ø§ÙØ´ÙØ±" value="AED 89,420" sub="ÙØ¯Ù: AED 120K" icon={TrendingUp} trend={8} color="blue" />
-        <KPICard label="ØµØ§ÙÙ Ø§ÙØ±Ø¨Ø­" value="AED 28,140" sub="ÙØ§ÙØ´ 31.5%" icon={BarChart2} trend={5} color="purple" />
-        <KPICard label="Ø§ÙØ·ÙØ¨Ø§Øª Ø§ÙÙØ´Ø·Ø©" value="147" sub="18 ØªØ­ØªØ§Ø¬ ÙØ±Ø§Ø¬Ø¹Ø©" icon={ShoppingCart} trend={-3} color="orange" />
+        <KPICard label="إيرادات اليوم" value="AED 4,280" sub="23 طلب مكتمل" icon={DollarSign} trend={12} color="green" />
+        <KPICard label="إيرادات الشهر" value="AED 89,420" sub="هدف: AED 120K" icon={TrendingUp} trend={8} color="blue" />
+        <KPICard label="صافي الربح" value="AED 28,140" sub="هامش 31.5%" icon={BarChart2} trend={5} color="purple" />
+        <KPICard label="الطلبات النشطة" value="147" sub="18 تحتاج مراجعة" icon={ShoppingCart} trend={-3} color="orange" />
       </div>
 
       {/* KPI Row 2 */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <KPICard label="Ø¥Ø¬ÙØ§ÙÙ Ø§ÙÙÙØªØ¬Ø§Øª" value="50" sub="3 ÙÙØ¯Øª ÙÙ Ø§ÙÙØ®Ø²Ù" icon={Package} color="blue" />
-        <KPICard label="Ø§ÙØ¹ÙÙØ§Ø¡ Ø§ÙÙØ³Ø¬ÙÙÙ" value="0" sub="Ø§ÙÙØªØ¬Ø± Ø¬Ø¯ÙØ¯" icon={Users} color="purple" />
-        <KPICard label="Ø§ÙÙÙØ±Ø¯ÙÙ Ø§ÙÙØ´Ø·ÙÙ" value="4" sub="2 Ø¯Ø±ÙØ¨Ø´ÙØ¨ÙØ¬" icon={Store} color="orange" />
-        <KPICard label="ÙÙØ§Ù Ø§ÙØ°ÙØ§Ø¡ Ø§ÙÙØ´Ø·ÙØ§Ø¹Ù" value="390" sub="6 ÙÙÙØ§Ø¡ ÙØ´Ø·ÙÙ" icon={Bot} color="green" />
+        <KPICard label="إجمالي المنتجات" value="50" sub="3 نفدت من المخزن" icon={Package} color="blue" />
+        <KPICard label="العملاء المسجلون" value="0" sub="المتجر جديد" icon={Users} color="purple" />
+        <KPICard label="الموردون النشطون" value="4" sub="2 دروبشيبنج" icon={Store} color="orange" />
+        <KPICard label="مهام الذكاء املشطلاعي" value="390" sub="6 وكلاء نشطون" icon={Bot} color="green" />
       </div>
 
       {/* Revenue Chart */}
       <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-bold text-gray-900">Ø§ÙØ¥ÙØ±Ø§Ø¯Ø§Øª ÙØ§ÙØ£Ø±Ø¨Ø§Ø­ (2026)</h3>
+          <h3 className="font-bold text-gray-900">الإيرادات والأرباح (2026)</h3>
           <select className="text-xs border border-gray-200 rounded-lg px-3 py-1.5 text-gray-600">
-            <option>Ø¢Ø®Ø± 6 Ø£Ø´ÙØ±</option>
-            <option>ÙØ°Ø§ Ø§ÙØ¹Ø§Ù</option>
+            <option>آخر 6 أشهر</option>
+            <option>هذا العام</option>
           </select>
         </div>
         <ResponsiveContainer width="100%" height={220}>
@@ -186,8 +186,8 @@ function DashboardSection() {
             <XAxis dataKey="d" stroke="#9ca3af" fontSize={11} tickLine={false} />
             <YAxis stroke="#9ca3af" fontSize={11} tickLine={false} />
             <Tooltip contentStyle={{ borderRadius: 8, border: '1px solid #e5e7eb', fontSize: 12 }} />
-            <Area type="monotone" dataKey="rev" stroke="#3b82f6" fill="url(#rev)" strokeWidth={2} name="Ø§ÙØ¥ÙØ±Ø§Ø¯Ø§Øª" />
-            <Area type="monotone" dataKey="profit" stroke="#22c55e" fill="url(#prof)" strokeWidth={2} name="Ø§ÙØ±Ø¨Ø­" />
+            <Area type="monotone" dataKey="rev" stroke="#3b82f6" fill="url(#rev)" strokeWidth={2} name="الإيرادات" />
+            <Area type="monotone" dataKey="profit" stroke="#22c55e" fill="url(#prof)" strokeWidth={2} name="الربح" />
           </AreaChart>
         </ResponsiveContainer>
       </div>
@@ -196,7 +196,7 @@ function DashboardSection() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
         {/* Recent Orders */}
         <div className="lg:col-span-2 bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <h3 className="font-bold text-gray-900 mb-4">Ø£Ø­Ø¯Ø« Ø§ÙØ·ÙØ¨Ø§Øª</h3>
+          <h3 className="font-bold text-gray-900 mb-4">أحدث الطلبات</h3>
           <div className="space-y-3">
             {MOCK_ORDERS.slice(0, 4).map(o => (
               <div key={o.id} className="flex items-center justify-between py-2 border-b border-gray-50 last:border-0">
@@ -206,7 +206,7 @@ function DashboardSection() {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-gray-800">{o.customer}</p>
-                    <p className="text-xs text-gray-400">{o.id} â¢ {o.date}</p>
+                    <p className="text-xs text-gray-400">{o.id} • {o.date}</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
@@ -220,14 +220,14 @@ function DashboardSection() {
 
         {/* System Status */}
         <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <h3 className="font-bold text-gray-900 mb-4">Ø­Ø§ÙØ© Ø§ÙÙÙØµØ©</h3>
+          <h3 className="font-bold text-gray-900 mb-4">حالة المنصة</h3>
           <div className="space-y-3">
             {[
-              { label: 'Ø§ÙÙÙÙØ¹ Ø§ÙØ¥ÙÙØªØ±ÙÙÙ', status: true },
-              { label: 'ØªØ·Ø¨ÙÙ Android', status: true },
-              { label: 'ØªØ·Ø¨ÙÙ iPhone', status: true },
+              { label: 'امموقع الإلكتروني', status: true },
+              { label: 'تطبيق Android', status: true },
+              { label: 'تطبيق iPhone', status: true },
               { label: 'Shopify Sync', status: true },
-              { label: 'ÙØ¸Ø§Ù Ø§ÙØ°ÙØ§Ø¡ Ø§ÙØ§ØµØ·ÙØ§Ø¹Ù', status: true },
+              { label: 'نظام الذكاء الاصطناعي', status: true },
               { label: 'CDN & Storage', status: true },
             ].map(s => (
               <div key={s.label} className="flex items-center justify-between">
@@ -235,7 +235,7 @@ function DashboardSection() {
                 <div className="flex items-center gap-1.5">
                   <div className={`w-2 h-2 rounded-full ${s.status ? 'bg-green-500' : 'bg-red-500'} ${s.status ? 'animate-pulse' : ''}`} />
                   <span className={`text-xs font-semibold ${s.status ? 'text-green-600' : 'text-red-500'}`}>
-                    {s.status ? 'ÙØ¹ÙÙ' : 'ÙØªÙÙÙ'}
+                    {s.status ? 'يعمل' : 'متوقف'}
                   </span>
                 </div>
               </div>
@@ -250,19 +250,19 @@ function DashboardSection() {
 function OrdersSection() {
   const [filter, setFilter] = useState('all')
   const tabs = [
-    { key: 'all', label: 'Ø§ÙÙÙ', count: 147 }, { key: 'pending', label: 'Ø§ÙØªØ¸Ø§Ø±', count: 18 },
-    { key: 'processing', label: 'ÙØ¹Ø§ÙØ¬Ø©', count: 31 }, { key: 'shipped', label: 'Ø´Ø­Ù', count: 45 },
-    { key: 'delivered', label: 'ÙÙØ³ÙÙÙÙ', count: 42 }, { key: 'cancelled', label: 'ÙÙØºÙ', count: 11 },
+    { key: 'all', label: 'الكل', count: 147 }, { key: 'pending', label: 'انتظار', count: 18 },
+    { key: 'processing', label: 'معالجة', count: 31 }, { key: 'shipped', label: 'شحن', count: 45 },
+    { key: 'delivered', label: 'مُسلَّم', count: 42 }, { key: 'cancelled', label: 'ملغي', count: 11 },
   ]
   const filtered = filter === 'all' ? MOCK_ORDERS : MOCK_ORDERS.filter(o => o.status === filter)
   return (
     <div className="space-y-6">
       <SectionHeader
-        title="Ø¥Ø¯Ø§Ø±Ø© Ø§ÙØ·ÙØ¨Ø§Øª"
-        subtitle="Ø¬ÙÙØ¹ Ø§ÙØ·ÙØ¨Ø§Øª Ø§ÙÙØ§Ø±Ø¯Ø© Ø¹Ø¨Ø± Ø§ÙÙÙÙØ§Øª Ø§ÙÙØ®ØªÙÙØ©"
+        title="إدارة الطلبات"
+        subtitle="جميع الطلبات الواردة عبر القنوات المختلفة"
         action={
           <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors">
-            <Plus className="w-4 h-4" /> Ø·ÙØ¨ Ø¬Ø¯ÙØ¯
+            <Plus className="w-4 h-4" /> طلب جديد
           </button>
         }
       />
@@ -288,13 +288,13 @@ function OrdersSection() {
         <table className="w-full">
           <thead>
             <tr className="border-b border-gray-100 bg-gray-50">
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø±ÙÙ Ø§ÙØ·ÙØ¨</th>
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø§ÙØ¹ÙÙÙ</th>
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø§ÙØªØ§Ø±ÙØ®</th>
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø§ÙØ¹ÙØ§ØµØ±</th>
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø§ÙÙØ¨ÙØº</th>
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø§ÙØ­Ø§ÙØ©</th>
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø¥Ø¬Ø±Ø§Ø¡</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">رقم الطلب</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">العميل</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">التاريخ</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">العناصر</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">المبلغ</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">الحالة</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">إجراء</th>
             </tr>
           </thead>
           <tbody>
@@ -303,7 +303,7 @@ function OrdersSection() {
                 <td className="px-4 py-3 text-sm font-bold text-blue-600">{o.id}</td>
                 <td className="px-4 py-3 text-sm text-gray-800">{o.customer}</td>
                 <td className="px-4 py-3 text-sm text-gray-500">{o.date}</td>
-                <td className="px-4 py-3 text-sm text-gray-600">{o.items} ÙÙØªØ¬Ø§Øª</td>
+                <td className="px-4 py-3 text-sm text-gray-600">{o.items} منتجات</td>
                 <td className="px-4 py-3 text-sm font-bold text-gray-900">{o.total}</td>
                 <td className="px-4 py-3"><Badge status={o.status} /></td>
                 <td className="px-4 py-3">
@@ -318,7 +318,7 @@ function OrdersSection() {
         {filtered.length === 0 && (
           <div className="text-center py-12 text-gray-400">
             <ShoppingCart className="w-10 h-10 mx-auto mb-3 opacity-30" />
-            <p className="text-sm">ÙØ§ ØªÙØ¬Ø¯ Ø·ÙØ¨Ø§Øª ÙÙ ÙØ°Ù Ø§ÙÙØ¦Ø©</p>
+            <p className="text-sm">لا توجد طلبات في هذه الفئة</p>
           </div>
         )}
       </div>
@@ -330,7 +330,7 @@ function ProductsSection() {
   const [products, setProducts] = useState(MOCK_PRODUCTS)
   const [showForm, setShowForm] = useState(false)
   const [syncing, setSyncing] = useState(false)
-  const [form, setForm] = useState({ name: '', category: 'Ø¥ÙÙØªØ±ÙÙÙØ§Øª', price: '', stock: '' })
+  const [form, setForm] = useState({ name: '', category: 'إلكترونيات', price: '', stock: '' })
 
   const handleSync = async () => {
     setSyncing(true)
@@ -339,9 +339,9 @@ function ProductsSection() {
       const json = await res.json()
       if (json.products) {
         const mapped = json.products.map((p: any) => ({
-          id: p.id, name: p.title, category: p.product_type || 'Ø¹Ø§Ù',
+          id: p.id, name: p.title, category: p.product_type || 'عام',
           price: p.variants?.[0]?.price || 0,
-          stock: p.variants?.[0]?.inventory_quantity ?? 'â',
+          stock: p.variants?.[0]?.inventory_quantity ?? '—',
           status: p.status === 'active' ? 'active' : 'out_of_stock',
           image: p.image?.src || '',
         }))
@@ -361,18 +361,18 @@ function ProductsSection() {
   return (
     <div className="space-y-6">
       <SectionHeader
-        title="Ø§ÙÙÙØªØ¬Ø§Øª ÙØ§ÙÙØ®Ø²ÙÙ"
-        subtitle="Ø¥Ø¯Ø§Ø±Ø© Ø§ÙÙØªØ§ÙÙØ¬ Ø§ÙÙØ§ÙÙ ÙÙÙÙØªØ¬Ø§Øª ÙÙØ²Ø§ÙÙØ© Shopify"
+        title="المنتجات والمخزون"
+        subtitle="إدارة الكتالوج الكامل للمنتجات ومزامنة Shopify"
         action={
           <div className="flex gap-2">
             <button onClick={handleSync} disabled={syncing}
               className="flex items-center gap-2 bg-white border border-gray-200 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium hover:bg-gray-50 transition-colors">
               <RefreshCw className={`w-4 h-4 ${syncing ? 'animate-spin' : ''}`} />
-              {syncing ? 'ÙØ²Ø§ÙÙØ©...' : 'ÙØ²Ø§ÙÙØ© Shopify'}
+              {syncing ? 'مزامنة...' : 'مزامنة Shopify'}
             </button>
             <button onClick={() => setShowForm(!showForm)}
               className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition-colors">
-              <Plus className="w-4 h-4" /> ÙÙØªØ¬ Ø¬Ø¯ÙØ¯
+              <Plus className="w-4 h-4" /> منتج جديد
             </button>
           </div>
         }
@@ -380,37 +380,37 @@ function ProductsSection() {
 
       {showForm && (
         <div className="bg-white rounded-xl border border-blue-200 p-5 shadow-sm">
-          <h3 className="font-bold text-gray-900 mb-4">Ø¥Ø¶Ø§ÙØ© ÙÙØªØ¬ Ø¬Ø¯ÙØ¯</h3>
+          <h3 className="font-bold text-gray-900 mb-4">إضافة منتج جديد</h3>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-semibold text-gray-600 block mb-1">Ø§Ø³Ù Ø§ÙÙÙØªØ¬</label>
+              <label className="text-xs font-semibold text-gray-600 block mb-1">اسم المنتج</label>
               <input value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
                 className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                placeholder="Ø§Ø³Ù Ø§ÙÙÙØªØ¬..." />
+                placeholder="اسم المنتج..." />
             </div>
             <div>
-              <label className="text-xs font-semibold text-gray-600 block mb-1">Ø§ÙÙØ¦Ø©</label>
+              <label className="text-xs font-semibold text-gray-600 block mb-1">الفئة</label>
               <select value={form.category} onChange={e => setForm({ ...form, category: e.target.value })}
                 className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                {['Ø¥ÙÙØªØ±ÙÙÙØ§Øª', 'Ø­ÙØ§Ø¦Ø¨', 'Ø¹ÙØ§ÙØ©', 'ÙÙØ§Ø¨Ø³', 'Ø£Ø«Ø§Ø«'].map(c => <option key={c}>{c}</option>)}
+                {['إلكترونيات', 'حقائب', 'عناية', 'ملابس', 'أثاث'].map(c => <option key={c}>{c}</option>)}
               </select>
             </div>
             <div>
-              <label className="text-xs font-semibold text-gray-600 block mb-1">Ø§ÙØ³Ø¹Ø± (AED)</label>
+              <label className="text-xs font-semibold text-gray-600 block mb-1">السعر (AED)</label>
               <input type="number" value={form.price} onChange={e => setForm({ ...form, price: e.target.value })}
                 className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="0.00" />
             </div>
             <div>
-              <label className="text-xs font-semibold text-gray-600 block mb-1">Ø§ÙÙÙÙØ©</label>
+              <label className="text-xs font-semibold text-gray-600 block mb-1">الكمية</label>
               <input type="number" value={form.stock} onChange={e => setForm({ ...form, stock: e.target.value })}
                 className="w-full border border-gray-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                 placeholder="0" />
             </div>
           </div>
           <div className="flex gap-3 mt-4">
-            <button className="bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700">Ø­ÙØ¸ Ø§ÙÙÙØªØ¬</button>
-            <button onClick={() => setShowForm(false)} className="bg-gray-100 text-gray-700 px-5 py-2 rounded-lg text-sm font-medium">Ø¥ÙØºØ§Ø¡</button>
+            <button className="bg-blue-600 text-white px-5 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700">حفظ المنتج</button>
+            <button onClick={() => setShowForm(false)} className="bg-gray-100 text-gray-700 px-5 py-2 rounded-lg text-sm font-medium">إلغاء</button>
           </div>
         </div>
       )}
@@ -419,12 +419,12 @@ function ProductsSection() {
         <table className="w-full">
           <thead>
             <tr className="border-b border-gray-100 bg-gray-50">
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø§ÙÙÙØªØ¬</th>
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø§ÙÙØ¦Ø©</th>
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø§ÙØ³Ø¹Ø±</th>
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø§ÙÙØ®Ø²ÙÙ</th>
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø§ÙØ­Ø§ÙØ©</th>
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø¥Ø¬Ø±Ø§Ø¡Ø§Øª</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">المنتج</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">الفئة</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">السعر</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">المخزون</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">الحالة</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">إجراءات</th>
             </tr>
           </thead>
           <tbody>
@@ -462,30 +462,30 @@ function CustomersSection() {
   return (
     <div className="space-y-6">
       <SectionHeader
-        title="Ø¥Ø¯Ø§Ø±Ø© Ø§ÙØ¹ÙÙØ§Ø¡"
-        subtitle="ÙÙÙØ§Øª Ø§ÙØ¹ÙÙØ§Ø¡Ø Ø§ÙÙØ¬ÙÙØ¹Ø§ØªØ ÙØªØ­ÙÙÙØ§Øª CRM"
+        title="إدارة العملاء"
+        subtitle="ملفات العملاء، المجموعات، وتحميلات CRM"
         action={
           <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700">
-            <UserPlus className="w-4 h-4" /> Ø¥Ø¶Ø§ÙØ© Ø¹ÙÙÙ
+            <UserPlus className="w-4 h-4" /> إضافة عميل
           </button>
         }
       />
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <KPICard label="Ø¥Ø¬ÙØ§ÙÙ Ø§ÙØ¹ÙÙØ§Ø¡" value="0" sub="Ø§ÙÙØªØ¬Ø± Ø¬Ø¯ÙØ¯" icon={Users} color="blue" />
-        <KPICard label="Ø¹ÙÙØ§Ö¡ VIP" value="0" sub="+0 ÙØ°Ø§ Ø§ÙØ´ÙØ±" icon={Sparkles} color="purple" />
-        <KPICard label="ÙØªÙØ³Ø· Ø§ÙØ¥ÙÙØ§Ù" value="AED 0" sub="ÙÙÙ Ø¹ÙÙÙ" icon={DollarSign} color="green" />
-        <KPICard label="ÙØ¹Ø¯Ù Ø§ÙØ§Ø­ØªÙØ§Ø¸" value="â" sub="ÙØ§ Ø¨ÙØ§ÙØ§Øª Ø¨Ø¹Ø¯" icon={RotateCcw} color="orange" />
+        <KPICard label="إجمالي العملاء" value="0" sub="اممتجر جديد" icon={Users} color="blue" />
+        <KPICard label="عملا֡ VIP" value="0" sub="+0 هذا الشهر" icon={Sparkles} color="purple" />
+        <KPICard label="متوسط الإنفاق" value="AED 0" sub="لكل عميل" icon={DollarSign} color="green" />
+        <KPICard label="معدل الاحتفاظ" value="—" sub="لا بيانات بعد" icon={RotateCcw} color="orange" />
       </div>
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
         <table className="w-full">
           <thead>
             <tr className="border-b border-gray-100 bg-gray-50">
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø§ÙØ¹ÙÙÙ</th>
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø§ÙØ¨Ø±ÙØ¯</th>
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø§ÙØ·ÙØ¨Ø§Øª</th>
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø§ÙØ¥ÙÙØ§Ù Ø§ÙÙÙÙ</th>
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">Ø§ÙÙØ¦Ø©</th>
-              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">ØªØ§Ø±ÙØ® Ø§ÙØªØ³Ø¬ÙÙ</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">العميل</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">البريد</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">الطلبات</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">الإنفاق الكلي</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">الفئة</th>
+              <th className="text-right text-xs font-semibold text-gray-500 px-4 py-3">تاريخ التسجيل</th>
             </tr>
           </thead>
           <tbody>
@@ -517,16 +517,16 @@ function AICenterSection() {
   const [autonomousMode, setAutonomousMode] = useState<'off' | 'assisted' | 'full'>('assisted')
   return (
     <div className="space-y-6">
-      <SectionHeader title="ÙØ±ÙØ² Ø§ÙØ°ÙØ§Ø¡ Ø§ÙØ§ØµØ·ÙØ§Ø¹Ù" subtitle="Ø¥Ø¯Ø§Ø±Ø© Ø§ÙÙÙÙØ§Ø¡ Ø§ÙØ°ÙÙÙÙ ÙØ§ÙÙØ¸Ø§Ù Ø§ÙØªØ´ØºÙÙÙ" />
+      <SectionHeader title="مركز الذكاء الاصطناعي" subtitle="إدارة الوكلاء الذكيين والنظام التشغيلي" />
 
       {/* Autonomous Mode */}
       <div className="bg-gradient-to-r from-violet-50 to-blue-50 rounded-xl border border-violet-200 p-5">
         <div className="flex items-center justify-between">
           <div>
             <h3 className="font-bold text-gray-900 flex items-center gap-2">
-              <Brain className="w-5 h-5 text-violet-600" /> ÙØ¶Ø¹ Ø§ÙØªØ´ØºÙÙ Ø§ÙØªÙÙØ§Ø¦Ù
+              <Brain className="w-5 h-5 text-violet-600" /> وضع التشغيل التمقائي
             </h3>
-            <p className="text-sm text-gray-500 mt-1">ØªØ­ÙÙ ÙÙ ÙØ³ØªÙÙ Ø§Ø³ØªÙÙØ§ÙÙØ© Ø§ÙØ°ÙØ§Ø¡ Ø§ÙØ§ØµØ·ÙØ§Ø¶Ù</p>
+            <p className="text-sm text-gray-500 mt-1">تحكم في مستوى استقلالية الذكاء الاصطناضي</p>
           </div>
           <div className="flex gap-2">
             {(['off', 'assisted', 'full'] as const).map(m => (
@@ -537,16 +537,16 @@ function AICenterSection() {
                     ? m === 'off' ? 'bg-gray-600 text-white' : m === 'assisted' ? 'bg-blue-600 text-white' : 'bg-violet-600 text-white'
                     : 'bg-white border border-gray-200 text-gray-500 hover:bg-gray-50'
                 }`}>
-                {m === 'off' ? 'â Ø¥ÙÙØ§Ù' : m === 'assisted' ? 'ð¤ ÙØ³Ø§Ø¹Ø¯Ø©' : 'ð ØªÙÙØ§Ø¦Ù ÙØ§ÙÙ'}
+                {m === 'off' ? '⛔ إيقاف' : m === 'assisted' ? 'ð¤ مساعدة' : 'ð تلقائي كامل'}
               </button>
             ))}
           </div>
         </div>
         <div className="mt-3 p-3 bg-white/70 rounded-lg">
           <p className="text-xs text-gray-600">
-            {autonomousMode === 'off' && 'ð´ Ø§ÙØ°ÙØ§Ø¡ Ø§ÙØ§ØµØ·ÙØ§Ø¹Ù ÙÙ ÙØ¶Ø¹ Ø§ÙÙØ±Ø§ÙØ¨Ø© ÙÙØ· â ÙØ§ ÙØªÙØ°Ø¯ ÙØ±Ø§ËØ±Ø§Øª.'}
-            {autonomousMode === 'assisted' && 'ð¡ Ø§ÙØ°ÙØ§Ø¡ Ø§ÙØ§ØµØ·ÙØ§Ø¹Ù ÙÙØªØ±Ø­Ø ÙØ§ÙÙØ§ÙÙ ÙÙØ§ÙÙ Ø¹ÙÙ ÙÙ Ø¥Ø¬Ø±Ø§Ø¡.'}
-            {autonomousMode === 'full' && 'ð¢ Ø§ÙØ°ÙØ§Ø¡ Ø§ÙØ§ØµØ·ÙØ§Ø¹Ù ÙØªØ­ÙÙ Ø¨Ù 95% ÙÙ Ø§ÙØ¹ÙÙÙØ§Øª ØªÙÙØ§Ø¦ÙØ§Ù. Ø¥Ø¬Ø±Ø§Ø¡Ø§Øª Ø§ÙØ­Ø°Ù ØªØªØ·ÙØ¨ ÙÙØ§ÙÙØªÙ Ø¯Ø§Ø¦ÙØ§Ù.'}
+            {autonomousMode === 'off' && 'ð´ الذكاء الاصطناعي في وضع المراقبة فقط — لا يتَذد قراËرات.'}
+            {autonomousMode === 'assisted' && 'ð¡ الذكاء الاصطناعي ييترح، والمالك يوافق على كل إجراء.'}
+            {autonomousMode === 'full' && 'ð¢ الذكاء الاصطناعي يتحكم بـ 95% من العمميات تلقائياً. إجراءات الحذف تتطلب موافقتك دائماً.'}
           </p>
         </div>
       </div>
@@ -555,17 +555,17 @@ function AICenterSection() {
       <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-bold text-gray-900 flex items-center gap-2">
-            <Cpu className="w-5 h-5 text-amber-500" /> ØªÙØ±ÙØ² Ø§ÙÙØ¯ÙØ± Ø§ÙØªÙÙÙØ°Ù ( I CEO)
+            <Cpu className="w-5 h-5 text-amber-500" /> تقريز المدير التمفيذي ( I CEO)
           </h3>
           <button className="flex items-center gap-2 text-sm bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1.5 rounded-lg font-medium hover:bg-amber-100">
-            <RefreshCw className="w-3.5 h-3.5" /> Ø¥ÙØ´Ø§Ø¡ ØªÙØ¸Ø±ÙØ² Ø¬Ø¯ÙØ¯
+            <RefreshCw className="w-3.5 h-3.5" /> إنشاء تقظريز جديد
           </button>
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           {[
-            { title: 'ÙØ±Øµ Ø§ÙØ¥ÙØ±Ø§Ø¯Ø§Øª', text: 'ÙÙØªØ¬Ø§Øª Ø§ÙØ¥ÙÙØªØ±ÙÙÙØ§Øª ØªÙØ´ÙÙÙ 68% ÙÙ Ø§ÙØ·ÙØ¨Ø§Øª. ØªÙØ³ÙØ¹ Ø§ÙÙØªØ§ÙÙØ¬ ÙÙ ÙØ°Ø§ Ø§ÙÙØ·Ø§Ø¹ ÙÙØªÙØ­ Ø²ÙØ§Ø¯Ø© Ø¥ÙÙØ±Ø§Ø¯Ø§Øª Ø¨Ø³Ø¨Ø© 35%.' },
-            { title: 'ØªØ­ÙÙÙ Ø§ÙÙØ®Ø§Ø·Ø±', text: '3 ÙÙØªØ¬Ø§Øª ÙÙØ¯Ø© ÙÙ Ø§ÙÙØ·. 18 Ø·ÙØ¨Ø§Ù ÙÙ ÙØ¶Ø¹ Ø§ÙÙØ·. ÙÙÙØµØ­ Ø¨Ø¥Ø¹Ø§Ø¯Ø© Ø§ÙØ·ÙØ¨ Ø®ÙØ§Ù 48 Ø³Ø§Ø¹Ø©.' },
-            { title: 'ØªÙØµÙØ§Øª Ø§ÙØªØ³ÙÙÙ', text: 'Ø­ÙÙØ© Ø¹Ø±ÙØ¶ ÙÙØ§ÙÙ Ø§ÙÙÙ Ø§ÙØ£Ø³Ø¨ÙØ¹ ÙÙÙÙÙØ§ Ø§Ø³ØªÙØ¯Ø§Ù 48 Ø³ÙØ© ÙÙØ¬ÙØ±Ø© ÙØ­ØªÙÙØ© â ØªÙÙØ¹Ø§Øª ØªØ­ÙÙÙ 22%.' },
+            { title: 'فرص الإيرادات', text: 'منتجات الإمكترونيات تُشكّل 68% من الطلبات. توسّع الكتالوج في هذا امقطاع يُتيح زيادة إي٘رادات بسبة 35%.' },
+            { title: 'تحليل المخاطر', text: '3 منتجات مندة من امنط. 18 طلباً في وضع امنط. يُنصح بإعادة الطلب خمال 48 ساعة.' },
+            { title: 'توصيات التسويق', text: 'حملة عروض مهاين امفق الأسبوع يمكنىا استهداف 48 سلة مهجورة محتملة └ توقعات تحويل 22%.' },
             { title: 'تحليل المورّدين', text: 'المورد الأول يسلّم في 3 أيام بمعدل رضا 94%. يُنصح بمراجعة شروط المورد الثاني.' },
           ].map((item, i) => (
             <div key={i} className="bg-amber-50 rounded-lg p-3 border border-amber-200">
@@ -579,19 +579,19 @@ function AICenterSection() {
         {/* Campaigns */}
         <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
           <div className="flex items-center justify-between mb-4">
-            <h3 className="font-bold text-gray-900">Ø§ÙÙØªÙØ§Öª Ø§ÙÙØª Ø§ÙÙØ±ÙØ§Öª Ø§ÙÙØ±ÙØ¨Ø§Ù</h3>
-            <button className="text-sm text-blue-600 font-medium hover:underline">+ Ø­ÙÙØ© Ø¬Ø¯ÙØ¯Ø©</button>
+            <h3 className="font-bold text-gray-900">امهتما֪ امهت افمرقا֪ افمرقباي</h3>
+            <button className="text-sm text-blue-600 font-medium hover:underline">+ حملة جديدة</button>
           </div>
           <div className="space-y-3">
             {[
-              { name: 'Summer Sale 2026', type: 'Ø®ØµÙ %30', reach: '12,340', status: 'active' },
-              { name: 'Flash Deal Friday', type: 'ØµØ±Ø¶ ÙÙØªÙ', reach: '8,240', status: 'scheduled' },
-              { name: 'Eid Specials', type: 'ÙØ¬ÙÙØ¹Ø©', reach: 'â', status: 'draft' },
+              { name: 'Summer Sale 2026', type: 'خصم %30', reach: '12,340', status: 'active' },
+              { name: 'Flash Deal Friday', type: 'صرض وقتي', reach: '8,240', status: 'scheduled' },
+              { name: 'Eid Specials', type: 'مجموعة', reach: '—', status: 'draft' },
             ].map(c => (
               <div key={c.name} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
                 <div>
                   <p className="text-sm font-semibold text-gray-800">{c.name}</p>
-                  <p className="text-xs text-gray-400">{c.type} â¢ ÙÙÙÙ: {c.reach}</p>
+                  <p className="text-xs text-gray-400">{c.type} • ومول: {c.reach}</p>
                 </div>
                 <Badge status={c.status === 'active' ? 'active' : 'pending'} />
               </div>
@@ -600,7 +600,7 @@ function AICenterSection() {
         </div>
         {/* Channels */}
         <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
-          <h3 className="font-bold text-gray-900 mb-4">ÙÙÙØ§Öª Ø§ÙÙØ±ÙÙÙ</h3>
+          <h3 className="font-bold text-gray-900 mb-4">فنوا֪ افمرقين</h3>
           <div className="space-y-3">
             {[
               { name: 'Push Notifications', icon: Bell, sent: '2,420', rate: '18%' },
@@ -616,8 +616,8 @@ function AICenterSection() {
                   <span className="text-sm font-medium text-gray-700">{ch.name}</span>
                 </div>
                 <div className="text-right">
-                  <p className="text-xs font-bold text-gray-800">{ch.sent} ÙØ±Ø·Ù
-                  <p className="text-xs text-green-600 font-semibold">{ch.rate} ÙØªØ­
+                  <p className="text-xs font-bold text-gray-800">{ch.sent} مرطل
+                  <p className="text-xs text-green-600 font-semibold">{ch.rate} فتح
                 </div>
               </div>
             ))}
@@ -631,26 +631,26 @@ function AICenterSection() {
 function MarketplaceSection() {
   return (
     <div className="space-y-6">
-      <SectionHeader title="Ø§ÙÙØªÙØ§Öª Ø§ÙÙØªÙØ©ÙØ©" subtitle="Ø¥Ø¯Ø§Ø±Ø© Ø§ÙÙØªÙØ§Öª Ø§ÙØ©ÙØ©" />
+      <SectionHeader title="امهتما֪ امهتفةلة" subtitle="إدارة امهتما֪ افةلة" />
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <KPICard label="Ø§ÙÙÙØ±Ø¯ÙÙ Ø§ÙÙØ´Ø·ÙÙ" value="4" sub="2 Ø¯Ø±ÙØ¨Ø´ÙØ¨Ù" icon={Store} color="blue" />
-        <KPICard label="Ø²Ø¯ÙÙ¤Ù Ø§ÙÙÙØ±Ø¯ÙÙ Ø§ÙÙØ§Ø±Ø¯"" value="31" sub="3 Ø¨Ø§ÙØªØ®Ø§Ø± Ø§ÙØªØ£ÙÙØ¯" icon={Truck} color="orange" />
-        <KPICard label="Ø§ÙÙØªÙØ§Öª Ø§ÙØ©ÙØ©"ÙØ³ØªÙØ¯Ø¹Ø©'" value="2" sub="Ø¯Ø¨Ù + Ø§ÙØ±ÙÙØ§" icon={Warehouse} color="green" />
-        <KPICard label="ÙØªÙØ³Ø· ÙÙØª Ø§ÙØªØ³ÙÙÙ" value="2.8 ÙÙÙ" sub="ÙØ¯Ù: 2 ÙÙÙ" icon={Clock} color="purple" />
+        <KPICard label="الموردون النشطون" value="4" sub="2 دروبشيبن" icon={Store} color="blue" />
+        <KPICard label="زدي٤ي الموردون الوارد"" value="31" sub="3 بانتخار التأكيد" icon={Truck} color="orange" />
+        <KPICard label="امهتما֪ افةلة"مستودعة'" value="2" sub="دبي + الري٘ا" icon={Warehouse} color="green" />
+        <KPICard label="متوسط وفت التسميم" value="2.8 يوم" sub="هدف: 2 ٙيم" icon={Clock} color="purple" />
       </div>
       <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
         <div className="flex items-center justify-between p-5 border-b border-gray-100">
-          <h3 className="font-bold text-gray-900">ÙØ§fm­  Ø§ÙÙÙØ±Ø¯ÙÙ Ø§ÙÙØ´Ø·ÙÙ ö`VØ§ÙÙØ¥ÙØ©'</h3>
+          <h3 className="font-bold text-gray-900">فاfm­  الموردون النشطون ö`Vالفإلة'</h3>
           <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
-            <Plus className="w-4 h-4" /> Ø¥Ø¶Ø§ÙØ© ÙÙØ±Ø¯
+            <Plus className="w-4 h-4" /> إضافة مورد
           </button>
         </div>
         <div className="p-5 space-y-3">
           {[
-            { name: 'ÙØ³ØªÙØ¯Ø¹ 4LEEE Ø§ÙÙØ±ÙØ²Ù', type: 'ÙØ³ØªÙØ¯Ø¹ Ø®Ø§Øµ', products: 45, rating: '4.9', location: 'Ø¯Ø¨Ù Ø§ÙÙØ§Ø±Ø§Øª' },
-            { name: 'TechSupply Arabia', type: 'Ø¯Ø±ÙØ¨Ø´ÙØ¨Ù', products: 28, rating: '4.6', location: 'Ø§ÙÙØ§Ø±Ø§Øª Ø§ÙÙØ±Ø§Ø©' },
-            { name: 'FashionLink UAE', type: 'Ø¯Ø±ÙØ¨Ø´ÙØ¨Ù', products: 12, rating: '4.2', location: 'Ø£Ø¨ÙØ¸Ø¨Ù Ø§ÙÙØ§Ø±Ø§Øª' },
-            { name: 'Global Accessories Co.', type: 'Ø¬ÙÙØ©', products: 8, rating: '4.7', location: 'Ø´ÙÚ¹ÙØ§ÙØ Ø§ÙØµÙÙ' },
+            { name: 'مستودع 4LEEE اممركزي', type: 'مستودع خاص', products: 45, rating: '4.9', location: 'دبي اممارات' },
+            { name: 'TechSupply Arabia', type: 'دروبشيبن', products: 28, rating: '4.6', location: 'اممارات امهراة' },
+            { name: 'FashionLink UAE', type: 'دروبشيبن', products: 12, rating: '4.2', location: 'أبوظبي اممارات' },
+            { name: 'Global Accessories Co.', type: 'جملة', products: 8, rating: '4.7', location: 'شنڹهاي، الصين' },
           ].map(s => (
             <div key={s.name} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100">
               <div className="flex items-center gap-3">
@@ -659,7 +659,7 @@ function MarketplaceSection() {
                 </div>
                 <div>
                   <p className="text-sm font-bold text-gray-800">{s.name}</p>
-                  <p className="text-xs text-gray-400">{s.type} â¢ {s.location}</p>
+                  <p className="text-xs text-gray-400">{s.type} • {s.location}</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 text-right">
@@ -785,7 +785,7 @@ export default function AdminUI() {
 
   return (
     <div className="flex h-screen bg-gray-50 overflow-hidden" dir="rtl">
-      {/* ââ SIDEBAR âââââââââââââââââââââââââââââââââââââââââââââââââââ */}
+      {/* ── SIDEBAR ─────────────────────────────────────────────────── */}
       <aside className={`${sidebarOpen ? 'w-60' : 'w-0 overflow-hidden'} transition-all duration-200 bg-white border-l border-gray-200 flex flex-col shrink-0`}>
         {/* Logo */}
         <div className="h-14 flex items-center gap-3 px-4 border-b border-gray-100">
@@ -832,7 +832,7 @@ export default function AdminUI() {
         </div>
       </aside>
 
-      {/* ââ MAIN ââââââââââââââââââââââââââââââââââââââââââââââââââââââ */}
+      {/* ── MAIN ────────────────────────────────────────────────────── */}
       <div className="flex-1 flex flex-col overflow-hidden min-w-0">
         {/* Header */}
         <header className="h-14 bg-white border-b border-gray-200 flex items-center gap-4 px-5 shrink-0">
@@ -845,7 +845,7 @@ export default function AdminUI() {
             <input
               value={search}
               onChange={e => setSearch(e.target.value)}
-              placeholder="Ø¨Ø­Ø« Ø³Ø±ÙØ¹... Ctrl+K"
+              placeholder="بحث سريع... Ctrl+K"
               className="w-full bg-gray-50 border border-gray-200 rounded-lg pr-9 pl-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
             />
           </div>
@@ -860,13 +860,13 @@ export default function AdminUI() {
               {notifOpen && (
                 <div className="absolute top-10 left-0 w-72 bg-white rounded-xl border border-gray-200 shadow-xl z-50">
                   <div className="p-3 border-b border-gray-100 flex items-center justify-between">
-                    <h4 className="text-sm font-bold text-gray-900">Ø§ÙØ¥Ø´Ø¹Ø§Ø±Ø§Öª</h4>
+                    <h4 className="text-sm font-bold text-gray-900">الإشعارا֪</h4>
                     <button onClick={() => setNotifOpen(false)}><X className="w-4 h-4 text-gray-400" /></button>
                   </div>
                   {[
-                    { text: 'Ø·ÙØ¨ Ø¬Ø¯ÙØ¯ #4522 ÙÙ ÙÙÙÙ Ø§ÙÙØ·ÙØ±Ù', time: 'ÙÙØ° 5 Ø¯ÙØ§ÙØ§Ù', icon: ShoppingCart, color: 'text-blue-500 bg-blue-50' },
-                    { text: 'منتج "حقيبة Titan" نفد من المخزون', time: 'ÙÙØ° 1 ÙØ³Ø§Ø¹Ù©', icon: AlertCircle, color: 'text-orange-500 bg-orange-50' },
-                    { text: 'ÙØ²Ø§ÙÙØ© Shopify â 50 ÙÙØªØ¬', time: 'ÙÙØ± Ø³Ø§Ø¹Ù©', icon: CheckCircle2, color: 'text-green-500 bg-green-50' },
+                    { text: 'طلب جديد #4522 من ليمً المطيري', time: 'منذ 5 دفاقاق', icon: ShoppingCart, color: 'text-blue-500 bg-blue-50' },
+                    { text: 'منتج "حقيبة Titan" نفد من المخزون', time: 'منذ 1 يساع٩', icon: AlertCircle, color: 'text-orange-500 bg-orange-50' },
+                    { text: 'مزامنة Shopify — 50 منتج', time: 'منر ساع٩', icon: CheckCircle2, color: 'text-green-500 bg-green-50' },
                   ].map((j, i) => (
                     <div key={i} className="p-3 hover:bg-gray-50 flex items-start gap-3 cursor-pointer">
                       <div className={`p-1.5 rounded-lg ${j.color.split(' ')[1]}`}>
