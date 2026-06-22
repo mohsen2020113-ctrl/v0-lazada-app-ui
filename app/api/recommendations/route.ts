@@ -76,8 +76,8 @@ export async function POST(request: NextRequest) {
 ${JSON.stringify(productContext, null, 2)}
 
 بيانات المستخدم:
-- المنتجات المشاهدة: ${viewedProducts.length > 0 ? viewedProductDetails.map((p) => p?.title).join(', ') : 'لا توجد'}
-- عناصر السلة: ${cartItems.length > 0 ? cartProductDetails.map((p) => p?.title).join(', ') : 'لا توجد'}
+- المنتجات المشاهدة: ${viewedProducts.length > 0 ? viewedProductDetails.map((p) => p?.name).join(', ') : 'لا توجد'}
+- عناصر السلة: ${cartItems.length > 0 ? cartProductDetails.map((p) => p?.name).join(', ') : 'لا توجد'}
 - الفئة المفضلة: ${category || 'جميع الفئات'}
 
 أرجع النتيجة في صيغة JSON بدون markdown:
