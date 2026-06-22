@@ -53,7 +53,7 @@ export default function ProductPage() {
   const [currentImage, setCurrentImage] = useState(0)
   const [quantity, setQuantity] = useState(1)
   const [wishlist, setWishlist] = useState(false)
-  const [activeTab, setActiveTab] = useState<'description' | 'reviews' | 'shipping'>('description')
+  const [activeTab, setActiveTab] = useState<'specs' | 'reviews' | 'recommendations'>('specs')
   const [addedToCart, setAddedToCart] = useState(false)
   const [relatedProducts, setRelatedProducts] = useState<RelatedProduct[]>([])
   const [recentlyViewed, setRecentlyViewed] = useState<RelatedProduct[]>([])
@@ -259,6 +259,20 @@ const [lightboxOpen, setLightboxOpen] = useState(false)
                   onClick={() => setLightboxOpen(true)}
                 />
               </div>
+{images.length > 1 && (
+<div className="flex items-center justify-center gap-1.5 pt-1">
+{images.map((_, i) => (
+<button
+key={i}
+onClick={() => setCurrentImage(i)}
+aria-label={`الصورة ${i + 1}`}
+className={`h-1.5 rounded-full transition-all ${
+i === currentImage ? 'w-5 bg-[#C2185B]' : 'w-1.5 bg-gray-300'
+}`}
+/>
+))}
+</div>
+)}
               {/* Thumbnails */}
               {images.length > 1 && (
                 <div className="flex gap-2 overflow-x-auto pb-1">
@@ -289,7 +303,7 @@ const [lightboxOpen, setLightboxOpen] = useState(false)
             <div className="lg:w-[55%] p-6 flex flex-col gap-4">
               {/* Title + Wishlist */}
               <div className="flex items-start gap-3">
-                <h1 className="flex-1 text-xl font-bold text-gray-900 leading-snug">{product.title}</h1>
+                <h1 className="flex-1 text-xl font-bold text-gray-900 leading-snug line-clamp-3">{product.title}</h1>
                 <button
                   onClick={() => setWishlist(!wishlist)}
                   className={`p-2 rounded-full border transition-colors flex-shrink-0 ${
@@ -336,6 +350,17 @@ const [lightboxOpen, setLightboxOpen] = useState(false)
                   السعر شامل ضريبة القيمة المضافة
                 </p>
               </div>
+{/* Delivery Info */}
+<div className="flex items-center gap-4 text-sm">
+<div className="flex items-center gap-1.5 text-gray-700">
+<Truck size={16} className="text-[#C2185B]" />
+<span>التوصيل المتوقع: 3-5 أيام عمل</span>
+</div>
+<div className="flex items-center gap-1.5 text-gray-700">
+<CheckCircle size={14} className="text-green-500" />
+<span>شحن مجاني فوق 200 درهم</span>
+</div>
+</div>
 
               {/* Store Info */}
               <div className="border border-gray-100 rounded-xl p-4 bg-gray-50">
@@ -455,9 +480,9 @@ const [lightboxOpen, setLightboxOpen] = useState(false)
         <div className="bg-white rounded-xl shadow-sm overflow-hidden">
           <div className="flex border-b border-gray-100">
             {[
-              { key: 'description', label: 'تفاصيل المنتج' },
-              { key: 'reviews', label: `التقييمات (2,042)` },
-              { key: 'shipping', label: 'الشحن والإرجاع' },
+              { key: 'specs', label: 'مواصفات' },
+{ key: 'reviews', label: `تقييمات (2,042)` },
+{ key: 'recommendations', label: 'توصيات' },
             ].map(tab => (
               <button
                 key={tab.key}
@@ -474,16 +499,12 @@ const [lightboxOpen, setLightboxOpen] = useState(false)
             ))}
           </div>
           <div className="p-6">
-            {activeTab === 'description' && (
-              <div className="text-gray-700 text-sm leading-8">
-                {product.description || 'لا يوجد وصف متاح لهذا المنتج.'}
-              </div>
-            )}
-            {activeTab === 'reviews' && (
-              <p className="text-gray-500 text-sm text-center py-4">اطّلع على التقييمات التفصيلية أدناه</p>
-            )}
-            {activeTab === 'shipping' && (
-              <div className="space-y-4 text-sm text-gray-700">
+            {activeTab === 'specs' && (
+<div className="space-y-6">
+<div className="text-gray-700 text-sm leading-8">
+{product.description || 'لا يوجد وصف متاح لهذا المنتج.'}
+</div>
+<div className="space-y-4 text-sm text-gray-700">
                 <div className="flex items-start gap-3 p-4 bg-blue-50 rounded-xl">
                   <Truck size={20} className="text-blue-600 flex-shrink-0 mt-0.5" />
                   <div>
@@ -506,14 +527,13 @@ const [lightboxOpen, setLightboxOpen] = useState(false)
                   </div>
                 </div>
               </div>
+</div>
+)}
+            {activeTab === 'reviews' && (
+              <p className="text-gray-500 text-sm text-center py-4">اطّلع على التقييمات التفصيلية أدناه</p>
             )}
-          </div>
-        </div>
-      </div>
-
-      {/* ===== RELATED PRODUCTS ===== */}
-      {relatedProducts.length > 0 && (
-        <div className="max-w-7xl mx-auto px-4 pb-4">
+            {activeTab === 'recommendations' && relatedProducts.length > 0 && (
+<div className="max-w-7xl mx-auto px-4 pb-4">
           <div className="bg-white rounded-xl shadow-sm p-6">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-bold text-gray-900 flex items-center gap-2">
@@ -554,7 +574,13 @@ const [lightboxOpen, setLightboxOpen] = useState(false)
             </div>
           </div>
         </div>
-      )}
+)}
+{activeTab === 'recommendations' && relatedProducts.length === 0 && (
+<p className="text-gray-500 text-sm text-center py-8">لا توجد توصيات متاحة حالياً</p>
+)}
+          </div>
+        </div>
+      </div>
 
       {/* ===== DETAILED REVIEWS ===== */}
       <div className="max-w-7xl mx-auto px-4 pb-4">
