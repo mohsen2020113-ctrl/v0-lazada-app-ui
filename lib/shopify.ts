@@ -124,3 +124,50 @@ export async function fetchCollections(locale = 'ae') {
   const data = await shopifyFetch(COLLECTIONS_QUERY, { first: 20 }, locale)
   return data?.collections?.edges?.map((e: any) => e.node) ?? []
 }
+
+// ── Cart ────────────────────────────────────────────────────────────────
+const CART_CREATE_MUTATION = /* graphql */ `
+  mutation CartCreate($lines: [CartLineInput!]!) __CONTEXT__ {
+      cartCreate(input: { lines: $lines }) {
+            cart { id checkoutUrl }
+                  userErrors { field message }
+                      }
+                        }
+                        `
+
+export async function createShopifyCart(
+    lines: { merchandiseId: string; quantity: number }[],
+    locale = 'ae'
+  ) {
+    const data = await shopifyFetch(CART_CREATE_MUTATION, { lines }, locale)
+    return data?.cartCreate?.cart ?? null
+}
+
+// ── Backward-compatible aliases (used by existing routes/components) ────
+export const getProduct = fetchProductByHandle
+export const getCollections = fetchCollections
+
+// ── Collection products ───────────────────────────────────────────────────
+const COLLECTION_PRODUCTS_QUERY = /* graphql */ `
+  query CollectionProducts($handle: String!, $first: Int!) __CONTEXT__ {
+      collectionByHandle(handle: $handle) {
+            id title description
+                  image { url altText }
+                        products(first: $first) {
+                                edges {
+                                          node {
+                                                      id handle title
+                                                                  availableForSale
+                                                                              priceRange { minVariantPrice { amount currencyCode } }
+                                                                                          images(first: 1) { edges { node { url altText } } }
+                                                                                                    }
+                                                                                                            }
+                                                                                                                  }
+                                                                                                                      }
+                                                                                                                        }
+                                                                                                                        `
+
+export async function getCollectionProducts(handle: string, first = 20, locale = 'ae') {
+    const data = await shopifyFetch(COLLECTION_PRODUCTS_QUERY, { handle, first }, locale)
+    return data?.collectionByHandle ?? null
+}
