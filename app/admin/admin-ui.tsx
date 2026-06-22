@@ -760,6 +760,23 @@ function SettingsSection() {
     </div>
   )
 }
+const NAV_ITEMS: { key: Section; label: string; icon: any; badge?: string }[] = [
+  { key: 'dashboard', label: 'لوحة التحكم', icon: LayoutDashboard },
+  { key: 'orders', label: 'الطلبات', icon: ShoppingCart },
+  { key: 'products', label: 'المنتجات', icon: Package },
+  { key: 'customers', label: 'العملاء', icon: Users },
+  { key: 'ai', label: 'الذكاء الاصطناعي', icon: Sparkles },
+  { key: 'design', label: 'التصميم', icon: Palette },
+  { key: 'marketing', label: 'التسويق', icon: Megaphone },
+  { key: 'marketplace', label: 'السوق', icon: Store },
+  { key: 'employees', label: 'الموظفون', icon: UserCog },
+  { key: 'finance', label: 'المالية', icon: DollarSign },
+  { key: 'platform', label: 'المنصة', icon: Monitor },
+  { key: 'shopify', label: 'Shopify', icon: ShoppingBag },
+  { key: 'security', label: 'الأمان', icon: Shield },
+  { key: 'settings', label: 'الإعدادات', icon: Settings },
+]
+
 export default function AdminUI() {
   const [section, setSection] = useState<Section>('dashboard')
   const [sidebarOpen, setSidebarOpen] = useState(true)
