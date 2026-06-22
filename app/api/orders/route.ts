@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: 'Cart is empty' }, { status: 400 })
   }
 
-  const totalAmount = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  const totalAmount = items.reduce((sum: number, item: any) => sum + item.price * item.quantity, 0)
 
   // Create order in our DB first
   const { data: order } = await supabaseAdmin
@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
   // Create order in Shopify Admin API
   const shopifyOrder = {
     order: {
-      line_items: items.map(item => ({
+      line_items: items.map((item: any) => ({
         variant_id: item.shopify_variant_id.replace('gid://shopify/ProductVariant/', ''),
         quantity: item.quantity,
         price: item.price.toString(),
