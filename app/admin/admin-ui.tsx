@@ -555,4 +555,342 @@ function AICenterSection() {
       <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
         <div className="flex items-center justify-between mb-4">
           <h3 className="font-bold text-gray-900 flex items-center gap-2">
-            <Cpu className="w-5 h-5 text-amber-500" /> تقريز المدير التمفيذي (
+            <Cpu className="w-5 h-5 text-amber-500" /> تقريز المدير التمفيذي (AI CEO)
+          </h3>
+          <button className="flex items-center gap-2 text-sm bg-amber-50 text-amber-700 border border-amber-200 px-3 py-1.5 rounded-lg font-medium hover:bg-amber-100">
+            <RefreshCw className="w-3.5 h-3.5" /> إنشاء تقظريز جديد
+          </button>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+          {[
+            { title: 'فرص الإيرادات', text: 'منتجات الإمكترونيات تُشكّل 68% من الطلبات. توسّع الكتالوج في هذا امقطاع يُتيح زيادة إي٘رادات بسبة 35%.' },
+            { title: 'تحليل المخاطر', text: '3 منتجات مندة من امنط. 18 طلباً في وضع امنط. يُنصح بإعادة الطلب خمال 48 ساعة.' },
+            { title: 'توصيات التسويق', text: 'حملة عروض مهاين امفق الأسبوع يمكنىا استهداف 48 سلة مهجورة محتملة └ توقعات تحويل 22%.' },
+            { title: 'تحليل المورّدين', text: 'المورد الأول يسلّم في 3 أيام بمعدل رضا 94%. يُنصح بمراجعة شروط المورد الثاني.' },
+          ].map((item, i) => (
+            <div key={i} className="bg-amber-50 rounded-lg p-3 border border-amber-200">
+              <p className="font-semibold text-amber-900 text-sm">{item.title}</p>
+              <p className="text-amber-700 text-xs mt-1">{item.text}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* Campaigns */}
+        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="font-bold text-gray-900">امهتما֪ امهت افمرقا֪ افمرقباي</h3>
+            <button className="text-sm text-blue-600 font-medium hover:underline">+ حملة جديدة</button>
+          </div>
+          <div className="space-y-3">
+            {[
+              { name: 'Summer Sale 2026', type: 'خصم %30', reach: '12,340', status: 'active' },
+              { name: 'Flash Deal Friday', type: 'صرض وقتي', reach: '8,240', status: 'scheduled' },
+              { name: 'Eid Specials', type: 'مجموعة', reach: '—', status: 'draft' },
+            ].map(c => (
+              <div key={c.name} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div>
+                  <p className="text-sm font-semibold text-gray-800">{c.name}</p>
+                  <p className="text-xs text-gray-400">{c.type} • ومول: {c.reach}</p>
+                </div>
+                <Badge status={c.status === 'active' ? 'active' : 'pending'} />
+              </div>
+            ))}
+          </div>
+        </div>
+        {/* Channels */}
+        <div className="bg-white rounded-xl border border-gray-200 p-5 shadow-sm">
+          <h3 className="font-bold text-gray-900 mb-4">فنوا֪ افمرقين</h3>
+          <div className="space-y-3">
+            {[
+              { name: 'Push Notifications', icon: Bell, sent: '2,420', rate: '18%' },
+              { name: 'Instagram Ads', icon: Instagram, sent: '8,100', rate: '3.4%' },
+              { name: 'Email Marketing', icon: Mail, sent: '1,200', rate: '22%' },
+              { name: 'SMS Marketing', icon: MessageSquare, sent: '850', rate: '31%' },
+            ].map(ch => (
+              <div key={ch.name} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div className="flex items-center gap-3">
+                  <div className="p-1.5 bg-white rounded-lg border border-gray-200">
+                    <ch.icon className="w-4 h-4 text-gray-600" />
+                  </div>
+                  <span className="text-sm font-medium text-gray-700">{ch.name}</span>
+                </div>
+                <div className="text-right">
+                  <p className="text-xs font-bold text-gray-800">{ch.sent} مرسل</p>
+                  <p className="text-xs text-green-600 font-semibold">{ch.rate} فتح</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function MarketplaceSection() {
+  return (
+    <div className="space-y-6">
+      <SectionHeader title="امهتما֪ امهتفةلة" subtitle="إدارة امهتما֪ افةلة" />
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        <KPICard label="الموردون النشطون" value="4" sub="2 دروبشيبن" icon={Store} color="blue" />
+        <KPICard label="طلبات الموردين الواردة" value="31" sub="3 بانتظار التأكيد" icon={Truck} color="orange" />
+        <KPICard label="المستودعات" value="2" sub="دبي + الرياض" icon={Warehouse} color="green" />
+        <KPICard label="متوسط وفت التسميم" value="2.8 يوم" sub="هدف: 2 ٙيم" icon={Clock} color="purple" />
+      </div>
+      <div className="bg-white rounded-xl border border-gray-200 shadow-sm">
+        <div className="flex items-center justify-between p-5 border-b border-gray-100">
+          <h3 className="font-bold text-gray-900">فاfm­  الموردون النشطون ö`Vالفإلة'</h3>
+          <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold">
+            <Plus className="w-4 h-4" /> إضافة مورد
+          </button>
+        </div>
+        <div className="p-5 space-y-3">
+          {[
+            { name: 'مستودع 4LEEE اممركزي', type: 'مستودع خاص', products: 45, rating: '4.9', location: 'دبي اممارات' },
+            { name: 'TechSupply Arabia', type: 'دروبشيبن', products: 28, rating: '4.6', location: 'اممارات امهراة' },
+            { name: 'FashionLink UAE', type: 'دروبشيبن', products: 12, rating: '4.2', location: 'أبوظبي اممارات' },
+            { name: 'Global Accessories Co.', type: 'جملة', products: 8, rating: '4.7', location: 'شنڹهاي، الصين' },
+          ].map(s => (
+            <div key={s.name} className="flex items-center justify-between p-4 bg-gray-50 rounded-xl border border-gray-100">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-blue-100 rounded-xl flex items-center justify-center">
+                  <Store className="w-5 h-5 text-blue-600" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-gray-800">{s.name}</p>
+                  <p className="text-xs text-gray-400">{s.type} • {s.location}</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-4 text-right">
+                   
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function DesignSection() {
+  return (
+    <div className="p-6 space-y-4">
+      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+        <h2 className="text-xl font-bold text-gray-800 mb-2">Design Center</h2>
+        <p className="text-gray-500 text-sm">This section is under construction.</p>
+      </div>
+    </div>
+  )
+}
+
+function MarketingSection() {
+  return (
+    <div className="p-6 space-y-4">
+      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+        <h2 className="text-xl font-bold text-gray-800 mb-2">Marketing Hub</h2>
+        <p className="text-gray-500 text-sm">This section is under construction.</p>
+      </div>
+    </div>
+  )
+}
+
+function EmployeesSection() {
+  return (
+    <div className="p-6 space-y-4">
+      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+        <h2 className="text-xl font-bold text-gray-800 mb-2">Employees</h2>
+        <p className="text-gray-500 text-sm">This section is under construction.</p>
+      </div>
+    </div>
+  )
+}
+
+function FinanceSection() {
+  return (
+    <div className="p-6 space-y-4">
+      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+        <h2 className="text-xl font-bold text-gray-800 mb-2">Finance</h2>
+        <p className="text-gray-500 text-sm">This section is under construction.</p>
+      </div>
+    </div>
+  )
+}
+
+function PlatformSection() {
+  return (
+    <div className="p-6 space-y-4">
+      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+        <h2 className="text-xl font-bold text-gray-800 mb-2">Platform Settings</h2>
+        <p className="text-gray-500 text-sm">This section is under construction.</p>
+      </div>
+    </div>
+  )
+}
+
+function ShopifySection() {
+  return (
+    <div className="p-6 space-y-4">
+      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+        <h2 className="text-xl font-bold text-gray-800 mb-2">Shopify Integration</h2>
+        <p className="text-gray-500 text-sm">This section is under construction.</p>
+      </div>
+    </div>
+  )
+}
+
+function SecuritySection() {
+  return (
+    <div className="p-6 space-y-4">
+      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+        <h2 className="text-xl font-bold text-gray-800 mb-2">Security</h2>
+        <p className="text-gray-500 text-sm">This section is under construction.</p>
+      </div>
+    </div>
+  )
+}
+
+function SettingsSection() {
+  return (
+    <div className="p-6 space-y-4">
+      <div className="bg-white rounded-xl border border-gray-200 p-6 shadow-sm">
+        <h2 className="text-xl font-bold text-gray-800 mb-2">Settings</h2>
+        <p className="text-gray-500 text-sm">This section is under construction.</p>
+      </div>
+    </div>
+  )
+}
+export default function AdminUI() {
+  const [section, setSection] = useState<Section>('dashboard')
+  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [notifOpen, setNotifOpen] = useState(false)
+  const [search, setSearch] = useState('')
+
+  const SECTION_MAP: Record<Section, React.ReactNode> = {
+    dashboard:   <DashboardSection />,
+    orders:      <OrdersSection />,
+    products:    <ProductsSection />,
+    customers:   <CustomersSection />,
+    ai:          <AICenterSection />,
+    design:      <DesignSection />,
+    marketing:   <MarketingSection />,
+    marketplace: <MarketplaceSection />,
+    employees:   <EmployeesSection />,
+    finance:     <FinanceSection />,
+    platform:    <PlatformSection />,
+    shopify:     <ShopifySection />,
+    security:    <SecuritySection />,
+    settings:    <SettingsSection />,
+  }
+
+  return (
+    <div className="flex h-screen bg-gray-50 overflow-hidden" dir="rtl">
+      {/* ── SIDEBAR ─────────────────────────────────────────────────── */}
+      <aside className={`${sidebarOpen ? 'w-60' : 'w-0 overflow-hidden'} transition-all duration-200 bg-white border-l border-gray-200 flex flex-col shrink-0`}>
+        {/* Logo */}
+        <div className="h-14 flex items-center gap-3 px-4 border-b border-gray-100">
+          <div className="w-8 h-8 bg-blue-600 rounded-xl flex items-center justify-center">
+            <Sparkles className="w-4 h-4 text-white" />
+          </div>
+          <div>
+            <p className="text-sm font-black text-gray-900">4LEEE</p>
+            <p className="text-[10px] text-gray-400 font-medium">ADMIN PANEL</p>
+          </div>
+        </div>
+        {/* Nav */}
+        <nav className="flex-1 overflow-y-auto py-3 px-2">
+          {NAV_ITEMS.map(item => (
+            <button
+              key={item.key}
+              onClick={() => setSection(item.key)}
+              className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl mb-0.5 text-sm font-medium transition-all group ${
+                section === item.key
+                  ? 'bg-blue-600 text-white shadow-sm'
+                  : 'text-gray-600 hover:bg-gray-100 hover:text-gray-900'
+              }`}
+            >
+              <item.icon className={`w-4 h-4 shrink-0 ${section === item.key ? 'text-white' : 'text-gray-400 group-hover:text-gray-600'}`} />
+              <span className="truncate">{item.label}</span>
+              {item.badge && (
+                <span className={`mr-auto text-[10px] font-bold px-1.5 py-0.5 rounded-full ${
+                  section === item.key ? 'bg-blue-500 text-white' : 'bg-gray-100 text-gray-500'
+                }`}>{item.badge}</span>
+              )}
+            </button>
+          ))}
+        </nav>
+        {/* Footer */}
+        <div className="p-3 border-t border-gray-100">
+          <div className="flex items-center gap-2 p-2 rounded-xl hover:bg-gray-50 cursor-pointer">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center text-white text-xs font-bold">M</div>
+            <div className="min-w-0">
+              <p className="text-xs font-bold text-gray-800 truncate">mohsen2020113</p>
+              <p className="text-[10px] text-gray-400">Owner</p>
+            </div>
+            <LogOut className="w-3.5 h-3.5 text-gray-300 mr-auto" />
+          </div>
+        </div>
+      </aside>
+
+      {/* ── MAIN ────────────────────────────────────────────────────── */}
+      <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+        {/* Header */}
+        <header className="h-14 bg-white border-b border-gray-200 flex items-center gap-4 px-5 shrink-0">
+          <button onClick={() => setSidebarOpen(!sidebarOpen)} className="text-gray-400 hover:text-gray-700">
+            <Menu className="w-5 h-5" />
+          </button>
+          {/* Search */}
+          <div className="flex-1 max-w-md relative">
+            <Search className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
+            <input
+              value={search}
+              onChange={e => setSearch(e.target.value)}
+              placeholder="بحث سريع... Ctrl+K"
+              className="w-full bg-gray-50 border border-gray-200 rounded-lg pr-9 pl-3 py-2 text-sm text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            />
+          </div>
+          <div className="flex items-center gap-2 mr-auto">
+            {/* Notifications */}
+            <div className="relative">
+              <button onClick={() => setNotifOpen(!notifOpen)}
+                className="relative p-2 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
+                <Bell className="w-5 h-5" />
+                <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full" />
+              </button>
+              {notifOpen && (
+                <div className="absolute top-10 left-0 w-72 bg-white rounded-xl border border-gray-200 shadow-xl z-50">
+                  <div className="p-3 border-b border-gray-100 flex items-center justify-between">
+                    <h4 className="text-sm font-bold text-gray-900">الإشعارا֪</h4>
+                    <button onClick={() => setNotifOpen(false)}><X className="w-4 h-4 text-gray-400" /></button>
+                  </div>
+                  {[
+                    { text: 'طلب جديد #4522 من ليمً المطيري', time: 'منذ 5 دفاقاق', icon: ShoppingCart, color: 'text-blue-500 bg-blue-50' },
+                    { text: 'منتج "حقيبة Titan" نفد من المخزون', time: 'منذ 1 يساع٩', icon: AlertCircle, color: 'text-orange-500 bg-orange-50' },
+                    { text: 'مزامنة Shopify — 50 منتج', time: 'منر ساع٩', icon: CheckCircle2, color: 'text-green-500 bg-green-50' },
+                  ].map((j, i) => (
+                    <div key={i} className="p-3 hover:bg-gray-50 flex items-start gap-3 cursor-pointer">
+                      <div className={`p-1.5 rounded-lg ${j.color.split(' ')[1]}`}>
+                        <j.icon className={`w-3.5 h-3.5 ${j.color.split(' ')[0]}`} />
+                      </div>
+                      <div>
+                        <p className="text-xs text-gray-700 font-medium leading-relaxed">{j.text}</p>
+                        <p className="text-[10px] text-gray-400 mt-0.5">{j.time}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            {/* Avatar */}
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-500 to-violet-600 flex items-center justify-center text-white text-xs font-bold cursor-pointer">M</div>
+          </div>
+        </header>
+
+        {/* Content */}
+        <main className="flex-1 overflow-y-auto p-6">
+          {SECTION_MAP[section]}
+        </main>
+      </div>
+    </div>
+  )
+}
