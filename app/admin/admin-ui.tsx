@@ -865,7 +865,7 @@ export default function AdminUI() {
                   </div>
                   {[
                     { text: 'Ø·ÙØ¨ Ø¬Ø¯ÙØ¯ #4522 ÙÙ ÙÙÙÙ Ø§ÙÙØ·ÙØ±Ù', time: 'ÙÙØ° 5 Ø¯ÙØ§ÙØ§Ù', icon: ShoppingCart, color: 'text-blue-500 bg-blue-50' },
-                    { text: 'ÙÙØªØ¬ "Ø­ÙÙØ¨Ù© Titan" ÙÙØ¯ ÙÙ Ø§ÙÙÙØ²ÙÙ', time: 'ÙÙØ° 1 ÙØ³Ø§Ø¹Ù©', icon: AlertCircle, color: 'text-orange-500 bg-orange-50' },
+                    { text: 'منتج "حقيبة Titan" نفد من المخزون', time: 'ÙÙØ° 1 ÙØ³Ø§Ø¹Ù©', icon: AlertCircle, color: 'text-orange-500 bg-orange-50' },
                     { text: 'ÙØ²Ø§ÙÙØ© Shopify â 50 ÙÙØªØ¬', time: 'ÙÙØ± Ø³Ø§Ø¹Ù©', icon: CheckCircle2, color: 'text-green-500 bg-green-50' },
                   ].map((j, i) => (
                     <div key={i} className="p-3 hover:bg-gray-50 flex items-start gap-3 cursor-pointer">
