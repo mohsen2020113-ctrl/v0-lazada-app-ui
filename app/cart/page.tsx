@@ -6,7 +6,7 @@ import { ShoppingCart, Trash2, Plus, Minus, Lock, ChevronRight } from 'lucide-re
 import { useCart } from '../contexts/cart-context'
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, total, clearCart } = useCart()
+  const { items, removeFromCart, updateQuantity, cartTotal, clearCart } = useCart()
   const [showConfirm, setShowConfirm] = useState(false)
 
   const isEmpty = !items || items.length === 0
@@ -55,27 +55,27 @@ export default function CartPage() {
                 />
                 <div className="flex-1 min-w-0">
                   <p className="text-white text-sm font-semibold line-clamp-2">{item.title}</p>
-                  {item.variant && item.variant !== 'Default Title' && (
-                    <p className="text-white/40 text-xs mt-0.5">{item.variant}</p>
+                  {item.variantTitle && item.variantTitle !== 'Default Title' && (
+                    <p className="text-white/40 text-xs mt-0.5">{item.variantTitle}</p>
                   )}
                   <p className="text-[#C2185B] text-base font-bold mt-1.5">
                     {(item.price * item.quantity).toFixed(2)} AED
                   </p>
                 </div>
                 <div className="flex flex-col items-center gap-2">
-                  <button onClick={() => removeItem(item.id)} className="text-white/30">
+                  <button onClick={() => removeFromCart(item.variantId)} className="text-white/30">
                     <Trash2 size={18} />
                   </button>
                   <div className="flex items-center gap-1 mt-auto">
                     <button
-                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                      onClick={() => updateQuantity(item.variantId, item.quantity - 1)}
                       className="w-7 h-7 bg-[#2A2A2A] rounded-lg flex items-center justify-center"
                     >
                       <Minus size={12} className="text-white/70" />
                     </button>
                     <span className="w-7 text-center text-white font-bold text-sm">{item.quantity}</span>
                     <button
-                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      onClick={() => updateQuantity(item.variantId, item.quantity + 1)}
                       className="w-7 h-7 bg-[#2A2A2A] rounded-lg flex items-center justify-center"
                     >
                       <Plus size={12} className="text-white/70" />
@@ -90,12 +90,12 @@ export default function CartPage() {
           <div className="bg-[#1A1A1A] rounded-t-3xl px-5 pt-4 pb-8 shadow-2xl">
             <div className="flex justify-between items-center mb-3">
               <span className="text-white/50 text-sm">{items.length} منتجات</span>
-              <span className="text-white text-xl font-extrabold">{total?.toFixed(2)} AED</span>
+              <span className="text-white text-xl font-extrabold">{cartTotal?.toFixed(2)} AED</span>
             </div>
             <div className="border-t border-white/10 pt-3 mb-1">
               <div className="flex justify-between mb-1.5">
                 <span className="text-white/40 text-sm">المجموع الفرعي</span>
-                <span className="text-white font-semibold text-sm">{total?.toFixed(2)} AED</span>
+                <span className="text-white font-semibold text-sm">{cartTotal?.toFixed(2)} AED</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-white/40 text-sm">الشحن</span>
@@ -138,4 +138,4 @@ export default function CartPage() {
       )}
     </div>
   )
-                }
+}
