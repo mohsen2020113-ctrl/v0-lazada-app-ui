@@ -86,6 +86,6 @@ async function getAdminData() {
 
 export default async function AdminPage() {
   await requireAdmin()
-  const data = await getAdminData()
-  return <AdminUI data={data} />
+  await getAdminData()
+  return <AdminUI />
 }
