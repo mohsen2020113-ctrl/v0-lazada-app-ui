@@ -76,7 +76,7 @@ export async function fetchAllProducts(locale = 'ae') {
     cursor = page.pageInfo.endCursor
   }
 
-  return { products }
+  return { products, pageInfo: { hasNextPage: false, endCursor: cursor as string | null } }
 }
 
 const PRODUCT_BY_HANDLE_QUERY = /* graphql */ `
