@@ -77,6 +77,7 @@ const QUICK_FILTERS = [
 ]
 
 const PRODUCTS_PER_PAGE = 8
+const AUTO_LOAD_THRESHOLD = 40
 
 function defaultFilterState(bounds: [number, number]): FilterState {
   return { subcategory: null, priceMin: bounds[0], priceMax: bounds[1], brands: [], shipping: [] }
@@ -172,10 +173,12 @@ export default function CategoryPage({ params }: { params: { handle: string } })
     }, 400)
   }, [isLoadingMore, hasMore, sortedProducts.length])
 
+  const isAutoLoadActive = visibleCount < AUTO_LOAD_THRESHOLD
+
   const observerTarget = useInfiniteScroll({
     onLoadMore: loadMoreProducts,
     isLoading: isLoadingMore,
-    hasMore,
+    hasMore: hasMore && isAutoLoadActive,
   })
 
   const activeFilterCount =
@@ -265,11 +268,23 @@ export default function CategoryPage({ params }: { params: { handle: string } })
               ))}
             </div>
 
-            {/* Infinite Scroll Observer */}
-            <div ref={observerTarget} className="h-1 w-full" />
+            {/* Infinite Scroll Observer (active until AUTO_LOAD_THRESHOLD products) */}
+            {isAutoLoadActive && <div ref={observerTarget} className="h-1 w-full" />}
 
             {/* Loading Indicator */}
             <InfiniteScrollLoaderDark isLoading={isLoadingMore} />
+
+            {/* Manual Load More button after the auto-load threshold */}
+            {!isAutoLoadActive && hasMore && !isLoadingMore && (
+              <div className="flex justify-center mt-4">
+                <button
+                  onClick={loadMoreProducts}
+                  className="px-6 py-2.5 rounded-full bg-[#1A1A1A] border border-white/15 text-white text-sm font-medium hover:bg-[#2A2A2A] transition-colors"
+                >
+                  تحميل المزيد
+                </button>
+              </div>
+            )}
           </>
         )}
       </div>
