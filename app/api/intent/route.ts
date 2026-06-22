@@ -73,9 +73,7 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    const responseText = response.content.parts
-      .map((part) => (typeof part === 'string' ? part : part.text || ''))
-      .join('');
+    const responseText = response.response.text();
 
     // Parse JSON response
     let intentData: IntentResponse;
