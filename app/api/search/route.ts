@@ -56,7 +56,7 @@ export async function GET(request: NextRequest) {
 
     // Fallback to local products
     const results = products.filter(product => {
-      const title = product.title.toLowerCase()
+      const title = product.name.toLowerCase()
       const description = product.description.toLowerCase()
       const category = product.category.toLowerCase()
       const tags = product.tags?.map(t => t.toLowerCase()).join(' ') || ''
@@ -71,8 +71,8 @@ export async function GET(request: NextRequest) {
 
     // Sort by relevance (title match > description match > tag match)
     results.sort((a, b) => {
-      const aTitle = (a.title||"").toLowerCase().includes(query) ? 3 : 0
-      const bTitle = (b.title||"").toLowerCase().includes(query) ? 3 : 0
+      const aTitle = (a.name||"").toLowerCase().includes(query) ? 3 : 0
+      const bTitle = (b.name||"").toLowerCase().includes(query) ? 3 : 0
       const aDesc = a.description.toLowerCase().includes(query) ? 2 : 0
       const bDesc = b.description.toLowerCase().includes(query) ? 2 : 0
       const aTag = a.tags?.some(t => t.toLowerCase().includes(query)) ? 1 : 0
