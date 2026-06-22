@@ -12,7 +12,7 @@
     height: 100%;
     margin: 0;
     padding: 0;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
@@ -48,7 +48,8 @@
   }
 
   .section-title {
-    @apply text-lg font-bold text-gray-900;
+    @apply text-lg font-bold;
+    color: #212121;
   }
 
   .page-header {
@@ -56,7 +57,8 @@
   }
 
   .badge {
-    @apply absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center;
+    @apply absolute -top-1 -right-1 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center;
+    background-color: #D32F2F;
   }
 
   .skeleton {
@@ -64,15 +66,32 @@
   }
 
   .price-tag {
-    @apply text-[#C2185B] font-bold;
+    @apply text-[#C2185B] font-bold text-lg;
   }
 
   .compare-price {
     @apply text-gray-400 line-through text-sm;
   }
 
+  .text-success {
+    color: #4CAF50;
+  }
+
+  .text-warning {
+    color: #FFA000;
+  }
+
+  .text-rating {
+    color: #FFC107;
+  }
+
+  .text-secondary {
+    color: #757575;
+  }
+
   .discount-badge {
-    @apply bg-red-500 text-white text-xs font-bold px-1.5 py-0.5 rounded;
+    @apply text-white text-xs font-bold px-1.5 py-0.5 rounded;
+    background-color: #D32F2F;
   }
 }
 
