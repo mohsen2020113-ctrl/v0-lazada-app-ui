@@ -171,3 +171,15 @@ export async function getCollectionProducts(handle: string, first = 20, locale =
     const data = await shopifyFetch(COLLECTION_PRODUCTS_QUERY, { handle, first }, locale)
     return data?.collectionByHandle ?? null
 } 
+
+// Shopify product type for components
+export type ShopifyProduct = {
+  id: string
+  title: string
+  handle: string
+  description: string
+  priceRange: { minVariantPrice: { amount: string; currencyCode: string } }
+  images: { edges: Array<{ node: { url: string; altText: string | null } }> }
+  variants: { edges: Array<{ node: { id: string; title: string; availableForSale: boolean; price: { amount: string; currencyCode: string } } }> }
+  [key: string]: any
+}
