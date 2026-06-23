@@ -30,12 +30,12 @@ const SizeRecommender = ({ productId }: { productId: string }) => {
           <div className="bg-slate-800 rounded-lg p-6 max-w-md">
                 <div className="flex items-center gap-2 mb-4">
                         <Ruler className="w-5 h-5 text-pink-400" />
-                        <h3 className="text-xl font-bold text-white">Size Recommender</h3>h3>
-                </div>div>
-                <p className="text-slate-300 text-sm mb-4">Tell us your measurements for a perfect fit</p>p>
+                        <h3 className="text-xl font-bold text-white">Size Recommender</h3>
+                </div>
+                <p className="text-slate-300 text-sm mb-4">Tell us your measurements for a perfect fit</p>
                 <div className="space-y-4">
                         <div>
-                                  <label className="block text-sm font-medium text-slate-300 mb-2">Height (cm)</label>label>
+                                  <label className="block text-sm font-medium text-slate-300 mb-2">Height (cm)</label>
                                   <input
                                                 type="number"
                                                 value={height}
@@ -43,9 +43,9 @@ const SizeRecommender = ({ productId }: { productId: string }) => {
                                                 placeholder="170"
                                                 className="w-full bg-slate-700 text-white px-3 py-2 rounded border border-slate-600 focus:border-pink-500 outline-none"
                                               />
-                        </div>div>
+                        </div>
                         <div>
-                                  <label className="block text-sm font-medium text-slate-300 mb-2">Weight (kg)</label>label>
+                                  <label className="block text-sm font-medium text-slate-300 mb-2">Weight (kg)</label>
                                   <input
                                                 type="number"
                                                 value={weight}
@@ -53,22 +53,22 @@ const SizeRecommender = ({ productId }: { productId: string }) => {
                                                 placeholder="70"
                                                 className="w-full bg-slate-700 text-white px-3 py-2 rounded border border-slate-600 focus:border-pink-500 outline-none"
                                               />
-                        </div>div>
+                        </div>
                         <button
                                     onClick={handleRecommend}
                                     disabled={loading || !height || !weight}
                                     className="w-full bg-pink-500 hover:bg-pink-600 disabled:bg-slate-600 text-white font-bold py-2 px-4 rounded transition"
                                   >
                           {loading ? 'Getting recommendation...' : 'Get Size'}
-                        </button>button>
+                        </button>
                   {recommendation && (
                       <div className="bg-slate-700 p-4 rounded mt-4">
-                                  <p className="text-slate-400 text-sm mb-2">Recommended Size:</p>p>
-                                  <p className="text-2xl font-bold text-pink-400">{recommendation}</p>p>
-                      </div>div>
+                                  <p className="text-slate-400 text-sm mb-2">Recommended Size:</p>
+                                  <p className="text-2xl font-bold text-pink-400">{recommendation}</p>
+                      </div>
                         )}
-                </div>div>
-          </div>div>
+                </div>
+          </div>
         );
 };
-export default SizeRecommender;</div>
+export default SizeRecommender;
