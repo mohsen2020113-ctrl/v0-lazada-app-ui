@@ -36,7 +36,7 @@ export function RecentlyViewedSection() {
       <div className="overflow-x-auto scrollbar-hide">
         <div className="flex gap-2 pb-2">
           {products.map((product) => {
-            const isFavorite = favorites.includes(product.handle);
+            const isFavorite = favorites.some((f: any) => f.id === product.handle || f === product.handle);
 
             return (
               <Link
