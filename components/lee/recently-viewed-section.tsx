@@ -59,12 +59,7 @@ export function RecentlyViewedSection() {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      toggleFavorite({
-                        id: product.handle,
-                        name: product.title,
-                        price: product.price,
-                        image: product.image,
-                      });
+                      toggleFavorite(product.handle);
                     }}
                     className="absolute top-1 right-1 p-1 bg-white rounded-full shadow-sm"
                   >
