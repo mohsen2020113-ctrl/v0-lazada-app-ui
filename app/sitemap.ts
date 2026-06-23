@@ -50,7 +50,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   try {
     const collections = await getCollections();
-    collectionPages = collections.filter((collection) => collection?.node?.handle).map((collection) => ({
+    collectionPages = collections.filter((collection: any) => collection?.node?.handle).map((collection: any) => ({
       url: `${BASE_URL}/category/${collection.node.handle}`,
       lastModified: new Date(),
       changeFrequency: 'weekly' as const,
