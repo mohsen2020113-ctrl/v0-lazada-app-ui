@@ -8,7 +8,7 @@ interface Product {
   handle: string
   title: string
   priceRange: {
-    minVariantPrice: { amount: string }
+    minVariantPrice: { amount: string; currencyCode: string }
     maxVariantPrice?: { amount: string }
   }
   compareAtPriceRange?: {
@@ -16,6 +16,7 @@ interface Product {
   }
   featuredImage?: { url: string }
   images: { edges: { node: { url: string } }[] }
+  availableForSale?: boolean
 }
 
 interface ProductsGridProps {
@@ -49,6 +50,8 @@ export const ProductsGrid = React.memo(function ProductsGrid({
         image,
         discount,
         compareAtPrice: compareAtPrice || undefined,
+        currencyCode: product.priceRange.minVariantPrice.currencyCode,
+        availableForSale: product.availableForSale,
       }
     })
   }, [products])

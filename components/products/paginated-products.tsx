@@ -9,7 +9,7 @@ interface Product {
   handle: string
   title: string
   priceRange: {
-    minVariantPrice: { amount: string }
+    minVariantPrice: { amount: string; currencyCode: string }
     maxVariantPrice?: { amount: string }
   }
   compareAtPriceRange?: {
@@ -17,6 +17,7 @@ interface Product {
   }
   featuredImage?: { url: string }
   images: { edges: { node: { url: string } }[] }
+  availableForSale?: boolean
 }
 
 interface PaginatedProductsProps {
@@ -93,11 +94,10 @@ export function PaginatedProducts({
                 <button
                   key={page}
                   onClick={() => goToPage(page)}
-                  className={`w-10 h-10 rounded-lg font-semibold transition-colors ${
-                    page === pagination.currentPage
+                  className={`w-10 h-10 rounded-lg font-semibold transition-colors ${page === pagination.currentPage
                       ? 'bg-pink-600 text-white'
                       : 'border border-gray-300 hover:bg-gray-100'
-                  }`}
+                    }`}
                 >
                   {page}
                 </button>
@@ -108,11 +108,10 @@ export function PaginatedProducts({
                 <span className="px-2">...</span>
                 <button
                   onClick={() => goToPage(pagination.totalPages)}
-                  className={`w-10 h-10 rounded-lg font-semibold transition-colors ${
-                    pagination.totalPages === pagination.currentPage
+                  className={`w-10 h-10 rounded-lg font-semibold transition-colors ${pagination.totalPages === pagination.currentPage
                       ? 'bg-pink-600 text-white'
                       : 'border border-gray-300 hover:bg-gray-100'
-                  }`}
+                    }`}
                 >
                   {pagination.totalPages}
                 </button>
