@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { Heart } from 'lucide-react'
-import { useState, useEffect, useRef, useCallback } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { SkeletonGrid } from '@/components/skeleton-card'
 
 interface Product {
@@ -22,20 +22,9 @@ interface ShopifyProductsProps {
   title?: string
 }
 
-const PAGE_SIZE = 20
-
-function fisherYatesShuffle<T>(arr: T[]): T[] {
-  const a = [...arr]
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1))
-    ;[a[i], a[j]] = [a[j], a[i]]
-  }
-  return a
-}
-
 function ProductCard({ product }: { product: Product }) {
   const [wishlist, setWishlist] = useState(false)
-  const price = parseFloat(product.priceRange.minVariantPrice.amount)
+  const price = parseFloat(product.priceRange?.minVariantPrice?.amount ?? '0')
   const comparePrice = product.compareAtPriceRange?.minVariantPrice?.amount
     ? parseFloat(product.compareAtPriceRange.minVariantPrice.amount)
     : null
@@ -57,11 +46,13 @@ function ProductCard({ product }: { product: Product }) {
               className="object-cover transition-transform duration-300 group-hover:scale-105"
             />
           )}
+          {/* Discount badge */}
           {discount && (
             <div className="absolute top-0 left-0 bg-red-600 text-white text-xs font-bold px-1.5 py-0.5 rounded-br-md">
               -{discount}%
             </div>
           )}
+          {/* Wishlist button */}
           <button
             onClick={(e) => { e.preventDefault(); setWishlist(!wishlist) }}
             className="absolute top-1.5 right-1.5 p-1.5 bg-white rounded-full shadow-sm opacity-0 group-hover:opacity-100 transition-opacity"
@@ -78,11 +69,11 @@ function ProductCard({ product }: { product: Product }) {
           <p className="text-xs text-gray-800 line-clamp-2 leading-tight mb-1">{product.title}</p>
           <div className="flex items-baseline gap-1.5 flex-wrap">
             <span className="text-sm font-bold text-[#C2185B]">
-              {product.priceRange.minVariantPrice.currencyCode} {price.toFixed(2)}
+              {product.priceRange?.minVariantPrice?.currencyCode ?? 'AED'} {price.toFixed(2)}
             </span>
             {comparePrice && comparePrice > price && (
               <span className="text-xs text-gray-400 line-through">
-                {product.priceRange.minVariantPrice.currencyCode} {comparePrice.toFixed(2)}
+                {product.priceRange?.minVariantPrice?.currencyCode ?? 'AED'} {comparePrice.toFixed(2)}
               </span>
             )}
           </div>
@@ -93,48 +84,28 @@ function ProductCard({ product }: { product: Product }) {
 }
 
 export function ShopifyProducts({ products: initialProducts, loading = false, title = 'All Products' }: ShopifyProductsProps) {
-  const [displayed, setDisplayed] = useState<Product[]>(() => initialProducts.slice(0, PAGE_SIZE))
+  const [displayCount, setDisplayCount] = useState(20)
   const sentinelRef = useRef<HTMLDivElement>(null)
-  const poolRef = useRef<Product[]>([...initialProducts])
-  const offsetRef = useRef(PAGE_SIZE)
-  const busyRef = useRef(false)
 
-  // Reset busy flag after each render so IntersectionObserver can fire again
-  useEffect(() => {
-    busyRef.current = false
-  }, [displayed])
-
-  const loadMore = useCallback(() => {
-    if (busyRef.current) return
-    busyRef.current = true
-
-    const pool = poolRef.current
-    const offset = offsetRef.current
-
-    if (offset < pool.length) {
-      // More products remain in the current shuffle cycle
-      const next = pool.slice(offset, offset + PAGE_SIZE)
-      setDisplayed(prev => [...prev, ...next])
-      offsetRef.current = offset + PAGE_SIZE
-    } else {
-      // All products shown — Fisher-Yates reshuffle and restart from top
-      const newPool = fisherYatesShuffle(initialProducts)
-      poolRef.current = newPool
-      offsetRef.current = PAGE_SIZE
-      setDisplayed(newPool.slice(0, PAGE_SIZE))
-    }
-  }, [initialProducts])
+  const displayedProducts = initialProducts.slice(0, displayCount)
+  const hasMore = displayCount < initialProducts.length
 
   useEffect(() => {
     const sentinel = sentinelRef.current
     if (!sentinel) return
+
     const observer = new IntersectionObserver(
-      (entries) => { if (entries[0].isIntersecting) loadMore() },
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore) {
+          setDisplayCount((prev) => Math.min(prev + 20, initialProducts.length))
+        }
+      },
       { rootMargin: '300px' }
     )
+
     observer.observe(sentinel)
     return () => observer.disconnect()
-  }, [loadMore])
+  }, [hasMore, initialProducts.length])
 
   if (loading) return <SkeletonGrid />
 
@@ -145,15 +116,17 @@ export function ShopifyProducts({ products: initialProducts, loading = false, ti
         <span className="text-xs sm:text-sm text-gray-500">{initialProducts.length} products</span>
       </div>
       <div className="px-3 sm:px-4 md:px-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
-        {displayed.map((product, idx) => (
-          <ProductCard key={`${product.id}-${idx}`} product={product} />
+        {displayedProducts.map((product) => (
+          <ProductCard key={product.id} product={product} />
         ))}
       </div>
-      {/* Sentinel — IntersectionObserver fires loadMore when this enters viewport */}
+      {/* Sentinel for IntersectionObserver */}
       <div ref={sentinelRef} className="h-4 mt-2" />
-      <div className="flex justify-center py-4">
-        <span className="text-gray-400 text-sm animate-pulse">Loading more…</span>
-      </div>
+      {hasMore && (
+        <div className="flex justify-center py-4">
+          <span className="text-gray-400 text-sm">Loading more...</span>
+        </div>
+      )}
     </section>
   )
 }
