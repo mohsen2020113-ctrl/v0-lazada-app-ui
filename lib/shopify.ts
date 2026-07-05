@@ -1,6 +1,6 @@
 const SHOPIFY_DOMAIN = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN!
 const SHOPIFY_TOKEN = process.env.NEXT_PUBLIC_SHOPIFY_STOREFRONT_ACCESS_TOKEN!
-const SHOPIFY_API_URL = `https://${SHOPIFY_DOMAIN}/api/2024-01/graphql.json`
+const SHOPIFY_API_URL = `https://${SHhOPIFY_DOMAIN}/api/2025-10/graphql.json`
 
 // ── Core fetch helper (handles locale context) ────────────────────────────
 export async function shopifyFetch<T = any>(
