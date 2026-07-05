@@ -12,6 +12,8 @@ interface ProductCardProps {
   image: string
   discount?: number
   compareAtPrice?: string
+  currencyCode: string
+  availableForSale?: boolean
 }
 
 export const ProductCard = React.memo(function ProductCard({
@@ -22,6 +24,8 @@ export const ProductCard = React.memo(function ProductCard({
   image,
   discount,
   compareAtPrice,
+  currencyCode,
+  availableForSale,
 }: ProductCardProps) {
   return (
     <Link href={`/product/${handle}`}>
@@ -36,6 +40,11 @@ export const ProductCard = React.memo(function ProductCard({
             className="w-full h-full"
             zoomLevel={2.5}
           />
+          {availableForSale === false && (
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center z-10">
+              <span className="bg-black/60 text-white text-xs font-medium px-2 py-1 rounded">Out of Stock</span>
+            </div>
+          )}
 
           {/* Discount Badge */}
           {discount && discount > 0 && (
@@ -52,10 +61,10 @@ export const ProductCard = React.memo(function ProductCard({
           </h3>
 
           <div className="flex items-baseline gap-2">
-            <span className="text-base font-bold text-gray-900">฿{parseFloat(price).toFixed(2)}</span>
+            <span className="text-base font-bold text-gray-900">{currencyCode} {parseFloat(price).toFixed(2)}</span>
             {compareAtPrice && (
               <span className="text-xs text-gray-500 line-through">
-                ฿{parseFloat(compareAtPrice).toFixed(2)}
+                {currencyCode} {parseFloat(compareAtPrice).toFixed(2)}
               </span>
             )}
           </div>
