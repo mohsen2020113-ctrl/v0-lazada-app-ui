@@ -16,7 +16,7 @@ import { AnimatedAdsBottom } from "@/components/lee/animated-ads-bottom"
 import { fetchAllProducts } from "@/lib/shopify"
 import { cookies } from 'next/headers'
 
-export const revalidate = 30 // Homepage refreshes every 30 seconds
+export const dynamic = 'force-dynamic'
 
 function ProductsLoading() {
   return (
@@ -44,13 +44,11 @@ function ProductsError() {
 
 export default async function LEEHome() {
   let allProducts: any[] = []
-  let initialPageInfo = { hasNextPage: false, endCursor: null as string | null }
   try {
     const cookieStore = await cookies()
     const locale = cookieStore.get('lee_country')?.value?.toLowerCase() ?? 'ae'
     const result = await fetchAllProducts(locale)
     allProducts = result.products
-    initialPageInfo = result.pageInfo
   } catch (error) {
     console.error('[v0] Error fetching products:', error)
   }
@@ -79,7 +77,7 @@ export default async function LEEHome() {
           <ProductsError />
         ) : (
           <Suspense fallback={<ProductsLoading />}>
-            <ShopifyProducts products={allProducts} initialPageInfo={initialPageInfo} />
+            <ShopifyProducts products={allProducts} />
           </Suspense>
         )}
       </main>

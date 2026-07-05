@@ -91,23 +91,23 @@ export function FlashSale() {
         <div className="px-3 sm:px-4 md:px-6 flex items-center justify-between mb-3 sm:mb-4">
           <div className="flex items-center gap-2 sm:gap-3">
             <h3 className="font-bold text-gray-900 text-sm sm:text-base">
-              LEEFla<span className="text-[#f57224]">&#9889;</span>h Sale
+              LEEFla<span className="text-[#c2185b]">&#9889;</span>h Sale
             </h3>
             <div className="flex items-center gap-0.5 sm:gap-1">
               <span className="bg-[#1a1a2e] text-white text-[10px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded min-w-[20px] sm:min-w-[24px] text-center">
                 {formatNumber(time.hours)}
               </span>
-              <span className="text-[#f85c98] font-bold text-xs sm:text-sm">:</span>
+              <span className="text-[#c2185b] font-bold text-xs sm:text-sm">:</span>
               <span className="bg-[#1a1a2e] text-white text-[10px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded min-w-[20px] sm:min-w-[24px] text-center">
                 {formatNumber(time.minutes)}
               </span>
-              <span className="text-[#f85c98] font-bold text-xs sm:text-sm">:</span>
-              <span className="bg-[#f85c98] text-white text-[10px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded min-w-[20px] sm:min-w-[24px] text-center">
+              <span className="text-[#c2185b] font-bold text-xs sm:text-sm">:</span>
+              <span className="bg-[#c2185b] text-white text-[10px] sm:text-xs font-bold px-1.5 sm:px-2 py-0.5 sm:py-1 rounded min-w-[20px] sm:min-w-[24px] text-center">
                 {formatNumber(time.seconds)}
               </span>
             </div>
           </div>
-          <button className="flex items-center text-gray-500 text-xs sm:text-sm font-medium hover:text-[#f85c98] transition-colors">
+          <button className="flex items-center text-gray-500 text-xs sm:text-sm font-medium hover:text-[#c2185b] transition-colors">
             MORE <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
         </div>
@@ -160,7 +160,7 @@ export function FlashSale() {
                       </span>
                     )}
                     {product.hasCOD && (
-                      <span className="bg-orange-500 text-white text-[6px] sm:text-[7px] px-1 py-0.5 rounded font-bold">
+                      <span className="bg-[#C2185B] text-white text-[6px] sm:text-[7px] px-1 py-0.5 rounded font-bold">
                         COD
                       </span>
                     )}
@@ -189,8 +189,8 @@ export function FlashSale() {
               </div>
               <div className="p-2 sm:p-2.5">
                 <div className="flex items-center justify-between">
-                  <span className="text-[#f85c98] font-bold text-xs sm:text-sm">{product.price}</span>
-                  <span className="bg-pink-100 text-[#f85c98] text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded font-semibold">
+                  <span className="text-[#c2185b] font-bold text-xs sm:text-sm">{product.price}</span>
+                  <span className="bg-pink-100 text-[#c2185b] text-[9px] sm:text-[10px] px-1.5 py-0.5 rounded font-semibold">
                     {product.discount}
                   </span>
                 </div>

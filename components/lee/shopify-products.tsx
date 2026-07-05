@@ -24,7 +24,7 @@ interface ShopifyProductsProps {
 
 function ProductCard({ product }: { product: Product }) {
   const [wishlist, setWishlist] = useState(false)
-  const price = parseFloat(product.priceRange.minVariantPrice.amount)
+  const price = parseFloat(product.priceRange?.minVariantPrice?.amount ?? '0')
   const comparePrice = product.compareAtPriceRange?.minVariantPrice?.amount
     ? parseFloat(product.compareAtPriceRange.minVariantPrice.amount)
     : null
@@ -36,7 +36,7 @@ function ProductCard({ product }: { product: Product }) {
   return (
     <Link href={'/product/' + product.handle} className="block group">
       <div className="bg-white rounded-lg overflow-hidden border border-gray-100 transition-all duration-200 hover:shadow-lg"
-           style={{boxShadow: '0 2px 8px rgba(0,0,0,0.08)'}}>
+        style={{boxShadow: '0 2px 8px rgba(0,0,0,0.08)'}}>
         <div className="relative aspect-square overflow-hidden bg-gray-50">
           {image && (
             <Image
@@ -68,12 +68,12 @@ function ProductCard({ product }: { product: Product }) {
         <div className="p-2">
           <p className="text-xs text-gray-800 line-clamp-2 leading-tight mb-1">{product.title}</p>
           <div className="flex items-baseline gap-1.5 flex-wrap">
-            <span className="text-sm font-bold text-orange-500">
-              {product.priceRange.minVariantPrice.currencyCode} {price.toFixed(2)}
+            <span className="text-sm font-bold text-[#C2185B]">
+              {product.priceRange?.minVariantPrice?.currencyCode ?? 'AED'} {price.toFixed(2)}
             </span>
             {comparePrice && comparePrice > price && (
               <span className="text-xs text-gray-400 line-through">
-                {product.priceRange.minVariantPrice.currencyCode} {comparePrice.toFixed(2)}
+                {product.priceRange?.minVariantPrice?.currencyCode ?? 'AED'} {comparePrice.toFixed(2)}
               </span>
             )}
           </div>

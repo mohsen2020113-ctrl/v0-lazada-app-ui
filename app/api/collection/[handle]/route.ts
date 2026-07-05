@@ -74,14 +74,14 @@ export async function GET(
   }
 
   try {
-    const data = await shopifyFetch({
-      query: GET_COLLECTION_PRODUCTS,
-      variables: {
+    const data = await shopifyFetch(
+      GET_COLLECTION_PRODUCTS,
+      {
         handle,
         first: 20,
         cursor: cursor || null,
-      },
-    });
+      }
+    );
 
     if (!data.collectionByHandle) {
       return NextResponse.json({ error: 'Collection not found' }, { status: 404 });

@@ -26,6 +26,9 @@ export async function POST(request: NextRequest) {
       ip: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip'),
     }
 
+    if (!db) {
+      return NextResponse.json({ error: 'Database not configured' }, { status: 503 })
+    }
     const docRef = await addDoc(collection(db, 'user_events'), eventDoc)
 
     return NextResponse.json(

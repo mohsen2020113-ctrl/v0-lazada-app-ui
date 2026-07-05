@@ -61,9 +61,9 @@ export function CartDrawer() {
         {/* Header */}
         <div className={`flex items-center justify-between p-4 border-b border-gray-100 ${isRTL ? 'flex-row-reverse' : ''}`}>
           <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
-            <ShoppingBag className="w-5 h-5 text-[#f85c98]" />
+            <ShoppingBag className="w-5 h-5 text-[#c2185b]" />
             <h2 className="text-lg font-bold text-gray-900">{t('nav.cart')}</h2>
-            <span className="bg-[#f85c98] text-white text-xs px-2 py-0.5 rounded-full">
+            <span className="bg-[#c2185b] text-white text-xs px-2 py-0.5 rounded-full">
               {cartCount}
             </span>
           </div>
@@ -85,7 +85,7 @@ export function CartDrawer() {
             </p>
             <button
               onClick={closeCart}
-              className="bg-[#f85c98] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#e91e8c] transition-colors"
+              className="bg-[#c2185b] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#e91e8c] transition-colors"
             >
               {t('action.continueShopping')}
             </button>
@@ -124,14 +124,14 @@ export function CartDrawer() {
                     <Link
                       href={`/product/${item.handle}`}
                       onClick={closeCart}
-                      className="text-sm font-medium text-gray-900 line-clamp-2 hover:text-[#f85c98]"
+                      className="text-sm font-medium text-gray-900 line-clamp-2 hover:text-[#c2185b]"
                     >
                       {item.title}
                     </Link>
                     {item.variantTitle && item.variantTitle !== 'Default Title' && (
                       <p className="text-xs text-gray-500 mt-0.5">{item.variantTitle}</p>
                     )}
-                    <p className="text-[#f85c98] font-bold mt-1">{formatPrice(item.price)}</p>
+                    <p className="text-[#c2185b] font-bold mt-1">{formatPrice(item.price)}</p>
 
                     {/* Quantity Controls */}
                     <div className="flex items-center justify-between mt-2">
@@ -179,7 +179,7 @@ export function CartDrawer() {
               <button
                 onClick={handleCheckout}
                 disabled={isCheckingOut || items.length === 0}
-                className="w-full bg-gradient-to-r from-[#f85c98] to-[#e91e8c] text-white py-3.5 rounded-full font-semibold text-sm hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                className="w-full bg-gradient-to-r from-[#c2185b] to-[#e91e8c] text-white py-3.5 rounded-full font-semibold text-sm hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {isCheckingOut ? (
                   <>
@@ -196,7 +196,7 @@ export function CartDrawer() {
               {/* Continue Shopping */}
               <button
                 onClick={closeCart}
-                className="w-full text-gray-600 py-2 text-sm font-medium hover:text-[#f85c98] transition-colors"
+                className="w-full text-gray-600 py-2 text-sm font-medium hover:text-[#c2185b] transition-colors"
               >
                 {t('action.continueShopping')}
               </button>

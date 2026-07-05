@@ -166,7 +166,7 @@ ONLY return the JSON array in English and Arabic reasons.`;
     if (!jsonMatch) return [];
 
     const recommendations = JSON.parse(jsonMatch[0]);
-    const recMap = new Map(recommendations.map((r: any) => [r.id, r]));
+    const recMap = new Map<string, any>(recommendations.map((r: any) => [r.id, r]));
 
     return bestsellers
       .slice(0, limit)

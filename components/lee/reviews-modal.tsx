@@ -87,7 +87,7 @@ export function ReviewsModal({
                   <Star
                     className={`w-8 h-8 ${
                       value <= rating
-                        ? 'fill-[#f85c98] text-[#f85c98]'
+                        ? 'fill-[#c2185b] text-[#c2185b]'
                         : 'text-gray-300'
                     }`}
                   />
@@ -107,7 +107,7 @@ export function ReviewsModal({
               required
               minLength={10}
               maxLength={500}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f85c98] resize-none"
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#c2185b] resize-none"
               placeholder="Share your experience with this product..."
               rows={5}
             />
@@ -120,7 +120,7 @@ export function ReviewsModal({
           <button
             type="submit"
             disabled={loading || !body.trim()}
-            className="w-full py-3 bg-gradient-to-r from-[#f85c98] to-[#e91e8c] text-white rounded-lg font-semibold disabled:opacity-70"
+            className="w-full py-3 bg-gradient-to-r from-[#c2185b] to-[#e91e8c] text-white rounded-lg font-semibold disabled:opacity-70"
           >
             {loading ? 'Submitting...' : 'Submit Review'}
           </button>

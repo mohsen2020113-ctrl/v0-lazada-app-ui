@@ -89,20 +89,20 @@ export function BottomSheetFilter({
               onClick={() => handleFilterSelect(option.value)}
               className={`w-full px-4 py-4 text-left border-b border-gray-100 transition-colors flex items-center justify-between ${
                 activeFilter === option.value
-                  ? 'bg-pink-50'
+                  ? 'bg-[#C2185B]/10'
                   : 'hover:bg-gray-50'
               }`}
             >
               <span className={`font-medium ${
                 activeFilter === option.value
-                  ? 'text-pink-600'
+                  ? 'text-[#C2185B]'
                   : 'text-gray-900'
               }`}>
                 {option.label}
               </span>
               {activeFilter === option.value && (
-                <div className="w-5 h-5 rounded-full border-2 border-pink-600 flex items-center justify-center">
-                  <div className="w-2.5 h-2.5 rounded-full bg-pink-600" />
+                <div className="w-5 h-5 rounded-full border-2 border-[#C2185B] flex items-center justify-center">
+                  <div className="w-2.5 h-2.5 rounded-full bg-[#C2185B]" />
                 </div>
               )}
             </button>

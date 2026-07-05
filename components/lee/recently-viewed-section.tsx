@@ -26,7 +26,7 @@ export function RecentlyViewedSection() {
         <h2 className="text-base font-bold text-gray-900">Recently Viewed</h2>
         <Link
           href="/"
-          className="text-sm text-[#f85c98] font-medium flex items-center gap-1"
+          className="text-sm text-[#c2185b] font-medium flex items-center gap-1"
         >
           See All →
         </Link>
@@ -36,7 +36,7 @@ export function RecentlyViewedSection() {
       <div className="overflow-x-auto scrollbar-hide">
         <div className="flex gap-2 pb-2">
           {products.map((product) => {
-            const isFavorite = favorites.some(f => f.id === product.handle);
+            const isFavorite = favorites.some((f: any) => f.id === product.handle || f === product.handle);
 
             return (
               <Link
@@ -59,19 +59,14 @@ export function RecentlyViewedSection() {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      toggleFavorite({
-                        id: product.handle,
-                        name: product.title,
-                        price: product.price,
-                        image: product.image,
-                      });
+                      toggleFavorite(product.handle);
                     }}
                     className="absolute top-1 right-1 p-1 bg-white rounded-full shadow-sm"
                   >
                     <Heart
                       className={`w-4 h-4 ${
                         isFavorite
-                          ? 'fill-[#f85c98] text-[#f85c98]'
+                          ? 'fill-[#c2185b] text-[#c2185b]'
                           : 'text-gray-400'
                       }`}
                     />
@@ -82,7 +77,7 @@ export function RecentlyViewedSection() {
                   <h3 className="text-xs text-gray-900 line-clamp-1 font-medium">
                     {product.title}
                   </h3>
-                  <p className="text-[#f85c98] text-xs font-bold mt-1">
+                  <p className="text-[#c2185b] text-xs font-bold mt-1">
                     AED {product.price.toFixed(2)}
                   </p>
                 </div>

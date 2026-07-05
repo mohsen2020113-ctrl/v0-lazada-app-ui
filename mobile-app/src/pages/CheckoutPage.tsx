@@ -15,8 +15,8 @@ export default function CheckoutPage({ navigate }: Props) {
       </div>
       <div className="px-4 py-6">
         <div className="card p-6 text-center">
-          <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <ExternalLink size={28} className="text-orange-500" />
+          <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <ExternalLink size={28} className="text-[#C2185B]" />
           </div>
           <h2 className="text-xl font-bold text-gray-900 mb-2">Secure Checkout</h2>
           <p className="text-gray-500 text-sm mb-4">You'll be redirected to our secure Shopify checkout to complete your purchase.</p>
@@ -28,7 +28,7 @@ export default function CheckoutPage({ navigate }: Props) {
               </div>
               <div className="flex justify-between font-bold">
                 <span>Total</span>
-                <span className="text-orange-500">{formatMoney(cart.cost.totalAmount.amount, cart.cost.totalAmount.currencyCode)}</span>
+                <span className="text-[#C2185B]">{formatMoney(cart.cost.totalAmount.amount, cart.cost.totalAmount.currencyCode)}</span>
               </div>
             </div>
           )}

@@ -52,7 +52,7 @@ export default function SearchPage({ navigate }: Props) {
               <div className="mb-5">
                 <div className="flex items-center justify-between mb-3">
                   <h3 className="text-sm font-bold text-gray-700">Recent</h3>
-                  <button onClick={() => { setRecent([]); localStorage.removeItem('lee_recent_searches'); }} className="text-xs text-orange-500">Clear</button>
+                  <button onClick={() => { setRecent([]); localStorage.removeItem('lee_recent_searches'); }} className="text-xs text-[#C2185B]">Clear</button>
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {recent.map(r => (<button key={r} onClick={() => setQuery(r)} className="flex items-center gap-1.5 bg-white border border-gray-200 rounded-full px-3 py-1.5 text-sm text-gray-600"><Clock size={12} /> {r}</button>))}
@@ -62,7 +62,7 @@ export default function SearchPage({ navigate }: Props) {
             <div>
               <h3 className="text-sm font-bold text-gray-700 mb-3">Trending</h3>
               <div className="flex flex-wrap gap-2">
-                {TRENDING.map(t => (<button key={t} onClick={() => setQuery(t)} className="bg-orange-50 text-orange-600 border border-orange-100 rounded-full px-3 py-1.5 text-sm font-medium">🔥 {t}</button>))}
+                {TRENDING.map(t => (<button key={t} onClick={() => setQuery(t)} className="bg-pink-50 text-[#C2185B] border border-pink-100 rounded-full px-3 py-1.5 text-sm font-medium">🔥 {t}</button>))}
               </div>
             </div>
           </>

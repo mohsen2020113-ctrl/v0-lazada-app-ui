@@ -19,14 +19,14 @@ export default function NotificationsPage({ navigate }: Props) {
       </div>
       <div className="px-4 py-4 space-y-2">
         {NOTIFICATIONS.map(({ id, icon: Icon, color, title, desc, time, unread }) => (
-          <div key={id} className={`card p-4 flex gap-3 ${unread ? 'border-l-4 border-orange-500' : ''}`}>
+          <div key={id} className={`card p-4 flex gap-3 ${unread ? 'border-l-4 border-[#C2185B]' : ''}`}>
             <div className={`w-10 h-10 ${color} rounded-xl flex items-center justify-center flex-none`}><Icon size={20} /></div>
             <div className="flex-1 min-w-0">
               <p className={`text-sm font-medium ${unread ? 'text-gray-900' : 'text-gray-700'}`}>{title}</p>
               <p className="text-xs text-gray-500 mt-0.5 line-clamp-2">{desc}</p>
               <p className="text-xs text-gray-400 mt-1">{time}</p>
             </div>
-            {unread && <div className="w-2 h-2 bg-orange-500 rounded-full mt-1 flex-none" />}
+            {unread && <div className="w-2 h-2 bg-[#C2185B] rounded-full mt-1 flex-none" />}
           </div>
         ))}
       </div>

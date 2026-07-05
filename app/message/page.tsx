@@ -42,7 +42,7 @@ export default function MessagePage() {
         <button onClick={() => router.back()} className="text-white">
           <ChevronLeft className="w-6 h-6 rotate-180" />
         </button>
-        <div className="w-9 h-9 rounded-full bg-[#F57224]/20 flex items-center justify-center text-lg">
+        <div className="w-9 h-9 rounded-full bg-[#C2185B]/20 flex items-center justify-center text-lg">
           🏪
         </div>
         <div>
@@ -57,7 +57,7 @@ export default function MessagePage() {
           <div key={msg.id} className={`flex ${msg.from === 'user' ? 'justify-start' : 'justify-end'}`}>
             <div className={`max-w-[75%] rounded-2xl px-4 py-2.5 ${
               msg.from === 'user'
-                ? 'bg-[#F57224] text-white rounded-tr-sm'
+                ? 'bg-[#C2185B] text-white rounded-tr-sm'
                 : 'bg-[#1A1A1A] text-white rounded-tl-sm'
             }`}>
               <p className="text-sm leading-relaxed">{msg.text}</p>
@@ -87,7 +87,7 @@ export default function MessagePage() {
           />
           <button
             onClick={send}
-            className="w-8 h-8 bg-[#F57224] rounded-full flex items-center justify-center"
+            className="w-8 h-8 bg-[#C2185B] rounded-full flex items-center justify-center"
           >
             <Send className="w-4 h-4 rotate-180" />
           </button>

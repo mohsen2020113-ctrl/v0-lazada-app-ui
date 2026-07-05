@@ -69,7 +69,7 @@ export default function FashionPage({ navigate, params }: Props) {
       <div className="bg-white px-4 pt-12 pb-3 sticky top-0 z-10 shadow-sm">
         <div className="flex items-center gap-3 mb-3">
           <h1 className="text-xl font-bold text-gray-900 flex-1">Shop</h1>
-          <button onClick={() => setShowFilters(true)} className="p-2 rounded-xl bg-orange-50 text-orange-500"><SlidersHorizontal size={18} /></button>
+          <button onClick={() => setShowFilters(true)} className="p-2 rounded-xl bg-pink-50 text-[#C2185B]"><SlidersHorizontal size={18} /></button>
         </div>
         <div className="relative mb-3">
           <Search size={16} className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" />
@@ -77,9 +77,9 @@ export default function FashionPage({ navigate, params }: Props) {
           {searchQuery && (<button onClick={() => setSearchQuery('')} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400"><X size={14} /></button>)}
         </div>
         <div className="flex gap-2 overflow-x-auto pb-1">
-          <button onClick={() => setActiveCollection(null)} className={`flex-none px-3 py-1 rounded-full text-xs font-medium transition-colors ${!activeCollection ? 'bg-orange-500 text-white' : 'bg-gray-100 text-gray-600'}`}>All</button>
+          <button onClick={() => setActiveCollection(null)} className={`flex-none px-3 py-1 rounded-full text-xs font-medium transition-colors ${!activeCollection ? 'bg-[#C2185B] text-white' : 'bg-gray-100 text-gray-600'}`}>All</button>
           {collections.map(col => (
-            <button key={col.id} onClick={() => setActiveCollection(col.handle)} className={`flex-none px-3 py-1 rounded-full text-xs font-medium transition-colors ${activeCollection === col.handle ? 'bg-orange-500 text-white' : 'bg-gray-100 text-gray-600'}`}>{col.title}</button>
+            <button key={col.id} onClick={() => setActiveCollection(col.handle)} className={`flex-none px-3 py-1 rounded-full text-xs font-medium transition-colors ${activeCollection === col.handle ? 'bg-[#C2185B] text-white' : 'bg-gray-100 text-gray-600'}`}>{col.title}</button>
           ))}
         </div>
       </div>
@@ -88,7 +88,7 @@ export default function FashionPage({ navigate, params }: Props) {
         <p className="text-xs text-gray-500">{products.length} products</p>
         <div className="flex gap-1 overflow-x-auto">
           {SORT_OPTIONS.map((opt, i) => (
-            <button key={opt} onClick={() => setSortIndex(i)} className={`flex-none text-xs px-2 py-1 rounded-full transition-colors ${sortIndex === i ? 'bg-orange-500 text-white' : 'text-gray-500'}`}>{opt}</button>
+            <button key={opt} onClick={() => setSortIndex(i)} className={`flex-none text-xs px-2 py-1 rounded-full transition-colors ${sortIndex === i ? 'bg-[#C2185B] text-white' : 'text-gray-500'}`}>{opt}</button>
           ))}
         </div>
       </div>
@@ -135,7 +135,7 @@ export default function FashionPage({ navigate, params }: Props) {
         {/* Loading spinner while fetching more */}
         {loading && products.length > 0 && (
           <div className="flex justify-center py-4">
-            <div className="w-6 h-6 border-2 border-orange-500 border-t-transparent rounded-full animate-spin" />
+            <div className="w-6 h-6 border-2 border-[#C2185B] border-t-transparent rounded-full animate-spin" />
           </div>
         )}
 
@@ -150,8 +150,8 @@ export default function FashionPage({ navigate, params }: Props) {
             <div className="flex items-center justify-between mb-4"><h3 className="font-bold text-lg">Sort & Filter</h3><button onClick={() => setShowFilters(false)}><X size={20} /></button></div>
             <p className="text-sm font-medium text-gray-700 mb-3">Sort By</p>
             {SORT_OPTIONS.map((opt, i) => (
-              <button key={opt} onClick={() => { setSortIndex(i); setShowFilters(false); }} className={`w-full text-left py-3 border-b border-gray-100 text-sm flex items-center justify-between ${sortIndex === i ? 'text-orange-500 font-medium' : 'text-gray-700'}`}>
-                {opt}{sortIndex === i && <span className="w-2 h-2 bg-orange-500 rounded-full" />}
+              <button key={opt} onClick={() => { setSortIndex(i); setShowFilters(false); }} className={`w-full text-left py-3 border-b border-gray-100 text-sm flex items-center justify-between ${sortIndex === i ? 'text-[#C2185B] font-medium' : 'text-gray-700'}`}>
+                {opt}{sortIndex === i && <span className="w-2 h-2 bg-[#C2185B] rounded-full" />}
               </button>
             ))}
           </div>

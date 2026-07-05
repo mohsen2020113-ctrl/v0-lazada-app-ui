@@ -28,7 +28,7 @@ export function VariantChips({ variants, selectedIndex, onSelect, label = 'Choos
             disabled={!variant.available}
             className={`px-4 py-2 rounded-xl text-sm font-medium transition-all ${
               index === selectedIndex
-                ? 'bg-[#F57224] text-white shadow-lg scale-105'
+                ? 'bg-[#C2185B] text-white shadow-lg scale-105'
                 : variant.available
                   ? 'bg-[#1A1A1A] text-white/70 border border-white/10 hover:border-white/30 hover:text-white/90'
                   : 'bg-[#0F0F0F] text-white/30 border border-white/5 cursor-not-allowed'

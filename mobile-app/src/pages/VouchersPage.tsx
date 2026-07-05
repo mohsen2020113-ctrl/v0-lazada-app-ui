@@ -5,7 +5,7 @@ import type { PageId, NavigationParams } from '../App';
 interface Props { navigate: (page: PageId, params?: NavigationParams) => void; params: NavigationParams; }
 
 const VOUCHERS = [
-  { id: '1', code: 'LEE20', discount: '20% OFF', desc: 'Min. spend $50', expiry: 'May 31, 2026', color: 'from-orange-400 to-red-500', used: false },
+  { id: '1', code: 'LEE20', discount: '20% OFF', desc: 'Min. spend $50', expiry: 'May 31, 2026', color: 'from-[#880E4F] to-[#C2185B]', used: false },
   { id: '2', code: 'FREE10', discount: '$10 OFF', desc: 'No minimum spend', expiry: 'Jun 15, 2026', color: 'from-purple-400 to-pink-500', used: false },
   { id: '3', code: 'SHIP0', discount: 'Free Shipping', desc: 'All orders', expiry: 'Jun 30, 2026', color: 'from-blue-400 to-cyan-500', used: true },
 ];
@@ -37,7 +37,7 @@ export default function VouchersPage({ navigate }: Props) {
               {v.used ? (
                 <span className="text-xs text-gray-400 font-medium">USED</span>
               ) : (
-                <button onClick={() => copy(v.code)} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium ${copied === v.code ? 'bg-green-500 text-white' : 'bg-orange-50 text-orange-600 border border-orange-200'}`}>
+                <button onClick={() => copy(v.code)} className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium ${copied === v.code ? 'bg-green-500 text-white' : 'bg-pink-50 text-[#C2185B] border border-pink-200'}`}>
                   {copied === v.code ? <><Check size={14} /> Copied!</> : <><Copy size={14} /> Copy</>}
                 </button>
               )}

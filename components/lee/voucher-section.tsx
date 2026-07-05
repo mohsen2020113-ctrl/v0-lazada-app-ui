@@ -8,7 +8,7 @@ const vouchers = [
     id: 1,
     amount: "AED 1,000.00",
     label: "Payday",
-    color: "text-[#f85c98]",
+    color: "text-[#c2185b]",
   },
   {
     id: 2,
@@ -41,7 +41,7 @@ export function VoucherSection() {
       <div className="max-w-4xl mx-auto">
         <div className="flex items-center justify-between mb-2 sm:mb-3">
           <h3 className="font-bold text-gray-900 text-sm sm:text-base">Biggest Saving</h3>
-          <button className="flex items-center text-gray-500 text-xs sm:text-sm hover:text-[#f85c98] transition-colors">
+          <button className="flex items-center text-gray-500 text-xs sm:text-sm hover:text-[#c2185b] transition-colors">
             More vouchers <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
         </div>
@@ -57,7 +57,7 @@ export function VoucherSection() {
               <div className={`border border-dashed rounded-lg p-2 sm:p-2.5 md:p-3 transition-all ${
                 collected.includes(voucher.id) 
                   ? 'border-gray-200 bg-gray-50' 
-                  : 'border-gray-300 bg-white hover:border-[#f85c98]/50 hover:bg-pink-50/30'
+                  : 'border-gray-300 bg-white hover:border-[#c2185b]/50 hover:bg-pink-50/30'
               }`}>
                 <p className={`font-bold text-sm sm:text-base md:text-lg ${collected.includes(voucher.id) ? 'text-gray-400' : voucher.color}`}>
                   {voucher.amount}
@@ -84,7 +84,7 @@ export function VoucherSection() {
             className={`text-white font-semibold px-3 sm:px-4 py-2.5 sm:py-3 md:py-3.5 rounded-lg text-xs sm:text-sm whitespace-nowrap transition-all active:scale-95 flex-shrink-0 ${
               collected.length === vouchers.length 
                 ? 'bg-gray-300 cursor-not-allowed' 
-                : 'bg-[#f57224] hover:bg-[#e56318]'
+                : 'bg-[#c2185b] hover:bg-[#e56318]'
             }`}
           >
             {isCollecting ? (

@@ -92,8 +92,13 @@ export function RecGPTV2({ userId, limit = 12 }: RecGPTV2Props) {
           <h2 className="text-lg font-bold text-gray-900">
             Just For You
           </h2>
+<<<<<<< HEAD
           <span className="text-[10px] bg-gradient-to-r from-[#f85c98] to-[#f57224] text-white px-2 py-1 rounded-full font-semibold whitespace-nowrap">
             Powered by Mercury AI
+=======
+          <span className="text-[10px] bg-gradient-to-r from-[#c2185b] to-[#c2185b] text-white px-2 py-1 rounded-full font-semibold whitespace-nowrap">
+            {isRTL ? 'بواسطة Mercury AI' : 'Powered by Mercury AI'}
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
           </span>
         </div>
         <span className="text-[10px] text-gray-500">{strategy}</span>
@@ -135,7 +140,7 @@ export function RecGPTV2({ userId, limit = 12 }: RecGPTV2Props) {
                     <Heart
                       className={`w-3.5 h-3.5 ${
                         isFavorite(product.id)
-                          ? 'fill-[#f85c98] text-[#f85c98]'
+                          ? 'fill-[#c2185b] text-[#c2185b]'
                           : 'text-gray-400'
                       }`}
                     />
@@ -150,7 +155,7 @@ export function RecGPTV2({ userId, limit = 12 }: RecGPTV2Props) {
                   </p>
 
                   {/* Price */}
-                  <p className="text-[#f85c98] font-bold text-[9px] mb-1">
+                  <p className="text-[#c2185b] font-bold text-[9px] mb-1">
                     AED {parseFloat(product.price).toFixed(2)}
                   </p>
 

@@ -35,7 +35,7 @@ function EventRow({ event, isLast }: { event: TrackingEvent; isLast: boolean }) 
       <div className="relative z-10 flex-shrink-0 mt-1">
         <div
           className={`w-10 h-10 rounded-full flex items-center justify-center transition-all ${
-            isActive ? "ring-4 ring-orange-100" : ""
+            isActive ? "ring-4 ring-[#C2185B]/15" : ""
           }`}
           style={{ backgroundColor: `${color}20`, border: `2px solid ${color}` }}
         >
@@ -67,9 +67,9 @@ function EventRow({ event, isLast }: { event: TrackingEvent; isLast: boolean }) 
           )}
         </div>
         {isActive && (
-          <div className="mt-2 inline-flex items-center gap-1.5 bg-orange-50 border border-orange-200 rounded-full px-3 py-1">
-            <span className="w-2 h-2 rounded-full bg-orange-500 animate-pulse" />
-            <span className="text-xs text-orange-700 font-medium">الموقع الحالي</span>
+          <div className="mt-2 inline-flex items-center gap-1.5 bg-[#C2185B]/10 border border-[#C2185B]/30 rounded-full px-3 py-1">
+            <span className="w-2 h-2 rounded-full bg-[#C2185B] animate-pulse" />
+            <span className="text-xs text-[#C2185B] font-medium">الموقع الحالي</span>
           </div>
         )}
       </div>
@@ -81,7 +81,7 @@ export default function TrackingTimeline({ trackingInfo }: TrackingTimelineProps
   const { progressPercent, events, currentStatusAr, originAr, destinationAr } = trackingInfo;
   return (
     <div dir="rtl" className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-      <div className="bg-gradient-to-l from-orange-500 to-orange-600 px-6 py-5 text-white">
+      <div className="bg-gradient-to-l from-[#C2185B] to-[#ec407a] px-6 py-5 text-white">
         <div className="flex items-center justify-between mb-3">
           <div>
             <p className="text-sm opacity-80">رقم التتبع</p>
@@ -112,7 +112,7 @@ export default function TrackingTimeline({ trackingInfo }: TrackingTimelineProps
               widur: `${progressPercent}%`,
               background: progressPercent === 100
                 ? "linear-gradient(to left, #10b981, #059669)"
-                : "linear-gradient(to left, #f97316, #fb923c)",
+                : "linear-gradient(to left, #C2185B, #ec407a)",
             }}
           />
         </div>

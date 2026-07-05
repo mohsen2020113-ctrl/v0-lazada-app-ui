@@ -71,7 +71,7 @@ export default function ProductPage({ navigate, params }: Props) {
       {images.length > 1 && (
         <div className="flex gap-2 px-4 py-2 overflow-x-auto">
           {images.map((img, i) => (
-            <button key={i} onClick={() => setActiveImageIndex(i)} className={`flex-none w-14 h-14 rounded-lg overflow-hidden border-2 ${i === activeImageIndex ? 'border-orange-500' : 'border-gray-200'}`}>
+            <button key={i} onClick={() => setActiveImageIndex(i)} className={`flex-none w-14 h-14 rounded-lg overflow-hidden border-2 ${i === activeImageIndex ? 'border-[#C2185B]' : 'border-gray-200'}`}>
               <img src={img.url} alt="" className="w-full h-full object-cover" />
             </button>
           ))}
@@ -82,9 +82,9 @@ export default function ProductPage({ navigate, params }: Props) {
         <p className="text-xs text-gray-400 mb-1">{product.vendor}</p>
         <h1 className="text-xl font-bold text-gray-900 mb-2">{product.title}</h1>
         <div className="flex items-center gap-3 mb-4">
-          <span className="text-2xl font-bold text-orange-500">{formatMoney(selectedVariant?.price.amount ?? product.priceRange.minVariantPrice.amount, selectedVariant?.price.currencyCode ?? 'USD')}</span>
+          <span className="text-2xl font-bold text-[#C2185B]">{formatMoney(selectedVariant?.price.amount ?? product.priceRange.minVariantPrice.amount, selectedVariant?.price.currencyCode ?? 'USD')}</span>
           {selectedVariant?.compareAtPrice && (<span className="compare-price">{formatMoney(selectedVariant.compareAtPrice.amount, selectedVariant.compareAtPrice.currencyCode)}</span>)}
-          <div className="flex items-center gap-1 ml-auto"><Star size={14} fill="orange" color="orange" /><span className="text-sm font-medium">4.8</span><span className="text-xs text-gray-400">(128)</span></div>
+          <div className="flex items-center gap-1 ml-auto"><Star size={14} fill="#C2185B" color="#C2185B" /><span className="text-sm font-medium">4.8</span><span className="text-xs text-gray-400">(128)</span></div>
         </div>
 
         {variantOptions.length > 1 && (
@@ -93,7 +93,7 @@ export default function ProductPage({ navigate, params }: Props) {
             <div className="flex flex-wrap gap-2">
               {variantOptions.map(v => (
                 <button key={v.id} onClick={() => setSelectedVariant(v)} disabled={!v.availableForSale}
-                  className={`px-3 py-1.5 rounded-lg border text-sm font-medium transition-colors ${selectedVariant?.id === v.id ? 'border-orange-500 bg-orange-50 text-orange-600' : v.availableForSale ? 'border-gray-200 text-gray-700' : 'border-gray-100 text-gray-300 line-through'}`}>
+                  className={`px-3 py-1.5 rounded-lg border text-sm font-medium transition-colors ${selectedVariant?.id === v.id ? 'border-[#C2185B] bg-pink-50 text-[#C2185B]' : v.availableForSale ? 'border-gray-200 text-gray-700' : 'border-gray-100 text-gray-300 line-through'}`}>
                   {v.title}
                 </button>
               ))}
@@ -120,7 +120,7 @@ export default function ProductPage({ navigate, params }: Props) {
 
       <div className="fixed bottom-0 left-1/2 -translate-x-1/2 w-full max-w-md bg-white border-t border-gray-100 px-4 py-4">
         <button onClick={handleAddToCart} disabled={!product.availableForSale || cartLoading || !selectedVariant}
-          className={`w-full py-3.5 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-all ${addedToCart ? 'bg-green-500 text-white' : 'bg-orange-500 text-white active:bg-orange-600'} disabled:opacity-50`}>
+          className={`w-full py-3.5 rounded-2xl font-bold text-base flex items-center justify-center gap-2 transition-all ${addedToCart ? 'bg-green-500 text-white' : 'bg-[#C2185B] text-white active:bg-[#C2185B]'} disabled:opacity-50`}>
           {addedToCart ? (<><Check size={20} /> Added to Cart!</>) : (<><ShoppingCart size={20} /> {product.availableForSale ? 'Add to Cart' : 'Sold Out'}</>)}
         </button>
       </div>

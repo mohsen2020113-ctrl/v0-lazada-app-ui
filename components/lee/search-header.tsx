@@ -84,7 +84,7 @@ export function SearchHeader({ placeholder = 'Search products...', showCountrySe
       {/* Mic icon */}
       <button type="button" onClick={handleVoiceSearch}
               className={'w-10 h-10 flex items-center justify-center rounded-full shrink-0 ' +
-                (listening ? 'bg-orange-500' : 'bg-gray-100')}>
+                (listening ? 'bg-[#C2185B]' : 'bg-gray-100')}>
         <Mic className={'w-5 h-5 ' + (listening ? 'text-white' : 'text-gray-500')} />
       </button>
     </form>

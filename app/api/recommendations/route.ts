@@ -32,8 +32,8 @@ export async function POST(request: NextRequest) {
       // Return best products by rating and sales
       recommended = [...products]
         .sort((a, b) => {
-          const aScore = (a.rating || 0) * (a.sales || 0)
-          const bScore = (b.rating || 0) * (b.sales || 0)
+          const aScore = (a.rating || 0) * (a.sold || 0)
+          const bScore = (b.rating || 0) * (b.sold || 0)
           return bScore - aScore
         })
         .slice(0, 10)
@@ -59,7 +59,7 @@ export async function POST(request: NextRequest) {
     // Build context for Gemini
     const productContext = products.map((p) => ({
       id: p.id,
-      title: p.title,
+      title: p.name,
       category: p.category,
       price: p.price,
       rating: p.rating,
@@ -76,8 +76,13 @@ export async function POST(request: NextRequest) {
 ${JSON.stringify(productContext, null, 2)}
 
 بيانات المستخدم:
+<<<<<<< HEAD
 - الProductات المشاهدة: ${viewedProducts.length > 0 ? viewedProductDetails.map((p) => p?.title).join(', ') : 'لا توجد'}
 - عناصر الCart: ${cartItems.length > 0 ? cartProductDetails.map((p) => p?.title).join(', ') : 'لا توجد'}
+=======
+- المنتجات المشاهدة: ${viewedProducts.length > 0 ? viewedProductDetails.map((p) => p?.name).join(', ') : 'لا توجد'}
+- عناصر السلة: ${cartItems.length > 0 ? cartProductDetails.map((p) => p?.name).join(', ') : 'لا توجد'}
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
 - الفئة المفضلة: ${category || 'جميع الفئات'}
 
 أرجع النتيجة في صيغة JSON بدون markdown:
@@ -100,8 +105,8 @@ ${JSON.stringify(productContext, null, 2)}
       // Fallback to best products
       recommended = [...products]
         .sort((a, b) => {
-          const aScore = (a.rating || 0) * (a.sales || 0)
-          const bScore = (b.rating || 0) * (b.sales || 0)
+          const aScore = (a.rating || 0) * (a.sold || 0)
+          const bScore = (b.rating || 0) * (b.sold || 0)
           return bScore - aScore
         })
         .slice(0, 10)
@@ -142,8 +147,8 @@ ${JSON.stringify(productContext, null, 2)}
     // Fallback to best products
     const recommended = [...products]
       .sort((a, b) => {
-        const aScore = (a.rating || 0) * (a.sales || 0)
-        const bScore = (b.rating || 0) * (b.sales || 0)
+        const aScore = (a.rating || 0) * (a.sold || 0)
+        const bScore = (b.rating || 0) * (b.sold || 0)
         return bScore - aScore
       })
       .slice(0, 10)

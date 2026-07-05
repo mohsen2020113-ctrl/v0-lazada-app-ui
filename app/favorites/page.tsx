@@ -14,6 +14,7 @@ export default function FavoritesPage() {
   }
 
   return (
+<<<<<<< HEAD
     <div className="min-h-screen bg-gray-50">
       <div className="sticky top-0 z-40 bg-white border-b border-gray-200 px-4 md:px-8 py-4">
         <div className="max-w-7xl mx-auto flex items-center gap-4">
@@ -36,6 +37,58 @@ export default function FavoritesPage() {
           <div className="flex flex-col items-center justify-center py-20"><Heart className="w-16 h-16 text-gray-300 mb-4" /><h2 className="text-2xl font-bold text-gray-900 mb-2">No favorite items yet</h2><p className="text-gray-600 mb-6">Add items to your favorites to keep track of them</p><Link href="/" className="px-6 py-3 bg-pink-600 text-white font-bold rounded-lg hover:bg-pink-700 transition-colors">Start Shopping</Link></div>
         )}
       </div>
+=======
+    <div className="min-h-screen bg-[#0F0F0F]" dir="rtl">
+      <div className="flex items-center px-4 pt-12 pb-4 gap-3">
+        <button onClick={() => router.back()} className="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center">
+          <ChevronLeft size={18} className="text-white" />
+        </button>
+        <h1 className="text-white font-bold text-lg">المفضلة</h1>
+        {items.length > 0 && (
+          <span className="mr-auto bg-[#C2185B]/20 text-[#C2185B] text-xs font-bold px-2.5 py-1 rounded-full">
+            {items.length} منتج
+          </span>
+        )}
+      </div>
+
+      {items.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-24 px-6">
+          <div className="w-24 h-24 rounded-full bg-[#C2185B]/10 flex items-center justify-center mb-5">
+            <Heart size={48} className="text-[#C2185B]" />
+          </div>
+          <h2 className="text-white text-xl font-bold mb-2">قائمتك فارغة</h2>
+          <p className="text-white/40 text-sm mb-7">أضف المنتجات التي تعجبك إلى المفضلة</p>
+          <Link href="/" className="bg-[#C2185B] text-white font-bold px-8 py-3.5 rounded-2xl">
+            استكشف المنتجات
+          </Link>
+        </div>
+      ) : (
+        <div className="px-4 pb-24 space-y-3">
+          {items.map(item => (
+            <div key={item.id} className="bg-[#1A1A1A] rounded-2xl p-3 flex gap-3">
+              <div className="w-20 h-20 rounded-xl bg-[#2A2A2A] flex items-center justify-center shrink-0">
+                <span className="text-4xl">{item.emoji}</span>
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-white text-sm font-semibold line-clamp-2 mb-1">{item.name}</p>
+                <div className="flex items-center gap-2">
+                  <span className="text-[#C2185B] font-black text-base">{item.price} AED</span>
+                  <span className="text-white/30 text-xs line-through">{item.original} AED</span>
+                </div>
+              </div>
+              <div className="flex flex-col gap-2 items-end justify-between shrink-0">
+                <button onClick={() => remove(item.id)} className="text-white/20 hover:text-red-400">
+                  <Trash2 size={16} />
+                </button>
+                <button className="w-8 h-8 rounded-xl bg-[#C2185B] flex items-center justify-center">
+                  <ShoppingCart size={14} className="text-white" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
     </div>
   )
 }

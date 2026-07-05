@@ -150,15 +150,20 @@ export default function ProductCreator() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
+<<<<<<< HEAD
           <h1 className="text-3xl font-bold text-orange-500 mb-2">🎨 Product Page Creator</h1>
           <p className="text-gray-400">Single image → AI Analysis → Complete professional product page</p>
+=======
+          <h1 className="text-3xl font-bold text-[#C2185B] mb-2">🎨 منشئ صفحات المنتجات</h1>
+          <p className="text-gray-400">صورة واحدة → تحليل AI → صفحة منتج احترافية كاملة</p>
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
         </div>
 
         {!result ? (
           <div className="bg-gray-900 rounded-2xl p-6 shadow-xl border border-gray-800">
             {/* Image Upload */}
             <div
-              className="border-2 border-dashed border-gray-700 rounded-xl p-8 text-center cursor-pointer hover:border-orange-500 transition-colors mb-6"
+              className="border-2 border-dashed border-gray-700 rounded-xl p-8 text-center cursor-pointer hover:border-[#C2185B] transition-colors mb-6"
               onClick={() => fileRef.current?.click()}
               onDrop={onDrop}
               onDragOver={e => e.preventDefault()}
@@ -185,8 +190,13 @@ export default function ProductCreator() {
                   type="text"
                   value={productName}
                   onChange={e => setProductName(e.target.value)}
+<<<<<<< HEAD
                   placeholder="Example: JBL Bluetooth Headphones"
                   className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500"
+=======
+                  placeholder="مثال: سماعة بلوتوث JBL"
+                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#C2185B]"
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
                 />
               </div>
               <div>
@@ -194,7 +204,7 @@ export default function ProductCreator() {
                 <select
                   value={category}
                   onChange={e => setCategory(e.target.value)}
-                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-orange-500"
+                  className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-[#C2185B]"
                 >
                   <option value="">-- Select Category --</option>
                   <option value="electronics">Electronics</option>
@@ -213,12 +223,12 @@ export default function ProductCreator() {
             {status !== 'idle' && status !== 'error' && (
               <div className="bg-gray-800 rounded-xl p-4 mb-6">
                 <div className="flex items-center gap-3 mb-3">
-                  <div className="text-orange-500 text-lg animate-spin">⚙️</div>
+                  <div className="text-[#C2185B] text-lg animate-spin">⚙️</div>
                   <span className="font-semibold">{statusLabels[status]}</span>
                 </div>
                 <div className="w-full bg-gray-700 rounded-full h-3">
                   <div
-                    className="bg-orange-500 h-3 rounded-full transition-all duration-500"
+                    className="bg-[#C2185B] h-3 rounded-full transition-all duration-500"
                     style={{ width: `${progress}%` }}
                   />
                 </div>
@@ -236,7 +246,7 @@ export default function ProductCreator() {
             <button
               onClick={processProduct}
               disabled={!imageFile || !productName || (status !== 'idle' && status !== 'error')}
-              className="w-full bg-orange-500 hover:bg-orange-600 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-bold py-4 rounded-xl text-lg transition-colors"
+              className="w-full bg-[#C2185B] hover:bg-[#C2185B]/90 disabled:bg-gray-700 disabled:cursor-not-allowed text-white font-bold py-4 rounded-xl text-lg transition-colors"
             >
               {status !== 'idle' && status !== 'error' ? '⏳ Processing...' : '🚀 Create Product Page'}
             </button>
@@ -255,6 +265,14 @@ export default function ProductCreator() {
               {/* Titles */}
               <div className="grid md:grid-cols-2 gap-4 mb-6">
                 <div className="bg-gray-800 rounded-xl p-4">
+<<<<<<< HEAD
+=======
+                  <div className="text-xs text-gray-500 mb-1">🇸🇦 العنوان بالعربية</div>
+                  <h3 className="font-bold text-[#ec407a]">{result.descriptions.ar.title}</h3>
+                  <p className="text-gray-300 text-sm mt-2">{result.descriptions.ar.mainDescription}</p>
+                </div>
+                <div className="bg-gray-800 rounded-xl p-4" dir="ltr">
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
                   <div className="text-xs text-gray-500 mb-1">🇬🇧 English Title</div>
                   <h3 className="font-bold text-blue-400">{result.descriptions.en.title}</h3>
                   <p className="text-gray-300 text-sm mt-2">{result.descriptions.en.mainDescription}</p>
@@ -289,7 +307,7 @@ export default function ProductCreator() {
                   <ul className="space-y-1">
                     {result.descriptions.en.features.map((f, i) => (
                       <li key={i} className="flex gap-2 text-sm text-gray-300">
-                        <span className="text-orange-500">•</span>{f}
+                        <span className="text-[#C2185B]">•</span>{f}
                       </li>
                     ))}
                   </ul>
@@ -297,8 +315,13 @@ export default function ProductCreator() {
                 <div>
                   <h4 className="font-bold text-gray-300 mb-3">🏷️ Keywords</h4>
                   <div className="flex flex-wrap gap-2">
+<<<<<<< HEAD
                     {result.descriptions.en.keywords.map((k, i) => (
                       <span key={i} className="bg-orange-500/20 text-orange-400 text-xs px-2 py-1 rounded-full">{k}</span>
+=======
+                    {result.descriptions.ar.keywords.map((k, i) => (
+                      <span key={i} className="bg-[#C2185B]/20 text-[#ec407a] text-xs px-2 py-1 rounded-full">{k}</span>
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
                     ))}
                   </div>
                 </div>

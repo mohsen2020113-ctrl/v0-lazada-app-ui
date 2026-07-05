@@ -10,8 +10,12 @@ const dailyProducts = [
     id: 1,
     image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=300&h=300&fit=crop",
     badge: "CHOICE by LEE",
+<<<<<<< HEAD
     badgeColor: "bg-[#f85c98]",
     handle: "premium-speaker-wireless",
+=======
+    badgeColor: "bg-[#c2185b]",
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
   },
   {
     id: 2,
@@ -76,9 +80,9 @@ export function DailyDeals() {
         <div className="px-3 sm:px-4 md:px-6 flex items-center justify-between mb-3 sm:mb-4">
           <div className="flex items-center gap-2 sm:gap-3">
             <h3 className="font-bold text-gray-900 text-sm sm:text-base">Daily 9.-</h3>
-            <span className="bg-[#f57224] text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded">CHOICE</span>
+            <span className="bg-[#c2185b] text-white text-[9px] sm:text-[10px] font-bold px-1.5 sm:px-2 py-0.5 rounded">CHOICE</span>
           </div>
-          <button className="flex items-center text-gray-500 text-xs sm:text-sm hover:text-[#f85c98] transition-colors">
+          <button className="flex items-center text-gray-500 text-xs sm:text-sm hover:text-[#c2185b] transition-colors">
             Buy 5 Get 1 Free <ChevronRight className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
           </button>
         </div>
@@ -104,7 +108,7 @@ export function DailyDeals() {
                   </span>
                 )}
                 {product.hasPromo && (
-                  <div className="absolute top-1.5 right-1.5 bg-gradient-to-br from-[#f85c98] to-[#e91e8c] text-white text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-1 sm:py-1.5 rounded shadow-md">
+                  <div className="absolute top-1.5 right-1.5 bg-gradient-to-br from-[#c2185b] to-[#e91e8c] text-white text-[9px] sm:text-[10px] px-1.5 sm:px-2 py-1 sm:py-1.5 rounded shadow-md">
                     <p className="font-bold text-xs sm:text-sm">{product.promoAmount}</p>
                     <p className="text-[8px] sm:text-[9px] opacity-90">{formatTime()}</p>
                   </div>

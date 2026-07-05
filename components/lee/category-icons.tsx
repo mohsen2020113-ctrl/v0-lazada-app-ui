@@ -31,7 +31,7 @@ const categories = [
     id: 1,
     name: "LEEMall",
     icon: ShoppingBag,
-    gradient: "from-[#f85c98] to-[#e91e63]",
+    gradient: "from-[#c2185b] to-[#e91e63]",
     href: "/category/home-kitchen",
   },
   {
@@ -122,7 +122,7 @@ const categories = [
     id: 14,
     name: "Vouchers",
     icon: Gift,
-    gradient: "from-[#f85c98] to-[#e91e8c]",
+    gradient: "from-[#c2185b] to-[#e91e8c]",
     href: "/vouchers",
   },
   {

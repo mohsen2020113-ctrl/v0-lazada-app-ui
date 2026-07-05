@@ -4,20 +4,18 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
     minimumCacheTTL: 3600,
     remotePatterns: [
-      {
-        protocol: 'https',
-        hostname: 'cdn.shopify.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
+      { protocol: 'https', hostname: 'cdn.shopify.com' },
+      { protocol: 'https', hostname: '**.myshopify.com' },
+      { protocol: 'https', hostname: 'images.unsplash.com' },
+      { protocol: 'https', hostname: 'via.placeholder.com' },
+      { protocol: 'https', hostname: 'lzd-img-global.slatic.net' },
+      { protocol: 'https', hostname: '**.lazada.com' },
     ],
   },
   compress: true,
+<<<<<<< HEAD
   reactStrictMode: false,
   headers: async () => {
     return [
@@ -61,6 +59,9 @@ const nextConfig = {
       },
     ]
   },
+=======
+  reactStrictMode: true,
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
 }
 
 export default nextConfig

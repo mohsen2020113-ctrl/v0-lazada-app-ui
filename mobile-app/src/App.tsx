@@ -131,7 +131,7 @@ function App() {
                         <Icon
                           size={22}
                           strokeWidth={active ? 2.5 : 1.8}
-                          style={{ color: active ? '#f85c98' : '#6b7280' }}
+                          style={{ color: active ? '#c2185b' : '#6b7280' }}
                         />
                         {id === 'messages' && (
                           <span className="absolute -top-1 -right-1 bg-red-600 text-white text-[8px] rounded-full w-4 h-4 flex items-center justify-center font-bold">
@@ -146,7 +146,7 @@ function App() {
                       </div>
                       <span
                         className="text-[9px] mt-1 font-medium"
-                        style={{ color: active ? '#f85c98' : '#6b7280' }}
+                        style={{ color: active ? '#c2185b' : '#6b7280' }}
                       >
                         {label}
                       </span>

@@ -22,7 +22,7 @@ export default function FlashSalePage({ navigate }: Props) {
 
   return (
     <div className="bg-gray-50 min-h-full">
-      <div className="bg-gradient-to-r from-red-500 to-orange-500 px-4 pt-12 pb-6">
+      <div className="bg-gradient-to-r from-[#880E4F] to-[#C2185B] px-4 pt-12 pb-6">
         <div className="flex items-center gap-3 mb-4">
           <button onClick={() => navigate('home')} className="text-white"><ChevronLeft size={22} /></button>
           <h1 className="text-xl font-bold text-white flex items-center gap-2"><Zap size={22} fill="white" /> Flash Sale</h1>

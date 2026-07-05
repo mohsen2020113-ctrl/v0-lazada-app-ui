@@ -4,7 +4,7 @@ import { Tag, Copy, Check, ChevronLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
 const VOUCHERS = [
-  { code: 'LEE30', discount: '30 AED', min: '100 AED', expires: '30 يونيو', color: '#F57224', type: 'خصم ثابت' },
+  { code: 'LEE30', discount: '30 AED', min: '100 AED', expires: '30 يونيو', color: '#C2185B', type: 'خصم ثابت' },
   { code: 'FREESHIP', discount: 'شحن مجاني', min: '50 AED', expires: '31 يوليو', color: '#22C55E', type: 'شحن مجاني' },
   { code: 'LEE10', discount: '10%', min: '200 AED', expires: '15 يوليو', color: '#3B82F6', type: 'نسبة خصم' },
   { code: 'NEW50', discount: '50 AED', min: '150 AED', expires: '31 أغسطس', color: '#8B5CF6', type: 'عميل جديد' },
@@ -33,7 +33,7 @@ export default function VouchersPage() {
 
       {/* Banner */}
       <div className="mx-4 mb-5 rounded-2xl overflow-hidden"
-        style={{ background: 'linear-gradient(135deg, #F57224 0%, #E04E0F 100%)' }}>
+        style={{ background: 'linear-gradient(135deg, #C2185B 0%, #E04E0F 100%)' }}>
         <div className="p-5 flex items-center gap-4">
           <div className="w-14 h-14 rounded-2xl bg-white/20 flex items-center justify-center">
             <Tag size={28} className="text-white" />

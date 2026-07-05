@@ -57,8 +57,8 @@ export function FilterBar({ onSortChange, onFilterChange, productCount }: Filter
                 onClick={() => handleChip(chip.value)}
                 className={'shrink-0 px-3 py-1.5 rounded-full text-xs font-medium border transition-all ' +
                   (activeSort === chip.value
-                    ? 'bg-orange-500 text-white border-orange-500'
-                    : 'bg-white text-gray-600 border-gray-200 hover:border-orange-300')}
+                    ? 'bg-[#C2185B] text-white border-[#C2185B]'
+                    : 'bg-white text-gray-600 border-gray-200 hover:border-[#C2185B]/40')}
               >
                 {chip.label}
               </button>
@@ -112,7 +112,7 @@ export function FilterBar({ onSortChange, onFilterChange, productCount }: Filter
                   <button key={r}
                     onClick={() => setFilters(f => ({...f, minRating: r}))}
                     className={'px-3 py-1.5 rounded-full text-xs border ' +
-                      (filters.minRating === r ? 'bg-orange-500 text-white border-orange-500' : 'border-gray-200 text-gray-600')}>
+                      (filters.minRating === r ? 'bg-[#C2185B] text-white border-[#C2185B]' : 'border-gray-200 text-gray-600')}>
                     {r === 0 ? 'All' : r + '+ ⭐'}
                   </button>
                 ))}
@@ -124,14 +124,14 @@ export function FilterBar({ onSortChange, onFilterChange, productCount }: Filter
               <p className="text-sm font-medium text-gray-700">Free Shipping Only</p>
               <button onClick={() => setFilters(f => ({...f, freeShipping: !f.freeShipping}))}
                 className={'w-11 h-6 rounded-full transition-colors ' +
-                  (filters.freeShipping ? 'bg-orange-500' : 'bg-gray-200')}>
+                  (filters.freeShipping ? 'bg-[#C2185B]' : 'bg-gray-200')}>
                 <div className={'w-5 h-5 bg-white rounded-full shadow transition-transform m-0.5 ' +
                   (filters.freeShipping ? 'translate-x-5' : 'translate-x-0')} />
               </button>
             </div>
 
             <button onClick={applyFilters}
-              className="w-full py-3 bg-orange-500 text-white rounded-full font-semibold text-sm">
+              className="w-full py-3 bg-[#C2185B] text-white rounded-full font-semibold text-sm">
               Apply Filters
             </button>
           </div>

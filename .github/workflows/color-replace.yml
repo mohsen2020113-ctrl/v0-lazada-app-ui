@@ -1,0 +1,43 @@
+name: Replace Primary Color
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  replace-color:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Replace color hex values
+        run: |
+          # Replace F57224 (uppercase) with C2185B
+          find . -type f \( -name "*.tsx" -o -name "*.ts" -o -name "*.css" -o -name "*.js" -o -name "*.jsx" \) \
+            -not -path "./.git/*" -not -path "./node_modules/*" \
+            -exec sed -i 's/F57224/C2185B/g' {} \;
+          # Replace f57224 (lowercase) with c2185b
+          find . -type f \( -name "*.tsx" -o -name "*.ts" -o -name "*.css" -o -name "*.js" -o -name "*.jsx" \) \
+            -not -path "./.git/*" -not -path "./node_modules/*" \
+            -exec sed -i 's/f57224/c2185b/g' {} \;
+          # Replace rgba values 245,114,36 with 194,24,91
+          find . -type f \( -name "*.tsx" -o -name "*.ts" -o -name "*.css" -o -name "*.js" -o -name "*.jsx" \) \
+            -not -path "./.git/*" -not -path "./node_modules/*" \
+            -exec sed -i 's/245,114,36/194,24,91/g' {} \;
+          # Replace hover color E06000 with 880E4F
+          find . -type f \( -name "*.tsx" -o -name "*.ts" -o -name "*.css" -o -name "*.js" -o -name "*.jsx" \) \
+            -not -path "./.git/*" -not -path "./node_modules/*" \
+            -exec sed -i 's/E06000/880E4F/g; s/e06000/880e4f/g' {} \;
+          echo "Color replacement done!"
+
+      - name: Commit and push
+        run: |
+          git config user.email "github-actions@github.com"
+          git config user.name "GitHub Actions"
+          git add -A
+          git diff --staged --quiet || git commit -m "style: replace primary orange #F57224 with dark rose #C2185B"
+          git push

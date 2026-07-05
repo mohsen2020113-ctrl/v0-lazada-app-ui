@@ -6,7 +6,7 @@ import { PageId, NavigationParams } from '../App';
 // ── Banners ────────────────────────────────────────────────────────────────
 const BANNERS = [
   {
-    id: 1,
+    id: 1,h
     title: 'MEGA SALE',
     subtitle: 'Up to 70% OFF on Everything',
     img: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=800',
@@ -142,7 +142,7 @@ export default function HomePage({ navigate }: HomePageProps) {
     <div className="flex flex-col bg-gray-50 min-h-screen pb-20">
 
       {/* ── Orange Header ─────────────────────────────────────────────── */}
-      <div className="sticky top-0 z-30" style={{ backgroundColor: '#f97316' }}>
+      <div className="sticky top-0 z-30" style={{ backgroundColor: '#C2185B' }}>
         <div className="flex items-center gap-2 px-3 py-2">
           {/* LEE Logo */}
           <span className="text-white font-black text-2xl tracking-tight flex-shrink-0">LEE</span>
@@ -219,7 +219,7 @@ export default function HomePage({ navigate }: HomePageProps) {
         {/* Header + countdown timer */}
         <div
           className="flex items-center justify-between px-4 py-2.5"
-          style={{ background: 'linear-gradient(90deg, #ef4444 0%, #f97316 100%)' }}
+          style={{ background: 'linear-gradient(90deg, #C2185B 0%, #880E4F 100%)' }}
         >
           <div className="flex items-center gap-2">
             <Zap size={18} className="text-white" fill="white" />
@@ -391,7 +391,7 @@ export default function HomePage({ navigate }: HomePageProps) {
                 <div
                   key={i}
                   className="w-2.5 h-2.5 rounded-full animate-bounce"
-                  style={{ backgroundColor: '#f97316', animationDelay: `${i * 0.15}s` }}
+                  style={{ backgroundColor: '#C2185B', animationDelay: `${i * 0.15}s` }}
                 />
               ))}
             </div>

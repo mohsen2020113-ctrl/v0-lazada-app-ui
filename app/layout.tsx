@@ -13,9 +13,14 @@ const _notoSansArabic = Noto_Sans_Arabic({ subsets: ["arabic"], weight: ["400", 
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.4leee.com'),
+<<<<<<< HEAD
   title: '4LEEE - Shop Online | Best Deals & Free Shipping',
   description: 'Discover 4LEEE - Your ultimate online shopping destination. Browse millions of products with amazing discounts and free shipping. Shop now!',
   viewport: 'width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes, viewport-fit=cover',
+=======
+  title: 'LEE - Shop Online | Best Deals & Free Shipping',
+  description: 'Discover LEE - Your ultimate online shopping destination. Browse millions of products with amazing discounts and free shipping. Shop now!',
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
   icons: {
     icon: [
       {
@@ -55,10 +60,10 @@ export const metadata: Metadata = {
 export const viewport = {
   width: 'device-width',
   initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
-  viewportFit: 'cover',
-  themeColor: '#f85c98',
+  maximumScale: 5,
+  userScalable: true,
+  viewportFit: 'cover' as const,
+  themeColor: '#C2185B',
 }
 
 export default function RootLayout({

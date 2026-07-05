@@ -244,7 +244,7 @@ export function AnimatedAds() {
         <div className="z-10 max-w-[70%] sm:max-w-[60%] md:max-w-[50%]">
           {/* Badge */}
           <div 
-            className={`inline-flex items-center gap-1.5 bg-[#f85c98] px-2.5 py-1 rounded-full text-white text-[10px] sm:text-xs font-bold mb-2 transition-all duration-500 ${isAnimating ? 'opacity-0 -translate-y-2' : 'opacity-100 translate-y-0'}`}
+            className={`inline-flex items-center gap-1.5 bg-[#c2185b] px-2.5 py-1 rounded-full text-white text-[10px] sm:text-xs font-bold mb-2 transition-all duration-500 ${isAnimating ? 'opacity-0 -translate-y-2' : 'opacity-100 translate-y-0'}`}
           >
             <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
             {currentAd.badge}
@@ -259,7 +259,7 @@ export function AnimatedAds() {
 
           {/* Subtitle */}
           <p 
-            className={`text-[#f85c98] text-sm sm:text-base md:text-lg font-bold mb-2 drop-shadow-md transition-all duration-500 delay-100 ${isAnimating ? 'opacity-0 -translate-x-4' : 'opacity-100 translate-x-0'}`}
+            className={`text-[#c2185b] text-sm sm:text-base md:text-lg font-bold mb-2 drop-shadow-md transition-all duration-500 delay-100 ${isAnimating ? 'opacity-0 -translate-x-4' : 'opacity-100 translate-x-0'}`}
           >
             {currentAd.subtitle}
           </p>
@@ -282,7 +282,7 @@ export function AnimatedAds() {
 
           {/* CTA Button */}
           <button 
-            className={`bg-[#f85c98] hover:bg-[#e04d85] text-white px-5 py-2 sm:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg ${isAnimating ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'}`}
+            className={`bg-[#c2185b] hover:bg-[#e04d85] text-white px-5 py-2 sm:px-6 sm:py-2.5 rounded-full text-xs sm:text-sm font-bold hover:scale-105 active:scale-95 transition-all duration-300 shadow-lg ${isAnimating ? 'opacity-0 translate-y-2' : 'opacity-100 translate-y-0'}`}
           >
             Shop Now
           </button>
@@ -318,7 +318,7 @@ export function AnimatedAds() {
             onClick={() => goToSlide(index)}
             className={`h-2 rounded-full transition-all duration-300 ${
               currentSlide % 5 === index 
-                ? 'bg-[#f85c98] w-6' 
+                ? 'bg-[#c2185b] w-6' 
                 : 'bg-white/50 w-2 hover:bg-white/70'
             }`}
             aria-label={`Go to slide ${index + 1}`}

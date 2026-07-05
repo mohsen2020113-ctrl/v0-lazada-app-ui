@@ -25,7 +25,7 @@ function CountdownTimer({ hours }: { hours: number }) {
   }, [])
   const pad = (n: number) => String(n).padStart(2, '0')
   return (
-    <span className="font-mono text-sm text-[#F57224]">
+    <span className="font-mono text-sm text-[#C2185B]">
       {pad(time.h)}:{pad(time.m)}:{pad(time.s)}
     </span>
   )
@@ -49,7 +49,7 @@ export default function GroupBuyPage() {
       </div>
 
       {/* Banner */}
-      <div className="mx-4 mt-4 rounded-2xl bg-gradient-to-l from-[#F57224] to-[#e05a10] p-4 flex items-center gap-3">
+      <div className="mx-4 mt-4 rounded-2xl bg-gradient-to-l from-[#C2185B] to-[#e05a10] p-4 flex items-center gap-3">
         <Users className="w-8 h-8 text-white" />
         <div>
           <p className="font-bold text-white text-base">اشترِ مع الآخرين</p>
@@ -74,7 +74,7 @@ export default function GroupBuyPage() {
                 <div className="flex-1">
                   <p className="font-semibold text-sm leading-tight mb-1">{g.name}</p>
                   <div className="flex items-baseline gap-2">
-                    <span className="text-[#F57224] font-bold text-lg">{g.price} د.إ</span>
+                    <span className="text-[#C2185B] font-bold text-lg">{g.price} د.إ</span>
                     <span className="text-gray-500 text-xs line-through">{g.original} د.إ</span>
                   </div>
                   <span className="text-green-400 text-xs">
@@ -97,8 +97,13 @@ export default function GroupBuyPage() {
                 </div>
                 <div className="w-full bg-[#0F0F0F] rounded-full h-2">
                   <div
+<<<<<<< HEAD
                     className={`h-2 rounded-full transition-all ${almostFull ? 'bg-green-500' : 'bg-[#F57224]'}`}
                     style={{ widur: `${pct}%` }}
+=======
+                    className={`h-2 rounded-full transition-all ${almostFull ? 'bg-green-500' : 'bg-[#C2185B]'}`}
+                    style={{ width: `${pct}%` }}
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
                   />
                 </div>
               </div>
@@ -112,7 +117,7 @@ export default function GroupBuyPage() {
               ) : (
                 <button
                   onClick={() => join(g.id)}
-                  className="w-full py-2.5 bg-[#F57224] rounded-xl flex items-center justify-center gap-2 font-semibold text-sm"
+                  className="w-full py-2.5 bg-[#C2185B] rounded-xl flex items-center justify-center gap-2 font-semibold text-sm"
                 >
                   <ShoppingCart className="w-4 h-4" />
                   انضم الآن

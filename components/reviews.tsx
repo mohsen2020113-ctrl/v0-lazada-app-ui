@@ -80,7 +80,7 @@ export function Reviews({
             </div>
             <button
               onClick={() => setShowReviewForm(!showReviewForm)}
-              className="bg-[#F57224] text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-[#F57224]/80 transition-colors"
+              className="bg-[#C2185B] text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-[#C2185B]/80 transition-colors"
             >
               Write Review
             </button>
@@ -162,7 +162,7 @@ export function Reviews({
             <button
               onClick={handleSubmitReview}
               disabled={!formData.title.trim() || !formData.text.trim()}
-              className="w-full bg-[#F57224] text-white py-2.5 rounded-xl text-sm font-bold disabled:bg-white/10 disabled:text-white/40 hover:bg-[#F57224]/80 transition-colors"
+              className="w-full bg-[#C2185B] text-white py-2.5 rounded-xl text-sm font-bold disabled:bg-white/10 disabled:text-white/40 hover:bg-[#C2185B]/80 transition-colors"
             >
               Submit Review
             </button>
@@ -183,7 +183,7 @@ export function Reviews({
                   <div className="flex items-center gap-2 mb-1">
                     <p className="text-white text-sm font-bold">{review.author}</p>
                     {review.verified && (
-                      <span className="text-[#F57224] text-[10px] bg-[#F57224]/15 px-1.5 py-0.5 rounded-full">
+                      <span className="text-[#C2185B] text-[10px] bg-[#C2185B]/15 px-1.5 py-0.5 rounded-full">
                         Verified
                       </span>
                     )}
@@ -219,7 +219,7 @@ export function Reviews({
 
       {/* Load More */}
       {filteredReviews.length > 0 && filteredReviews.length < reviews.length && (
-        <button className="w-full mt-6 py-3 text-[#F57224] font-bold text-sm hover:text-[#F57224]/80 transition-colors">
+        <button className="w-full mt-6 py-3 text-[#C2185B] font-bold text-sm hover:text-[#C2185B]/80 transition-colors">
           Load More Reviews
         </button>
       )}

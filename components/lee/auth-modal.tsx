@@ -89,7 +89,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
             }}
             className={`pb-3 font-medium ${
               tab === 'signin'
-                ? 'border-b-2 border-[#f85c98] text-[#f85c98]'
+                ? 'border-b-2 border-[#c2185b] text-[#c2185b]'
                 : 'text-gray-600'
             }`}
           >
@@ -102,7 +102,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
             }}
             className={`pb-3 font-medium ${
               tab === 'signup'
-                ? 'border-b-2 border-[#f85c98] text-[#f85c98]'
+                ? 'border-b-2 border-[#c2185b] text-[#c2185b]'
                 : 'text-gray-600'
             }`}
           >
@@ -134,7 +134,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
-                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f85c98]"
+                className="w-full pl-10 pr-4 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#c2185b]"
                 placeholder="you@example.com"
               />
             </div>
@@ -152,7 +152,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
-                className="w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#f85c98]"
+                className="w-full pl-10 pr-10 py-2.5 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#c2185b]"
                 placeholder="••••••••"
               />
               <button
@@ -173,7 +173,7 @@ export function AuthModal({ isOpen, onClose }: AuthModalProps) {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-3 bg-gradient-to-r from-[#f85c98] to-[#e91e8c] text-white rounded-lg font-semibold disabled:opacity-70"
+            className="w-full py-3 bg-gradient-to-r from-[#c2185b] to-[#e91e8c] text-white rounded-lg font-semibold disabled:opacity-70"
           >
             {loading ? 'Loading...' : tab === 'signin' ? 'Sign In' : 'Sign Up'}
           </button>

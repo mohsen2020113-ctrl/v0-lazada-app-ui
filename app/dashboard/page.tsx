@@ -1,137 +1,62 @@
-"use client";
+import { createClient } from '@supabase/supabase-js'
+import { fetchAllProducts } from '@/lib/shopify'
+import DashboardUI from './dashboard-ui'
 
-import { useState } from "react";
+export const dynamic = 'force-dynamic'
 
-const KPICard = ({
-  label,
-  value,
-  sub,
-  color,
-}: {
-  label: string;
-  value: string;
-  sub?: string;
-  color: string;
-}) => (
-  <div
-    className={`rounded-2xl p-6 text-white shadow-lg flex flex-col gap-1 ${color}`}
-  >
-    <span className="text-sm font-medium opacity-80">{label}</span>
-    <span className="text-3xl font-bold">{value}</span>
-    {sub && <span className="text-xs opacity-70">{sub}</span>}
-  </div>
-);
+async function getDashboardData() {
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
+  )
 
-const orders = [
-  {
-    id: "#LEE-10821",
-    customer: "أحمد الفهد",
-    country: "🇸🇦",
-    countryName: "السعودية",
-    amount: "AED 620",
-    status: "مُسلَّم",
-    statusColor: "bg-green-100 text-green-800",
-    warehouse: "🏭",
-    date: "2024-01-15",
-  },
-  {
-    id: "#LEE-10822",
-    customer: "فاطمة المرزوقي",
-    country: "🇦🇪",
-    countryName: "الإمارات",
-    amount: "AED 940",
-    status: "قيد الشحن",
-    statusColor: "bg-blue-100 text-blue-800",
-    warehouse: "🏭",
-    date: "2024-01-15",
-  },
-  {
-    id: "#LEE-10823",
-    customer: "محمد الرشيد",
-    country: "🇰🇼",
-    countryName: "الكويت",
-    amount: "AED 1200",
-    status: "في المستودع",
-    statusColor: "bg-yellow-100 text-yellow-800",
-    warehouse: "🏭",
-    date: "2024-01-14",
-  },
-  {
-    id: "#LEE-10824",
-    customer: "نورة السلطان",
-    country: "🇶🇦",
-    countryName: "قطر",
-    amount: "AED 430",
-    status: "مُسلَّم",
-    statusColor: "bg-green-100 text-green-800",
-    warehouse: "🏭",
-    date: "2024-01-14",
-  },
-  {
-    id: "#LEE-10825",
-    customer: "عبدالله الشمري",
-    country: "🇧🇭",
-    countryName: "البحرين",
-    amount: "AED 780",
-    status: "قيد المعالجة",
-    statusColor: "bg-orange-100 text-orange-800",
-    warehouse: "🏭",
-    date: "2024-01-13",
-  },
-  {
-    id: "#LEE-10826",
-    customer: "مريم الزهراني",
-    country: "🇴🇲",
-    countryName: "عُمان",
-    amount: "AED 310",
-    status: "مُسلَّم",
-    statusColor: "bg-green-100 text-green-800",
-    warehouse: "🏭",
-    date: "2024-01-13",
-  },
-  {
-    id: "#LEE-10827",
-    customer: "خالد المطيري",
-    country: "🇯🇴",
-    countryName: "الأردن",
-    amount: "AED 560",
-    status: "قيد الشحن",
-    statusColor: "bg-blue-100 text-blue-800",
-    warehouse: "🏭",
-    date: "2024-01-12",
-  },
-  {
-    id: "#LEE-10828",
-    customer: "سارة العتيبي",
-    country: "🇪🇬",
-    countryName: "مصر",
-    amount: "AED 890",
-    status: "في الجمارك",
-    statusColor: "bg-purple-100 text-purple-800",
-    warehouse: "🏭",
-    date: "2024-01-12",
-  },
-];
+  const [
+    { data: recentOrders },
+    { data: allOrders },
+    { data: lowStock },
+    { data: profilesCount },
+  ] = await Promise.all([
+    supabase
+      .from('orders')
+      .select('id, status, total, currency, shipping_address, created_at, payment_method')
+      .order('created_at', { ascending: false })
+      .limit(10),
+    supabase
+      .from('orders')
+      .select('total, currency, shipping_address, status, created_at'),
+    supabase
+      .from('inventory')
+      .select('product_id, sku, quantity, available_quantity, low_stock_threshold, warehouse_location')
+      .filter('available_quantity', 'lte', 10)
+      .order('available_quantity', { ascending: true })
+      .limit(10),
+    supabase
+      .from('profiles')
+      .select('id', { count: 'exact', head: true }),
+  ])
 
-const topCountries = [
-  { flag: "🇸🇦", name: "المملكة العربية السعودية", orders: 542, percent: 88 },
-  { flag: "🇦🇪", name: "الإمارات العربية المتحدة", orders: 398, percent: 65 },
-  { flag: "🇰🇼", name: "الكويت", orders: 287, percent: 47 },
-  { flag: "🇶🇦", name: "قطر", orders: 201, percent: 33 },
-  { flag: "🇧🇭", name: "البحرين", orders: 164, percent: 27 },
-];
+  const totalOrders = allOrders?.length ?? 0
+  const totalSales = allOrders?.reduce((sum, o) => sum + parseFloat(String(o.total ?? 0)), 0) ?? 0
+  const avgOrderValue = totalOrders > 0 ? totalSales / totalOrders : 0
 
-const lowStockItems = [
-  { name: "سماعات بلوتوث لاسلكية", sku: "BT-001", stock: 3, threshold: 10 },
-  { name: "حافظة هاتف جلدية", sku: "PH-034", stock: 5, threshold: 15 },
-  { name: "شاحن لاسلكي سريع", sku: "CH-012", stock: 2, threshold: 8 },
-];
+  const countryMap: Record<string, number> = {}
+  allOrders?.forEach(o => {
+    const addr = o.shipping_address as Record<string, string> | null
+    const country = addr?.country ?? addr?.country_code ?? 'غير محدد'
+    if (country) countryMap[country] = (countryMap[country] || 0) + 1
+  })
+  const topCountries = Object.entries(countryMap)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 5)
+    .map(([name, orders]) => ({ name, orders }))
 
-export default function MerchantDashboard() {
-  const [activeTab, setActiveTab] = useState<"orders" | "countries" | "stock">(
-    "orders"
-  );
+  let shopifyProductsCount = 0
+  try {
+    const result = await fetchAllProducts('ae')
+    shopifyProductsCount = result.products.length
+  } catch {}
 
+<<<<<<< HEAD
   return (
     <div dir="rtl" className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
@@ -351,4 +276,23 @@ export default function MerchantDashboard() {
       </main>
     </div>
   );
+=======
+  return {
+    recentOrders: recentOrders ?? [],
+    kpis: {
+      totalOrders,
+      totalSales,
+      avgOrderValue,
+      shopifyProductsCount,
+      registeredUsers: (profilesCount as any)?.count ?? 0,
+    },
+    topCountries,
+    lowStock: lowStock ?? [],
+  }
+}
+
+export default async function DashboardPage() {
+  const data = await getDashboardData()
+  return <DashboardUI data={data} />
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
 }

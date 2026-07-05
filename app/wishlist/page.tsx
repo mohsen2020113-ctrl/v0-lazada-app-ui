@@ -25,8 +25,13 @@ export default function WishlistPage() {
           <div className="flex flex-col items-center justify-center py-24 gap-4">
             <Heart size={56} className="text-white/10" />
             <p className="text-white/40 text-sm">قائمة المفضلة فارغة</p>
+<<<<<<< HEAD
             <Link href="/" className="bg-[#F57224] text-white text-sm font-bold px-6 py-3 rounded-xl">
               استكشف الProductات
+=======
+            <Link href="/" className="bg-[#C2185B] text-white text-sm font-bold px-6 py-3 rounded-xl">
+              استكشف المنتجات
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
             </Link>
           </div>
         ) : (
@@ -40,16 +45,16 @@ export default function WishlistPage() {
                       onClick={(e) => { e.preventDefault(); setItems(prev => prev.filter(i => i.id !== item.id)) }}
                       className="absolute top-2 right-2 w-8 h-8 rounded-full bg-black/50 flex items-center justify-center"
                     >
-                      <Heart size={14} className="text-[#F57224] fill-[#F57224]" />
+                      <Heart size={14} className="text-[#C2185B] fill-[#C2185B]" />
                     </button>
                   </div>
                 </Link>
                 <div className="p-2.5">
                   <p className="text-white text-xs font-semibold line-clamp-2 mb-2">{item.title}</p>
                   <div className="flex items-center justify-between">
-                    <span className="text-[#F57224] text-sm font-bold">{item.price} AED</span>
-                    <button className="w-7 h-7 rounded-lg bg-[#F57224]/15 flex items-center justify-center">
-                      <ShoppingCart size={13} className="text-[#F57224]" />
+                    <span className="text-[#C2185B] text-sm font-bold">{item.price} AED</span>
+                    <button className="w-7 h-7 rounded-lg bg-[#C2185B]/15 flex items-center justify-center">
+                      <ShoppingCart size={13} className="text-[#C2185B]" />
                     </button>
                   </div>
                 </div>

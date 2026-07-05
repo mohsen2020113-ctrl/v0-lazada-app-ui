@@ -53,7 +53,7 @@ function searchProducts(query: string, intent: IntentResult): typeof products {
   const queryLower = query.toLowerCase()
 
   let filtered = products.filter((p) => {
-    const title = p.title.toLowerCase()
+    const title = p.name.toLowerCase()
     const description = p.description.toLowerCase()
     const category = p.category.toLowerCase()
 
@@ -72,9 +72,9 @@ function searchProducts(query: string, intent: IntentResult): typeof products {
 
   // Sort by relevance (title match > description match)
   filtered.sort((a, b) => {
-    const aTitle = a.title.toLowerCase().includes(queryLower) ? 2 : 0
+    const aTitle = a.name.toLowerCase().includes(queryLower) ? 2 : 0
     const aDesc = a.description.toLowerCase().includes(queryLower) ? 1 : 0
-    const bTitle = b.title.toLowerCase().includes(queryLower) ? 2 : 0
+    const bTitle = b.name.toLowerCase().includes(queryLower) ? 2 : 0
     const bDesc = b.description.toLowerCase().includes(queryLower) ? 1 : 0
 
     return bTitle + bDesc - (aTitle + aDesc)

@@ -163,7 +163,7 @@ export function ImageGallery({ images, alt, onImageChange }: ImageGalleryProps) 
               key={i}
               onClick={() => handleDotClick(i)}
               className={`h-1.5 rounded-full transition-all ${
-                i === currentImage ? 'w-5 bg-[#F57224]' : 'w-1.5 bg-white/40 hover:bg-white/60'
+                i === currentImage ? 'w-5 bg-[#C2185B]' : 'w-1.5 bg-white/40 hover:bg-white/60'
               }`}
               aria-label={`Go to image ${i + 1}`}
             />

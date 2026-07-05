@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 
+<<<<<<< HEAD
 // Country to locale mapping (ISO 3166-1 alpha-2 to BCP 47 locale)
 const COUNTRY_LOCALE: Record<string, string> = {
   // Middle East & GCC
@@ -62,9 +63,27 @@ const STATIC_PREFIXES = ['/api/', '/_next/', '/favicon.ico', '/images/', '/fonts
 // Protected routes that require authentication
 const PROTECTED_ROUTES = ['/account', '/checkout', '/orders', '/wishlist']
 
-export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl
+=======
+const COUNTRY_COOKIE = 'lee_country'
+const DEFAULT_COUNTRY = 'AE'
 
+// Derive country from Accept-Language or CF-IPCountry header
+function detectCountry(req: NextRequest): string {
+  const cfCountry = req.headers.get('cf-ipcountry')
+  if (cfCountry && cfCountry !== 'XX') return cfCountry.toUpperCase()
+
+  const acceptLang = req.headers.get('accept-language') ?? ''
+  const match = acceptLang.match(/[-_]([A-Z]{2})/i)
+  if (match) return match[1].toUpperCase()
+
+  return DEFAULT_COUNTRY
+}
+
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
+export function middleware(req: NextRequest) {
+  const response = NextResponse.next()
+
+<<<<<<< HEAD
   // Skip static assets
   if (STATIC_PREFIXES.some(p => pathname.startsWith(p))) {
     return NextResponse.next()
@@ -125,9 +144,24 @@ export function middleware(req: NextRequest) {
   response.headers.set('x-geo-currency', currency)
   response.headers.set('x-geo-language', language)
 
+=======
+  // Only set the cookie if it's not already present — prevents CDN cache bypass
+  const existingCountry = req.cookies.get(COUNTRY_COOKIE)?.value
+  if (!existingCountry) {
+    const country = detectCountry(req)
+    response.cookies.set(COUNTRY_COOKIE, country, {
+      maxAge: 86400,
+      path: '/',
+      sameSite: 'lax',
+    })
+  }
+
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
   return response
 }
 
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|favicon.ico|images|fonts|icons).*)'],
+  matcher: [
+    '/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+  ],
 }

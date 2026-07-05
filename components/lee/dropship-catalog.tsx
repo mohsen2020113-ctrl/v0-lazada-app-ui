@@ -87,7 +87,7 @@ function ProductCard({ product, onAdd }: ProductCardProps) {
           </div>
           <div className="text-left">
             <p className="text-gray-400 text-xs">سعر البيع المقترح</p>
-            <p className="font-bold text-orange-600">
+            <p className="font-bold text-[#C2185B]">
               {product.suggestedRetailPrice} {product.currency}
             </p>
           </div>
@@ -126,7 +126,7 @@ function ProductCard({ product, onAdd }: ProductCardProps) {
 
         <button
           onClick={() => onAdd(product)}
-          className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2.5 rounded-xl text-sm transition-colors group-hover:shadow-sm"
+          className="w-full bg-[#C2185B] hover:bg-[#C2185B]/90 text-white font-semibold py-2.5 rounded-xl text-sm transition-colors group-hover:shadow-sm"
         >
           أضف للمتجر
         </button>
@@ -193,7 +193,7 @@ export default function DropshipCatalog() {
             placeholder="ابحث عن منتج..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full md:w-80 px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-orange-300 bg-white"
+            className="w-full md:w-80 px-4 py-2.5 rounded-xl border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#C2185B]/40 bg-white"
           />
         </div>
 
@@ -203,8 +203,8 @@ export default function DropshipCatalog() {
             onClick={() => setActiveSupplierId("all")}
             className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all border ${
               activeSupplierId === "all"
-                ? "bg-orange-500 text-white border-orange-500 shadow-sm"
-                : "bg-white text-gray-600 border-gray-200 hover:border-orange-300"
+                ? "bg-[#C2185B] text-white border-[#C2185B] shadow-sm"
+                : "bg-white text-gray-600 border-gray-200 hover:border-[#C2185B]/40"
             }`}
           >
             🌍 جميع الموردين
@@ -215,8 +215,8 @@ export default function DropshipCatalog() {
               onClick={() => setActiveSupplierId(sup.id)}
               className={`px-5 py-2.5 rounded-xl text-sm font-semibold transition-all border ${
                 activeSupplierId === sup.id
-                  ? "bg-orange-500 text-white border-orange-500 shadow-sm"
-                  : "bg-white text-gray-600 border-gray-200 hover:border-orange-300"
+                  ? "bg-[#C2185B] text-white border-[#C2185B] shadow-sm"
+                  : "bg-white text-gray-600 border-gray-200 hover:border-[#C2185B]/40"
               }`}
             >
               {sup.countryFlag} {sup.nameAr}

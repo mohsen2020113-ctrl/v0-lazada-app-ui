@@ -14,7 +14,7 @@ export default function VendorRegisterPage() {
 
   const update = (k: string, v: string) => setForm(prev => ({ ...prev, [k]: v }))
 
-  const inputClass = "w-full bg-[#0F0F0F] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 outline-none focus:border-[#F57224] transition-colors"
+  const inputClass = "w-full bg-[#0F0F0F] border border-white/10 rounded-xl px-4 py-3 text-sm text-white placeholder-gray-500 outline-none focus:border-[#C2185B] transition-colors"
 
   if (submitted) {
     return (
@@ -28,7 +28,7 @@ export default function VendorRegisterPage() {
         </p>
         <button
           onClick={() => router.back()}
-          className="px-8 py-3 bg-[#F57224] rounded-2xl font-semibold"
+          className="px-8 py-3 bg-[#C2185B] rounded-2xl font-semibold"
         >
           العودة للرئيسية
         </button>
@@ -51,11 +51,11 @@ export default function VendorRegisterPage() {
         {[1, 2].map(s => (
           <div key={s} className="flex items-center flex-1">
             <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
-              step >= s ? 'bg-[#F57224] text-white' : 'bg-[#1A1A1A] text-gray-500'
+              step >= s ? 'bg-[#C2185B] text-white' : 'bg-[#1A1A1A] text-gray-500'
             }`}>
               {s}
             </div>
-            {s < 2 && <div className={`h-0.5 flex-1 mx-2 ${step > s ? 'bg-[#F57224]' : 'bg-white/10'}`} />}
+            {s < 2 && <div className={`h-0.5 flex-1 mx-2 ${step > s ? 'bg-[#C2185B]' : 'bg-white/10'}`} />}
           </div>
         ))}
         <div className="flex gap-2 text-xs text-gray-400 absolute right-16">
@@ -97,7 +97,7 @@ export default function VendorRegisterPage() {
                   placeholder="store@example.com" type="email" className={inputClass + " pr-10"} />
               </div>
             </div>
-            <button onClick={() => setStep(2)} className="w-full py-3 bg-[#F57224] rounded-2xl font-semibold mt-4">
+            <button onClick={() => setStep(2)} className="w-full py-3 bg-[#C2185B] rounded-2xl font-semibold mt-4">
               التالي
             </button>
           </>
@@ -137,8 +137,13 @@ export default function VendorRegisterPage() {
               <button onClick={() => setStep(1)} className="flex-1 py-3 bg-[#1A1A1A] rounded-2xl font-semibold border border-white/10">
                 رجوع
               </button>
+<<<<<<< HEAD
               <button onClick={() => setSubmitted(true)} className="flex-1 py-3 bg-[#F57224] rounded-2xl font-semibold">
                 إرسال الOrder
+=======
+              <button onClick={() => setSubmitted(true)} className="flex-1 py-3 bg-[#C2185B] rounded-2xl font-semibold">
+                إرسال الطلب
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
               </button>
             </div>
           </>
