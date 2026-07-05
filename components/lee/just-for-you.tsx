@@ -35,7 +35,7 @@ export function JustForYou({ products }: JustForYouProps) {
       {/* Header */}
       <div className={`px-4 py-3 border-b border-gray-100 flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
         <h2 className="text-lg font-bold text-gray-900">Just4U</h2>
-        <Link 
+        <Link
           href="/search"
           className={`text-[#c2185b] text-sm font-semibold flex items-center gap-1 hover:underline ${isRTL ? 'flex-row-reverse' : ''}`}
         >
@@ -66,7 +66,7 @@ export function JustForYou({ products }: JustForYouProps) {
                       className="w-full h-full object-cover"
                     />
                   )}
-                  
+
                   {/* Favorite button */}
                   <button
                     onClick={(e) => {
@@ -85,17 +85,17 @@ export function JustForYou({ products }: JustForYouProps) {
                     />
                   </button>
                 </div>
-                
+
                 {/* Product Info */}
                 <div className="p-2">
                   {/* Title */}
                   <p className="text-[11px] text-gray-700 line-clamp-1 mb-1 font-medium">
                     {product.title}
                   </p>
-                  
+
                   {/* Price */}
                   <p className="text-[#c2185b] font-bold text-[10px]">
-                    {formatPrice(product.priceRange.minVariantPrice.amount)}
+                    {formatPrice(product.priceRange?.minVariantPrice?.amount ?? '0')}
                   </p>
                 </div>
               </Link>
