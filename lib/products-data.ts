@@ -1,7 +1,7 @@
 export interface Product {
   id: string;
   title: string;
-  titleThai: string;
+  titleAr?: string;
   price: number;
   originalPrice: number;
   image: string;
@@ -27,7 +27,6 @@ export const products: Product[] = [
   {
     id: '1',
     title: 'VINTLOOK 100W Fast Charging Cable',
-    titleThai: 'สายชาร์จเร็ว 100W VINTLOOK 3 in 1',
     price: 11.58,
     originalPrice: 21.58,
     image: 'https://images.unsplash.com/photo-1609042237318-7beb42dc2138?w=300&h=300&fit=crop',
@@ -47,7 +46,6 @@ export const products: Product[] = [
   {
     id: '2',
     title: 'Wireless Bluetooth Headphones',
-    titleThai: 'หูฟังบลูทูธไร้สาย',
     price: 299.00,
     originalPrice: 599.00,
     image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=300&h=300&fit=crop',
@@ -66,7 +64,6 @@ export const products: Product[] = [
   {
     id: '3',
     title: 'USB-C Portable Charger',
-    titleThai: 'พาวเวอร์แบงค์ USB-C',
     price: 459.00,
     originalPrice: 899.00,
     image: 'https://images.unsplash.com/photo-1591290619762-3a2c3611e8b7?w=300&h=300&fit=crop',
@@ -86,7 +83,6 @@ export const products: Product[] = [
   {
     id: '4',
     title: 'Screen Protector Tempered Glass',
-    titleThai: 'ฟิล์มกระจกเทมเปอร์',
     price: 89.00,
     originalPrice: 199.00,
     image: 'https://images.unsplash.com/photo-1559163499-6a1994e0f932?w=300&h=300&fit=crop',
@@ -105,7 +101,6 @@ export const products: Product[] = [
   {
     id: '5',
     title: 'Wireless Mouse USB',
-    titleThai: 'เมาส์ไร้สาย USB',
     price: 129.00,
     originalPrice: 299.00,
     image: 'https://images.unsplash.com/photo-1527814050087-3793815479db?w=300&h=300&fit=crop',
@@ -126,7 +121,6 @@ export const products: Product[] = [
   {
     id: '6',
     title: 'Men\'s Casual Shorts',
-    titleThai: 'กางเกงขาสั้นผ้านุ่ม',
     price: 57.12,
     originalPrice: 79.00,
     image: 'https://images.unsplash.com/photo-1591195853828-11db59a44f6b?w=300&h=300&fit=crop',
@@ -146,7 +140,6 @@ export const products: Product[] = [
   {
     id: '7',
     title: 'Women\'s Summer Dress',
-    titleThai: 'ชุดเดรสสำหรับผู้หญิง',
     price: 189.00,
     originalPrice: 449.00,
     image: 'https://images.unsplash.com/photo-1595777707802-4b115f1dcf32?w=300&h=300&fit=crop',
@@ -165,7 +158,6 @@ export const products: Product[] = [
   {
     id: '8',
     title: 'Sports Running Shoes',
-    titleThai: 'รองเท้าวิ่งกีฬา',
     price: 799.00,
     originalPrice: 1599.00,
     image: 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=300&h=300&fit=crop',
@@ -184,7 +176,6 @@ export const products: Product[] = [
   {
     id: '9',
     title: 'Casual T-Shirt Cotton',
-    titleThai: 'เสื้อยืดคอตตอนสำหรับผู้ชาย',
     price: 69.00,
     originalPrice: 149.00,
     image: 'https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=300&h=300&fit=crop',
@@ -204,7 +195,6 @@ export const products: Product[] = [
   {
     id: '10',
     title: 'Jeans Premium Denim',
-    titleThai: 'กางเกงยีนส์พรีเมี่ยม',
     price: 499.00,
     originalPrice: 1099.00,
     image: 'https://images.unsplash.com/photo-1542272604-787c62d465d1?w=300&h=300&fit=crop',
@@ -225,7 +215,6 @@ export const products: Product[] = [
   {
     id: '11',
     title: 'Green Plant Areca',
-    titleThai: 'ต้นปาล์มสวยๆ ขนาดใหญ่',
     price: 1344.82,
     originalPrice: 1899.00,
     image: 'https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=300&h=300&fit=crop',
@@ -244,7 +233,6 @@ export const products: Product[] = [
   {
     id: '12',
     title: 'Monstera Plant Medium',
-    titleThai: 'ต้นมอนสเตร่า',
     price: 94.31,
     originalPrice: 189.00,
     image: 'https://images.unsplash.com/photo-1459411552884-841db9b3cc2a?w=300&h=300&fit=crop',
@@ -263,7 +251,6 @@ export const products: Product[] = [
   {
     id: '13',
     title: 'Water Mop Floor Cleaner',
-    titleThai: 'ไม้ปาดน้ำไม้เช็ดพื้น',
     price: 37.90,
     originalPrice: 89.00,
     image: 'https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=300&h=300&fit=crop',
@@ -283,7 +270,6 @@ export const products: Product[] = [
   {
     id: '14',
     title: 'LED Smart Light Bulb',
-    titleThai: 'หลอดไฟ LED สมาร์ท',
     price: 299.00,
     originalPrice: 699.00,
     image: 'https://images.unsplash.com/photo-1565484424714-f87db920d104?w=300&h=300&fit=crop',
@@ -302,7 +288,6 @@ export const products: Product[] = [
   {
     id: '15',
     title: 'Bed Sheet Set Cotton',
-    titleThai: 'ชุดเครื่องนอนผ้าคอตตอน',
     price: 399.00,
     originalPrice: 899.00,
     image: 'https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=300&h=300&fit=crop',
@@ -324,7 +309,6 @@ export const products: Product[] = [
   {
     id: '16',
     title: 'Makeup Set Complete',
-    titleThai: 'ชุดแต่งหน้าสมบูรณ์',
     price: 259.00,
     originalPrice: 599.00,
     image: 'https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=300&h=300&fit=crop',
@@ -343,7 +327,6 @@ export const products: Product[] = [
   {
     id: '17',
     title: 'Facial Skincare Kit',
-    titleThai: 'ชุดสกินแคร์ดูแลผิวหน้า',
     price: 419.00,
     originalPrice: 899.00,
     image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=300&h=300&fit=crop',
@@ -362,7 +345,6 @@ export const products: Product[] = [
   {
     id: '18',
     title: 'Hair Care Shampoo',
-    titleThai: 'แชมพูดูแลผม',
     price: 79.00,
     originalPrice: 189.00,
     image: 'https://images.unsplash.com/photo-1608571423902-eed4a5ad8108?w=300&h=300&fit=crop',
@@ -382,7 +364,6 @@ export const products: Product[] = [
   {
     id: '19',
     title: 'Face Mask Sheet Pack',
-    titleThai: 'มาสก์แผ่นดูแลผิวหน้า',
     price: 129.00,
     originalPrice: 299.00,
     image: 'https://images.unsplash.com/photo-1556228578-a0fc2653e45b?w=300&h=300&fit=crop',
@@ -401,7 +382,6 @@ export const products: Product[] = [
   {
     id: '20',
     title: 'Sunscreen SPF 50',
-    titleThai: 'กันแดด SPF 50',
     price: 189.00,
     originalPrice: 449.00,
     image: 'https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=300&h=300&fit=crop',
@@ -422,7 +402,6 @@ export const products: Product[] = [
   {
     id: '21',
     title: 'Stainless Steel Knife Set',
-    titleThai: 'ชุดมีดสแตนเลส',
     price: 249.00,
     originalPrice: 599.00,
     image: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=300&h=300&fit=crop',
@@ -441,7 +420,6 @@ export const products: Product[] = [
   {
     id: '22',
     title: 'Non-Stick Cookware Set',
-    titleThai: 'ชุดหม้อเครื่องครัว',
     price: 699.00,
     originalPrice: 1599.00,
     image: 'https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=300&h=300&fit=crop',
@@ -461,7 +439,6 @@ export const products: Product[] = [
   {
     id: '23',
     title: 'Electric Rice Cooker',
-    titleThai: 'หม้อหุงข้าวไฟฟ้า',
     price: 449.00,
     originalPrice: 999.00,
     image: 'https://images.unsplash.com/photo-1578500494198-246f612d03b3?w=300&h=300&fit=crop',
@@ -480,7 +457,6 @@ export const products: Product[] = [
   {
     id: '24',
     title: 'Glass Mixing Bowl Set',
-    titleThai: 'ชุดชามแก้วใส',
     price: 129.00,
     originalPrice: 299.00,
     image: 'https://images.unsplash.com/photo-1599599810694-a5c9f1d1a4c9?w=300&h=300&fit=crop',
@@ -499,7 +475,6 @@ export const products: Product[] = [
   {
     id: '25',
     title: 'Microwave Oven',
-    titleThai: 'เตาอบไมโครเวฟ',
     price: 1199.00,
     originalPrice: 2499.00,
     image: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=300&h=300&fit=crop',
@@ -520,7 +495,6 @@ export const products: Product[] = [
   {
     id: '26',
     title: 'Yoga Mat Non-Slip',
-    titleThai: 'เสื่อโยคะ',
     price: 149.00,
     originalPrice: 349.00,
     image: 'https://images.unsplash.com/photo-1599579810694-a5c9f1d1a4c9?w=300&h=300&fit=crop',
@@ -539,7 +513,6 @@ export const products: Product[] = [
   {
     id: '27',
     title: 'Dumbbell Weight Set',
-    titleThai: 'ชุดดัมเบล',
     price: 599.00,
     originalPrice: 1299.00,
     image: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=300&h=300&fit=crop',
@@ -559,7 +532,6 @@ export const products: Product[] = [
   {
     id: '28',
     title: 'Bicycle Helmet Safety',
-    titleThai: 'หมวกกันน็อกปั่นจักรยาน',
     price: 199.00,
     originalPrice: 449.00,
     image: 'https://images.unsplash.com/photo-1568571933382-74d440642117?w=300&h=300&fit=crop',
@@ -578,7 +550,6 @@ export const products: Product[] = [
   {
     id: '29',
     title: 'Sports Backpack Travel',
-    titleThai: 'เป้าสำหรับเดินทาง',
     price: 279.00,
     originalPrice: 599.00,
     image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=300&h=300&fit=crop',
@@ -597,7 +568,6 @@ export const products: Product[] = [
   {
     id: '30',
     title: 'Water Bottle Thermos',
-    titleThai: 'กระติกน้ำเก็บอุณหภูมิ',
     price: 179.00,
     originalPrice: 399.00,
     image: 'https://images.unsplash.com/photo-1602527336146-40e9e676a682?w=300&h=300&fit=crop',
@@ -619,7 +589,6 @@ export const products: Product[] = [
   {
     id: '31',
     title: 'Building Blocks Set',
-    titleThai: 'ชุดบล็อกสำหรับเด็ก',
     price: 89.00,
     originalPrice: 199.00,
     image: 'https://images.unsplash.com/photo-1566274175335-c1ee14cd996d?w=300&h=300&fit=crop',
@@ -638,7 +607,6 @@ export const products: Product[] = [
   {
     id: '32',
     title: 'Remote Control Car',
-    titleThai: 'รถบังคับ',
     price: 299.00,
     originalPrice: 699.00,
     image: 'https://images.unsplash.com/photo-1612872087720-bb876e2e67d1?w=300&h=300&fit=crop',
@@ -657,7 +625,6 @@ export const products: Product[] = [
   {
     id: '33',
     title: 'Puzzle 1000 Pieces',
-    titleThai: 'จิ๊กซอว์ 1000 ชิ้น',
     price: 149.00,
     originalPrice: 349.00,
     image: 'https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=300&h=300&fit=crop',
@@ -676,7 +643,6 @@ export const products: Product[] = [
   {
     id: '34',
     title: 'Drone with Camera',
-    titleThai: 'โดรนมีกล้อง',
     price: 1899.00,
     originalPrice: 3999.00,
     image: 'https://images.unsplash.com/photo-1579829366248-204fe8413f31?w=300&h=300&fit=crop',
@@ -696,7 +662,6 @@ export const products: Product[] = [
   {
     id: '35',
     title: 'Board Game Set',
-    titleThai: 'เกมบอร์ด',
     price: 199.00,
     originalPrice: 449.00,
     image: 'https://images.unsplash.com/photo-1570303008254-eb3d04a0ccc3?w=300&h=300&fit=crop',
@@ -717,7 +682,6 @@ export const products: Product[] = [
   {
     id: '36',
     title: 'English Learning Book',
-    titleThai: 'หนังสือเรียนภาษาอังกฤษ',
     price: 79.00,
     originalPrice: 189.00,
     image: 'https://images.unsplash.com/photo-1507842072343-583f20270319?w=300&h=300&fit=crop',
@@ -735,8 +699,7 @@ export const products: Product[] = [
   },
   {
     id: '37',
-    title: 'Cookbook Thai Cuisine',
-    titleThai: 'หนังสืออาหารไทย',
+    title: 'Cookbook UAE Cuisine',
     price: 119.00,
     originalPrice: 279.00,
     image: 'https://images.unsplash.com/photo-1507842072343-583f20270319?w=300&h=300&fit=crop',
@@ -749,13 +712,12 @@ export const products: Product[] = [
     features: ['FREE SHIPPING', 'FREE RETURN'],
     hasVideo: false,
     category: 'Books',
-    description: 'Traditional Thai recipes cookbook',
+    description: 'Traditional UAE recipes cookbook',
     isMall: false,
   },
   {
     id: '38',
     title: 'Self-Help Book',
-    titleThai: 'หนังสือพัฒนาตนเอง',
     price: 99.00,
     originalPrice: 229.00,
     image: 'https://images.unsplash.com/photo-1507842072343-583f20270319?w=300&h=300&fit=crop',
@@ -775,7 +737,6 @@ export const products: Product[] = [
   {
     id: '39',
     title: 'Novel Fiction',
-    titleThai: 'นิยาย',
     price: 89.00,
     originalPrice: 199.00,
     image: 'https://images.unsplash.com/photo-1507842072343-583f20270319?w=300&h=300&fit=crop',
@@ -794,7 +755,6 @@ export const products: Product[] = [
   {
     id: '40',
     title: 'Science Encyclopedia',
-    titleThai: 'สารานุกรมวิทยาศาสตร์',
     price: 149.00,
     originalPrice: 349.00,
     image: 'https://images.unsplash.com/photo-1507842072343-583f20270319?w=300&h=300&fit=crop',
@@ -815,7 +775,6 @@ export const products: Product[] = [
   {
     id: '41',
     title: 'Dog Food Premium',
-    titleThai: 'อาหารสุนัขพรีเมี่ยม',
     price: 149.00,
     originalPrice: 349.00,
     image: 'https://images.unsplash.com/photo-1544716278-ca5e3af5fad6?w=300&h=300&fit=crop',
@@ -834,7 +793,6 @@ export const products: Product[] = [
   {
     id: '42',
     title: 'Cat Litter Box',
-    titleThai: 'กล่องรังแสบแมว',
     price: 199.00,
     originalPrice: 449.00,
     image: 'https://images.unsplash.com/photo-1597289212624-754a1dae4c67?w=300&h=300&fit=crop',
@@ -853,7 +811,6 @@ export const products: Product[] = [
   {
     id: '43',
     title: 'Pet Bed Comfortable',
-    titleThai: 'เบดสัตว์เลี้ยง',
     price: 179.00,
     originalPrice: 399.00,
     image: 'https://images.unsplash.com/photo-1585110396000-c9fbe2915b11?w=300&h=300&fit=crop',
@@ -872,7 +829,6 @@ export const products: Product[] = [
   {
     id: '44',
     title: 'Pet Toys Collection',
-    titleThai: 'ชุดของเล่นสัตว์เลี้ยง',
     price: 89.00,
     originalPrice: 199.00,
     image: 'https://images.unsplash.com/photo-1535241749838-299ce2cf0b65?w=300&h=300&fit=crop',
@@ -892,7 +848,6 @@ export const products: Product[] = [
   {
     id: '45',
     title: 'Pet Grooming Kit',
-    titleThai: 'ชุดอุปกรณ์อาบน้ำสัตว์เลี้ยง',
     price: 129.00,
     originalPrice: 299.00,
     image: 'https://images.unsplash.com/photo-1568693289271-7db8df0df64d?w=300&h=300&fit=crop',
@@ -913,7 +868,6 @@ export const products: Product[] = [
   {
     id: '46',
     title: 'Car Phone Mount',
-    titleThai: 'ที่ยึดโทรศัพท์ในรถ',
     price: 79.00,
     originalPrice: 179.00,
     image: 'https://images.unsplash.com/photo-1559163499-06e13ef80497?w=300&h=300&fit=crop',
@@ -932,7 +886,6 @@ export const products: Product[] = [
   {
     id: '47',
     title: 'Car Dash Camera',
-    titleThai: 'กล้องติดรถยนต์',
     price: 449.00,
     originalPrice: 999.00,
     image: 'https://images.unsplash.com/photo-1583121274602-3e2820c69888?w=300&h=300&fit=crop',
@@ -951,7 +904,6 @@ export const products: Product[] = [
   {
     id: '48',
     title: 'Car Air Freshener',
-    titleThai: 'น้ำหอมรถยนต์',
     price: 39.00,
     originalPrice: 89.00,
     image: 'https://images.unsplash.com/photo-1580421747917-498caa778b44?w=300&h=300&fit=crop',
@@ -971,7 +923,6 @@ export const products: Product[] = [
   {
     id: '49',
     title: 'Car Seat Covers',
-    titleThai: 'ผ้าหุ้มเบาะรถยนต์',
     price: 299.00,
     originalPrice: 699.00,
     image: 'https://images.unsplash.com/photo-1470225620780-dba8ba36b745?w=300&h=300&fit=crop',
@@ -990,7 +941,6 @@ export const products: Product[] = [
   {
     id: '50',
     title: 'Car Jump Starter',
-    titleThai: 'บัตเตอรี่สำรองรถยนต์',
     price: 799.00,
     originalPrice: 1799.00,
     image: 'https://images.unsplash.com/photo-1581524046613-491c38ab10bb?w=300&h=300&fit=crop',

@@ -1,162 +1,104 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
-import { ChevronLeft, ChevronRight, Bell, Lock, HelpCircle, MessageSquare } from 'lucide-react';
-import { useState, useCallback } from 'react';
-import { useRouter } from 'next/navigation';
+import { ChevronLeft } from 'lucide-react'
+import Link from 'next/link'
 
 export default function SettingsPage() {
-  const router = useRouter();
-  const [isLoggingOut, setIsLoggingOut] = useState(false);
-
-  const handleNavigateBack = useCallback(() => {
-    router.push('/account');
-  }, [router]);
-
-  const handleLogout = async () => {
-    setIsLoggingOut(true);
-    try {
-      const response = await fetch('/api/auth/logout', { method: 'POST' });
-      if (response.ok) {
-        router.push('/');
-      }
-    } catch (error) {
-      console.error('Logout failed:', error);
-      setIsLoggingOut(false);
-    }
-  };
-
-  const menuItems = [
-    { 
-      label: 'Account Information', 
-      href: '/account/settings/info',
-      icon: null 
-    },
-    { 
-      label: 'Payment Setting', 
-      href: '/account/settings/payment',
-      icon: null 
-    },
-    { 
-      label: 'Address Book', 
-      href: '/account/addresses',
-      icon: null 
-    },
-    { 
-      label: 'Messages', 
-      subtitle: 'Receive exclusive offers and personal updates',
-      href: '/messages',
-      icon: null 
-    },
-    { 
-      label: 'Country', 
-      subtitle: 'Thailand is your current country',
-      hasFlag: true,
-      href: '/account/settings/country',
-      icon: null 
-    },
-    { 
-      label: 'เปลี่ยนภาษา - Language', 
-      subtitle: 'English',
-      href: '/account/settings/language',
-      icon: null 
-    },
-    { 
-      label: 'Dark Mode', 
-      href: '/account/settings/darkmode',
-      icon: null 
-    },
-    { 
-      label: 'Account Security', 
-      href: '/account/settings/security',
-      icon: Lock 
-    },
-    { 
-      label: 'Policies', 
-      href: '/account/settings/policies',
-      icon: null 
-    },
-    { 
-      label: 'Help', 
-      href: '/account/settings/help',
-      icon: HelpCircle 
-    },
-    { 
-      label: 'Feedback', 
-      href: '/account/settings/feedback',
-      icon: MessageSquare 
-    },
-  ];
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50">
-      {/* Header */}
-      <header className="bg-white sticky top-0 z-50 border-b border-gray-100">
-        <div className="flex items-center px-4 py-4 gap-3">
-          <button 
-            onClick={handleNavigateBack}
-            className="p-2 -ml-2 hover:bg-gray-100 rounded-lg transition-colors"
-            aria-label="Go back"
-          >
-            <ChevronLeft className="w-6 h-6 text-gray-900" strokeWidth={2.5} />
-          </button>
-          <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
+    <div className="min-h-screen bg-white pb-24">
+      {/* Dark Header */}
+      <div className="sticky top-0 z-40 bg-gray-900 text-white px-4 py-4">
+        <div className="flex items-center gap-4">
+          <Link href="/account/profile">
+            <ChevronLeft className="w-6 h-6" />
+          </Link>
+          <h1 className="text-2xl font-bold">Settings</h1>
         </div>
-      </header>
+      </div>
 
-      <main className="flex-1 overflow-y-auto pb-32">
-        {/* Menu Items */}
-        <div className="bg-white mt-2">
-          {menuItems.map((item, index) => (
-            <Link
-              key={index}
-              href={item.href}
-              className="flex items-center px-4 py-4 hover:bg-gray-50 transition-colors active:bg-gray-100 border-b border-gray-50 last:border-b-0"
-            >
-              {/* Thailand Flag for Country item */}
-              {item.hasFlag && (
-                <div className="w-9 h-6 mr-3 relative overflow-hidden rounded flex-shrink-0 flex-col flex">
-                  <div className="flex-1 bg-red-600" />
-                  <div className="flex-1 bg-white" />
-                  <div className="flex-[1.4] bg-blue-900" />
-                  <div className="flex-1 bg-white" />
-                  <div className="flex-1 bg-red-600" />
-                </div>
-              )}
-              
-              {/* Icon if available */}
-              {item.icon && !item.hasFlag && (
-                <div className="w-9 h-9 mr-3 flex items-center justify-center flex-shrink-0 text-pink-600">
-                  <item.icon className="w-5 h-5" />
-                </div>
-              )}
-              
-              <div className="flex-1 text-left">
-                <p className="text-base text-gray-900 font-medium">{item.label}</p>
-                {item.subtitle && (
-                  <p className="text-sm text-gray-500 mt-0.5">{item.subtitle}</p>
-                )}
-              </div>
+      {/* Settings Menu */}
+      <div className="bg-white">
+        {/* Account Information */}
+        <button className="w-full px-6 py-4 text-left border-b border-gray-200 hover:bg-gray-50 active:bg-gray-100">
+          <p className="font-bold text-lg text-gray-900">Account Information</p>
+        </button>
 
-              <ChevronRight className="w-5 h-5 text-gray-300 flex-shrink-0 ml-2" strokeWidth={2.5} />
-            </Link>
-          ))}
+        {/* Payment Setting */}
+        <button className="w-full px-6 py-4 text-left border-b border-gray-200 hover:bg-gray-50 active:bg-gray-100">
+          <p className="font-bold text-lg text-gray-900">Payment Setting</p>
+        </button>
+
+        {/* Address Book */}
+        <button className="w-full px-6 py-4 text-left border-b border-gray-200 hover:bg-gray-50 active:bg-gray-100">
+          <p className="font-bold text-lg text-gray-900">Address Book</p>
+        </button>
+
+        {/* Messages Section */}
+        <button className="w-full px-6 py-4 text-left border-b border-gray-200 hover:bg-gray-50 active:bg-gray-100">
+          <p className="font-bold text-lg text-gray-900">Messages</p>
+          <p className="text-sm text-gray-600 mt-1">Receive exclusive offers and personal updates</p>
+        </button>
+
+        {/* Country Subsection */}
+        <div className="px-6 py-4 border-b border-gray-200 bg-white flex items-center gap-3">
+          <span className="text-3xl">🇹🇭</span>
+          <div>
+            <p className="font-bold text-lg text-gray-900">Country</p>
+            <p className="text-sm text-gray-600">Thailand is your current country</p>
+          </div>
         </div>
 
-        {/* Logout Button Section */}
-        <div className="mt-6 px-4">
-          <button
-            onClick={handleLogout}
-            disabled={isLoggingOut}
-            className="w-full py-3 bg-red-600 hover:bg-red-700 disabled:bg-red-400 text-white font-semibold rounded-lg transition-colors active:bg-red-800 disabled:opacity-70"
-          >
-            {isLoggingOut ? 'Logging out...' : 'Logout'}
-          </button>
-        </div>
+        {/* Language Subsection */}
+        <button className="w-full px-6 py-4 text-left border-b border-gray-200 hover:bg-gray-50 active:bg-gray-100">
+          <p className="font-bold text-lg text-gray-900">เปลี่ยนภาษา - Language</p>
+          <p className="text-sm text-gray-600 mt-1">English</p>
+        </button>
 
-        {/* Bottom spacing */}
-        <div className="h-12" />
-      </main>
+        {/* Dark Mode */}
+        <button className="w-full px-6 py-4 text-left border-b border-gray-200 hover:bg-gray-50 active:bg-gray-100">
+          <p className="font-bold text-lg text-gray-900">Dark Mode</p>
+        </button>
+
+        {/* Account Security */}
+        <button className="w-full px-6 py-4 text-left border-b border-gray-200 hover:bg-gray-50 active:bg-gray-100">
+          <p className="font-bold text-lg text-gray-900">Account Security</p>
+        </button>
+
+        {/* Policies */}
+        <button className="w-full px-6 py-4 text-left border-b border-gray-200 hover:bg-gray-50 active:bg-gray-100">
+          <p className="font-bold text-lg text-gray-900">Policies</p>
+        </button>
+
+        {/* Help */}
+        <button className="w-full px-6 py-4 text-left border-b border-gray-200 hover:bg-gray-50 active:bg-gray-100">
+          <p className="font-bold text-lg text-gray-900">Help</p>
+        </button>
+
+        {/* Feedback */}
+        <button className="w-full px-6 py-4 text-left border-b border-gray-200 hover:bg-gray-50 active:bg-gray-100">
+          <p className="font-bold text-lg text-gray-900">Feedback</p>
+        </button>
+      </div>
+
+      {/* Bottom Section */}
+      <div className="px-4 py-12 text-center">
+        {/* Logo Circle */}
+        <div className="w-16 h-16 bg-gray-700 rounded-full flex items-center justify-center text-white text-2xl font-bold mx-auto mb-8">T</div>
+
+        {/* Logout Button */}
+        <button className="text-red-600 font-bold text-2xl hover:text-red-700 mb-12">
+          Logout
+        </button>
+      </div>
+
+      {/* Bottom Navigation Bar - Fixed */}
+      <div className="fixed bottom-0 left-0 right-0 bg-gray-700 h-16 flex items-center justify-around">
+        <button className="text-blue-400 text-xl">⊡</button>
+        <button className="text-white text-xl">↗</button>
+        <button className="text-white text-xl">#</button>
+        <button className="text-white text-xl">📝</button>
+        <button className="text-white text-xl">✕</button>
+      </div>
     </div>
-  );
+  )
 }

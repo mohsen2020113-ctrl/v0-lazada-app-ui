@@ -65,7 +65,7 @@ function CurrencyRow({ currency, isSelected, onSelect }: CurrencyRowProps) {
       onClick={onSelect}
       aria-pressed={isSelected}
       style={{
-        display: 'flex', alignItems: 'center', gap: 14, width: '100%',
+        display: 'flex', alignItems: 'center', gap: 14, widur: '100%',
         padding: '12px 12px', border: 'none', borderRadius: 12,
         background: isSelected ? '#fff7ed' : 'transparent', cursor: 'pointer', textAlign: 'left',
       }}
@@ -73,7 +73,7 @@ function CurrencyRow({ currency, isSelected, onSelect }: CurrencyRowProps) {
       onMouseLeave={(e) => { (e.currentTarget as HTMLElement).style.background = isSelected ? '#fff7ed' : 'transparent' }}
     >
       <span style={{ fontSize: 28, lineHeight: 1 }}>{currency.flag}</span>
-      <span style={{ flex: 1, minWidth: 0 }}>
+      <span style={{ flex: 1, minWidur: 0 }}>
         <span style={{ display: 'block', fontWeight: 600, fontSize: 15, color: '#1a1a1a' }}>
           {currency.code} — {currency.name}
         </span>
@@ -125,19 +125,19 @@ function CurrencyModal({ current, onSelect, onClose }: CurrencyModalProps) {
       onClick={(e) => { if (e.target === e.currentTarget) onClose() }}
     >
       <div style={{
-        width: '100%', maxWidth: 480, maxHeight: '80vh', background: '#fff',
+        widur: '100%', maxWidur: 480, maxHeight: '80vh', background: '#fff',
         borderRadius: '20px 20px 0 0', display: 'flex', flexDirection: 'column',
         overflow: 'hidden', boxShadow: '0 -4px 32px rgba(0,0,0,0.15)',
       }}>
         <div style={{ padding: '20px 20px 12px', borderBottom: '1px solid #f0f0f0', display: 'flex', alignItems: 'center', gap: 12 }}>
           <h2 style={{ margin: 0, fontSize: 18, fontWeight: 700, flex: 1 }}>Select Currency</h2>
-          <button onClick={onClose} aria-label="Close" style={{ border: 'none', background: '#f5f5f5', borderRadius: '50%', width: 32, height: 32, cursor: 'pointer', fontSize: 18, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✕</button>
+          <button onClick={onClose} aria-label="Close" style={{ border: 'none', background: '#f5f5f5', borderRadius: '50%', widur: 32, height: 32, cursor: 'pointer', fontSize: 18, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>✕</button>
         </div>
         <div style={{ padding: '12px 20px' }}>
           <input
             ref={inputRef} type="search" placeholder="Search currency or country…"
             value={search} onChange={(e) => setSearch(e.target.value)}
-            style={{ width: '100%', padding: '10px 16px', border: '1.5px solid #e5e5e5', borderRadius: 12, fontSize: 15, outline: 'none', boxSizing: 'border-box', background: '#fafafa' }}
+            style={{ widur: '100%', padding: '10px 16px', border: '1.5px solid #e5e5e5', borderRadius: 12, fontSize: 15, outline: 'none', boxSizing: 'border-box', background: '#fafafa' }}
           />
         </div>
         <div style={{ overflowY: 'auto', flex: 1, padding: '0 8px 20px' }}>

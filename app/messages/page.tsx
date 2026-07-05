@@ -28,21 +28,21 @@ export default function MessagesPage() {
       id: '1',
       type: 'product',
       title: '(1ลิ้ง 30ห้อ) ...',
-      price: '฿85.00',
+      price: 'AED 85.00',
       image: '📦',
     },
     {
       id: '2',
       type: 'product',
       title: 'แปรงขัดห้องน้ำ ...',
-      price: '฿32.00',
+      price: 'AED 32.00',
       image: '🧹',
     },
     {
       id: '3',
       type: 'product',
       title: 'ใหม่ไม้กวาดยาง...',
-      price: '฿37.00',
+      price: 'AED 37.00',
       image: '🧼',
     },
   ])
@@ -127,10 +127,10 @@ export default function MessagesPage() {
         {/* Chat Products Grid */}
         <div className="grid grid-cols-3 gap-2.5">
           {messages.map(msg => (
-            <button
+            <div
               key={msg.id}
               onClick={() => msg.type === 'product' && handleNavigate(`/product/${msg.id}`)}
-              className="bg-transparent group text-left transition-all"
+              className="bg-transparent group text-left transition-all cursor-pointer"
             >
               {/* Product Image Container */}
               <div className="w-full aspect-square bg-gradient-to-br from-teal-500 via-teal-600 to-teal-700 rounded-lg flex items-center justify-center text-4xl font-bold group-hover:shadow-lg transition-all">
@@ -144,18 +144,18 @@ export default function MessagesPage() {
                 </p>
                 <div className="flex items-center justify-between mt-1.5">
                   <span className="text-sm font-bold text-pink-500">{msg.price}</span>
-                  <button
+                  <div
                     onClick={(e) => {
                       e.stopPropagation()
                       handleNavigate('/cart')
                     }}
-                    className="bg-pink-600 hover:bg-pink-700 text-white p-1.5 rounded transition-all group-hover:scale-110"
+                    className="bg-pink-600 hover:bg-pink-700 text-white p-1.5 rounded transition-all group-hover:scale-110 cursor-pointer"
                   >
                     <Heart className="w-3.5 h-3.5 fill-current" />
-                  </button>
+                  </div>
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
 
@@ -166,14 +166,14 @@ export default function MessagesPage() {
           <div className="flex-1 h-px bg-gray-700" />
         </div>
 
-        {/* Lazzie Bot Section */}
+        {/* 4LEEE Bot Section */}
         <div className="bg-gray-700 rounded-lg p-4 mb-4">
           <div className="flex items-start gap-3">
             <div className="w-10 h-10 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center flex-shrink-0 text-white text-lg font-bold">
-              L
+              4
             </div>
             <div className="flex-1 min-w-0">
-              <p className="font-semibold text-gray-200 text-sm">Lazzie</p>
+              <p className="font-semibold text-gray-200 text-sm">4LEEE Assistant</p>
               <p className="text-gray-400 text-xs mt-1.5 leading-relaxed break-words">
                 Saw ไม้กวาดหยายไซย์ยิฮะได้ 280 cm? —here&apos;s what else you might like...
               </p>
@@ -208,7 +208,7 @@ export default function MessagesPage() {
                     <div className="w-10 h-10 bg-pink-500 rounded-lg mx-auto mb-2 flex items-center justify-center">
                       <span className="text-white text-lg font-bold">L</span>
                     </div>
-                    <p className="text-white text-xs font-semibold">Lazada</p>
+                    <p className="text-white text-xs font-semibold">4LEEE</p>
                     <p className="text-gray-500 text-xs mt-1">App notifications</p>
                   </div>
                 </div>
@@ -235,7 +235,7 @@ export default function MessagesPage() {
               <button
                 onClick={() => {
                   setShowNotificationModal(false)
-                  handleNavigate('/settings')
+                  handleNavigate('/account/settings')
                 }}
                 className="w-full py-3 bg-pink-600 hover:bg-pink-700 text-white font-bold rounded-lg transition-colors text-sm"
               >

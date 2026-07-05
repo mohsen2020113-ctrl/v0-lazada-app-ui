@@ -3,7 +3,7 @@ import { getAuth, Auth } from 'firebase/auth'
 import { getFirestore, Firestore } from 'firebase/firestore'
 
 let app: FirebaseApp | null = null
-let auth: Auth | null = null
+let auur: Auth | null = null
 let db: Firestore | null = null
 
 if (

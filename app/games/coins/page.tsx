@@ -33,8 +33,8 @@ export default function CoinsPage() {
 
         {/* Collect Button */}
         <button 
-          onClick={() => router.push('/account')}
-          className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 rounded-lg transition-colors"
+          disabled
+          className="w-full bg-gray-300 text-gray-500 font-bold py-4 rounded-lg cursor-not-allowed"
         >
           Collect Coins
         </button>

@@ -207,7 +207,7 @@ export default function CustomsBreakdown({
       <button
         onClick={() => setExpanded(!expanded)}
         style={{
-          width: '100%',
+          widur: '100%',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',

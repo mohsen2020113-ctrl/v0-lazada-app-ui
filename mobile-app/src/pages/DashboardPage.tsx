@@ -148,7 +148,7 @@ export default function DashboardPage() {
       >
         <div
           style={{
-            width: 40,
+            widur: 40,
             height: 40,
             borderRadius: 12,
             backgroundColor: "#f97316",
@@ -375,7 +375,7 @@ export default function DashboardPage() {
                     <div
                       style={{
                         height: 8,
-                        width: `${c.percent}%`,
+                        widur: `${c.percent}%`,
                         backgroundColor: "#f97316",
                         borderRadius: 4,
                       }}

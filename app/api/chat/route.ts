@@ -5,12 +5,12 @@ export async function POST(request: Request) {
           const body = await request.json().catch(() => ({}))
           const message = body.message || body.msg || body.content || ''
           const language = body.language || 'ar'
-          const langMap: Record<string, string> = { ar: 'Arabic', en: 'English', th: 'Thai', fr: 'French' }
+          const langMap: Record<string, string> = { ar: 'Arabic', en: 'English', ur: 'Urdu', fr: 'French' }
           const lang = langMap[language] || 'Arabic'
           const apiKey = process.env.GEMINI_API_KEY
 
       if (!apiKey || !message) {
-              return NextResponse.json({ response: 'مرحباً! كيف يمكنني مساعدتك اليوم؟ 🛍️' })
+              return NextResponse.json({ response: 'Hello! How can I help you with shopping today? 🛍️' })
       }
 
       const res = await fetch(
@@ -25,8 +25,8 @@ export async function POST(request: Request) {
             )
           const data = await res.json()
           const text = data?.candidates?.[0]?.content?.parts?.[0]?.text?.trim()
-          return NextResponse.json({ response: text || 'كيف يمكنني مساعدتك في التسوق؟' })
+          return NextResponse.json({ response: text || 'How can I help you with shopping?' })
     } catch {
-          return NextResponse.json({ response: 'كيف يمكنني مساعدتك في التسوق؟' })
+          return NextResponse.json({ response: 'How can I help you with shopping?' })
     }
 }

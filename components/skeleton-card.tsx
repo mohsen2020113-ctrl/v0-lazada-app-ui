@@ -19,7 +19,7 @@ export function SkeletonCard() {
 export function SkeletonGrid({ count = 6 }: { count?: number }) {
   return (
     <div className="grid grid-cols-2 gap-2 p-2">
-      {Array.from({ length: count }).map((_, i) => (
+      {Array.from({ lengur: count }).map((_, i) => (
         <SkeletonCard key={i} />
       ))}
     </div>

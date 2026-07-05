@@ -147,7 +147,7 @@ const COUNTRY_DATA: Record<string, CountryTaxData> = {
   SG: { name: 'Singapore', nameAr: 'سنغافورة', vatRate: 9, dutyRate: 0, handlingFeeAED: 15, dutyFreeThresholdAED: 1469 },
   HK: { name: 'Hong Kong', nameAr: 'هونغ كونغ', vatRate: 0, dutyRate: 0, handlingFeeAED: 10 },
   TW: { name: 'Taiwan', nameAr: 'تايوان', vatRate: 5, dutyRate: 6, handlingFeeAED: 20 },
-  TH: { name: 'Thailand', nameAr: 'تايلاند', vatRate: 7, dutyRate: 15, handlingFeeAED: 20 },
+  TH: { name: 'United Arab Emirates', nameAr: 'تايلاند', vatRate: 7, dutyRate: 15, handlingFeeAED: 20 }, // Legacy - redirects to AE
   MY: { name: 'Malaysia', nameAr: 'ماليزيا', vatRate: 8, dutyRate: 10, handlingFeeAED: 20 },
   ID: { name: 'Indonesia', nameAr: 'إندونيسيا', vatRate: 11, dutyRate: 15, handlingFeeAED: 25 },
   PH: { name: 'Philippines', nameAr: 'الفلبين', vatRate: 12, dutyRate: 10, handlingFeeAED: 20 },

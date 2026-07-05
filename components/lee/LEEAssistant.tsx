@@ -9,12 +9,12 @@ interface Message {
   timestamp: string;
 }
 
-export function LEEAssistant() {
+export function FourLEEEAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'assistant',
-      content: 'مرحباً! أنا LEE، مساعدك الذكي في التسوق. كيف يمكنني مساعدتك اليوم؟',
+      content: 'Hello! I am 4LEEE, your smart shopping assistant. How can I help you today?',
       timestamp: new Date().toISOString(),
     },
   ]);
@@ -27,7 +27,10 @@ export function LEEAssistant() {
   };
 
   useEffect(() => {
-    scrollToBottom();
+    // Add hydration check to prevent errors during SSR
+    if (typeof window !== 'undefined') {
+      scrollToBottom();
+    }
   }, [messages]);
 
   const handleSendMessage = async () => {
@@ -108,7 +111,7 @@ export function LEEAssistant() {
           {/* Header */}
           <div className="bg-gradient-to-r from-[#c2185b] to-[#e91e8c] p-4 text-white flex items-center justify-between">
             <div>
-              <h3 className="font-bold">LEE Assistant</h3>
+              <h3 className="font-bold">4LEEE Assistant</h3>
               <p className="text-xs opacity-90">مساعدك الذكي في التسوق</p>
             </div>
           </div>

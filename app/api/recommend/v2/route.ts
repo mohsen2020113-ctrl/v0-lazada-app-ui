@@ -177,7 +177,7 @@ ONLY return the JSON array in English and Arabic reasons.`;
         image: p.image,
         score: recMap.get(p.id)?.score ?? 0.7,
         reason: recMap.get(p.id)?.reason ?? 'Trending product',
-        reasonAr: recMap.get(p.id)?.reasonAr ?? 'منتج شهير',
+        reasonAr: recMap.get(p.id)?.reasonAr ?? 'Product شهير',
       }))
       .sort((a, b) => (b.score || 0) - (a.score || 0));
   } catch {

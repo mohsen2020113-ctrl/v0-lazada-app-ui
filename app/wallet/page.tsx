@@ -4,10 +4,10 @@ import { ChevronLeft, Plus, ArrowDownLeft, ArrowUpRight, Gift, Star } from 'luci
 
 const TRANSACTIONS = [
   { id: 1, title: 'رصيد مكافآت', sub: 'مشتريات قيمتها 500 AED', amount: '+25 AED', type: 'credit', date: 'اليوم' },
-  { id: 2, title: 'خصم بالمحفظة', sub: 'طلب #ORD-1042', amount: '-30 AED', type: 'debit', date: 'أمس' },
+  { id: 2, title: 'خصم بالمحفظة', sub: 'Order #ORD-1042', amount: '-30 AED', type: 'debit', date: 'أمس' },
   { id: 3, title: 'هدية ترحيب', sub: 'مكافأة العميل الجديد', amount: '+50 AED', type: 'credit', date: '2 يونيو' },
-  { id: 4, title: 'استرداد مبلغ', sub: 'طلب #ORD-0991 ملغى', amount: '+120 AED', type: 'credit', date: '30 مايو' },
-  { id: 5, title: 'خصم بالمحفظة', sub: 'طلب #ORD-0980', amount: '-80 AED', type: 'debit', date: '28 مايو' },
+  { id: 4, title: 'استرداد مبلغ', sub: 'Order #ORD-0991 ملغى', amount: '+120 AED', type: 'credit', date: '30 مايو' },
+  { id: 5, title: 'خصم بالمحفظة', sub: 'Order #ORD-0980', amount: '-80 AED', type: 'debit', date: '28 مايو' },
 ]
 
 export default function WalletPage() {
@@ -53,7 +53,7 @@ export default function WalletPage() {
         <div className="grid grid-cols-3 gap-3">
           {[
             { icon: '🏷️', label: 'استخدام كوبون' },
-            { icon: '📦', label: 'دفع الطلبات' },
+            { icon: '📦', label: 'دفع الOrderات' },
             { icon: '🎁', label: 'المكافآت' },
           ].map(a => (
             <button key={a.label} className="bg-[#1A1A1A] rounded-2xl py-4 flex flex-col items-center gap-2">

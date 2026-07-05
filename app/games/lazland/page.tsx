@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { ChevronLeft } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 
-export default function LazlandPage() {
+export default function FourLandPage() {
   const router = useRouter()
 
   return (
@@ -18,7 +18,7 @@ export default function LazlandPage() {
           >
             <ChevronLeft className="w-6 h-6 text-gray-900" />
           </button>
-          <h1 className="text-xl font-bold text-gray-900">Lazland</h1>
+          <h1 className="text-xl font-bold text-gray-900">4Land</h1>
         </div>
       </header>
 
@@ -26,15 +26,15 @@ export default function LazlandPage() {
         {/* Game Display */}
         <div className="bg-gradient-to-br from-green-200 to-green-100 rounded-2xl p-8 text-center shadow-lg">
           <div className="text-7xl mb-4">🎁</div>
-          <p className="text-sm text-gray-700 mb-2">Welcome to Lazland</p>
+          <p className="text-sm text-gray-700 mb-2">Welcome to 4Land</p>
           <p className="text-2xl font-bold text-gray-900 mb-4">Get Free Prize!</p>
           <p className="text-xs text-gray-700">Spin the wheel and win amazing rewards</p>
         </div>
 
         {/* Play Button */}
         <button 
-          onClick={() => router.push('/account')}
-          className="w-full bg-pink-500 hover:bg-pink-600 text-white font-bold py-4 rounded-lg transition-colors"
+          disabled
+          className="w-full bg-gray-300 text-gray-500 font-bold py-4 rounded-lg cursor-not-allowed"
         >
           Play Now
         </button>
@@ -67,7 +67,7 @@ export default function LazlandPage() {
           <p className="text-sm font-bold text-gray-900 mb-2">Daily Spin Limit</p>
           <p className="text-xs text-gray-700">You have 3 spins remaining today</p>
           <div className="mt-3 bg-gray-200 rounded-full h-2 overflow-hidden">
-            <div className="bg-pink-500 h-full" style={{ width: '30%' }}></div>
+            <div className="bg-pink-500 h-full" style={{ widur: '30%' }}></div>
           </div>
           <p className="text-xs text-gray-600 mt-2">Come back tomorrow for more spins!</p>
         </div>

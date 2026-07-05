@@ -25,8 +25,13 @@ export default function WishlistPage() {
           <div className="flex flex-col items-center justify-center py-24 gap-4">
             <Heart size={56} className="text-white/10" />
             <p className="text-white/40 text-sm">قائمة المفضلة فارغة</p>
+<<<<<<< HEAD
+            <Link href="/" className="bg-[#F57224] text-white text-sm font-bold px-6 py-3 rounded-xl">
+              استكشف الProductات
+=======
             <Link href="/" className="bg-[#C2185B] text-white text-sm font-bold px-6 py-3 rounded-xl">
               استكشف المنتجات
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
             </Link>
           </div>
         ) : (

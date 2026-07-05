@@ -42,7 +42,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json(
       {
         error: "Supplier not found",
-        errorAr: "المورد غير موجود",
+        errorAr: "Supplier not found",
         code: "SUPPLIER_NOT_FOUND",
         supplierId,
       },

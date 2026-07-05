@@ -62,7 +62,17 @@ body {
   border-radius: 4px;
 }
 
+<<<<<<< HEAD
+/* Hide scrollbars for horizontal carousels */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+=======
 /* Standardize all icon stroke widths */
 .lucide {
   stroke-width: 1.5;
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
 }
