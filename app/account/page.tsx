@@ -1,163 +1,52 @@
 'use client'
 
-import { Settings, ChevronRight, Clock } from 'lucide-react'
 import Link from 'next/link'
+import { ChevronRight, CreditCard, Gift, Heart, MessageCircle, Package, RotateCcw, Settings, Star, Truck, Wallet, Gamepad2 } from 'lucide-react'
+
+const games = [
+  { name: 'LazGames', detail: 'Win daily coins', icon: Gamepad2, color: 'bg-violet-100 text-violet-700' },
+  { name: 'Daily Check-in', detail: 'Get free coins', icon: Gift, color: 'bg-amber-100 text-amber-700' },
+  { name: 'Mission Center', detail: 'Complete missions', icon: Star, color: 'bg-rose-100 text-rose-700' },
+]
+
+const orderStatuses = [
+  { label: 'To Pay', count: 2, icon: CreditCard },
+  { label: 'To Ship', count: 0, icon: Package },
+  { label: 'To Receive', count: 1, icon: Truck },
+  { label: 'To Review', count: 0, icon: Star },
+  { label: 'Returns', count: 0, icon: RotateCcw },
+]
 
 export default function AccountPage() {
-  const games = [
-    { id: 1, name: 'Biggest Sa...', icon: '🎯' },
-    { id: 2, name: 'MergeBoss', icon: '🎲' },
-    { id: 3, name: 'GoGoMatch', icon: '🎮' },
-    { id: 4, name: 'LazFun', icon: '🎪' },
-    { id: 5, name: 'Crack & Win', icon: '💎' },
-    { id: 6, name: 'More...', icon: '◀' },
-  ]
-
   return (
-    <div className="min-h-screen bg-gradient-to-b from-pink-100 to-white pb-24">
-      {/* Pink Gradient Header */}
-      <div className="bg-gradient-to-br from-pink-100 via-pink-50 to-white px-4 pt-4 pb-6">
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex items-center gap-3">
-            <div className="w-14 h-14 rounded-full bg-gradient-to-br from-yellow-400 to-yellow-700 border-4 border-yellow-300 flex items-center justify-center text-white font-bold text-lg">MA</div>
-            <h2 className="font-bold text-xl text-gray-900">Mohsen Alattas</h2>
+    <main className="min-h-screen bg-[#f7f7f8] pb-12 text-slate-900">
+      <section className="bg-gradient-to-br from-[#c2185b] via-[#df286b] to-[#ff5b72] px-4 pb-16 pt-5 text-white">
+        <div className="mx-auto max-w-6xl">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex h-14 w-14 items-center justify-center rounded-full border-4 border-white/40 bg-amber-300 text-lg font-black text-amber-950">MA</div>
+              <div><p className="text-sm text-white/75">Welcome back</p><h1 className="text-xl font-bold">Mohsen Alattas</h1></div>
+            </div>
+            <Link href="/account/settings" aria-label="Account settings" className="rounded-full bg-white/15 p-3 hover:bg-white/25"><Settings className="h-5 w-5" /></Link>
           </div>
-          <Link href="/account/settings">
-            <Settings className="w-6 h-6 text-gray-700" />
-          </Link>
         </div>
-        
-        {/* Voucher Badge */}
-        <div className="bg-white rounded-lg p-3 flex items-center gap-2 shadow-sm">
-          <span className="text-pink-600 font-bold">✓</span>
-          <span className="font-bold text-gray-900 flex-1 text-sm">52 vouchers | claim ฿1,000 vouc...</span>
-          <ChevronRight className="w-5 h-5 text-pink-600" />
-        </div>
+      </section>
+
+      <div className="mx-auto -mt-10 max-w-6xl space-y-4 px-4">
+        <section className="rounded-2xl bg-white p-4 shadow-sm">
+          <div className="flex items-center justify-between"><div><p className="text-xs font-semibold uppercase tracking-wider text-slate-500">My vouchers</p><p className="mt-1 text-lg font-bold">52 vouchers available</p><p className="text-sm text-slate-500">Claim up to AED 1,000 in savings</p></div><Link href="/vouchers" className="rounded-full bg-[#c2185b] px-4 py-2 text-sm font-bold text-white">Claim</Link></div>
+        </section>
+
+        <section className="rounded-2xl bg-white p-4 shadow-sm"><div className="mb-4 flex items-center justify-between"><div><h2 className="text-lg font-bold">My Games</h2><p className="text-sm text-slate-500">Play, collect coins, and unlock rewards</p></div><Link href="/missions" className="flex items-center gap-1 text-sm font-semibold text-[#c2185b]">Mission Center<ChevronRight className="h-4 w-4" /></Link></div><div className="grid gap-3 sm:grid-cols-3">{games.map(({ name, detail, icon: Icon, color }) => <button key={name} className="flex items-center gap-3 rounded-xl border border-slate-100 p-3 text-left hover:border-[#c2185b]/30 hover:bg-rose-50"><span className={`rounded-xl p-3 ${color}`}><Icon className="h-5 w-5" /></span><span><span className="block text-sm font-bold">{name}</span><span className="text-xs text-slate-500">{detail}</span></span></button>)}</div><div className="mt-4 flex items-center justify-between rounded-xl bg-amber-50 px-4 py-3"><div><p className="text-sm font-bold text-amber-950">250 free coins waiting</p><p className="text-xs text-amber-800">Check in today to collect</p></div><button className="rounded-full bg-amber-500 px-4 py-2 text-xs font-bold text-white">Collect</button></div></section>
+
+        <section className="rounded-2xl bg-white p-4 shadow-sm"><div className="mb-4 flex items-center justify-between"><h2 className="text-lg font-bold">My Orders</h2><Link href="/account/orders" className="flex items-center gap-1 text-sm font-semibold text-[#c2185b]">View all<ChevronRight className="h-4 w-4" /></Link></div><div className="grid grid-cols-5 gap-2">{orderStatuses.map(({ label, count, icon: Icon }) => <Link href="/account/orders" key={label} className="group text-center"><span className="relative mx-auto flex h-11 w-11 items-center justify-center rounded-full bg-rose-50 text-[#c2185b] group-hover:bg-rose-100"><Icon className="h-5 w-5" />{count > 0 && <span className="absolute -right-1 -top-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-[#c2185b] px-1 text-[10px] font-bold text-white">{count}</span>}</span><span className="mt-2 block text-[11px] font-semibold text-slate-600">{label}</span></Link>)}</div></section>
+
+        <section className="rounded-2xl bg-white p-4 shadow-sm"><div className="mb-4 flex items-center justify-between"><div><h2 className="text-lg font-bold">My Channels</h2><p className="text-sm text-slate-500">Your personalized deals and content</p></div><button className="text-sm font-semibold text-[#c2185b]">Edit</button></div><div className="grid grid-cols-3 gap-3"><div className="rounded-xl bg-gradient-to-br from-fuchsia-100 to-rose-200 p-3"><p className="text-xs font-bold text-rose-800">PAYDAY</p><p className="mt-8 text-lg font-black text-rose-700">15% OFF</p></div><div className="rounded-xl bg-gradient-to-br from-sky-100 to-blue-200 p-3"><p className="text-xs font-bold text-blue-800">LazFlash</p><p className="mt-8 text-lg font-black text-blue-700">Deals now</p></div><div className="rounded-xl bg-gradient-to-br from-amber-100 to-orange-200 p-3"><p className="text-xs font-bold text-orange-800">Rewards</p><p className="mt-8 text-lg font-black text-orange-700">Earn more</p></div></div></section>
+
+        <section className="flex items-center justify-between rounded-2xl bg-slate-900 p-5 text-white shadow-sm"><div><p className="text-xs font-semibold uppercase tracking-wider text-rose-300">LazRewards</p><h2 className="mt-1 text-lg font-bold">Play more, earn more</h2><p className="mt-1 text-sm text-slate-300">Get AED 20 in rewards this week</p></div><Gift className="h-10 w-10 text-rose-300" /></section>
+
+        <nav className="grid grid-cols-2 gap-3 sm:grid-cols-4"><Link href="/account/profile" className="flex items-center gap-3 rounded-xl bg-white p-4 shadow-sm hover:bg-rose-50"><Wallet className="h-5 w-5 text-[#c2185b]" /><span className="text-sm font-bold">Wallet</span></Link><Link href="/favorites" className="flex items-center gap-3 rounded-xl bg-white p-4 shadow-sm hover:bg-rose-50"><Heart className="h-5 w-5 text-[#c2185b]" /><span className="text-sm font-bold">Wishlist</span></Link><Link href="/account/profile" className="flex items-center gap-3 rounded-xl bg-white p-4 shadow-sm hover:bg-rose-50"><MessageCircle className="h-5 w-5 text-[#c2185b]" /><span className="text-sm font-bold">Messages</span></Link><Link href="/account/addresses" className="flex items-center gap-3 rounded-xl bg-white p-4 shadow-sm hover:bg-rose-50"><Truck className="h-5 w-5 text-[#c2185b]" /><span className="text-sm font-bold">Addresses</span></Link></nav>
       </div>
-
-      {/* Content */}
-      <div className="px-4 py-6 space-y-6">
-        {/* My Games */}
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-bold text-xl text-gray-900">My Games</h3>
-            <button className="text-gray-700 font-bold text-sm hover:underline">Mission Center {'>'}</button>
-          </div>
-
-          {/* Coins & Prize Cards */}
-          <div className="grid grid-cols-2 gap-4 mb-4">
-            {/* Coins */}
-            <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
-              <span className="text-3xl mb-2 block">🎯</span>
-              <p className="font-bold text-gray-900 text-sm mb-1">Coins</p>
-              <p className="text-xs mb-3"><span className="font-bold text-gray-900">250</span> <span className="text-gray-600">Free Coins</span></p>
-              <div className="flex gap-2 mb-2">
-                <button className="bg-pink-600 text-white font-bold px-2 py-1 rounded text-xs">CHECK IN</button>
-              </div>
-              <button className="w-full bg-pink-600 text-white font-bold py-2 rounded text-sm hover:bg-pink-700">Collect</button>
-            </div>
-
-            {/* Prize */}
-            <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-              <div className="bg-red-500 text-white font-bold px-2 py-1 rounded inline-block text-xs mb-2">FREE PRIZE</div>
-              <p className="font-bold text-gray-900 text-sm mb-1">Lazland</p>
-              <p className="text-xs text-gray-600 mb-3">Get Free Prize!</p>
-              <button className="w-full bg-pink-600 text-white font-bold py-2 rounded text-sm hover:bg-pink-700">GO</button>
-            </div>
-          </div>
-
-          {/* Mini Games Grid */}
-          <div className="grid grid-cols-3 gap-3">
-            {games.map((game) => (
-              <button key={game.id} className="text-center hover:shadow-md transition-shadow">
-                <div className="bg-white border border-gray-200 rounded-lg p-3 mb-2 flex items-center justify-center h-16">
-                  <span className="text-3xl">{game.icon}</span>
-                </div>
-                <p className="text-xs font-bold text-gray-900 line-clamp-2">{game.name}</p>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Play Rewards Banner */}
-        <div className="bg-white border-2 border-pink-200 rounded-lg p-4 flex items-center justify-between">
-          <p className="font-bold text-gray-900">Play to get <span className="text-pink-600">฿20</span> LazRewards!</p>
-          <button className="border-2 border-pink-600 text-pink-600 font-bold px-4 py-1 rounded text-sm hover:bg-pink-50">Go</button>
-        </div>
-
-        {/* My Orders */}
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-bold text-xl text-gray-900">My Orders</h3>
-            <button className="text-gray-700 font-bold text-sm hover:underline">View All Orders {'>'}</button>
-          </div>
-          <div className="grid grid-cols-5 gap-2">
-            {[
-              { label: 'To Pay', icon: '💳' },
-              { label: 'To Ship', icon: '📦' },
-              { label: 'To Receive', icon: '🚚' },
-              { label: 'To Review', icon: '⭐' },
-              { label: 'Returns &\nCancellations', icon: '↩️' },
-            ].map((item, idx) => (
-              <button key={idx} className="text-center hover:shadow-md transition-shadow">
-                <div className="bg-pink-600 rounded-lg p-3 mb-2 flex items-center justify-center h-12">
-                  <span className="text-2xl">{item.icon}</span>
-                </div>
-                <p className="text-xs font-bold text-gray-900 line-clamp-2 leading-tight">{item.label}</p>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* My Channels */}
-        <div>
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
-              <h3 className="font-bold text-xl text-gray-900">My Channels</h3>
-              <button className="text-blue-600 font-bold text-sm">✎ Edit</button>
-            </div>
-            <button className="text-gray-700 font-bold text-sm hover:underline">All Channels {'>'}</button>
-          </div>
-
-          <div className="grid grid-cols-3 gap-3 mb-4">
-            {/* PAYDAY */}
-            <div className="bg-pink-200 rounded-lg overflow-hidden">
-              <div className="bg-pink-600 text-white font-bold px-2 py-1 text-xs">PAYDAY</div>
-              <div className="bg-pink-300 h-24 flex items-center justify-center text-4xl">🎪</div>
-              <p className="text-xs font-bold text-gray-900 p-2">PAYDAY</p>
-            </div>
-
-            {/* Biggest Sale */}
-            <div className="bg-pink-100 rounded-lg p-3 text-center flex flex-col items-center justify-center h-32">
-              <p className="text-2xl font-bold text-pink-600 mb-1">15%OFF</p>
-              <p className="text-xs text-pink-600 font-bold">Min. spend</p>
-              <p className="text-xs text-pink-600 font-bold">฿1,299</p>
-            </div>
-
-            {/* LazFlash */}
-            <div className="bg-blue-100 rounded-lg overflow-hidden">
-              <div className="bg-blue-600 text-white font-bold px-2 py-1 text-xs flex items-center gap-1">
-                <Clock className="w-3 h-3" />
-                17:24:19
-              </div>
-              <div className="bg-blue-200 h-24 flex items-center justify-center">
-                <span className="text-3xl">⚡</span>
-              </div>
-              <p className="text-xs font-bold text-gray-900 p-2 text-center">LazFlash</p>
-            </div>
-          </div>
-
-          {/* Promo Banner */}
-          <div className="bg-gray-700 rounded-lg p-4 flex items-center gap-3 text-white">
-            <span className="text-2xl">✈️</span>
-            <div className="flex-1">
-              <p className="font-bold text-sm">200.-OFF ✨ for PayDay booking</p>
-              <p className="text-xs text-gray-300">Check flight & hotel...</p>
-            </div>
-            <button className="bg-orange-500 text-white font-bold px-3 py-1 rounded text-xs hover:bg-orange-600">GO</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    </main>
   )
 }
