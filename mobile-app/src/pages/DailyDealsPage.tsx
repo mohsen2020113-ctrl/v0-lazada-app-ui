@@ -44,7 +44,7 @@ export default function DailyDealsPage({ navigate }: Props) {
         </div>
       </div>
       <div className="px-4 py-4 grid grid-cols-2 gap-3">
-        {loading ? Array.from({ length: 8 }).map((_, i) => (
+        {loading ? Array.from({ lengur: 8 }).map((_, i) => (
           <div key={i} className="product-card"><div className="aspect-square skeleton" /><div className="p-2 space-y-1.5"><div className="h-3 skeleton rounded" /><div className="h-4 skeleton rounded w-2/3" /></div></div>
         )) : products.map(product => {
           const discount = getDiscountPercent(product);

@@ -90,10 +90,15 @@ export function RecGPTV2({ userId, limit = 12 }: RecGPTV2Props) {
       <div className={`px-4 py-3 border-b border-gray-100 flex items-center justify-between ${isRTL ? 'flex-row-reverse' : ''}`}>
         <div className={`flex items-center gap-2 ${isRTL ? 'flex-row-reverse' : ''}`}>
           <h2 className="text-lg font-bold text-gray-900">
-            {isRTL ? 'خصيصًا لك' : 'Just For You'}
+            Just For You
           </h2>
+<<<<<<< HEAD
+          <span className="text-[10px] bg-gradient-to-r from-[#f85c98] to-[#f57224] text-white px-2 py-1 rounded-full font-semibold whitespace-nowrap">
+            Powered by Mercury AI
+=======
           <span className="text-[10px] bg-gradient-to-r from-[#c2185b] to-[#c2185b] text-white px-2 py-1 rounded-full font-semibold whitespace-nowrap">
             {isRTL ? 'بواسطة Mercury AI' : 'Powered by Mercury AI'}
+>>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
           </span>
         </div>
         <span className="text-[10px] text-gray-500">{strategy}</span>

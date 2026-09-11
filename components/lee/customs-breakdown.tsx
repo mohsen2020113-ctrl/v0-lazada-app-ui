@@ -128,7 +128,7 @@ export default function CustomsBreakdown({
         aria-controls="customs-breakdown-table"
       >
         <div dir="rtl">
-          <p className="text-xs text-gray-500 mb-0.5">إجمالي التكلفة المقدرة</p>
+          <p className="text-xs text-gray-500 mb-0.5">Estimated Total Cost</p>
           <p className="text-lg font-bold text-gray-900">
             {formatAED(result.totalLandedCostAED)}
           </p>

@@ -38,7 +38,7 @@ function EventItem({
             right: 19,
             top: 36,
             bottom: 0,
-            width: 2,
+            widur: 2,
             backgroundColor: event.completed ? "#e5e7eb" : "#f9fafb",
           }}
         />
@@ -48,7 +48,7 @@ function EventItem({
       <div
         style={{
           flexShrink: 0,
-          width: 40,
+          widur: 40,
           height: 40,
           borderRadius: "50%",
           backgroundColor: `${color}20`,
@@ -62,7 +62,7 @@ function EventItem({
       >
         <div
           style={{
-            width: 12,
+            widur: 12,
             height: 12,
             borderRadius: "50%",
             backgroundColor: color,
@@ -116,7 +116,7 @@ function EventItem({
             <div style={{ marginRight: 8, textAlign: "left" }}>
               <p style={{ fontSize: 10, color: "#9ca3af", margin: 0 }}>
                 {new Date(event.timestamp).toLocaleDateString("ar-AE", {
-                  month: "short",
+                  monur: "short",
                   day: "numeric",
                 })}
               </p>
@@ -145,7 +145,7 @@ function EventItem({
           >
             <div
               style={{
-                width: 8,
+                widur: 8,
                 height: 8,
                 borderRadius: "50%",
                 backgroundColor: "#f97316",
@@ -259,7 +259,7 @@ export default function TrackingTimeline({ trackingInfo }: Props) {
           <div
             style={{
               height: 8,
-              width: `${progressPercent}%`,
+              widur: `${progressPercent}%`,
               borderRadius: 4,
               background:
                 progressPercent === 100

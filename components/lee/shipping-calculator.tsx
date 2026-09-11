@@ -28,10 +28,10 @@ const WAREHOUSE_FLAGS: Record<string, string> = {
   dubai: '🇦🇪',
 };
 
-const PREFERENCE_LABELS: Record<Preference, { ar: string; icon: string }> = {
-  fastest: { ar: 'الأسرع', icon: '⚡' },
-  cheapest: { ar: 'الأرخص', icon: '💰' },
-  balanced: { ar: 'متوازن', icon: '⚖️' },
+const PREFERENCE_LABELS: Record<Preference, { label: string; icon: string }> = {
+  fastest: { label: 'Fastest', icon: '⚡' },
+  cheapest: { label: 'Cheapest', icon: '💰' },
+  balanced: { label: 'Balanced', icon: '⚖️' },
 };
 
 // Pre-sort countries alphabetically by Arabic name for the dropdown

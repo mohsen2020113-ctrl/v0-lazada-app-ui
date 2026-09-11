@@ -3,12 +3,14 @@
 import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 import { Search, Camera, Mic, QrCode, X } from 'lucide-react'
+import { CountrySelector } from '@/components/CountrySelector'
 
 interface SearchHeaderProps {
   placeholder?: string
+  showCountrySelector?: boolean
 }
 
-export function SearchHeader({ placeholder = 'Search products...' }: SearchHeaderProps) {
+export function SearchHeader({ placeholder = 'Search products...', showCountrySelector = true }: SearchHeaderProps) {
   const [query, setQuery] = useState('')
   const [listening, setListening] = useState(false)
   const router = useRouter()
@@ -45,7 +47,14 @@ export function SearchHeader({ placeholder = 'Search products...' }: SearchHeade
 
   return (
     <form onSubmit={handleSearch} className="flex items-center gap-2 px-3 py-2 bg-white">
-      {/* Search bar — fully rounded per Lazada spec */}
+      {/* Country Selector */}
+      {showCountrySelector && (
+        <div className="shrink-0">
+          <CountrySelector compact={true} />
+        </div>
+      )}
+      
+      {/* Search bar — fully rounded per 4LEEE spec */}
       <div className="flex-1 flex items-center bg-gray-100 rounded-full px-4 gap-2"
            style={{ height: '48px' }}>
         <Search className="w-4 h-4 text-gray-400 shrink-0" />

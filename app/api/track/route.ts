@@ -53,7 +53,7 @@ export async function GET(request: NextRequest): Promise<NextResponse> {
     return NextResponse.json(
       {
         error: "Internal server error",
-        errorAr: "خطأ داخلي في الخادم",
+        errorAr: "Error داخلي في الخادم",
         code: "SERVER_ERROR",
       },
       { status: 500 }

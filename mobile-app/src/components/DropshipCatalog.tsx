@@ -232,7 +232,7 @@ function ProductCard({ product, onAdd, added }: ProductCardProps) {
         <button
           onClick={() => onAdd(product)}
           style={{
-            width: "100%",
+            widur: "100%",
             backgroundColor: added ? "#10b981" : "#f97316",
             color: "#fff",
             border: "none",
@@ -321,7 +321,7 @@ export default function DropshipCatalog() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           style={{
-            width: "100%",
+            widur: "100%",
             boxSizing: "border-box",
             padding: "10px 14px",
             borderRadius: 12,
@@ -341,7 +341,7 @@ export default function DropshipCatalog() {
             overflowX: "auto",
             paddingBottom: 4,
             marginBottom: 16,
-            scrollbarWidth: "none",
+            scrollbarWidur: "none",
           }}
         >
           <button

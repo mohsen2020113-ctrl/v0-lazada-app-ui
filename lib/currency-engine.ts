@@ -37,7 +37,7 @@ export const CURRENCIES: Record<string, CurrencyConfig> = {
   KRW: { code: 'KRW', name: 'Korean Won',             nameAr: 'وون كوري',            symbol: '₩',    rateToAED: 0.0027,   flag: '🇰🇷', decimals: 0 },
   MYR: { code: 'MYR', name: 'Malaysian Ringgit',      nameAr: 'رينغيت ماليزي',       symbol: 'RM',   rateToAED: 0.78,     flag: '🇲🇾' },
   IDR: { code: 'IDR', name: 'Indonesian Rupiah',      nameAr: 'روبية إندونيسية',     symbol: 'Rp',   rateToAED: 0.00023,  flag: '🇮🇩', decimals: 0 },
-  THB: { code: 'THB', name: 'Thai Baht',              nameAr: 'بات تايلاندي',        symbol: '฿',    rateToAED: 0.10,     flag: '🇹🇭' },
+  THB: { code: 'THB', name: 'Thai Baht (Legacy)',      nameAr: 'بات تايلاندي (قديم)',        symbol: '฿',    rateToAED: 0.10,     flag: '🇹🇭' }, // Legacy support only - deprecated
   VND: { code: 'VND', name: 'Vietnamese Dong',        nameAr: 'دونغ فيتنامي',        symbol: '₫',    rateToAED: 0.00015,  flag: '🇻🇳', decimals: 0 },
   PHP: { code: 'PHP', name: 'Philippine Peso',        nameAr: 'بيسو فلبيني',         symbol: '₱',    rateToAED: 0.064,    flag: '🇵🇭' },
   SGD: { code: 'SGD', name: 'Singapore Dollar',       nameAr: 'دولار سنغافوري',      symbol: 'S$',   rateToAED: 2.72,     flag: '🇸🇬' },
@@ -58,7 +58,7 @@ export const CURRENCIES: Record<string, CurrencyConfig> = {
   LYD: { code: 'LYD', name: 'Libyan Dinar',           nameAr: 'دينار ليبي',          symbol: 'ل.د',  rateToAED: 0.75,     flag: '🇱🇾', decimals: 3, symbolAfter: true },
   MAD: { code: 'MAD', name: 'Moroccan Dirham',        nameAr: 'درهم مغربي',          symbol: 'د.م.', rateToAED: 0.37,     flag: '🇲🇦', symbolAfter: true },
   TND: { code: 'TND', name: 'Tunisian Dinar',         nameAr: 'دينار تونسي',         symbol: 'د.ت',  rateToAED: 1.22,     flag: '🇹🇳', decimals: 3, symbolAfter: true },
-  DZD: { code: 'DZD', name: 'Algerian Dinar',         nameAr: 'دينار جزائري',        symbol: 'د.ج',  rateToAED: 0.028,    flag: '🇩🇿', symbolAfter: true },
+  DZD: { code: 'DZD', name: 'Algerian Dinar',         nameAr: 'دينار جزائر��',        symbol: 'د.ج',  rateToAED: 0.028,    flag: '🇩🇿', symbolAfter: true },
   SDG: { code: 'SDG', name: 'Sudanese Pound',         nameAr: 'جنيه سوداني',         symbol: 'ج.س',  rateToAED: 0.0059,   flag: '🇸🇩', symbolAfter: true },
   IQD: { code: 'IQD', name: 'Iraqi Dinar',            nameAr: 'دينار عراقي',         symbol: 'ع.د',  rateToAED: 0.0028,   flag: '🇮🇶', decimals: 0, symbolAfter: true },
   SYP: { code: 'SYP', name: 'Syrian Pound',           nameAr: 'ليرة سورية',          symbol: 'ل.س',  rateToAED: 0.00029,  flag: '🇸🇾', decimals: 0, symbolAfter: true },
@@ -170,7 +170,7 @@ export function formatConvertedPrice(amountAED: number, targetCurrency: string):
 export const COUNTRY_CURRENCY_MAP: Record<string, string> = {
   AE:'AED',SA:'SAR',KW:'KWD',QA:'QAR',BH:'BHD',OM:'OMR',EG:'EGP',JO:'JOD',LB:'LBP',SY:'SYP',IQ:'IQD',YE:'YER',LY:'LYD',TN:'TND',MA:'MAD',DZ:'DZD',SD:'SDG',MR:'XOF',DJ:'DJF',SO:'SOS',ER:'ERN',ET:'ETB',IL:'ILS',PS:'ILS',
   US:'USD',CA:'CAD',GB:'GBP',AU:'AUD',NZ:'NZD',DE:'EUR',FR:'EUR',IT:'EUR',ES:'EUR',NL:'EUR',BE:'EUR',AT:'EUR',PT:'EUR',IE:'EUR',FI:'EUR',GR:'EUR',CY:'EUR',MT:'EUR',SK:'EUR',SI:'EUR',EE:'EUR',LV:'EUR',LT:'EUR',LU:'EUR',MC:'EUR',SM:'EUR',VA:'EUR',AD:'EUR',CH:'CHF',LI:'CHF',SE:'SEK',NO:'NOK',DK:'DKK',IS:'ISK',PL:'PLN',CZ:'CZK',HU:'HUF',RO:'RON',BG:'BGN',HR:'EUR',RS:'RSD',BA:'BAM',ME:'EUR',MK:'MKD',AL:'ALL',XK:'EUR',MD:'MDL',UA:'UAH',BY:'BYN',RU:'RUB',TR:'TRY',GE:'GEL',AM:'AMD',AZ:'AZN',
-  CN:'CNY',JP:'JPY',KR:'KRW',HK:'HKD',TW:'TWD',MO:'MOP',SG:'SGD',MY:'MYR',ID:'IDR',TH:'THB',VN:'VND',PH:'PHP',MM:'MMK',KH:'KHR',LA:'LAK',BN:'SGD',IN:'INR',PK:'PKR',BD:'BDT',NP:'NPR',LK:'LKR',MV:'MVR',AF:'AFN',IR:'IRR',KZ:'KZT',UZ:'UZS',TJ:'TJS',KG:'KGS',TM:'TMT',MN:'MNT',
+  CN:'CNY',JP:'JPY',KR:'KRW',HK:'HKD',TW:'TWD',MO:'MOP',SG:'SGD',MY:'MYR',ID:'IDR',TH:'AED',VN:'VND',PH:'PHP',MM:'MMK',KH:'KHR',LA:'LAK',BN:'SGD',IN:'INR',PK:'PKR',BD:'BDT',NP:'NPR',LK:'LKR',MV:'MVR',AF:'AFN',IR:'IRR',KZ:'KZT',UZ:'UZS',TJ:'TJS',KG:'KGS',TM:'TMT',MN:'MNT',
   NG:'NGN',ZA:'ZAR',KE:'KES',GH:'GHS',TZ:'TZS',UG:'UGX',RW:'RWF',BI:'BIF',MG:'MGA',AO:'AOA',CD:'CDF',MZ:'MZN',ZM:'ZMW',ZW:'USD',BW:'BWP',NA:'NAD',LS:'LSL',SZ:'SZL',MW:'MWK',MU:'MUR',SC:'SCR',KM:'KMF',CV:'CVE',ST:'STN',GQ:'XAF',GA:'XAF',CG:'XAF',CM:'XAF',CF:'XAF',TD:'XAF',SN:'XOF',ML:'XOF',BF:'XOF',NE:'XOF',GN:'GNF',CI:'XOF',GW:'XOF',TG:'XOF',BJ:'XOF',GM:'GMD',SL:'SLL',LR:'LRD',SS:'SSP',
   MX:'MXN',BR:'BRL',AR:'ARS',CL:'CLP',CO:'COP',PE:'PEN',VE:'VES',BO:'BOB',PY:'PYG',UY:'UYU',EC:'USD',GY:'GYD',SR:'SRD',GF:'EUR',FK:'FKP',GT:'GTQ',BZ:'BZD',HN:'HNL',SV:'USD',NI:'NIO',CR:'CRC',PA:'PAB',CU:'CUP',DO:'DOP',HT:'HTG',JM:'JMD',TT:'TTD',BB:'BBD',GD:'XCD',LC:'XCD',VC:'XCD',AG:'XCD',DM:'XCD',KN:'XCD',BS:'BSD',TC:'USD',KY:'KYD',BM:'BMD',PR:'USD',
   FJ:'FJD',PG:'PGK',SB:'SBD',VU:'VUV',WS:'WST',TO:'TOP',KI:'AUD',NR:'AUD',TV:'AUD',PF:'XPF',NC:'XPF',GU:'USD',PW:'USD',FM:'USD',MH:'USD',

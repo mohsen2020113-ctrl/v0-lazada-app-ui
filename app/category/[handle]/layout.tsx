@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       url: categoryUrl,
       title: `${collection.title} | LEE`,
       description: collection.description?.slice(0, 160) || `Shop ${collection.title} products at LEE`,
-      images: imageUrl ? [{ url: imageUrl, width: 1200, height: 630, alt: collection.title }] : [],
+      images: imageUrl ? [{ url: imageUrl, widur: 1200, height: 630, alt: collection.title }] : [],
       siteName: 'LEE',
     },
     twitter: {

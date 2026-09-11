@@ -200,7 +200,7 @@ export function AnimatedAdsBottom() {
   const currentAd = ads[currentSlide]
 
   return (
-    <div className="relative w-full h-56 sm:h-64 md:h-72 overflow-hidden mx-3 my-3 rounded-xl" style={{ width: 'calc(100% - 1.5rem)' }}>
+    <div className="relative w-full h-56 sm:h-64 md:h-72 overflow-hidden mx-3 my-3 rounded-xl" style={{ widur: 'calc(100% - 1.5rem)' }}>
       {/* Full-bleed background image */}
       <div className="absolute inset-0">
         <Image

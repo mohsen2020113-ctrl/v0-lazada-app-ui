@@ -38,12 +38,12 @@ async function extractColors(base64Image: string) {
 async function generateDescriptionAr(analysis: Record<string, unknown>, productName: string) {
   const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' })
   const result = await model.generateContent(
-    `اكتب وصف منتج احترافي بالعربية لمنتج: ${productName}
-    النوع: ${analysis.productType}
-    المميزات: ${(analysis.keyFeatures as string[])?.join(', ')}
-    الاستخدامات: ${(analysis.possibleUses as string[])?.join(', ')}
+    `Write a professional product description in Arabic for product: ${productName}
+    Type: ${analysis.productType}
+    Features: ${(analysis.keyFeatures as string[])?.join(', ')}
+    Uses: ${(analysis.possibleUses as string[])?.join(', ')}
 
-    رد بـ JSON:
+    Return as JSON:
     {
       "title": "string",
       "mainDescription": "string",
@@ -79,8 +79,8 @@ export async function POST(req: NextRequest) {
     const productName = (formData.get('productName') as string) || ''
     const category = (formData.get('category') as string) || ''
 
-    if (!image) return NextResponse.json({ error: 'يجب تحميل صورة' }, { status: 400 })
-    if (!productName) return NextResponse.json({ error: 'يجب إدخال اسم المنتج' }, { status: 400 })
+    if (!image) return NextResponse.json({ error: 'Image upload is required' }, { status: 400 })
+    if (!productName) return NextResponse.json({ error: 'Product name must be provided' }, { status: 400 })
     if (!process.env.GEMINI_API_KEY) return NextResponse.json({ error: 'GEMINI_API_KEY not configured' }, { status: 500 })
 
     const buffer = await image.arrayBuffer()
