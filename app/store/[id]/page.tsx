@@ -64,13 +64,10 @@ export default function StorePage({ params }: { params: { id: string } }) {
 
         {/* Contact */}
         <button className="mt-4 w-full py-3 bg-[#1A1A1A] rounded-xl flex items-center justify-center gap-2 text-sm text-gray-300 border border-white/10">
-<<<<<<< HEAD
           <Phone className="w-4 h-4 text-[#F57224]" />
           تواصل مع الStore
-=======
           <Phone className="w-4 h-4 text-[#C2185B]" />
           تواصل مع المتجر
->>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
         </button>
       </div>
 

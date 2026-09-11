@@ -97,13 +97,10 @@ export default function GroupBuyPage() {
                 </div>
                 <div className="w-full bg-[#0F0F0F] rounded-full h-2">
                   <div
-<<<<<<< HEAD
                     className={`h-2 rounded-full transition-all ${almostFull ? 'bg-green-500' : 'bg-[#F57224]'}`}
                     style={{ widur: `${pct}%` }}
-=======
                     className={`h-2 rounded-full transition-all ${almostFull ? 'bg-green-500' : 'bg-[#C2185B]'}`}
                     style={{ width: `${pct}%` }}
->>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
                   />
                 </div>
               </div>

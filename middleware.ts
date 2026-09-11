@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
 
-<<<<<<< HEAD
 // Country to locale mapping (ISO 3166-1 alpha-2 to BCP 47 locale)
 const COUNTRY_LOCALE: Record<string, string> = {
   // Middle East & GCC
@@ -63,7 +62,6 @@ const STATIC_PREFIXES = ['/api/', '/_next/', '/favicon.ico', '/images/', '/fonts
 // Protected routes that require authentication
 const PROTECTED_ROUTES = ['/account', '/checkout', '/orders', '/wishlist']
 
-=======
 const COUNTRY_COOKIE = 'lee_country'
 const DEFAULT_COUNTRY = 'AE'
 
@@ -79,11 +77,9 @@ function detectCountry(req: NextRequest): string {
   return DEFAULT_COUNTRY
 }
 
->>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
 export function middleware(req: NextRequest) {
-  const response = NextResponse.next()
+  const pathname = req.nextUrl.pathname
 
-<<<<<<< HEAD
   // Skip static assets
   if (STATIC_PREFIXES.some(p => pathname.startsWith(p))) {
     return NextResponse.next()
@@ -111,8 +107,7 @@ export function middleware(req: NextRequest) {
   const currency = COUNTRY_CURRENCY[country] || 'AED'
   const language = COUNTRY_LANGUAGE[country] || 'en'
 
-  // Create response and set geo-location cookies
-  const response = NextResponse.next()
+  // Set geo-location cookies on the response
   response.cookies.set('4leee_country', country, { 
     maxAge: 86400 * 30, // 30 days
     path: '/',
@@ -144,7 +139,6 @@ export function middleware(req: NextRequest) {
   response.headers.set('x-geo-currency', currency)
   response.headers.set('x-geo-language', language)
 
-=======
   // Only set the cookie if it's not already present — prevents CDN cache bypass
   const existingCountry = req.cookies.get(COUNTRY_COOKIE)?.value
   if (!existingCountry) {
@@ -156,7 +150,6 @@ export function middleware(req: NextRequest) {
     })
   }
 
->>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
   return response
 }
 

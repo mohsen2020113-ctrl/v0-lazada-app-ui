@@ -56,7 +56,6 @@ async function getDashboardData() {
     shopifyProductsCount = result.products.length
   } catch {}
 
-<<<<<<< HEAD
   return (
     <div dir="rtl" className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
@@ -276,7 +275,6 @@ async function getDashboardData() {
       </main>
     </div>
   );
-=======
   return {
     recentOrders: recentOrders ?? [],
     kpis: {
@@ -294,5 +292,4 @@ async function getDashboardData() {
 export default async function DashboardPage() {
   const data = await getDashboardData()
   return <DashboardUI data={data} />
->>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
 }

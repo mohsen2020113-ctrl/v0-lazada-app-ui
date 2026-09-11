@@ -76,13 +76,10 @@ export async function POST(request: NextRequest) {
 ${JSON.stringify(productContext, null, 2)}
 
 بيانات المستخدم:
-<<<<<<< HEAD
 - الProductات المشاهدة: ${viewedProducts.length > 0 ? viewedProductDetails.map((p) => p?.title).join(', ') : 'لا توجد'}
 - عناصر الCart: ${cartItems.length > 0 ? cartProductDetails.map((p) => p?.title).join(', ') : 'لا توجد'}
-=======
 - المنتجات المشاهدة: ${viewedProducts.length > 0 ? viewedProductDetails.map((p) => p?.name).join(', ') : 'لا توجد'}
 - عناصر السلة: ${cartItems.length > 0 ? cartProductDetails.map((p) => p?.name).join(', ') : 'لا توجد'}
->>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
 - الفئة المفضلة: ${category || 'جميع الفئات'}
 
 أرجع النتيجة في صيغة JSON بدون markdown:

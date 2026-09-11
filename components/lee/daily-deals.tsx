@@ -10,12 +10,9 @@ const dailyProducts = [
     id: 1,
     image: "https://images.unsplash.com/photo-1558317374-067fb5f30001?w=300&h=300&fit=crop",
     badge: "CHOICE by LEE",
-<<<<<<< HEAD
     badgeColor: "bg-[#f85c98]",
     handle: "premium-speaker-wireless",
-=======
     badgeColor: "bg-[#c2185b]",
->>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
   },
   {
     id: 2,

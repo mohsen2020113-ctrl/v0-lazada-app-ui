@@ -10,7 +10,6 @@ export default function LiveShoppingPage() {
         <h1 className="text-2xl font-bold">Live Shopping</h1>
       </div>
 
-<<<<<<< HEAD
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-4 p-4">
         {/* Video Player - Main */}
         <div className="lg:col-span-3">
@@ -20,7 +19,6 @@ export default function LiveShoppingPage() {
               <p className="text-gray-400">Live stream player</p>
             </div>
           </div>
-=======
       {/* Featured Live */}
       <div className="mx-4 mb-5 rounded-2xl overflow-hidden bg-[#1A1A1A]">
         <div className="relative h-48 bg-gradient-to-br from-[#C2185B]/20 to-[#1A1A1A] flex items-center justify-center">
@@ -42,7 +40,6 @@ export default function LiveShoppingPage() {
           <button className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center"><Share2 size={16} className="text-white" /></button>
         </div>
       </div>
->>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
 
           {/* Live Products Carousel */}
           <div className="space-y-4">

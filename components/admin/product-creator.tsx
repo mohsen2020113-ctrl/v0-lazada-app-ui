@@ -150,13 +150,10 @@ export default function ProductCreator() {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-<<<<<<< HEAD
           <h1 className="text-3xl font-bold text-orange-500 mb-2">🎨 Product Page Creator</h1>
           <p className="text-gray-400">Single image → AI Analysis → Complete professional product page</p>
-=======
           <h1 className="text-3xl font-bold text-[#C2185B] mb-2">🎨 منشئ صفحات المنتجات</h1>
           <p className="text-gray-400">صورة واحدة → تحليل AI → صفحة منتج احترافية كاملة</p>
->>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
         </div>
 
         {!result ? (
@@ -190,13 +187,10 @@ export default function ProductCreator() {
                   type="text"
                   value={productName}
                   onChange={e => setProductName(e.target.value)}
-<<<<<<< HEAD
                   placeholder="Example: JBL Bluetooth Headphones"
                   className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-orange-500"
-=======
                   placeholder="مثال: سماعة بلوتوث JBL"
                   className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-3 text-white placeholder-gray-500 focus:outline-none focus:border-[#C2185B]"
->>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
                 />
               </div>
               <div>
@@ -265,14 +259,11 @@ export default function ProductCreator() {
               {/* Titles */}
               <div className="grid md:grid-cols-2 gap-4 mb-6">
                 <div className="bg-gray-800 rounded-xl p-4">
-<<<<<<< HEAD
-=======
                   <div className="text-xs text-gray-500 mb-1">🇸🇦 العنوان بالعربية</div>
                   <h3 className="font-bold text-[#ec407a]">{result.descriptions.ar.title}</h3>
                   <p className="text-gray-300 text-sm mt-2">{result.descriptions.ar.mainDescription}</p>
                 </div>
                 <div className="bg-gray-800 rounded-xl p-4" dir="ltr">
->>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
                   <div className="text-xs text-gray-500 mb-1">🇬🇧 English Title</div>
                   <h3 className="font-bold text-blue-400">{result.descriptions.en.title}</h3>
                   <p className="text-gray-300 text-sm mt-2">{result.descriptions.en.mainDescription}</p>
@@ -315,13 +306,11 @@ export default function ProductCreator() {
                 <div>
                   <h4 className="font-bold text-gray-300 mb-3">🏷️ Keywords</h4>
                   <div className="flex flex-wrap gap-2">
-<<<<<<< HEAD
                     {result.descriptions.en.keywords.map((k, i) => (
                       <span key={i} className="bg-orange-500/20 text-orange-400 text-xs px-2 py-1 rounded-full">{k}</span>
-=======
+                    ))}
                     {result.descriptions.ar.keywords.map((k, i) => (
                       <span key={i} className="bg-[#C2185B]/20 text-[#ec407a] text-xs px-2 py-1 rounded-full">{k}</span>
->>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
                     ))}
                   </div>
                 </div>

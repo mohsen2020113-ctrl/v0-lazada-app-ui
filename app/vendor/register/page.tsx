@@ -137,13 +137,8 @@ export default function VendorRegisterPage() {
               <button onClick={() => setStep(1)} className="flex-1 py-3 bg-[#1A1A1A] rounded-2xl font-semibold border border-white/10">
                 رجوع
               </button>
-<<<<<<< HEAD
-              <button onClick={() => setSubmitted(true)} className="flex-1 py-3 bg-[#F57224] rounded-2xl font-semibold">
-                إرسال الOrder
-=======
               <button onClick={() => setSubmitted(true)} className="flex-1 py-3 bg-[#C2185B] rounded-2xl font-semibold">
                 إرسال الطلب
->>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
               </button>
             </div>
           </>

@@ -15,8 +15,7 @@ const nextConfig = {
     ],
   },
   compress: true,
-<<<<<<< HEAD
-  reactStrictMode: false,
+  reactStrictMode: true,
   headers: async () => {
     return [
       {
@@ -59,9 +58,6 @@ const nextConfig = {
       },
     ]
   },
-=======
-  reactStrictMode: true,
->>>>>>> 82ed7310fe1b2f44e8966ae94903d137cc481af2
 }
 
 export default nextConfig
